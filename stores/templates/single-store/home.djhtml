@@ -1,0 +1,18 @@
+{% set pageTitle = "Home" %}
+{% extends 'single-store/base.djhtml' %}
+
+{% block head %}
+{% endblock %}
+
+{% block bodyHead %}{% endblock %}
+
+{% block content %}
+	{# {% include '/general/blocks/hero-slider.djhtml' %} #}
+	{% include '/general/blocks/hero-slider.djhtml' %}
+	{# {% include '/general/header/header.djhtml' %} #}
+{% endblock %}
+
+{% block container %}{% endblock %}
+
+{% block tail %}
+{% endblock %}

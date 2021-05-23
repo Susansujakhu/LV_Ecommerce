@@ -1,0 +1,17 @@
+{% set pageTitle = "Product Name" %}
+{% extends 'single-store/base.djhtml' %}
+
+{% block head %}
+{% endblock %}
+
+{# {% block bodyHead %}{% endblock %} #}
+
+{% block content %}
+	{% include '/general/blocks/single-product-detail.djhtml' %}
+	{# {% include '/general/blocks/product-carousel-block.djhtml' %} #}
+{% endblock %}
+
+{% block container %}{% endblock %}
+
+{% block tail %}
+{% endblock %}

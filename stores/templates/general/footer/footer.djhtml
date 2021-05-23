@@ -1,0 +1,122 @@
+<footer class="site-footer">
+    <div class="">
+        <div class="container">
+            <div class="site-footer-widgets">
+                <div class="row">
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="site-footer-widget footer-contacts">
+                            <h5 class="footer-contacts-title">Contact Us</h5>
+                            <div class="footer-contacts-text">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer in feugiat lorem. Pellentque ac placerat tellus.
+                            </div>
+                            <ul class="footer-contacts-contacts">
+                                <li><i class="footer-contacts-icon fas fa-globe-americas"></i> 715 Fake Street, New York 10021 USA</li>
+                                <li><i class="footer-contacts-icon far fa-envelope"></i> stroyka@example.com</li>
+                                <li><i class="footer-contacts-icon fas fa-mobile-alt"></i> (800) 060-0730, (800) 060-0730</li>
+                                <li><i class="footer-contacts-icon far fa-clock"></i> Mon-Sat 10:00pm - 7:00pm</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3 col-lg-2">
+                        <div class="site-footer-widget footer-links">
+                            <h5 class="footer-links-title">Information</h5>
+                            <ul class="footer-links-list">
+                                <li class="footer-links-item"><a href="" class="footer-links-link">About Us</a></li>
+                                <li class="footer-links-item"><a href="" class="footer-links-link">Delivery Information</a></li>
+                                <li class="footer-links-item"><a href="" class="footer-links-link">Privacy Policy</a></li>
+                                <li class="footer-links-item"><a href="" class="footer-links-link">Brands</a></li>
+                                <li class="footer-links-item"><a href="" class="footer-links-link">Contact Us</a></li>
+                                <li class="footer-links-item"><a href="" class="footer-links-link">Returns</a></li>
+                                <li class="footer-links-item"><a href="" class="footer-links-link">Site Map</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3 col-lg-2">
+                        <div class="site-footer-widget footer-links">
+                            <h5 class="footer-links-title">My Account</h5>
+                            <ul class="footer-links-list">
+                                <li class="footer-links-item"><a href="" class="footer-links-link">Store Location</a></li>
+                                <li class="footer-links-item"><a href="" class="footer-links-link">Order History</a></li>
+                                <li class="footer-links-item"><a href="" class="footer-links-link">Wish List</a></li>
+                                <li class="footer-links-item"><a href="" class="footer-links-link">Newsletter</a></li>
+                                <li class="footer-links-item"><a href="" class="footer-links-link">Specials</a></li>
+                                <li class="footer-links-item"><a href="" class="footer-links-link">Gift Certificates</a></li>
+                                <li class="footer-links-item"><a href="" class="footer-links-link">Affiliate</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-12 col-lg-4">
+                        <div class="site-footer-widget footer-newsletter">
+                            <h5 class="footer-newsletter-title">Newsletter</h5>
+                            <div class="footer-newsletter-text">
+                                Praesent pellentesque volutpat ex, vitae auctor lorem pulvinar mollis felis at lacinia.
+                            </div>
+                            <form action="" class="footer-newsletter-form">
+                                <label class="sr-only" for="footer-newsletter-address">Email Address</label>
+                                <input type="text" class="footer-newsletter-form-input form-control" id="footer-newsletter-address" placeholder="Email Address...">
+                                <button class="footer-newsletter-form-button btn btn-primary">Subscribe</button>
+                            </form>
+                            <div class="footer-newsletter-text footer-newsletter-text--social">
+                                Follow us on social networks
+                            </div>
+                            <!-- social-links -->
+                            <div class="social-links footer-newsletter-social-links social-links--shape--circle">
+                                <ul class="social-links-list">
+                                    <li class="social-links-item">
+                                        <a class="social-links-link social-links-link--type--rss" href="" target="_blank">
+                                            <i class="fas fa-rss"></i>
+                                        </a>
+                                    </li>
+                                    <li class="social-links-item">
+                                        <a class="social-links-link social-links-link--type--youtube" href="" target="_blank">
+                                            <i class="fab fa-youtube"></i>
+                                        </a>
+                                    </li>
+                                    <li class="social-links-item">
+                                        <a class="social-links-link social-links-link--type--facebook" href="" target="_blank">
+                                            <i class="fab fa-facebook-f"></i>
+                                        </a>
+                                    </li>
+                                    <li class="social-links-item">
+                                        <a class="social-links-link social-links-link--type--twitter" href="" target="_blank">
+                                            <i class="fab fa-twitter"></i>
+                                        </a>
+                                    </li>
+                                    <li class="social-links-item">
+                                        <a class="social-links-link social-links-link--type--instagram" href="" target="_blank">
+                                            <i class="fab fa-instagram"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- social-links / end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="site-footer-bottom">
+                <div class="site-footer-copyright">
+                    <!-- copyright -->
+                    Powered by HTML — Design by <a href="https://themeforest.net/user/kos9" target="_blank">Kos</a>
+                    <!-- copyright / end -->
+                </div>
+                <div class="site-footer-payments">
+                    <img src="images/payments.png" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="totop">
+            <div class="totop-body">
+                <div class="totop-start"></div>
+                <div class="totop-container container"></div>
+                <div class="totop-end">
+                    <button type="button" class="totop-button">
+                        <svg width="13px" height="8px">
+                            <use xlink:href="images/sprite.svg#arrow-rounded-up-13x8"></use>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
