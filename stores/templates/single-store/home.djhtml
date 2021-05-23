@@ -7,9 +7,8 @@
 {% block bodyHead %}{% endblock %}
 
 {% block content %}
-	{# {% include '/general/blocks/hero-slider.djhtml' %} #}
 	{% include '/general/blocks/hero-slider.djhtml' %}
-	{# {% include '/general/header/header.djhtml' %} #}
+	{% include '/general/blocks/features-block.djhtml' %}
 {% endblock %}
 
 {% block container %}{% endblock %}
