@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+{% block content %}
+
+{{ product['productName'] }}
+{{ product['price'] }}
+{{ product['stock'] }}
+{{ product['category'] }}
+{% set imageFile = url_for('static', filename = 'profile_pics/' + product['imageFile']) %}
+<img class="rounded-circle account-img" src="{{ imageFile }}">
+{% endblock content %}

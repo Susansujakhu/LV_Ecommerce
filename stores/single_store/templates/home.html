@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block content %}
+
+    <div class="content-section">
+        {% if current_user.is_authenticated %}
+        <h1>Success {{ current_user.role }}</h1>
+        {% for product in current_user.productId %}
+        <h3>{{ product['productName'] }}</h3>
+        {% endfor %}
+        
+        {% else %}
+        <h1>All Products</h1>
+        {% for product in product %}
+        {% set imageFile = url_for('static', filename = 'profile_pics/' + product['imageFile']) %}
+        <img class="rounded-circle account-img" src="{{ imageFile }}">
+        <a href="product/{{ product['id'] }}">{{ product['productName'] }}</a>
+        
+        {% endfor %}
+        {% endif %}
+      </div>
+
+{% endblock content %}
