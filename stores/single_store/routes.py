@@ -271,13 +271,10 @@ def add_feature():
     form = FeaturesForm()
         
     if form.validate_on_submit():
-        if form.icon.data:
-            image = save_picture(form.icon.data)
 
         if request.form.get('submit'):
             feature = Features(title = form.title.data, 
                             description = form.description.data,
-  
                             icon = form.icon.data,
                             )
             db.session.add(feature)
