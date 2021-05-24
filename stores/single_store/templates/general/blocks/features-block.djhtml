@@ -3,17 +3,21 @@
 <div class="block block-features block-features--layout--classic">
     <div class="container">
         <div class="block-features-list">
+
+            {% for data in featuresService %}
             <div class="block-features-item">
                 <div class="block-features-icon">
                     <i class="fas fa-shipping-fast"></i>
                 </div>
                 <div class="block-features-content">
-                    <div class="block-features-title">Free Shipping</div>
-                    <div class="block-features-subtitle">For orders from $50</div>
+                    <div class="block-features-title">{{data.title}}</div>
+                    <div class="block-features-subtitle">{{data.description}}</div>
                 </div>
             </div>
             <div class="block-features-divider"></div>
-            <div class="block-features-item">
+            {% endfor %}
+
+            {# <div class="block-features-item">
                 <div class="block-features-icon">
                     <i class="fas fa-headset"></i>
                 </div>
@@ -33,6 +37,7 @@
                 </div>
             </div>
             <div class="block-features-divider"></div>
+
             <div class="block-features-item">
                 <div class="block-features-icon">
                     <i class="fas fa-tags"></i>
@@ -41,7 +46,7 @@
                     <div class="block-features-title">Hot Offers</div>
                     <div class="block-features-subtitle">Discounts up to 90%</div>
                 </div>
-            </div>
+            </div> #}
         </div>
     </div>
 </div>
