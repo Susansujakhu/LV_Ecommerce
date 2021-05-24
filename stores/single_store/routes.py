@@ -2,7 +2,7 @@
 from flask import render_template, url_for, flash, redirect, request, Response
 from flask.globals import session
 from single_store import app, db, bcrypt
-from single_store.forms import RegistrationForm, LoginForm, UpdateAccountForm, ProductForm
+from single_store.forms import RegistrationForm, LoginForm, UpdateAccountForm, ProductForm, CategoryForm
 from single_store.models import Attributes, Brand, Cart, Category, Order, Product, Rating, Shipping, User, MyAdminIndexView, AdminView
 from flask_login import login_user, current_user, logout_user, login_required
 import secrets, os
@@ -29,9 +29,14 @@ def home():
 		'single-store/home.djhtml'
 		)
 
-@app.route("/single")
-def single_product():
-	return render_template(
+@app.route("/single/<int:productId>")
+def single_product(productId):
+    product = Product.query.get(productId)
+    print(product)
+    if product is None:
+        return redirect(url_for('home'))
+    
+    return render_template(
 		'single-store/single-product-page.djhtml'
 		)
 
@@ -48,12 +53,12 @@ def shop():
 #     product = Product.query.all()
 #     return render_template('home.html', title = "Home", product = product)
 
-@app.route("/product/<int:productId>")
-def post(productId):
-    product = Product.query.get(productId)
-    if product is None:
-        return redirect(url_for('home'))
-    return render_template('single_product_page.html', title = product.productName, product = product)
+# @app.route("/product/<int:productId>")
+# def post(productId):
+#     product = Product.query.get(productId)
+#     if product is None:
+#         return redirect(url_for('home'))
+#     return render_template('single-store/single-product-page.djhtml', title = product.productName, product = product)
 
 
 
@@ -176,6 +181,35 @@ def add_product():
 
     # image_file = url_for('static', filename = 'profile_pics/' + current_user.image_file)
     return render_template('add_product.html', title='New Product', form=form)
+
+
+@app.route("/add_category", methods=['GET', 'POST'])
+@login_required
+def add_category():
+
+    category_table = Category()
+    form = CategoryForm()
+    form.parentCategory.choices = ['None']+[(category.name) for category in Category.query.with_entities(Category.name).all()] #db.session.query(Category.name)
+    
+    if form.validate_on_submit():
+        if form.imageFile.data:
+            image = save_picture(form.imageFile.data)
+
+        if request.form.get('submit'):
+            category = Category(name = form.name.data, 
+                            slug = form.slug.data,
+                            parentCategory = form.parentCategory.data,
+                            description = form.description.data,
+                            imageFile = form.imageFile.data,
+                            )
+            db.session.add(category)
+            db.session.commit()
+            flash('Category Added Successful!', 'success')
+        
+        # return redirect(url_for('home'))
+
+    # image_file = url_for('static', filename = 'profile_pics/' + current_user.image_file)
+    return render_template('add_category.html', title='New Category', form=form)
 
 
 # @app.route("/post/new", methods=['GET', 'POST'])
