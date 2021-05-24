@@ -17,36 +17,6 @@
             <div class="block-features-divider"></div>
             {% endfor %}
 
-            {# <div class="block-features-item">
-                <div class="block-features-icon">
-                    <i class="fas fa-headset"></i>
-                </div>
-                <div class="block-features-content">
-                    <div class="block-features-title">Support 24/7</div>
-                    <div class="block-features-subtitle">Call us anytime</div>
-                </div>
-            </div>
-            <div class="block-features-divider"></div>
-            <div class="block-features-item">
-                <div class="block-features-icon">
-                    <i class="fas fa-credit-card"></i>
-                </div>
-                <div class="block-features-content">
-                    <div class="block-features-title">100% Safety</div>
-                    <div class="block-features-subtitle">Only secure payments</div>
-                </div>
-            </div>
-            <div class="block-features-divider"></div>
-
-            <div class="block-features-item">
-                <div class="block-features-icon">
-                    <i class="fas fa-tags"></i>
-                </div>
-                <div class="block-features-content">
-                    <div class="block-features-title">Hot Offers</div>
-                    <div class="block-features-subtitle">Discounts up to 90%</div>
-                </div>
-            </div> #}
         </div>
     </div>
 </div>
