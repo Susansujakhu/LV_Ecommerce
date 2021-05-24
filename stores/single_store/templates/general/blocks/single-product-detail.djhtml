@@ -1,3 +1,21 @@
+{% set productName = product['productName']  %}
+{% set productSlug = product['slug']  %}
+{% set productPrice = product['price']  %}
+{% set productDiscount = product['discount']  %}
+{% set productStock = product['stock']  %}
+{% set productCategory = product['category']  %}
+{% set productBrand = product['brand']  %}
+{% set productColor = product['color']  %}
+{% set productSize = product['size']  %}
+{% set productWeight = product['weight']  %}
+{% set productMaterial = product['material']  %}
+{% set productShortDescription = product['shortDescription']  %}
+{% set productLongDescription = product['longDescription']  %}
+{% set productImageFile = product['imageFile']  %}
+{% set productImageGallery = product['imageGallery']  %}
+{% set productFeatured = product['featured']  %}
+{% set currency = "Rs." %}
+
 <div class="block">
     <div class="container">
         <div class="product product--layout--columnar" data-layout="columnar">
@@ -125,7 +143,8 @@
                             </svg>
                         </button>
                     </div>
-                    <h1 class="product-name">Brandix Screwdriver SCREW1500ACC</h1>
+                   
+                    <h1 class="product-name">{{productName}}</h1>
                     <div class="product-rating">
                         <div class="product-rating-stars">
                             <div class="rating">
@@ -218,8 +237,7 @@
                         </div>
                     </div>
                     <div class="product-description">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ornare, mi in ornare elementum, libero nibh
-                        lacinia urna, quis convallis lorem erat at purus. Maecenas eu varius nisi.
+                        {{productShortDescription}}
                     </div>
                     <ul class="product-features">
                         <li>Speed: 750 RPM</li>
@@ -238,10 +256,10 @@
                 <!-- .product-sidebar -->
                 <div class="product-sidebar">
                     <div class="product-availability">
-                        Availability: <span class="text-success">In Stock</span>
+                        Availability: <span class="text-success">{{productStock}} in Stock</span>
                     </div>
                     <div class="product-prices">
-                        $1,499.00
+                        {{currency}} {{productPrice}}
                     </div>
                     <!-- .product-options -->
                     <form class="product-options">
@@ -353,30 +371,7 @@
                 <div class="product-tabs-pane product-tabs-pane--active" id="tab-description">
                     <div class="typography">
                         <h3>Product Full Description</h3>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas fermentum, diam non iaculis finibus,
-                            ipsum arcu sollicitudin dolor, ut cursus sapien sem sed purus. Donec vitae fringilla tortor, sed
-                            fermentum nunc. Suspendisse sodales turpis dolor, at rutrum dolor tristique id. Quisque pellentesque
-                            ullamcorper felis, eget gravida mi elementum a. Maecenas consectetur volutpat ante, sit amet molestie
-                            urna luctus in. Nulla eget dolor semper urna malesuada dictum. Duis eleifend pellentesque dui et
-                            finibus. Pellentesque dapibus dignissim augue. Etiam odio est, sodales ac aliquam id, iaculis eget
-                            lacus. Aenean porta, ante vitae suscipit pulvinar, purus dui interdum tellus, sed dapibus mi mauris
-                            vitae tellus.
-                        </p>
-                        <h3>Etiam lacus lacus mollis in mattis</h3>
-                        <p>
-                            Praesent mattis eget augue ac elementum. Maecenas vel ante ut enim mollis accumsan. Vestibulum vel
-                            eros at mi suscipit feugiat. Sed tortor purus, vulputate et eros a, rhoncus laoreet orci. Proin sapien
-                            neque, commodo at porta in, vehicula eu elit. Vestibulum ante ipsum primis in faucibus orci luctus et
-                            ultrices posuere cubilia Curae; Curabitur porta vulputate augue, at sollicitudin nisl molestie eget.
-                        </p>
-                        <p>
-                            Nunc sollicitudin, nunc id accumsan semper, libero nunc aliquet nulla, nec pretium ipsum risus ac
-                            neque. Morbi eu facilisis purus. Quisque mi tortor, cursus in nulla ut, laoreet commodo quam.
-                            Pellentesque et ornare sapien. In ac est tempus urna tincidunt finibus. Integer erat ipsum, tristique
-                            ac lobortis sit amet, dapibus sit amet purus. Nam sed lorem nisi. Vestibulum ultrices tincidunt turpis,
-                            sit amet fringilla odio scelerisque non.
-                        </p>
+                           {{productLongDescription}}
                     </div>
                 </div>
                 <div class="product-tabs-pane" id="tab-specification">

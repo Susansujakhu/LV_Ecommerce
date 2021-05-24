@@ -37,8 +37,8 @@ def single_product(productId):
         return redirect(url_for('home'))
     
     return render_template(
-		'single-store/single-product-page.djhtml'
-		)
+		'single-store/single-product-page.djhtml', title = product.productName, product = product)
+		
 
 @app.route("/shop")
 def shop():
