@@ -46,6 +46,12 @@ def shop():
         'single-store/shop-page.djhtml'
         )
 
+@app.route("/account")
+def user_account():
+    return render_template(
+        'single-store/user-account.djhtml'
+        )
+
 
 
 # @app.route("/")
