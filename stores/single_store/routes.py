@@ -35,6 +35,12 @@ def single_product():
 		'single-store/single-product-page.djhtml'
 		)
 
+@app.route("/shop")
+def shop():
+    return render_template(
+        'single-store/shop-page.djhtml'
+        )
+
 
 
 # @app.route("/")
