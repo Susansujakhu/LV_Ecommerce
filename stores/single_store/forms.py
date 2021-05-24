@@ -112,7 +112,7 @@ class HeroForm(FlaskForm):
 class FeaturesForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
     description = TextAreaField('Discription')
-    icon = FileField('Features Image', validators = [FileAllowed(['jpg', 'png'])])
+    icon = StringField('Icons')
     submit = SubmitField('Add Feature')
 
 
