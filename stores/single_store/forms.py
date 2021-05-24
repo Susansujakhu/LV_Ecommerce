@@ -103,7 +103,6 @@ class BrandForm(FlaskForm):
 
 class HeroForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
-    slug = StringField('Slug', validators=[DataRequired()])
     description = TextAreaField('Discription')
     button = StringField('Button Text')
     imageFile = FileField('Hero Image', validators = [FileAllowed(['jpg', 'png'])])
