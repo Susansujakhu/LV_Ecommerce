@@ -1,8 +1,8 @@
 <!-- .block-products-carousel -->
-<div class="block block-products-carousel" data-layout="grid-4" data-mobile-grid-columns="2">
+<div class="block block-products-carousel" data-layout="horizontal" data-mobile-grid-columns="2">
     <div class="container">
         <div class="block-header">
-            <h3 class="block-header-title">Featured Products</h3>
+            <h3 class="block-header-title">New Arrivals</h3>
             <div class="block-header-divider"></div>
             <ul class="block-header-groups-list">
                 <li><button type="button" class="block-header-group  block-header-group--active ">All</button></li>
@@ -170,8 +170,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="block-products-carousel-column">
                     <div class="block-products-carousel-cell">
                         <div class="product-card product-card--hidden-actions ">
                             <button class="product-card-quickview" type="button">
@@ -457,8 +455,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="block-products-carousel-column">
                     <div class="block-products-carousel-cell">
                         <div class="product-card product-card--hidden-actions ">
                             <button class="product-card-quickview" type="button">
@@ -745,8 +741,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="block-products-carousel-column">
                     <div class="block-products-carousel-cell">
                         <div class="product-card product-card--hidden-actions ">
                             <button class="product-card-quickview" type="button">
@@ -1029,8 +1023,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="block-products-carousel-column">
                     <div class="block-products-carousel-cell">
                         <div class="product-card product-card--hidden-actions ">
                             <button class="product-card-quickview" type="button">
@@ -1313,8 +1305,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="block-products-carousel-column">
                     <div class="block-products-carousel-cell">
                         <div class="product-card product-card--hidden-actions ">
                             <button class="product-card-quickview" type="button">
@@ -1597,8 +1587,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="block-products-carousel-column">
                     <div class="block-products-carousel-cell">
                         <div class="product-card product-card--hidden-actions ">
                             <button class="product-card-quickview" type="button">
@@ -1881,8 +1869,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="block-products-carousel-column">
                     <div class="block-products-carousel-cell">
                         <div class="product-card product-card--hidden-actions ">
                             <button class="product-card-quickview" type="button">
@@ -2165,8 +2151,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="block-products-carousel-column">
                     <div class="block-products-carousel-cell">
                         <div class="product-card product-card--hidden-actions ">
                             <button class="product-card-quickview" type="button">

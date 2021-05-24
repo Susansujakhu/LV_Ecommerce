@@ -1,0 +1,31 @@
+<!-- .block-brands -->
+<div class="block block-brands">
+    <div class="container">
+        <div class="block-brands-slider">
+            <div class="owl-carousel">
+                <div class="block-brands-item">
+                    <a href=""><img src="static/assets/images/brand-carousel/logo-1.png" alt=""></a>
+                </div>
+                <div class="block-brands-item">
+                    <a href=""><img src="static/assets/images/brand-carousel/logo-2.png" alt=""></a>
+                </div>
+                <div class="block-brands-item">
+                    <a href=""><img src="static/assets/images/brand-carousel/logo-3.png" alt=""></a>
+                </div>
+                <div class="block-brands-item">
+                    <a href=""><img src="static/assets/images/brand-carousel/logo-4.png" alt=""></a>
+                </div>
+                <div class="block-brands-item">
+                    <a href=""><img src="static/assets/images/brand-carousel/logo-5.png" alt=""></a>
+                </div>
+                <div class="block-brands-item">
+                    <a href=""><img src="static/assets/images/brand-carousel/logo-6.png" alt=""></a>
+                </div>
+                <div class="block-brands-item">
+                    <a href=""><img src="static/assets/images/brand-carousel/logo-7.png" alt=""></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- .block-brands / end -->

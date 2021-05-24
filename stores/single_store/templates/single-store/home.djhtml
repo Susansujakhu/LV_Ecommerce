@@ -9,6 +9,13 @@
 {% block content %}
 	{% include '/general/blocks/hero-slider.djhtml' %}
 	{% include '/general/blocks/features-block.djhtml' %}
+	{% include '/general/blocks/product-carousel-block.djhtml' %}
+	{% include '/general/blocks/horizontal-banner-block.djhtml' %}
+	{% include '/general/blocks/1-6-product-block.djhtml' %}
+	{% include '/general/blocks/product-categories-block.djhtml' %}
+	{% include '/general/blocks/horizontal-product-carousel-block.djhtml' %}
+	{% include '/general/blocks/brand-carousel-block.djhtml' %}
+	{% include '/general/blocks/3-product-column-block.djhtml' %}
 {% endblock %}
 
 {% block container %}{% endblock %}
