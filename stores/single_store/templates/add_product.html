@@ -1,262 +1,289 @@
 {% extends "layout.html" %}
 {% block content %}
 
-    <div class="content-section">
-        <form method="POST" action="">
-            {{ form.hidden_tag() }}
-            <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Add Product</legend>
-                <!-- product name -->
-                <div class="form-group">
-                    {{ form.productName.label(class="form-control-label") }}
-                    {% if form.productName.errors %}
-                        {{ form.productName(class="form-control form-control-lg is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.productName.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ form.productName(class="form-control form-control-lg") }}
-                    {% endif %}
-                </div>
-
-                <!-- product slug -->
-                <div class="form-group">
-                    {{ form.slug.label(class="form-control-label") }}
-                    {% if form.slug.errors %}
-                        {{ form.slug(class="form-control form-control-lg is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.slug.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ form.slug(class="form-control form-control-lg") }}
-                    {% endif %}
-                </div>
-
-                <!-- product price -->
-                <div class="form-group">
-                    {{ form.price.label(class="form-control-label") }}
-                    {% if form.price.errors %}
-                        {{ form.price(class="form-control form-control-lg is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.price.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ form.price(class="form-control form-control-lg") }}
-                    {% endif %}
-                </div>
-                <!-- product discount -->
-                <div class="form-group">
-                    {{ form.discount.label(class="form-control-label")}}
-                    {% if form.discount.errors %}
-                        {{ form.discount(class="form-control form-control-lg is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.discount.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ form.discount(class="form-control form-control-lg") }}
-                    {% endif %}
-                </div>
-                <!-- product stock -->
-                <div class="form-group">
-                    {{ form.stock.label(class="form-control-label")}}
-                    {% if form.stock.errors %}
-                        {{ form.stock(class="form-control form-control-lg is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.stock.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ form.stock(class="form-control form-control-lg") }}
-                    {% endif %}
-                </div>
-                <!-- product category -->
-                <div class="form-group">
-                    {{ form.category.label(class="form-control-label")}}
-                    {% if form.category.errors %}
-                        {{ form.category(class="form-control form-control-lg is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.category.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ form.category(class="form-control form-control-lg") }}
-                    {% endif %}
-                </div>
-                <!-- product brand -->
-                <div class="form-group">
-                    {{ form.brand.label(class="form-control-label")}}
-                    {% if form.brand.errors %}
-                        {{ form.brand(class="form-control form-control-lg is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.brand.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ form.brand(class="form-control form-control-lg") }}
-                    {% endif %}
-                </div>
-                <!-- product short description -->
-                <div class="form-group">
-                    {{ form.shortDescription.label(class="form-control-label") }}
-                    {% if form.shortDescription.errors %}
-                        {{ form.shortDescription(class="form-control form-control-lg is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.shortDescription.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ form.shortDescription(class="form-control form-control-lg") }}
-                    {% endif %}
-                </div>
-                <!-- ptoduct long description -->
-                <div class="form-group">
-                    {{ form.longDescription.label(class="form-control-label") }}
-                    {% if form.longDescription.errors %}
-                        {{ form.longDescription(class="form-control form-control-lg is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.longDescription.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ form.longDescription(class="form-control form-control-lg") }}
-                    {% endif %}
-                </div>
-                <!-- product color -->
-                <div class="form-group">
-                    {{ form.color.label(class="form-control-label") }}
-                    {% if form.color.errors %}
-                        {{ form.color(class="form-control form-control-lg is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.color.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ form.color(class="form-control form-control-lg") }}
-                    {% endif %}
-                </div>
-                <!-- product size -->
-                <div class="form-group">
-                    {{ form.size.label(class="form-control-label") }}
-                    {% if form.size.errors %}
-                        {{ form.size(class="form-control form-control-lg is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.size.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ form.size(class="form-control form-control-lg") }}
-                    {% endif %}
-                </div>
-                <!-- product wirght-->
-                <div class="form-group">
-                    {{ form.weight.label(class="form-control-label") }}
-                    {% if form.weight.errors %}
-                        {{ form.weight(class="form-control form-control-lg is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.weight.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ form.weight(class="form-control form-control-lg") }}
-                    {% endif %}
-                </div>
-                <!-- product dimension-->
-                <div class="form-group">
-                    {{ form.dimension.label(class="form-control-label") }}
-                    {% if form.dimension.errors %}
-                        {{ form.dimension(class="form-control form-control-lg is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.dimension.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ form.dimension(class="form-control form-control-lg") }}
-                    {% endif %}
-                </div>
-                <!-- product material -->
-                <div class="form-group">
-                    {{ form.material.label(class="form-control-label") }}
-                    {% if form.material.errors %}
-                        {{ form.material(class="form-control form-control-lg is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.material.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ form.material(class="form-control form-control-lg") }}
-                    {% endif %}
-                </div>
-                <!-- product imagefile-->
-                <div class="form-group">
-                    {{ form.imageFile.label() }}
-                    {{ form.imageFile(class="form-control-file") }}
-                    {% if form.imageFile.errors %}
-                        {% for error in form.imageFile.errors %}
-                            <span class="text-danger">{{ error }}</span></br>
-                        {% endfor %}
-                    {% endif %}
-                </div>
-                <!-- product gallery-->
-                <div class="form-group">
-                    {{ form.imageGallery.label() }}
-                    {{ form.imageGallery(class="form-control-file") }}
-                    {% if form.imageGallery.errors %}
-                        {% for error in form.imageGallery.errors %}
-                            <span class="text-danger">{{ error }}</span></br>
-                        {% endfor %}
-                    {% endif %}
-                </div>
-                <!-- product featured-->
-                <div class="form-group">
-                    {{ form.featured.label(class="form-control-label") }}
-                    {% if form.featured.errors %}
-                        {{ form.featured(class="form-control form-control-lg is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.featured.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ form.featured(class="form-control form-control-lg") }}
-                    {% endif %}
-                </div>
-            </fieldset>
+<div class="content-section">
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Add Product</legend>
+            <!-- product name -->
             <div class="form-group">
-                {{ form.submit(class="btn btn-outline-info") }}
+                {{ form.productName.label(class="form-control-label") }}
+                {% if form.productName.errors %}
+                {{ form.productName(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.productName.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.productName(class="form-control form-control-lg") }}
+                {% endif %}
             </div>
+
+            <!-- product slug -->
             <div class="form-group">
-                {{ form.edit(class="btn btn-outline-info") }}
+                {{ form.slug.label(class="form-control-label") }}
+                {% if form.slug.errors %}
+                {{ form.slug(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.slug.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.slug(class="form-control form-control-lg") }}
+                {% endif %}
             </div>
- 
-        </form>
-    </div>
-    <script>
-        let name = document.getElementById('productName');
-        let slug = document.getElementById('slug');
-        
-        slug.onfocus = function(){
-            product_name = name.value;
-            product_name = product_name.toLowerCase();
-            product_name = product_name.replace(/ /g, "-");
-            slug.value = product_name;
-        }
-    </script>
+
+            <!-- product price -->
+            <div class="form-group">
+                {{ form.price.label(class="form-control-label") }}
+                {% if form.price.errors %}
+                {{ form.price(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.price.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.price(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <!-- product discount -->
+            <div class="form-group">
+                {{ form.discount.label(class="form-control-label")}}
+                {% if form.discount.errors %}
+                {{ form.discount(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.discount.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.discount(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <!-- product stock -->
+            <div class="form-group">
+                {{ form.stock.label(class="form-control-label")}}
+                {% if form.stock.errors %}
+                {{ form.stock(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.stock.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.stock(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <!-- product category -->
+            <div class="form-group">
+                {{ form.category.label(class="form-control-label")}}
+                {% if form.category.errors %}
+                {{ form.category(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.category.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.category(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <!-- product brand -->
+            <div class="form-group">
+                {{ form.brand.label(class="form-control-label")}}
+                {% if form.brand.errors %}
+                {{ form.brand(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.brand.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.brand(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <!-- product short description -->
+            <div class="form-group">
+                {{ form.shortDescription.label(class="form-control-label") }}
+                {% if form.shortDescription.errors %}
+                {{ form.shortDescription(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.shortDescription.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.shortDescription(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <!-- ptoduct long description -->
+            <div class="form-group">
+                {{ form.longDescription.label(class="form-control-label") }}
+                {% if form.longDescription.errors %}
+                {{ form.longDescription(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.longDescription.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.longDescription(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <!-- product color -->
+            <div class="form-group">
+                {{ form.color.label(class="form-control-label") }}
+                {% if form.color.errors %}
+                {{ form.color(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.color.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.color(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <!-- product size -->
+            <div class="form-group">
+                {{ form.size.label(class="form-control-label") }}
+                {% if form.size.errors %}
+                {{ form.size(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.size.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.size(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <!-- product wirght-->
+            <div class="form-group">
+                {{ form.weight.label(class="form-control-label") }}
+                {% if form.weight.errors %}
+                {{ form.weight(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.weight.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.weight(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <!-- product dimension-->
+            <div class="form-group">
+                {{ form.dimension.label(class="form-control-label") }}
+                {% if form.dimension.errors %}
+                {{ form.dimension(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.dimension.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.dimension(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <!-- product material -->
+            <div class="form-group">
+                {{ form.material.label(class="form-control-label") }}
+                {% if form.material.errors %}
+                {{ form.material(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.material.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.material(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <!-- product imagefile-->
+            <div class="form-group">
+                {{ form.imageFile.label() }}
+                {{ form.imageFile(class="form-control-file") }}
+                {% if form.imageFile.errors %}
+                {% for error in form.imageFile.errors %}
+                <span class="text-danger">{{ error }}</span></br>
+                {% endfor %}
+                {% endif %}
+            </div>
+            <!-- product gallery-->
+            <div class="form-group">
+                {{ form.imageGallery.label() }}
+                {{ form.imageGallery(class="form-control-file") }}
+                {% if form.imageGallery.errors %}
+                {% for error in form.imageGallery.errors %}
+                <span class="text-danger">{{ error }}</span></br>
+                {% endfor %}
+                {% endif %}
+            </div>
+            <!-- product featured-->
+            <div class="form-group">
+                {{ form.featured.label(class="form-control-label") }}
+                {% if form.featured.errors %}
+                {{ form.featured(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.featured.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.featured(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+        </fieldset>
+        <div class="form-group">
+            {{ form.submit(class="btn btn-outline-info") }}
+        </div>
+        <div class="form-group">
+            {{ form.edit(class="btn btn-outline-info") }}
+        </div>
+
+    </form>
+</div>
+<script>
+    let name = document.getElementById('productName');
+    let slug = document.getElementById('slug');
+
+    slug.onfocus = function () {
+        product_name = name.value;
+        product_name = product_name.toLowerCase();
+        product_name = product_name.replace(/ /g, "-");
+        slug.value = product_name;
+    }
+</script>
+<script src="https://cdn.tiny.cloud/1/tgrybbrczjfzbzqdyj2scw84czfmx90a6urirqulti3vk84b/tinymce/5/tinymce.min.js"
+    referrerpolicy="origin"></script>
+
+<script>
+    tinymce.init({
+        selector: '#shortDescription',
+        branding: false,
+        height: '200px',
+        plugins: 'table code advtable lists fullscreen' + 'lists',
+        toolbar: 'undo redo | formatselect | bold italic | ' + 'numlist bullist' +
+            'alignleft aligncenter alignright alignjustify | indent outdent | ' +
+            'table tableinsertdialog tablecellprops tableprops | fullscreen',
+        content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+
+    });
+
+    tinymce.init({
+        selector: '#longDescription',
+        branding: false,
+        height: '200px',
+        plugins: 'table code advtable lists fullscreen' + 'lists',
+        toolbar: 'undo redo | formatselect | bold italic | ' + 'numlist bullist' +
+            'alignleft aligncenter alignright alignjustify | indent outdent | ' +
+            'table tableinsertdialog tablecellprops tableprops | fullscreen',
+        content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+    });
+</script>
 {% endblock content %}
