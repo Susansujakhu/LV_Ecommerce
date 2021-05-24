@@ -2,8 +2,8 @@
 from flask import render_template, url_for, flash, redirect, request, Response
 from flask.globals import session
 from single_store import app, db, bcrypt
-from single_store.forms import BrandForm, HeroForm, RegistrationForm, LoginForm, UpdateAccountForm, ProductForm, CategoryForm
-from single_store.models import Attributes, Brand, Cart, Category, Hero, Order, Product, Rating, Shipping, User, MyAdminIndexView, AdminView
+from single_store.forms import BrandForm, FeaturesForm, HeroForm, RegistrationForm, LoginForm, UpdateAccountForm, ProductForm, CategoryForm
+from single_store.models import Attributes, Brand, Cart, Category, Features, Hero, Order, Product, Rating, Shipping, User, MyAdminIndexView, AdminView
 from flask_login import login_user, current_user, logout_user, login_required
 import secrets, os
 from PIL import Image
@@ -263,6 +263,32 @@ def add_hero():
 
     # image_file = url_for('static', filename = 'profile_pics/' + current_user.image_file)
     return render_template('add_hero.html', title='New Hero', form=form)
+
+@app.route("/add_feature", methods=['GET', 'POST'])
+@login_required
+def add_feature():
+
+    features_table = Features()
+    form = FeaturesForm()
+        
+    if form.validate_on_submit():
+        if form.icon.data:
+            image = save_picture(form.icon.data)
+
+        if request.form.get('submit'):
+            feature = Features(title = form.title.data, 
+                            description = form.description.data,
+  
+                            icon = form.icon.data,
+                            )
+            db.session.add(feature)
+            db.session.commit()
+            flash('Feature Added Successful!', 'success')
+        
+        # return redirect(url_for('home'))
+
+    # image_file = url_for('static', filename = 'profile_pics/' + current_user.image_file)
+    return render_template('add_feature.html', title='New Feature', form=form)
 
 
 
