@@ -73,16 +73,6 @@
 
     </form>
 </div>
-<script>
-    let name = document.getElementById('name');
-    let slug = document.getElementById('slug');
 
-    slug.onfocus = function () {
-        product_name = name.value;
-        product_name = product_name.toLowerCase();
-        product_name = product_name.replace(/ /g, "-");
-        slug.value = product_name;
-    }
-</script>
 
 {% endblock content %}
