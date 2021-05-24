@@ -2,7 +2,7 @@
 from flask import render_template, url_for, flash, redirect, request, Response
 from flask.globals import session
 from single_store import app, db, bcrypt
-from single_store.forms import RegistrationForm, LoginForm, UpdateAccountForm, ProductForm, CategoryForm
+from single_store.forms import BrandForm, RegistrationForm, LoginForm, UpdateAccountForm, ProductForm, CategoryForm
 from single_store.models import Attributes, Brand, Cart, Category, Order, Product, Rating, Shipping, User, MyAdminIndexView, AdminView
 from flask_login import login_user, current_user, logout_user, login_required
 import secrets, os
@@ -211,6 +211,32 @@ def add_category():
     # image_file = url_for('static', filename = 'profile_pics/' + current_user.image_file)
     return render_template('add_category.html', title='New Category', form=form)
 
+
+@app.route("/add_brand", methods=['GET', 'POST'])
+@login_required
+def add_brand():
+
+    category_table = Brand()
+    form = BrandForm()
+        
+    if form.validate_on_submit():
+        if form.imageFile.data:
+            image = save_picture(form.imageFile.data)
+
+        if request.form.get('submit'):
+            brand = Brand(name = form.name.data, 
+                            slug = form.slug.data,
+                            description = form.description.data,
+                            imageFile = form.imageFile.data,
+                            )
+            db.session.add(brand)
+            db.session.commit()
+            flash('Brand Added Successful!', 'success')
+        
+        # return redirect(url_for('home'))
+
+    # image_file = url_for('static', filename = 'profile_pics/' + current_user.image_file)
+    return render_template('add_brand.html', title='New Brand', form=form)
 
 # @app.route("/post/new", methods=['GET', 'POST'])
 # @login_required
