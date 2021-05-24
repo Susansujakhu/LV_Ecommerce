@@ -1,11 +1,11 @@
+<link rel="stylesheet" type="text/css" href= "{{ url_for('static', filename='css/general/features-block.css') }}" }}>
+
 <div class="block block-features block-features--layout--classic">
     <div class="container">
         <div class="block-features-list">
             <div class="block-features-item">
                 <div class="block-features-icon">
-                    <svg width="48px" height="48px">
-                        <use xlink:href="images/sprite.svg#fi-free-delivery-48"></use>
-                    </svg>
+                    <i class="fas fa-shipping-fast"></i>
                 </div>
                 <div class="block-features-content">
                     <div class="block-features-title">Free Shipping</div>
@@ -15,9 +15,7 @@
             <div class="block-features-divider"></div>
             <div class="block-features-item">
                 <div class="block-features-icon">
-                    <svg width="48px" height="48px">
-                        <use xlink:href="images/sprite.svg#fi-24-hours-48"></use>
-                    </svg>
+                    <i class="fas fa-headset"></i>
                 </div>
                 <div class="block-features-content">
                     <div class="block-features-title">Support 24/7</div>
@@ -27,9 +25,7 @@
             <div class="block-features-divider"></div>
             <div class="block-features-item">
                 <div class="block-features-icon">
-                    <svg width="48px" height="48px">
-                        <use xlink:href="images/sprite.svg#fi-payment-security-48"></use>
-                    </svg>
+                    <i class="fas fa-credit-card"></i>
                 </div>
                 <div class="block-features-content">
                     <div class="block-features-title">100% Safety</div>
@@ -39,9 +35,7 @@
             <div class="block-features-divider"></div>
             <div class="block-features-item">
                 <div class="block-features-icon">
-                    <svg width="48px" height="48px">
-                        <use xlink:href="images/sprite.svg#fi-tag-48"></use>
-                    </svg>
+                    <i class="fas fa-tags"></i>
                 </div>
                 <div class="block-features-content">
                     <div class="block-features-title">Hot Offers</div>
