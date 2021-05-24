@@ -186,3 +186,24 @@ class Brand(db.Model):
         return f"Post('{self.name}', '{self.description}', '{self.imageFile}')"
 
 
+class Hero(db.Model):
+    __tablename__ = 'hero_section'
+    id = db.Column(db.Integer, primary_key = True)
+    title = db.Column(db.Text, nullable = False)
+    slug = db.Column(db.Text, nullable = False, unique = False)
+    description = db.Column(db.Text, nullable = True)
+    button = db.Column(db.String(20), nullable = True)
+    imageFile = db.Column(db.Text, nullable = False, default = 'Brand.jpg')
+
+    def __repr__(self):
+        return f"Post('{self.title}', '{self.description}', '{self.button}', '{self.imageFile}')"
+
+class Features(db.Model):
+    __tablename__ = 'features'
+    id = db.Column(db.Integer, primary_key = True)
+    title = db.Column(db.Text, nullable = False)
+    description = db.Column(db.Text, nullable = False, unique = False)
+    icon = db.Column(db.Text, nullable = True)
+
+    def __repr__(self):
+        return f"Post('{self.title}', '{self.description}', '{self.icon}')"
