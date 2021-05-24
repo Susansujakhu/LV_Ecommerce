@@ -26,8 +26,9 @@ admin.add_view(AdminView(Brand, db.session))
 @app.route("/")
 def home():
     heroSlider = Hero.query.all()
+    featuresService = Features.query.all()
     return render_template(
-        'single-store/home.djhtml', heroSlider = heroSlider)
+        'single-store/home.djhtml', heroSlider = heroSlider, featuresService = featuresService)
 
 @app.route("/single/<int:productId>")
 def single_product(productId):
