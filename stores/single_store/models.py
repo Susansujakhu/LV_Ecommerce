@@ -190,7 +190,7 @@ class Hero(db.Model):
     __tablename__ = 'hero_section'
     id = db.Column(db.Integer, primary_key = True)
     title = db.Column(db.Text, nullable = False)
-    slug = db.Column(db.Text, nullable = False, unique = False)
+
     description = db.Column(db.Text, nullable = True)
     button = db.Column(db.String(20), nullable = True)
     imageFile = db.Column(db.Text, nullable = False, default = 'Brand.jpg')
