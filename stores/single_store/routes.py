@@ -25,14 +25,13 @@ admin.add_view(AdminView(Brand, db.session))
 
 @app.route("/")
 def home():
-	return render_template(
-		'single-store/home.djhtml'
-		)
+    heroSlider = Hero.query.all()
+    return render_template(
+        'single-store/home.djhtml', heroSlider = heroSlider)
 
 @app.route("/single/<int:productId>")
 def single_product(productId):
     product = Product.query.get(productId)
-    print(product)
     if product is None:
         return redirect(url_for('home'))
     
