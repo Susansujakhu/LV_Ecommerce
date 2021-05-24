@@ -1,0 +1,88 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="content-section">
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Add Brand</legend>
+           
+            <!-- Brand name -->
+            <div class="form-group">
+                {{ form.name.label(class="form-control-label") }}
+                {% if form.name.errors %}
+                {{ form.name(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.name.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.name(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+
+            <!-- Brand slug -->
+            <div class="form-group">
+                {{ form.slug.label(class="form-control-label") }}
+                {% if form.slug.errors %}
+                {{ form.slug(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.slug.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.slug(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+
+
+            <!-- Brand description -->
+            <div class="form-group">
+                {{ form.description.label(class="form-control-label") }}
+                {% if form.description.errors %}
+                {{ form.description(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.description.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.description(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+
+            <!-- Brand imagefile-->
+            <div class="form-group">
+                {{ form.imageFile.label() }}
+                {{ form.imageFile(class="form-control-file") }}
+                {% if form.imageFile.errors %}
+                {% for error in form.imageFile.errors %}
+                <span class="text-danger">{{ error }}</span></br>
+                {% endfor %}
+                {% endif %}
+            </div>
+
+
+        </fieldset>
+        <div class="form-group">
+            {{ form.submit(class="btn btn-outline-info") }}
+        </div>
+
+
+    </form>
+</div>
+<script>
+    let name = document.getElementById('name');
+    let slug = document.getElementById('slug');
+
+    slug.onfocus = function () {
+        product_name = name.value;
+        product_name = product_name.toLowerCase();
+        product_name = product_name.replace(/ /g, "-");
+        slug.value = product_name;
+    }
+</script>
+
+{% endblock content %}

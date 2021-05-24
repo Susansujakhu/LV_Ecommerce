@@ -92,3 +92,28 @@ class CategoryForm(FlaskForm):
     description = TextAreaField('Discription')
     imageFile = FileField('Category Image', validators = [FileAllowed(['jpg', 'png'])])
     submit = SubmitField('Add Category')
+
+
+class BrandForm(FlaskForm):
+    name = StringField('Name', validators=[DataRequired()])
+    slug = StringField('Slug', validators=[DataRequired()])
+    description = TextAreaField('Discription')
+    imageFile = FileField('Brand Image', validators = [FileAllowed(['jpg', 'png'])])
+    submit = SubmitField('Add Brand')
+
+class HeroForm(FlaskForm):
+    title = StringField('Title', validators=[DataRequired()])
+    slug = StringField('Slug', validators=[DataRequired()])
+    description = TextAreaField('Discription')
+    button = StringField('Button Text')
+    imageFile = FileField('Hero Image', validators = [FileAllowed(['jpg', 'png'])])
+    submit = SubmitField('Add Hero Section')
+
+
+class FeaturesForm(FlaskForm):
+    title = StringField('Title', validators=[DataRequired()])
+    description = TextAreaField('Discription')
+    icon = FileField('Features Image', validators = [FileAllowed(['jpg', 'png'])])
+    submit = SubmitField('Add Feature')
+
+
