@@ -87,7 +87,8 @@ class ProductForm(FlaskForm):
 
 class CategoryForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired()])
-    parentCategory = StringField('Parent Category', validators=[DataRequired()])
+    slug = StringField('Slug', validators=[DataRequired()])
+    parentCategory = SelectField('Parent Category', choices=[])
     description = TextAreaField('Discription')
-    image = FileField('Category Image', validators = [FileAllowed(['jpg', 'png'])])
+    imageFile = FileField('Category Image', validators = [FileAllowed(['jpg', 'png'])])
     submit = SubmitField('Add Category')
