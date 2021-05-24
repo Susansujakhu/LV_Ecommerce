@@ -7,7 +7,7 @@
             {% for data in featuresService %}
             <div class="block-features-item">
                 <div class="block-features-icon">
-                    <i class="fas fa-shipping-fast"></i>
+                    <i class="{{data.icon}}"></i>
                 </div>
                 <div class="block-features-content">
                     <div class="block-features-title">{{data.title}}</div>
