@@ -84,14 +84,44 @@ class ProductForm(FlaskForm):
 
     edit = SubmitField('Save Changes')
 
+class EditProductForm(FlaskForm):
+    productName = StringField('Product Name', validators=[DataRequired()])
+    slug = StringField('Slug', validators=[DataRequired()])
+    price = IntegerField('Price', validators=[DataRequired()])
+    discount = IntegerField('Discount')
+    stock = IntegerField('Stock', validators=[DataRequired()])
+    category = SelectField('Category', choices=[] ,validators=[DataRequired()])
+    brand = SelectField('Brand', choices=[])
+    color = StringField('Color')
+    size = StringField('Size')
+    weight = StringField('Weight')
+    dimension = StringField('Dimension')
+    material = StringField('Material')
+    shortDescription = TextAreaField('Short Description')
+    longDescription = TextAreaField('Long Description')
+    imageFile = FileField('Set Featured image', validators = [FileAllowed(['jpg', 'png'])])
+    imageGallery = FileField('Gallery', validators = [FileAllowed(['jpg', 'png'])])
+    featured = BooleanField("Featured")
+    # product_user_id = current_user
+
+    submit = SubmitField('Update')
+
 
 class CategoryForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired()])
     slug = StringField('Slug', validators=[DataRequired()])
     parentCategory = SelectField('Parent Category', choices=[])
-    description = TextAreaField('Discription')
+    description = TextAreaField('Description')
     imageFile = FileField('Category Image', validators = [FileAllowed(['jpg', 'png'])])
     submit = SubmitField('Add Category')
+
+class EditCategoryForm(FlaskForm):
+    name = StringField('Name', validators=[DataRequired()])
+    slug = StringField('Slug', validators=[DataRequired()])
+    parentCategory = SelectField('Parent Category', choices=[])
+    description = TextAreaField('Description')
+    imageFile = FileField('Category Image', validators = [FileAllowed(['jpg', 'png'])])
+    submit = SubmitField('Update')
 
 
 class BrandForm(FlaskForm):
