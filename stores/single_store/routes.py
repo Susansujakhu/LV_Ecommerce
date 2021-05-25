@@ -2,7 +2,7 @@
 from flask import render_template, url_for, flash, redirect, request, Response
 from flask.globals import session
 from single_store import app, db, bcrypt
-from single_store.forms import BrandForm, FeaturesForm, HeroForm, RegistrationForm, LoginForm, UpdateAccountForm, ProductForm, CategoryForm
+from single_store.forms import BrandForm, FeaturesForm, HeroForm, RegistrationForm, LoginForm, UpdateAccountForm, ProductForm, EditProductForm, CategoryForm,EditCategoryForm
 from single_store.models import Attributes, Brand, Cart, Category, Features, Hero, Order, Product, Rating, Shipping, User, MyAdminIndexView, AdminView
 from flask_login import login_user, current_user, logout_user, login_required
 import secrets, os
@@ -189,6 +189,62 @@ def add_product():
     return render_template('add_product.html', title='New Product', form=form)
 
 
+@app.route("/edit_product/<int:productId>", methods=['GET', 'POST'])
+@login_required
+def edit_product(productId):
+    product = Product.query.get_or_404(productId)
+    form = EditProductForm()
+    form.category.choices = [(category.name) for category in Category.query.with_entities(Category.name).all()] #db.session.query(Category.name)
+    form.brand.choices = [(brand.name) for brand in Brand.query.with_entities(Brand.name).all()]
+    if form.validate_on_submit():
+        if form.imageFile.data:
+            featuredImage = save_picture(form.imageFile.data)
+
+        if form.imageGallery.data:
+            galleryImage = save_picture(form.imageGallery.data)
+
+        if request.form.get('submit'):
+            product.productName = form.productName.data
+            product.slug = form.slug.data
+            product.price = form.price.data
+            product.discount = form.discount.data
+            product.stock = form.stock.data
+            product.category = form.category.data
+            product.brand = form.brand.data
+            product.color = form.color.data
+            product.size = form.size.data
+            product.weight = form.weight.data
+            product.dimension = form.dimension.data
+            product.material = form.material.data
+            product.shortDescription = form.shortDescription.data
+            product.longDescription = form.longDescription.data
+            # product.imageFile = form.imageFile.data
+            # product.imageGallery = form.imageGallery.data
+            product.featured = form.featured.data
+            product.product_user_id = current_user
+            db.session.commit()
+            flash(form.productName.data+' Product Updated Successful!', 'success')
+    elif request.method == 'GET' :
+        form.productName.data = product.productName 
+        form.slug.data = product.slug 
+        form.price.data = product.price
+        form.discount.data = product.discount
+        form.stock.data = product.stock
+        form.category.data = product.category
+        form.brand.data = product.brand
+        form.color.data = product.color
+        form.size.data  = product.size
+        form.weight.data = product.weight 
+        form.dimension.data = product.dimension 
+        form.material.data = product.material 
+        form.shortDescription.data = product.shortDescription 
+        form.longDescription.data = product.longDescription
+        form.imageFile.data = product.imageFile
+        form.imageGallery.data = product.imageGallery
+        form.featured.data = product.featured 
+    return render_template('edit_product.html', title= product.productName, form=form)
+
+
 @app.route("/add_category", methods=['GET', 'POST'])
 @login_required
 def add_category():
@@ -216,6 +272,34 @@ def add_category():
 
     # image_file = url_for('static', filename = 'profile_pics/' + current_user.image_file)
     return render_template('add_category.html', title='New Category', form=form)
+
+
+
+@app.route("/edit_category/<int:categoryId>", methods=['GET', 'POST'])
+@login_required
+def edit_category(categoryId):
+    category = Category.query.get_or_404(categoryId)
+    form = EditCategoryForm()
+    form.parentCategory.choices = ['None']+[(category.name) for category in Category.query.with_entities(Category.name).all()]
+    if form.validate_on_submit():
+        if form.imageFile.data:
+            image = save_picture(form.imageFile.data)
+
+        if request.form.get('submit'):
+            category.name = form.name.data
+            category.slug = form.slug.data
+            category.parentCategory = form.parentCategory.data
+            category.description = form.description.data
+            db.session.commit()
+            flash(form.name.data+' Category Updated Successful!', 'success')
+    elif request.method == 'GET' :
+        form.name.data = category.name 
+        form.slug.data = category.slug
+        form.parentCategory.data = category.parentCategory
+        form.description.data = category.description
+        form.imageFile.data = category.imageFile                      
+    return render_template('edit_category.html', title=category.name, form=form)
+
 
 
 @app.route("/add_brand", methods=['GET', 'POST'])
