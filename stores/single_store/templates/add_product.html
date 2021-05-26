@@ -217,13 +217,17 @@
             <!-- product gallery-->
             <div class="form-group">
                 {{ form.imageGallery.label() }}
-                {{ form.imageGallery(class="form-control-file") }}
+                {{ form.imageGallery(multiple="multiple", class="form-control-file") }}
+
                 {% if form.imageGallery.errors %}
                 {% for error in form.imageGallery.errors %}
                 <span class="text-danger">{{ error }}</span></br>
                 {% endfor %}
+
                 {% endif %}
+
             </div>
+
             <!-- product Tags-->
             <div class="form-group">
                 {{ form.tags.label(class="form-control-label") }}
