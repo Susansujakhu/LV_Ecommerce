@@ -132,5 +132,8 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-#db migrations
+# db migrations
 migrations/
+
+# init file
+single_store/__init__.py
