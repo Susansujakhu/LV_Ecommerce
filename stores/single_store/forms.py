@@ -104,6 +104,9 @@ class EditProductForm(FlaskForm):
     longDescription = TextAreaField('Long Description')
     imageFile = FileField('Set Featured image', validators = [FileAllowed(['jpg', 'png'])])
     imageGallery = FileField('Gallery', validators = [FileAllowed(['jpg', 'png'])])
+    tags = StringField('Tags')
+    badgeDuration = IntegerField('Badge Durations')
+    excludeBadge = BooleanField("Exclude Badge")
     featured = BooleanField("Featured")
     # product_user_id = current_user
 
