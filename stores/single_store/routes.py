@@ -200,7 +200,6 @@ def account():
     return render_template('account.html', title='Account', image_file=image_file, form = form)
 
 
-
 @app.route("/add_product", methods=['GET', 'POST'])
 @login_required
 def add_product():
@@ -242,9 +241,9 @@ def add_product():
                             featured = form.featured.data,
                             product_user_id = current_user,
                             )
-            # db.session.add(product)
-            # db.session.commit()
-            flash('Product Added Successful!', 'success')
+            db.session.add(product)
+            db.session.commit()
+            flash(form.productName.data+' Product Added Successful!', 'success')
         else:
             # form.productName.data = 
             # form.email.data = current_user.email
@@ -258,13 +257,17 @@ def add_product():
 @app.route("/edit_product/<int:productId>", methods=['GET', 'POST'])
 @login_required
 def edit_product(productId):
+    print('<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>')
     product = Product.query.get_or_404(productId)
     form = EditProductForm()
     form.category.choices = [(category.name) for category in Category.query.with_entities(Category.name).all()] #db.session.query(Category.name)
     form.brand.choices = [(brand.name) for brand in Brand.query.with_entities(Brand.name).all()]
     if form.validate_on_submit():
+        print(form.imageFile.data)
         if form.imageFile.data:
-            featuredImage = save_picture(form.imageFile.data)
+            random_hex = secrets.token_hex(4)
+            featuredImage = save_picture(form.imageFile.data, random_hex + form.productName.data, 'products', 700, 700)
+            print(featuredImage)
 
         if form.imageGallery.data:
             galleryImage = save_picture(form.imageGallery.data)
@@ -286,6 +289,9 @@ def edit_product(productId):
             product.longDescription = form.longDescription.data
             # product.imageFile = form.imageFile.data
             # product.imageGallery = form.imageGallery.data
+            product.tags = form.tags.data
+            product.badgeDuration = form.badgeDuration.data
+            product.excludeBadge = form.excludeBadge.data
             product.featured = form.featured.data
             product.product_user_id = current_user
             db.session.commit()
@@ -307,7 +313,10 @@ def edit_product(productId):
         form.longDescription.data = product.longDescription
         form.imageFile.data = product.imageFile
         form.imageGallery.data = product.imageGallery
-        form.featured.data = product.featured 
+        form.tags.data = product.tags 
+        form.badgeDuration.data = product.badgeDuration
+        form.excludeBadge.data = product.excludeBadge
+        form.featured.data = product.featured
     return render_template('edit_product.html', title= product.productName, form=form)
 
 
