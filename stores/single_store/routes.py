@@ -108,13 +108,13 @@ def logout():
     logout_user()
     return redirect(url_for('home'))
 
-def save_picture(form_picture):
-    random_hex = secrets.token_hex(8)
+def save_picture(form_picture, name, path, width, height):
+    
     _, f_ext = os.path.splitext(form_picture.filename)
-    picture_fn = random_hex + f_ext
-    picture_path = os.path.join(app.root_path, 'static/profile_pics', picture_fn)
+    picture_fn = name + f_ext
+    picture_path = os.path.join(app.root_path, 'static/assets/images/'+path, picture_fn)
 
-    output_size = (125, 125)
+    output_size = (width, height)
     i = Image.open(form_picture)
     i.thumbnail(output_size)
     i.save(picture_path)
@@ -126,7 +126,8 @@ def account():
     form = UpdateAccountForm()
     if form.validate_on_submit():
         if form.picture.data:
-            picture_file = save_picture(form.picture.data)
+            random_hex = secrets.token_hex(4)
+            picture_file = save_picture(form.picture.data, random_hex + current_user.username, 'users', 700, 700)
             current_user.image_file = picture_file
         current_user.username = form.username.data
         current_user.email = form.email.data
@@ -150,9 +151,12 @@ def add_product():
     form.category.choices = [(category.name) for category in Category.query.with_entities(Category.name).all()] #db.session.query(Category.name)
     form.brand.choices = [(brand.name) for brand in Brand.query.with_entities(Brand.name).all()]
     if form.validate_on_submit():
+        
+        print(form.imageFile.data)
         if form.imageFile.data:
-            featuredImage = save_picture(form.imageFile.data)
-
+            random_hex = secrets.token_hex(4)
+            featuredImage = save_picture(form.imageFile.data, random_hex + form.productName.data, 'products', 700, 700)
+            print(featuredImage)
         if form.imageGallery.data:
             galleryImage = save_picture(form.imageGallery.data)
 
@@ -171,19 +175,22 @@ def add_product():
                             material = form.material.data,
                             shortDescription = form.shortDescription.data,
                             longDescription = form.longDescription.data,
-                            imageFile = form.imageFile.data,
+                            imageFile = featuredImage,
                             imageGallery = form.imageGallery.data,
+                            tags = form.tags.data,
+                            badgeDuration = form.badgeDuration.data,
+                            excludeBadge = form.excludeBadge.data,
                             featured = form.featured.data,
-                            product_user_id = current_user
+                            product_user_id = current_user,
                             )
-            db.session.add(product)
-            db.session.commit()
+            # db.session.add(product)
+            # db.session.commit()
             flash('Product Added Successful!', 'success')
         else:
             # form.productName.data = 
             # form.email.data = current_user.email
             flash('Product Edited Successful!', 'success')
-        return redirect(url_for('home'))
+            # return redirect(url_for('home'))
 
     # image_file = url_for('static', filename = 'profile_pics/' + current_user.image_file)
     return render_template('add_product.html', title='New Product', form=form)
@@ -255,14 +262,15 @@ def add_category():
     
     if form.validate_on_submit():
         if form.imageFile.data:
-            image = save_picture(form.imageFile.data)
+            random_hex = secrets.token_hex(4)
+            image = save_picture(form.imageFile.data, random_hex + form.name.data, 'category', 700, 700)
 
         if request.form.get('submit'):
             category = Category(name = form.name.data, 
                             slug = form.slug.data,
                             parentCategory = form.parentCategory.data,
                             description = form.description.data,
-                            imageFile = form.imageFile.data,
+                            imageFile = image,
                             )
             db.session.add(category)
             db.session.commit()
@@ -311,13 +319,14 @@ def add_brand():
         
     if form.validate_on_submit():
         if form.imageFile.data:
-            image = save_picture(form.imageFile.data)
+            random_hex = secrets.token_hex(4)
+            image = save_picture(form.imageFile.data,random_hex + form.name.data, 'brand', 700, 700)
 
         if request.form.get('submit'):
             brand = Brand(name = form.name.data, 
                             slug = form.slug.data,
                             description = form.description.data,
-                            imageFile = form.imageFile.data,
+                            imageFile = image,
                             )
             db.session.add(brand)
             db.session.commit()
@@ -337,13 +346,15 @@ def add_hero():
         
     if form.validate_on_submit():
         if form.imageFile.data:
-            image = save_picture(form.imageFile.data)
+            random_hex = secrets.token_hex(4)
+            image = save_picture(form.imageFile.data, random_hex + form.title.data, 'hero/desktop', 840, 395)
+            image = save_picture(form.imageFile.data, random_hex + form.title.data, 'hero/mobile', 510, 395)
 
         if request.form.get('submit'):
             hero = Hero(title = form.title.data, 
                             description = form.description.data,
                             button = form.button.data,
-                            imageFile = form.imageFile.data,
+                            imageFile =image,
                             )
             db.session.add(hero)
             db.session.commit()
