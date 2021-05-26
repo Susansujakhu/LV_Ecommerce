@@ -2,7 +2,7 @@
 {% block content %}
 
 <div class="content-section">
-    <form method="POST" action="">
+    <form method="POST" action="" enctype="multipart/form-data">
         {{ form.hidden_tag() }}
         <fieldset class="form-group">
             <legend class="border-bottom mb-4">Add Product</legend>
@@ -222,6 +222,48 @@
                 {% for error in form.imageGallery.errors %}
                 <span class="text-danger">{{ error }}</span></br>
                 {% endfor %}
+                {% endif %}
+            </div>
+            <!-- product Tags-->
+            <div class="form-group">
+                {{ form.tags.label(class="form-control-label") }}
+                {% if form.tags.errors %}
+                {{ form.tags(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.tags.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.tags(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <!-- product badgeDuration-->
+            <div class="form-group">
+                {{ form.badgeDuration.label(class="form-control-label") }}
+                {% if form.badgeDuration.errors %}
+                {{ form.badgeDuration(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.badgeDuration.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.badgeDuration(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <!-- product excludeBadge-->
+            <div class="form-group">
+                {{ form.excludeBadge.label(class="form-control-label") }}
+                {% if form.excludeBadge.errors %}
+                {{ form.excludeBadge(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.excludeBadge.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.excludeBadge(class="form-control form-control-lg") }}
                 {% endif %}
             </div>
             <!-- product featured-->
