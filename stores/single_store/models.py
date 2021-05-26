@@ -94,6 +94,11 @@ class Product(db.Model):
     imageFile = db.Column(db.Text, nullable = False, default = 'default.jpg')
     imageGallery = db.Column(db.Text, nullable = True)
     featured = db.Column(db.Boolean, nullable = False, default = False)
+    tags = db.Column(db.Text, nullable = True)
+
+    badgeDuration = db.Column(db.String(50), nullable = True)
+    excludeBadge = db.Column(db.Boolean, nullable = False, default = False)
+    dateCreated = db.Column(db.DateTime, nullable = False, default = datetime.utcnow)
 
     userId = db.Column(db.Integer, db.ForeignKey('user.userId'), nullable = False) # User Id
 
