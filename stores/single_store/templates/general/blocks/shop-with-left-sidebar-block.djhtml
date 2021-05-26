@@ -8,7 +8,7 @@
                         <div class="block-sidebar-title">Filters</div>
                         <button class="block-sidebar-close" type="button">
                             <svg width="20px" height="20px">
-                                <use xlink:href="images/sprite.svg#cross-20"></use>
+                                <use xlink:href="/static/assets/icons/sprite.svg#cross-20"></use>
                             </svg>
                         </button>
                     </div>
@@ -21,7 +21,7 @@
                                         <button type="button" class="filter-title" data-collapse-trigger>
                                             Categories
                                             <svg class="filter-arrow" width="12px" height="7px">
-                                                <use xlink:href="images/sprite.svg#arrow-rounded-down-12x7"></use>
+                                                <use xlink:href="/static/assets/icons/sprite.svg#arrow-rounded-down-12x7"></use>
                                             </svg>
                                         </button>
                                         <div class="filter-body" data-collapse-content>
@@ -30,14 +30,14 @@
                                                     <ul class="filter-categories-list">
                                                         <li class="filter-categories-item filter-categories-item--parent">
                                                             <svg class="filter-categories-arrow" width="6px" height="9px">
-                                                                <use xlink:href="images/sprite.svg#arrow-rounded-left-6x9"></use>
+                                                                <use xlink:href="/static/assets/icons/sprite.svg#arrow-rounded-left-6x9"></use>
                                                             </svg>
                                                             <a href="">Construction & Repair</a>
                                                             <div class="filter-categories-counter">254</div>
                                                         </li>
                                                         <li class="filter-categories-item filter-categories-item--parent">
                                                             <svg class="filter-categories-arrow" width="6px" height="9px">
-                                                                <use xlink:href="images/sprite.svg#arrow-rounded-left-6x9"></use>
+                                                                <use xlink:href="/static/assets/icons/sprite.svg#arrow-rounded-left-6x9"></use>
                                                             </svg>
                                                             <a href="">Instruments</a>
                                                             <div class="filter-categories-counter">75</div>
@@ -101,7 +101,7 @@
                                         <button type="button" class="filter-title" data-collapse-trigger>
                                             Categories Alt
                                             <svg class="filter-arrow" width="12px" height="7px">
-                                                <use xlink:href="images/sprite.svg#arrow-rounded-down-12x7"></use>
+                                                <use xlink:href="/static/assets/icons/sprite.svg#arrow-rounded-down-12x7"></use>
                                             </svg>
                                         </button>
                                         <div class="filter-body" data-collapse-content>
@@ -246,7 +246,7 @@
                                         <button type="button" class="filter-title" data-collapse-trigger>
                                             Price
                                             <svg class="filter-arrow" width="12px" height="7px">
-                                                <use xlink:href="images/sprite.svg#arrow-rounded-down-12x7"></use>
+                                                <use xlink:href="/static/assets/icons/sprite.svg#arrow-rounded-down-12x7"></use>
                                             </svg>
                                         </button>
                                         <div class="filter-body" data-collapse-content>
@@ -264,7 +264,7 @@
                                         <button type="button" class="filter-title" data-collapse-trigger>
                                             Brand
                                             <svg class="filter-arrow" width="12px" height="7px">
-                                                <use xlink:href="images/sprite.svg#arrow-rounded-down-12x7"></use>
+                                                <use xlink:href="/static/assets/icons/sprite.svg#arrow-rounded-down-12x7"></use>
                                             </svg>
                                         </button>
                                         <div class="filter-body" data-collapse-content>
@@ -277,7 +277,7 @@
                                                                     <input class="input-check-input" type="checkbox">
                                                                     <span class="input-check-box"></span>
                                                                     <svg class="input-check-icon" width="9px" height="7px">
-                                                                        <use xlink:href="images/sprite.svg#check-9x7"></use>
+                                                                        <use xlink:href="/static/assets/icons/sprite.svg#check-9x7"></use>
                                                                     </svg>
                                                                 </span>
                                                             </span>
@@ -292,7 +292,7 @@
                                                                     <input class="input-check-input" type="checkbox" checked>
                                                                     <span class="input-check-box"></span>
                                                                     <svg class="input-check-icon" width="9px" height="7px">
-                                                                        <use xlink:href="images/sprite.svg#check-9x7"></use>
+                                                                        <use xlink:href="/static/assets/icons/sprite.svg#check-9x7"></use>
                                                                     </svg>
                                                                 </span>
                                                             </span>
@@ -307,7 +307,7 @@
                                                                     <input class="input-check-input" type="checkbox" checked disabled>
                                                                     <span class="input-check-box"></span>
                                                                     <svg class="input-check-icon" width="9px" height="7px">
-                                                                        <use xlink:href="images/sprite.svg#check-9x7"></use>
+                                                                        <use xlink:href="/static/assets/icons/sprite.svg#check-9x7"></use>
                                                                     </svg>
                                                                 </span>
                                                             </span>
@@ -321,7 +321,7 @@
                                                                     <input class="input-check-input" type="checkbox" disabled>
                                                                     <span class="input-check-box"></span>
                                                                     <svg class="input-check-icon" width="9px" height="7px">
-                                                                        <use xlink:href="images/sprite.svg#check-9x7"></use>
+                                                                        <use xlink:href="/static/assets/icons/sprite.svg#check-9x7"></use>
                                                                     </svg>
                                                                 </span>
                                                             </span>
@@ -335,7 +335,7 @@
                                                                     <input class="input-check-input" type="checkbox">
                                                                     <span class="input-check-box"></span>
                                                                     <svg class="input-check-icon" width="9px" height="7px">
-                                                                        <use xlink:href="images/sprite.svg#check-9x7"></use>
+                                                                        <use xlink:href="/static/assets/icons/sprite.svg#check-9x7"></use>
                                                                     </svg>
                                                                 </span>
                                                             </span>
@@ -350,7 +350,7 @@
                                                                     <input class="input-check-input" type="checkbox">
                                                                     <span class="input-check-box"></span>
                                                                     <svg class="input-check-icon" width="9px" height="7px">
-                                                                        <use xlink:href="images/sprite.svg#check-9x7"></use>
+                                                                        <use xlink:href="/static/assets/icons/sprite.svg#check-9x7"></use>
                                                                     </svg>
                                                                 </span>
                                                             </span>
@@ -370,7 +370,7 @@
                                         <button type="button" class="filter-title" data-collapse-trigger>
                                             Brand
                                             <svg class="filter-arrow" width="12px" height="7px">
-                                                <use xlink:href="images/sprite.svg#arrow-rounded-down-12x7"></use>
+                                                <use xlink:href="/static/assets/icons/sprite.svg#arrow-rounded-down-12x7"></use>
                                             </svg>
                                         </button>
                                         <div class="filter-body" data-collapse-content>
@@ -458,7 +458,7 @@
                                         <button type="button" class="filter-title" data-collapse-trigger>
                                             Color
                                             <svg class="filter-arrow" width="12px" height="7px">
-                                                <use xlink:href="images/sprite.svg#arrow-rounded-down-12x7"></use>
+                                                <use xlink:href="/static/assets/icons/sprite.svg#arrow-rounded-down-12x7"></use>
                                             </svg>
                                         </button>
                                         <div class="filter-body" data-collapse-content>
@@ -471,7 +471,7 @@
                                                                     <input class="input-check-color-input" type="checkbox">
                                                                     <span class="input-check-color-box"></span>
                                                                     <svg class="input-check-color-icon" width="12px" height="9px">
-                                                                        <use xlink:href="images/sprite.svg#check-12x9"></use>
+                                                                        <use xlink:href="/static/assets/icons/sprite.svg#check-12x9"></use>
                                                                     </svg>
                                                                     <span class="input-check-color-stick"></span>
                                                                 </label>
@@ -483,7 +483,7 @@
                                                                     <input class="input-check-color-input" type="checkbox">
                                                                     <span class="input-check-color-box"></span>
                                                                     <svg class="input-check-color-icon" width="12px" height="9px">
-                                                                        <use xlink:href="images/sprite.svg#check-12x9"></use>
+                                                                        <use xlink:href="/static/assets/icons/sprite.svg#check-12x9"></use>
                                                                     </svg>
                                                                     <span class="input-check-color-stick"></span>
                                                                 </label>
@@ -495,7 +495,7 @@
                                                                     <input class="input-check-color-input" type="checkbox">
                                                                     <span class="input-check-color-box"></span>
                                                                     <svg class="input-check-color-icon" width="12px" height="9px">
-                                                                        <use xlink:href="images/sprite.svg#check-12x9"></use>
+                                                                        <use xlink:href="/static/assets/icons/sprite.svg#check-12x9"></use>
                                                                     </svg>
                                                                     <span class="input-check-color-stick"></span>
                                                                 </label>
@@ -507,7 +507,7 @@
                                                                     <input class="input-check-color-input" type="checkbox">
                                                                     <span class="input-check-color-box"></span>
                                                                     <svg class="input-check-color-icon" width="12px" height="9px">
-                                                                        <use xlink:href="images/sprite.svg#check-12x9"></use>
+                                                                        <use xlink:href="/static/assets/icons/sprite.svg#check-12x9"></use>
                                                                     </svg>
                                                                     <span class="input-check-color-stick"></span>
                                                                 </label>
@@ -519,7 +519,7 @@
                                                                     <input class="input-check-color-input" type="checkbox">
                                                                     <span class="input-check-color-box"></span>
                                                                     <svg class="input-check-color-icon" width="12px" height="9px">
-                                                                        <use xlink:href="images/sprite.svg#check-12x9"></use>
+                                                                        <use xlink:href="/static/assets/icons/sprite.svg#check-12x9"></use>
                                                                     </svg>
                                                                     <span class="input-check-color-stick"></span>
                                                                 </label>
@@ -531,7 +531,7 @@
                                                                     <input class="input-check-color-input" type="checkbox">
                                                                     <span class="input-check-color-box"></span>
                                                                     <svg class="input-check-color-icon" width="12px" height="9px">
-                                                                        <use xlink:href="images/sprite.svg#check-12x9"></use>
+                                                                        <use xlink:href="/static/assets/icons/sprite.svg#check-12x9"></use>
                                                                     </svg>
                                                                     <span class="input-check-color-stick"></span>
                                                                 </label>
@@ -543,7 +543,7 @@
                                                                     <input class="input-check-color-input" type="checkbox">
                                                                     <span class="input-check-color-box"></span>
                                                                     <svg class="input-check-color-icon" width="12px" height="9px">
-                                                                        <use xlink:href="images/sprite.svg#check-12x9"></use>
+                                                                        <use xlink:href="/static/assets/icons/sprite.svg#check-12x9"></use>
                                                                     </svg>
                                                                     <span class="input-check-color-stick"></span>
                                                                 </label>
@@ -555,7 +555,7 @@
                                                                     <input class="input-check-color-input" type="checkbox" checked>
                                                                     <span class="input-check-color-box"></span>
                                                                     <svg class="input-check-color-icon" width="12px" height="9px">
-                                                                        <use xlink:href="images/sprite.svg#check-12x9"></use>
+                                                                        <use xlink:href="/static/assets/icons/sprite.svg#check-12x9"></use>
                                                                     </svg>
                                                                     <span class="input-check-color-stick"></span>
                                                                 </label>
@@ -567,7 +567,7 @@
                                                                     <input class="input-check-color-input" type="checkbox">
                                                                     <span class="input-check-color-box"></span>
                                                                     <svg class="input-check-color-icon" width="12px" height="9px">
-                                                                        <use xlink:href="images/sprite.svg#check-12x9"></use>
+                                                                        <use xlink:href="/static/assets/icons/sprite.svg#check-12x9"></use>
                                                                     </svg>
                                                                     <span class="input-check-color-stick"></span>
                                                                 </label>
@@ -579,7 +579,7 @@
                                                                     <input class="input-check-color-input" type="checkbox">
                                                                     <span class="input-check-color-box"></span>
                                                                     <svg class="input-check-color-icon" width="12px" height="9px">
-                                                                        <use xlink:href="images/sprite.svg#check-12x9"></use>
+                                                                        <use xlink:href="/static/assets/icons/sprite.svg#check-12x9"></use>
                                                                     </svg>
                                                                     <span class="input-check-color-stick"></span>
                                                                 </label>
@@ -591,7 +591,7 @@
                                                                     <input class="input-check-color-input" type="checkbox">
                                                                     <span class="input-check-color-box"></span>
                                                                     <svg class="input-check-color-icon" width="12px" height="9px">
-                                                                        <use xlink:href="images/sprite.svg#check-12x9"></use>
+                                                                        <use xlink:href="/static/assets/icons/sprite.svg#check-12x9"></use>
                                                                     </svg>
                                                                     <span class="input-check-color-stick"></span>
                                                                 </label>
@@ -603,7 +603,7 @@
                                                                     <input class="input-check-color-input" type="checkbox" checked>
                                                                     <span class="input-check-color-box"></span>
                                                                     <svg class="input-check-color-icon" width="12px" height="9px">
-                                                                        <use xlink:href="images/sprite.svg#check-12x9"></use>
+                                                                        <use xlink:href="/static/assets/icons/sprite.svg#check-12x9"></use>
                                                                     </svg>
                                                                     <span class="input-check-color-stick"></span>
                                                                 </label>
@@ -615,7 +615,7 @@
                                                                     <input class="input-check-color-input" type="checkbox">
                                                                     <span class="input-check-color-box"></span>
                                                                     <svg class="input-check-color-icon" width="12px" height="9px">
-                                                                        <use xlink:href="images/sprite.svg#check-12x9"></use>
+                                                                        <use xlink:href="/static/assets/icons/sprite.svg#check-12x9"></use>
                                                                     </svg>
                                                                     <span class="input-check-color-stick"></span>
                                                                 </label>
@@ -627,7 +627,7 @@
                                                                     <input class="input-check-color-input" type="checkbox">
                                                                     <span class="input-check-color-box"></span>
                                                                     <svg class="input-check-color-icon" width="12px" height="9px">
-                                                                        <use xlink:href="images/sprite.svg#check-12x9"></use>
+                                                                        <use xlink:href="/static/assets/icons/sprite.svg#check-12x9"></use>
                                                                     </svg>
                                                                     <span class="input-check-color-stick"></span>
                                                                 </label>
@@ -639,7 +639,7 @@
                                                                     <input class="input-check-color-input" type="checkbox">
                                                                     <span class="input-check-color-box"></span>
                                                                     <svg class="input-check-color-icon" width="12px" height="9px">
-                                                                        <use xlink:href="images/sprite.svg#check-12x9"></use>
+                                                                        <use xlink:href="/static/assets/icons/sprite.svg#check-12x9"></use>
                                                                     </svg>
                                                                     <span class="input-check-color-stick"></span>
                                                                 </label>
@@ -651,7 +651,7 @@
                                                                     <input class="input-check-color-input" type="checkbox" disabled>
                                                                     <span class="input-check-color-box"></span>
                                                                     <svg class="input-check-color-icon" width="12px" height="9px">
-                                                                        <use xlink:href="images/sprite.svg#check-12x9"></use>
+                                                                        <use xlink:href="/static/assets/icons/sprite.svg#check-12x9"></use>
                                                                     </svg>
                                                                     <span class="input-check-color-stick"></span>
                                                                 </label>
@@ -663,7 +663,7 @@
                                                                     <input class="input-check-color-input" type="checkbox" checked>
                                                                     <span class="input-check-color-box"></span>
                                                                     <svg class="input-check-color-icon" width="12px" height="9px">
-                                                                        <use xlink:href="images/sprite.svg#check-12x9"></use>
+                                                                        <use xlink:href="/static/assets/icons/sprite.svg#check-12x9"></use>
                                                                     </svg>
                                                                     <span class="input-check-color-stick"></span>
                                                                 </label>
@@ -675,7 +675,7 @@
                                                                     <input class="input-check-color-input" type="checkbox">
                                                                     <span class="input-check-color-box"></span>
                                                                     <svg class="input-check-color-icon" width="12px" height="9px">
-                                                                        <use xlink:href="images/sprite.svg#check-12x9"></use>
+                                                                        <use xlink:href="/static/assets/icons/sprite.svg#check-12x9"></use>
                                                                     </svg>
                                                                     <span class="input-check-color-stick"></span>
                                                                 </label>
@@ -687,7 +687,7 @@
                                                                     <input class="input-check-color-input" type="checkbox">
                                                                     <span class="input-check-color-box"></span>
                                                                     <svg class="input-check-color-icon" width="12px" height="9px">
-                                                                        <use xlink:href="images/sprite.svg#check-12x9"></use>
+                                                                        <use xlink:href="/static/assets/icons/sprite.svg#check-12x9"></use>
                                                                     </svg>
                                                                     <span class="input-check-color-stick"></span>
                                                                 </label>
@@ -699,7 +699,7 @@
                                                                     <input class="input-check-color-input" type="checkbox">
                                                                     <span class="input-check-color-box"></span>
                                                                     <svg class="input-check-color-icon" width="12px" height="9px">
-                                                                        <use xlink:href="images/sprite.svg#check-12x9"></use>
+                                                                        <use xlink:href="/static/assets/icons/sprite.svg#check-12x9"></use>
                                                                     </svg>
                                                                     <span class="input-check-color-stick"></span>
                                                                 </label>
@@ -822,7 +822,7 @@
                             <div class="view-options-filters-button">
                                 <button type="button" class="filters-button">
                                     <svg class="filters-button-icon" width="16px" height="16px">
-                                        <use xlink:href="images/sprite.svg#filters-16"></use>
+                                        <use xlink:href="/static/assets/icons/sprite.svg#filters-16"></use>
                                     </svg>
                                     <span class="filters-button-title">Filters</span>
                                     <span class="filters-button-counter">3</span>
@@ -833,17 +833,17 @@
                                     <div class="layout-switcher-list">
                                         <button data-layout="grid-3-sidebar" data-with-features="false" title="Grid" type="button" class="layout-switcher-button  layout-switcher-button--active ">
                                             <svg width="16px" height="16px">
-                                                <use xlink:href="images/sprite.svg#layout-grid-16x16"></use>
+                                                <use xlink:href="/static/assets/icons/sprite.svg#layout-grid-16x16"></use>
                                             </svg>
                                         </button>
                                         <button data-layout="grid-3-sidebar" data-with-features="true" title="Grid With Features" type="button" class="layout-switcher-button ">
                                             <svg width="16px" height="16px">
-                                                <use xlink:href="images/sprite.svg#layout-grid-with-details-16x16"></use>
+                                                <use xlink:href="/static/assets/icons/sprite.svg#layout-grid-with-details-16x16"></use>
                                             </svg>
                                         </button>
                                         <button data-layout="list" data-with-features="false" title="List" type="button" class="layout-switcher-button ">
                                             <svg width="16px" height="16px">
-                                                <use xlink:href="images/sprite.svg#layout-list-16x16"></use>
+                                                <use xlink:href="/static/assets/icons/sprite.svg#layout-list-16x16"></use>
                                             </svg>
                                         </button>
                                     </div>
@@ -877,7 +877,7 @@
                                 <div class="product-card product-card--hidden-actions ">
                                     <button class="product-card-quickview" type="button">
                                         <svg width="16px" height="16px">
-                                            <use xlink:href="images/sprite.svg#quickview-16"></use>
+                                            <use xlink:href="/static/assets/icons/sprite.svg#quickview-16"></use>
                                         </svg>
                                         <span class="fake-svg-icon"></span>
                                     </button>
@@ -899,10 +899,10 @@
                                                     <div class="rating-body">
                                                         <svg class="rating-star rating-star--active" width="13px" height="12px">
                                                             <g class="rating-fill">
-                                                                <use xlink:href="images/sprite.svg#star-normal"></use>
+                                                                <use xlink:href="/static/assets/icons/sprite.svg#star-normal"></use>
                                                             </g>
                                                             <g class="rating-stroke">
-                                                                <use xlink:href="images/sprite.svg#star-normal-stroke"></use>
+                                                                <use xlink:href="/static/assets/icons/sprite.svg#star-normal-stroke"></use>
                                                             </g>
                                                         </svg>
                                                         <div class="rating-star rating-star--only-edge rating-star--active">
@@ -915,10 +915,10 @@
                                                         </div>
                                                         <svg class="rating-star rating-star--active" width="13px" height="12px">
                                                             <g class="rating-fill">
-                                                                <use xlink:href="images/sprite.svg#star-normal"></use>
+                                                                <use xlink:href="/static/assets/icons/sprite.svg#star-normal"></use>
                                                             </g>
                                                             <g class="rating-stroke">
-                                                                <use xlink:href="images/sprite.svg#star-normal-stroke"></use>
+                                                                <use xlink:href="/static/assets/icons/sprite.svg#star-normal-stroke"></use>
                                                             </g>
                                                         </svg>
                                                         <div class="rating-star rating-star--only-edge rating-star--active">
@@ -931,10 +931,10 @@
                                                         </div>
                                                         <svg class="rating-star rating-star--active" width="13px" height="12px">
                                                             <g class="rating-fill">
-                                                                <use xlink:href="images/sprite.svg#star-normal"></use>
+                                                                <use xlink:href="/static/assets/icons/sprite.svg#star-normal"></use>
                                                             </g>
                                                             <g class="rating-stroke">
-                                                                <use xlink:href="images/sprite.svg#star-normal-stroke"></use>
+                                                                <use xlink:href="/static/assets/icons/sprite.svg#star-normal-stroke"></use>
                                                             </g>
                                                         </svg>
                                                         <div class="rating-star rating-star--only-edge rating-star--active">
@@ -947,10 +947,10 @@
                                                         </div>
                                                         <svg class="rating-star rating-star--active" width="13px" height="12px">
                                                             <g class="rating-fill">
-                                                                <use xlink:href="images/sprite.svg#star-normal"></use>
+                                                                <use xlink:href="/static/assets/icons/sprite.svg#star-normal"></use>
                                                             </g>
                                                             <g class="rating-stroke">
-                                                                <use xlink:href="images/sprite.svg#star-normal-stroke"></use>
+                                                                <use xlink:href="/static/assets/icons/sprite.svg#star-normal-stroke"></use>
                                                             </g>
                                                         </svg>
                                                         <div class="rating-star rating-star--only-edge rating-star--active">
@@ -963,10 +963,10 @@
                                                         </div>
                                                         <svg class="rating-star " width="13px" height="12px">
                                                             <g class="rating-fill">
-                                                                <use xlink:href="images/sprite.svg#star-normal"></use>
+                                                                <use xlink:href="/static/assets/icons/sprite.svg#star-normal"></use>
                                                             </g>
                                                             <g class="rating-stroke">
-                                                                <use xlink:href="images/sprite.svg#star-normal-stroke"></use>
+                                                                <use xlink:href="/static/assets/icons/sprite.svg#star-normal-stroke"></use>
                                                             </g>
                                                         </svg>
                                                         <div class="rating-star rating-star--only-edge ">
@@ -1002,13 +1002,13 @@
                                             <button class="btn btn-secondary product-card-addtocart product-card-addtocart--list" type="button">Add To Cart</button>
                                             <button class="btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card-wishlist" type="button">
                                                 <svg width="16px" height="16px">
-                                                    <use xlink:href="images/sprite.svg#wishlist-16"></use>
+                                                    <use xlink:href="/static/assets/icons/sprite.svg#wishlist-16"></use>
                                                 </svg>
                                                 <span class="fake-svg-icon fake-svg-icon--wishlist-16"></span>
                                             </button>
                                             <button class="btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card-compare" type="button">
                                                 <svg width="16px" height="16px">
-                                                    <use xlink:href="images/sprite.svg#compare-16"></use>
+                                                    <use xlink:href="/static/assets/icons/sprite.svg#compare-16"></use>
                                                 </svg>
                                                 <span class="fake-svg-icon fake-svg-icon--compare-16"></span>
                                             </button>
@@ -1023,7 +1023,7 @@
                             <li class="page-item disabled">
                                 <a class="page-link page-link--with-arrow" href="" aria-label="Previous">
                                     <svg class="page-link-arrow page-link-arrow--left" aria-hidden="true" width="8px" height="13px">
-                                        <use xlink:href="images/sprite.svg#arrow-rounded-left-8x13"></use>
+                                        <use xlink:href="/static/assets/icons/sprite.svg#arrow-rounded-left-8x13"></use>
                                     </svg>
                                 </a>
                             </li>
@@ -1033,7 +1033,7 @@
                             <li class="page-item">
                                 <a class="page-link page-link--with-arrow" href="" aria-label="Next">
                                     <svg class="page-link-arrow page-link-arrow--right" aria-hidden="true" width="8px" height="13px">
-                                        <use xlink:href="images/sprite.svg#arrow-rounded-right-8x13"></use>
+                                        <use xlink:href="/static/assets/icons/sprite.svg#arrow-rounded-right-8x13"></use>
                                     </svg>
                                 </a>
                             </li>

@@ -1,0 +1,16 @@
+{% set pageTitle = "Shop" %}
+{% extends 'single-store/base.djhtml' %}
+
+{% block head %}
+{% endblock %}
+
+{# {% block bodyHead %}{% endblock %} #}
+
+{% block content %}
+	{% include '/general/blocks/cart-block.djhtml' %}
+{% endblock %}
+
+{% block container %}{% endblock %}
+
+{% block tail %}
+{% endblock %}

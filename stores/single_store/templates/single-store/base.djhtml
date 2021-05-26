@@ -43,23 +43,23 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item">
-                                <a href="index.html">Home</a>
+                                <a href="/">Home</a>
                                 <svg class="breadcrumb-arrow" width="6px" height="9px">
-                                    <use xlink:href="images/sprite.svg#arrow-rounded-right-6x9"></use>
+                                    <use xlink:href="/static/assets/icons/sprite.svg#arrow-rounded-right-6x9"></use>
                                 </svg>
                             </li>
                             <li class="breadcrumb-item">
-                                <a href="">Breadcrumb</a>
+                                <a href="">Breadcrumbs</a>
                                 <svg class="breadcrumb-arrow" width="6px" height="9px">
-                                    <use xlink:href="images/sprite.svg#arrow-rounded-right-6x9"></use>
+                                    <use xlink:href="/static/assets/icons/sprite.svg#arrow-rounded-right-6x9"></use>
                                 </svg>
                             </li>
-                            <li class="breadcrumb-item active" aria-current="page">My Account</li>
+                            <li class="breadcrumb-item active" aria-current="page">{{ pageTitle }}</li>
                         </ol>
                     </nav>
                 </div>
                 <div class="page-header-title">
-                    <h1>My Account</h1>
+                    <h1>{{ pageTitle }}</h1>
                 </div>
             </div>
         {% endblock %}
@@ -93,6 +93,9 @@
     <script src="{{ url_for('static', filename='js/header.js') }}" type="text/javascript"></script>
     <script src="{{ url_for('static', filename='js/number.js') }}" type="text/javascript"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/svg4everybody/2.1.9/svg4everybody.min.js"></script>
+    <script>
+        svg4everybody();
+    </script>
     {% block tail %}{% endblock %}
 </body>
 </html>

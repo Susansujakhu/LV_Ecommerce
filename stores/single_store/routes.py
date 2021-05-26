@@ -46,12 +46,71 @@ def shop():
         'single-store/shop-page.djhtml'
         )
 
+@app.route("/cart")
+def cart():
+    return render_template(
+        'single-store/cart-page.djhtml'
+        )
+
+@app.route("/checkout")
+def checkout():
+    return render_template(
+        'single-store/checkout-page.djhtml'
+        )
+
+@app.route("/wishlist")
+def wishlist():
+    return render_template(
+        'single-store/wishlist-page.djhtml'
+        )
+
 @app.route("/account")
 def user_account():
     return render_template(
-        'single-store/user-account.djhtml'
+        'single-store/user-account/user-account.djhtml'
         )
 
+@app.route("/dashboard")
+def user_dashboard():
+    return render_template(
+        'single-store/user-account/user-dashboard.djhtml'
+        )
+
+@app.route("/address-book")
+def address_book():
+    return render_template(
+        'single-store/user-account/address-book.djhtml'
+        )
+
+@app.route("/edit-address")
+def edit_address():
+    return render_template(
+        'single-store/user-account/edit-address.djhtml'
+        )
+
+@app.route("/edit-profile")
+def edit_profile():
+    return render_template(
+        'single-store/user-account/edit-profile.djhtml'
+        )
+
+@app.route("/order-details")
+def order_details():
+    return render_template(
+        'single-store/user-account/order-details.djhtml'
+        )
+
+@app.route("/order-history")
+def order_history():
+    return render_template(
+        'single-store/user-account/order-history.djhtml'
+        )
+
+@app.route("/change-password")
+def change_password():
+    return render_template(
+        'single-store/user-account/password.djhtml'
+        )
 
 
 # @app.route("/")

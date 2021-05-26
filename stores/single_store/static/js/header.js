@@ -1157,6 +1157,63 @@
                 }
             });
         })();
+
+        /*
+        // offcanvas account
+        */
+        (function() {
+            const body = $('body');
+            const account = $('.dropaccount--style--offcanvas');
+
+            if (account.length === 0) {
+                return;
+            }
+
+            function accountIsHidden() {
+                return window.getComputedStyle(account[0]).visibility === 'hidden';
+            }
+            function showScrollbar() {
+                body.css('overflow', '');
+                body.css('paddingRight', '');
+            }
+            function hideScrollbar() {
+                const bodyWidth = body.width();
+                body.css('overflow', 'hidden');
+                body.css('paddingRight', (body.width() - bodyWidth) + 'px');
+            }
+            function open() {
+                hideScrollbar();
+
+                account.addClass('dropaccount--open');
+            }
+            function close() {
+                if (accountIsHidden()) {
+                    showScrollbar();
+                }
+
+                account.removeClass('dropaccount--open');
+            }
+
+            $('[data-open="offcanvas-account"]').on('click', function(event){
+                if (!event.cancelable) {
+                    return;
+                }
+
+                event.preventDefault();
+
+                open();
+            });
+
+            account.find('.dropaccount-backdrop, .dropaccount-close').on('click', function(){
+                close();
+            });
+
+            account.on('transitionend', function(event){
+                if (account.is(event.target) && event.originalEvent.propertyName === 'visibility' && accountIsHidden()) {
+                    showScrollbar();
+                }
+            });
+        })();
     });
 
 })(jQuery);

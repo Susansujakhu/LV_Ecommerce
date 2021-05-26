@@ -1,3 +1,5 @@
+<link rel="stylesheet" type="text/css" href= "{{ url_for('static', filename='css/general/blocks/product-categories-block.css') }}" }}>
+
 <!-- .block-categories -->
 <div class="block block--highlighted block-categories block-categories--layout--classic">
     <div class="container">

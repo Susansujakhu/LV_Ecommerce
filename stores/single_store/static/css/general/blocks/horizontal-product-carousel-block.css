@@ -1,0 +1,182 @@
+.block-products-carousel {
+  pointer-events: none;
+}
+
+.block-products-carousel .owl-stage {
+  margin-bottom: 100px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  pointer-events: auto;
+}
+
+.block-products-carousel .owl-stage-outer {
+  margin-bottom: -100px;
+}
+
+.block-products-carousel .owl-item {
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.block-products-carousel .block-header {
+  pointer-events: auto;
+}
+
+.block-products-carousel-slider {
+  position: relative;
+  z-index: 2;
+}
+
+.block-products-carousel-preloader {
+  position: absolute;
+  z-index: 2;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 56px;
+  background: rgba(255, 255, 255, 0.9);
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transition: opacity .3s, visibility 0s .3s;
+  transition: opacity .3s, visibility 0s .3s;
+}
+
+.block-products-carousel-preloader:after {
+  display: block;
+  content: '';
+  position: absolute;
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  border-top-color: rgba(0, 0, 0, 0.5);
+  -webkit-transition: border-color .1s;
+  transition: border-color .1s;
+  -webkit-animation-name: preloader-animation;
+          animation-name: preloader-animation;
+  -webkit-animation-duration: .5s;
+          animation-duration: .5s;
+  -webkit-animation-timing-function: linear;
+          animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+  left: calc(50% - 50px);
+  top: calc(50% - 50px);
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+}
+
+.block-products-carousel--loading .block-products-carousel-preloader {
+  -webkit-transition-delay: 0s, 0s;
+          transition-delay: 0s, 0s;
+  opacity: 1;
+  visibility: visible;
+}
+
+.block-products-carousel-column {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 100%;
+}
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  .block-products-carousel-column {
+    display: block;
+  }
+}
+
+.block-products-carousel-cell {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  -ms-flex-preferred-size: 100%;
+      flex-basis: 100%;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+}
+
+.block-products-carousel-cell + .block-products-carousel-cell {
+  margin-top: 14px;
+}
+
+.block-products-carousel-cell .product-card {
+  width: 100%;
+}
+
+.block-products-carousel[data-layout="horizontal"] .product-card {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.block-products-carousel[data-layout="horizontal"] .product-card .product-card-image {
+  width: 120px;
+  padding: 16px;
+}
+
+.block-products-carousel[data-layout="horizontal"] .product-card .product-card-badges-list {
+  top: 10px;
+}
+
+.block-products-carousel[data-layout="horizontal"] .product-card .product-card-badges-list {
+  left: 10px;
+}
+
+.block-products-carousel[data-layout="horizontal"] .product-card .product-card-badge {
+  padding: 3px 5px 2px;
+}
+
+.block-products-carousel[data-layout="horizontal"] .product-card .product-card-info {
+  padding-top: 14px;
+  padding-bottom: 42px;
+  width: 100%;
+}
+
+.block-products-carousel[data-layout="horizontal"] .product-card .product-card-info {
+  padding-left: 0;
+  padding-right: 30px;
+}
+
+.block-products-carousel[data-layout="horizontal"] .product-card .product-card-name {
+  overflow: hidden;
+  max-height: 38px;
+}
+
+.block-products-carousel[data-layout="horizontal"] .product-card .product-card-rating {
+  white-space: nowrap;
+}
+
+.block-products-carousel[data-layout="horizontal"] .product-card .product-card-description {
+  display: none;
+}
+
+.block-products-carousel[data-layout="horizontal"] .product-card .product-card-availability {
+  display: none;
+}
+
+.block-products-carousel[data-layout="horizontal"] .product-card .product-card-buttons {
+  display: none;
+}
+
+.block-products-carousel[data-layout="horizontal"] .product-card .product-card-actions {
+  position: absolute;
+  bottom: 18px;
+}
+
+.block-products-carousel[data-layout="horizontal"] .product-card .product-card-actions {
+  left: 120px;
+}
+
+.block-products-carousel[data-layout="horizontal"] .product-card .product-card-features-list {
+  display: none;
+}

@@ -1,0 +1,26 @@
+.block-product-columns-item {
+  position: relative;
+}
+
+.block-product-columns-item + .block-product-columns-item {
+  margin-top: -1px;
+}
+
+.block-product-columns-item:hover {
+  z-index: 2;
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .block-product-columns .product-card .product-card-image {
+    width: 110px;
+  }
+  .block-product-columns .product-card .product-card-rating {
+    display: none;
+  }
+  .block-product-columns .product-card .product-card-actions {
+    left: 110px;
+  }
+  [dir=rtl] .block-product-columns .product-card .product-card-actions {
+    right: 110px;
+  }
+}
