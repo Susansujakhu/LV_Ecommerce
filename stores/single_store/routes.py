@@ -113,20 +113,6 @@ def change_password():
         )
 
 
-# @app.route("/")
-# def home():
-#     product = Product.query.all()
-#     return render_template('home.html', title = "Home", product = product)
-
-# @app.route("/product/<int:productId>")
-# def post(productId):
-#     product = Product.query.get(productId)
-#     if product is None:
-#         return redirect(url_for('home'))
-#     return render_template('single-store/single-product-page.djhtml', title = product.productName, product = product)
-
-
-
 @app.route("/about")
 def about():
     return render_template('about.html', title='About')
@@ -167,6 +153,8 @@ def logout():
     logout_user()
     return redirect(url_for('home'))
 
+
+
 def save_picture(form_picture, name, path, width, height):
     
     _, f_ext = os.path.splitext(form_picture.filename)
@@ -178,6 +166,7 @@ def save_picture(form_picture, name, path, width, height):
     i.thumbnail(output_size)
     i.save(picture_path)
     return picture_fn
+
 
 @app.route("/account", methods=['GET', 'POST'])
 @login_required
@@ -210,13 +199,19 @@ def add_product():
     form.brand.choices = [(brand.name) for brand in Brand.query.with_entities(Brand.name).all()]
     if form.validate_on_submit():
         
-        print(form.imageFile.data)
         if form.imageFile.data:
             random_hex = secrets.token_hex(4)
             featuredImage = save_picture(form.imageFile.data, random_hex + form.productName.data, 'products', 700, 700)
-            print(featuredImage)
+            
         if form.imageGallery.data:
-            galleryImage = save_picture(form.imageGallery.data)
+            galleryImages = ""
+            file_list = request.files.getlist('imageGallery')
+            print(file_list)
+            for f in file_list:
+                random_hex = secrets.token_hex(4)
+                file_name = f
+                images = save_picture(file_name, random_hex + form.productName.data, 'gallery', 700, 700)
+                galleryImages = galleryImages + "," + images
 
         if request.form.get('submit'):
             product = Product(productName = form.productName.data, 
@@ -234,7 +229,7 @@ def add_product():
                             shortDescription = form.shortDescription.data,
                             longDescription = form.longDescription.data,
                             imageFile = featuredImage,
-                            imageGallery = form.imageGallery.data,
+                            imageGallery = galleryImages,
                             tags = form.tags.data,
                             badgeDuration = form.badgeDuration.data,
                             excludeBadge = form.excludeBadge.data,
