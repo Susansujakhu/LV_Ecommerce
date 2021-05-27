@@ -263,6 +263,7 @@ def add_product():
 
 @app.route("/edit_product/<int:productId>", methods=['GET', 'POST'])
 @login_required
+@restricted(access_level="Admin")
 def edit_product(productId):
     print('<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>')
     product = Product.query.get_or_404(productId)
@@ -329,6 +330,7 @@ def edit_product(productId):
 
 @app.route("/add_category", methods=['GET', 'POST'])
 @login_required
+@restricted(access_level="Admin")
 def add_category():
 
     category_table = Category()
@@ -360,6 +362,7 @@ def add_category():
 
 @app.route("/edit_category/<int:categoryId>", methods=['GET', 'POST'])
 @login_required
+@restricted(access_level="Admin")
 def edit_category(categoryId):
     category = Category.query.get_or_404(categoryId)
     form = EditCategoryForm()
@@ -387,6 +390,7 @@ def edit_category(categoryId):
 
 @app.route("/add_brand", methods=['GET', 'POST'])
 @login_required
+@restricted(access_level="Admin")
 def add_brand():
 
     brand_table = Brand()
@@ -414,6 +418,7 @@ def add_brand():
 
 @app.route("/add_hero", methods=['GET', 'POST'])
 @login_required
+@restricted(access_level="Admin")
 def add_hero():
 
     hero_table = Hero()
@@ -442,6 +447,7 @@ def add_hero():
 
 @app.route("/add_feature", methods=['GET', 'POST'])
 @login_required
+@restricted(access_level="Admin")
 def add_feature():
 
     features_table = Features()
