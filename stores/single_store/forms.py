@@ -110,7 +110,7 @@ class EditProductForm(FlaskForm):
     featured = BooleanField("Featured")
     # product_user_id = current_user
 
-    submit = SubmitField('Update')
+    submit = SubmitField('Update Product')
 
 
 class CategoryForm(FlaskForm):
@@ -127,28 +127,48 @@ class EditCategoryForm(FlaskForm):
     parentCategory = SelectField('Parent Category', choices=[])
     description = TextAreaField('Description')
     imageFile = FileField('Category Image', validators = [FileAllowed(['jpg', 'png'])])
-    submit = SubmitField('Update')
+    submit = SubmitField('Update Category')
 
 
 class BrandForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired()])
     slug = StringField('Slug', validators=[DataRequired()])
-    description = TextAreaField('Discription')
+    description = TextAreaField('Description')
     imageFile = FileField('Brand Image', validators = [FileAllowed(['jpg', 'png'])])
     submit = SubmitField('Add Brand')
 
+class EditBrandForm(FlaskForm):
+    name = StringField('Name', validators=[DataRequired()])
+    slug = StringField('Slug', validators=[DataRequired()])
+    description = TextAreaField('Description')
+    imageFile = FileField('Brand Image', validators = [FileAllowed(['jpg', 'png'])])
+    submit = SubmitField('Update Brand')
+
 class HeroForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
-    description = TextAreaField('Discription')
+    description = TextAreaField('Description')
     button = StringField('Button Text')
     imageFile = FileField('Hero Image', validators = [FileAllowed(['jpg', 'png'])])
     submit = SubmitField('Add Hero Section')
 
+class EditHeroForm(FlaskForm):
+    title = StringField('Title', validators=[DataRequired()])
+    description = TextAreaField('Description')
+    button = StringField('Button Text')
+    imageFile = FileField('Hero Image', validators = [FileAllowed(['jpg', 'png'])])
+    submit = SubmitField('Update Hero Section')
+
 
 class FeaturesForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
-    description = TextAreaField('Discription')
+    description = TextAreaField('Description')
     icon = StringField('Icons')
     submit = SubmitField('Add Feature')
+
+class EditFeaturesForm(FlaskForm):
+    title = StringField('Title', validators=[DataRequired()])
+    description = TextAreaField('Description')
+    icon = StringField('Icons')
+    submit = SubmitField('Update Feature')
 
 
