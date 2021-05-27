@@ -1,6 +1,6 @@
 <link rel="stylesheet" type="text/css" href= "{{ url_for('static', filename='css/general/blocks/product-carousel-block.css') }}" }}>
 
-{% set products = ['1','2','3','4','5','6','7','8'] %}
+{# {% set products = ['1','2','3','4','5','6','7','8'] %} #}
 {# {% set products = ['1'] %} #}
 
 <!-- .block-products-carousel -->
@@ -45,13 +45,13 @@
                                     <div class="product-card-badge product-card-badge--new">New</div>
                                 </div>
                                 <div class="product-card-image product-image">
-                                    <a href="product.html" class="product-image-body">
-                                        <img class="product-image-img" src="images/products/product-1.jpg" alt="">
+                                    <a href="single/{{ items['id'] }}" class="product-image-body">
+                                        <img class="product-image-img" src="{{url_for('static',filename='assets/images/products/'+items['imageFile'])}}" alt="">
                                     </a>
                                 </div>
                                 <div class="product-card-info">
                                     <div class="product-card-name">
-                                        <a href="product.html">Electric Planer Brandix KL370090G 300 Watts</a>
+                                        <a href="product.html">{{items['productName']}}</a>
                                     </div>
                                     <div class="product-card-rating">
                                         <div class="product-card-rating-stars">
@@ -155,7 +155,7 @@
                                         Availability: <span class="text-success">In Stock</span>
                                     </div>
                                     <div class="product-card-prices">
-                                        $749.00
+                                       {{ currency }} {{ items['price']}}
                                     </div>
                                     <div class="product-card-buttons">
                                         <button class="btn btn-primary product-card-addtocart" type="button">Add To Cart</button>
