@@ -3,7 +3,7 @@ from functools import wraps
 from flask import render_template, url_for, flash, redirect, request, Response
 from flask.globals import session
 from single_store import app, db, bcrypt
-from single_store.forms import BrandForm, FeaturesForm, HeroForm, RegistrationForm, LoginForm, UpdateAccountForm, ProductForm, EditProductForm, CategoryForm,EditCategoryForm
+from single_store.forms import BrandForm, EditBrandForm, FeaturesForm, EditFeaturesForm, HeroForm, EditHeroForm, RegistrationForm, LoginForm, UpdateAccountForm, ProductForm, EditProductForm, CategoryForm,EditCategoryForm
 from single_store.models import Attributes, Brand, Cart, Category, Features, Hero, Order, Product, Rating, Shipping, User, MyAdminIndexView, AdminView
 from flask_login import login_user, current_user, logout_user, login_required
 import secrets, os
@@ -21,6 +21,9 @@ admin.add_view(AdminView(Rating, db.session))
 admin.add_view(AdminView(Attributes, db.session))
 admin.add_view(AdminView(Category, db.session))
 admin.add_view(AdminView(Brand, db.session))
+admin.add_view(AdminView(Hero, db.session))
+admin.add_view(AdminView(Features, db.session))
+
 
 def restricted(access_level):
     def decorator(func):
@@ -276,7 +279,14 @@ def edit_product(productId):
             print(featuredImage)
 
         if form.imageGallery.data:
-            galleryImage = save_picture(form.imageGallery.data)
+            galleryImages = ""
+            file_list = request.files.getlist('imageGallery')
+            print(file_list)
+            for f in file_list:
+                random_hex = secrets.token_hex(4)
+                file_name = f
+                images = save_picture(file_name, random_hex + form.productName.data, 'gallery', 700, 700)
+                galleryImages = galleryImages + "," + images
 
         if request.form.get('submit'):
             product.productName = form.productName.data
@@ -294,7 +304,7 @@ def edit_product(productId):
             product.shortDescription = form.shortDescription.data
             product.longDescription = form.longDescription.data
             product.imageFile = featuredImage
-            # product.imageGallery = form.imageGallery.data
+            product.imageGallery = galleryImages,
             product.tags = form.tags.data
             product.badgeDuration = form.badgeDuration.data
             product.excludeBadge = form.excludeBadge.data
@@ -303,6 +313,7 @@ def edit_product(productId):
             db.session.commit()
             flash(form.productName.data+' Product Updated Successful!', 'success')
     elif request.method == 'GET' :
+        #db data are fetch in form in this method
         form.productName.data = product.productName 
         form.slug.data = product.slug 
         form.price.data = product.price
@@ -367,13 +378,15 @@ def edit_category(categoryId):
     form.parentCategory.choices = ['None']+[(category.name) for category in Category.query.with_entities(Category.name).all()]
     if form.validate_on_submit():
         if form.imageFile.data:
-            image = save_picture(form.imageFile.data)
+            random_hex = secrets.token_hex(4)
+            image = save_picture(form.imageFile.data, random_hex + form.name.data, 'category', 700, 700)
 
         if request.form.get('submit'):
             category.name = form.name.data
             category.slug = form.slug.data
             category.parentCategory = form.parentCategory.data
             category.description = form.description.data
+            category.imageFile = image
             db.session.commit()
             flash(form.name.data+' Category Updated Successful!', 'success')
     elif request.method == 'GET' :
@@ -407,12 +420,40 @@ def add_brand():
                             )
             db.session.add(brand)
             db.session.commit()
-            flash('Brand Added Successful!', 'success')
+            flash(form.name.data+' Brand Added Successful!', 'success')
         
         # return redirect(url_for('home'))
 
     # image_file = url_for('static', filename = 'profile_pics/' + current_user.image_file)
     return render_template('add_brand.html', title='New Brand', form=form)
+
+@app.route("/edit_brand/<int:brandId>", methods=['GET', 'POST'])
+@login_required
+@restricted(access_level="Admin")
+def edit_brand(brandId):
+
+    brand = Brand.query.get_or_404(brandId)
+    form = EditBrandForm()
+
+    if form.validate_on_submit():
+        if form.imageFile.data:
+            random_hex = secrets.token_hex(4)
+            image = save_picture(form.imageFile.data,random_hex + form.name.data, 'brand', 700, 700)
+        
+        if request.form.get('submit'):
+            brand.name = form.name.data
+            brand.slug = form.slug.data
+            brand.description = form.description.data
+            brand.imageFile = image
+            db.session.commit()
+            flash(form.name.data+' Brand Updated Successful!', 'success')
+    
+    elif request.method == 'GET' :
+        form.name.data = brand.name 
+        form.slug.data = brand.slug  
+        form.description.data = brand.description 
+        form.imageFile.data = brand.imageFile 
+    return render_template('edit_brand.html', title=brand.name, form=form)
 
 @app.route("/add_hero", methods=['GET', 'POST'])
 @login_required
@@ -423,7 +464,9 @@ def add_hero():
     form = HeroForm()
         
     if form.validate_on_submit():
+        print("<<<<<<<<<<<<<")
         if form.imageFile.data:
+            print(">>>>>>>>>>>")
             random_hex = secrets.token_hex(4)
             image = save_picture(form.imageFile.data, random_hex + form.title.data, 'hero/desktop', 840, 395)
             image = save_picture(form.imageFile.data, random_hex + form.title.data, 'hero/mobile', 510, 395)
@@ -436,12 +479,41 @@ def add_hero():
                             )
             db.session.add(hero)
             db.session.commit()
-            flash('Hero Added Successful!', 'success')
+            flash(form.title.data+' Hero section Added Successful!', 'success')
         
         # return redirect(url_for('home'))
 
     # image_file = url_for('static', filename = 'profile_pics/' + current_user.image_file)
     return render_template('add_hero.html', title='New Hero', form=form)
+
+@app.route("/edit_hero/<int:heroId>", methods=['GET', 'POST'])
+@login_required
+@restricted(access_level="Admin")
+def edit_hero(heroId):
+
+    hero=Hero.query.get_or_404(heroId)
+    form = EditHeroForm()
+        
+    if form.validate_on_submit():
+        if form.imageFile.data:
+            random_hex = secrets.token_hex(4)
+            image = save_picture(form.imageFile.data, random_hex + form.title.data, 'hero/desktop', 840, 395)
+            image = save_picture(form.imageFile.data, random_hex + form.title.data, 'hero/mobile', 510, 395)
+
+        if request.form.get('submit'):
+            hero.title = form.title.data
+            hero.description = form.description.data
+            hero.button = form.button.data
+            hero.imageFile =image
+            db.session.commit()
+            flash(form.title.data+' Hero section Updated Successful!', 'success')
+
+    elif request.method == 'GET' :
+        form.title.data = hero.title 
+        form.description.data = hero.description  
+        form.button.data = hero.button 
+        form.imageFile.data = hero.imageFile
+    return render_template('edit_hero.html', title=hero.title, form=form)
 
 @app.route("/add_feature", methods=['GET', 'POST'])
 @login_required
@@ -466,6 +538,28 @@ def add_feature():
 
     # image_file = url_for('static', filename = 'profile_pics/' + current_user.image_file)
     return render_template('add_feature.html', title='New Feature', form=form)
+
+@app.route("/edit_feature/<int:featureId>", methods=['GET', 'POST'])
+@login_required
+@restricted(access_level="Admin")
+def edit_feature(featureId):
+    features=Features.query.get_or_404(featureId)
+    form = EditFeaturesForm()
+        
+    if form.validate_on_submit():
+
+        if request.form.get('submit'):
+            features.title = form.title.data
+            features.description = form.description.data
+            features.icon = form.icon.data
+            db.session.commit()
+            flash(form.title.data+' Feature Added Successful!', 'success')
+
+    elif request.method == 'GET':
+        form.title.data = features.title
+        form.description.data = features.description
+        form.title.icon = features.icon
+    return render_template('edit_feature.html', title=form.title.data, form=form)
 
 
 
