@@ -40,8 +40,9 @@ def restricted(access_level):
 def home():
     heroSlider = Hero.query.all()
     featuresService = Features.query.all()
+    products = Product.query.all()
     return render_template(
-        'single-store/home.djhtml', heroSlider = heroSlider, featuresService = featuresService)
+        'single-store/home.djhtml', heroSlider = heroSlider, featuresService = featuresService, products = products)
 
 @app.route("/single/<int:productId>")
 def single_product(productId):
