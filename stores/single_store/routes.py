@@ -265,13 +265,11 @@ def add_product():
 @login_required
 @restricted(access_level="Admin")
 def edit_product(productId):
-    print('<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>')
     product = Product.query.get_or_404(productId)
     form = EditProductForm()
     form.category.choices = [(category.name) for category in Category.query.with_entities(Category.name).all()] #db.session.query(Category.name)
     form.brand.choices = [(brand.name) for brand in Brand.query.with_entities(Brand.name).all()]
     if form.validate_on_submit():
-        print(form.imageFile.data)
         if form.imageFile.data:
             random_hex = secrets.token_hex(4)
             featuredImage = save_picture(form.imageFile.data, random_hex + form.productName.data, 'products', 700, 700)
@@ -295,7 +293,7 @@ def edit_product(productId):
             product.material = form.material.data
             product.shortDescription = form.shortDescription.data
             product.longDescription = form.longDescription.data
-            # product.imageFile = form.imageFile.data
+            product.imageFile = featuredImage
             # product.imageGallery = form.imageGallery.data
             product.tags = form.tags.data
             product.badgeDuration = form.badgeDuration.data
