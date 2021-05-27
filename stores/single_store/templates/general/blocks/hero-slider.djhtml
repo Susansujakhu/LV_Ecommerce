@@ -8,9 +8,10 @@
                     <div class="owl-carousel">
 
                         {% for data in heroSlider %}
+ 
                         <a class="block-slideshow-slide" href="">
-                            <div class="block-slideshow-slide-image block-slideshow-slide-image--desktop" style="background-image: url('static/assets/images/hero-slider.jpg')"></div>
-                            <div class="block-slideshow-slide-image block-slideshow-slide-image--mobile" style="background-image: url('static/assets/images/hero-slider-mobile.jpg')"></div>
+                            <div class="block-slideshow-slide-image block-slideshow-slide-image--desktop" style="background-image: url({{url_for('static', filename='assets/images/hero/desktop/'+data.imageFile)}})"></div>
+                            <div class="block-slideshow-slide-image block-slideshow-slide-image--mobile" style="background-image: url({{url_for('static', filename='assets/images/hero/mobile/'+data.imageFile)}})"></div>
                             <div class="block-slideshow-slide-content">
 
                                 <div class="block-slideshow-slide-title">{{data.title}}</div>
