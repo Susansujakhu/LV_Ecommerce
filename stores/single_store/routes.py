@@ -1,4 +1,5 @@
 
+from functools import wraps
 from flask import render_template, url_for, flash, redirect, request, Response
 from flask.globals import session
 from single_store import app, db, bcrypt
@@ -21,6 +22,15 @@ admin.add_view(AdminView(Attributes, db.session))
 admin.add_view(AdminView(Category, db.session))
 admin.add_view(AdminView(Brand, db.session))
 
+def restricted(access_level):
+    def decorator(func):
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            if not current_user.role == access_level:
+                return redirect(url_for('home'))
+            return func(*args, **kwargs)
+        return wrapper
+    return decorator
 
 
 @app.route("/")
@@ -149,6 +159,7 @@ def login():
     return render_template('login.html', title='Login', form=form)
 
 @app.route("/logout")
+@login_required
 def logout():
     logout_user()
     return redirect(url_for('home'))
@@ -191,6 +202,7 @@ def account():
 
 @app.route("/add_product", methods=['GET', 'POST'])
 @login_required
+@restricted(access_level="Admin")
 def add_product():
 
     product_table = Product()
