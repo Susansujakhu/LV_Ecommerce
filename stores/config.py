@@ -10,6 +10,7 @@ class DevelopmentConfig(Config):
     DEBUG = True
     SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:sushansujakhu14@localhost/ecommerce'
     SQLALCHEMY_TRACK_MODIFICATIONS = True
+    
     MAIL_SERVER='smtp.gmail.com'
     MAIL_PORT = 465
     MAIL_USERNAME = 'your_email@gmail.com'
