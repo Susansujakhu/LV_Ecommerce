@@ -171,4 +171,18 @@ class EditFeaturesForm(FlaskForm):
     icon = StringField('Icons')
     submit = SubmitField('Update Feature')
 
+class HorizontalPanelForm(FlaskForm):
+    title = StringField('Title', validators=[DataRequired()])
+    description = TextAreaField('Description')
+    button = StringField('Button Text')
+    imageFile = FileField('Horizontal Panel Image', validators = [FileAllowed(['jpg', 'png'])])
+    submit = SubmitField('Add Horizontal Panel')
+
+class EditHorizontalPanelForm(FlaskForm):
+    title = StringField('Title', validators=[DataRequired()])
+    description = TextAreaField('Description')
+    button = StringField('Button Text')
+    imageFile = FileField('Horizontal Panel Image', validators = [FileAllowed(['jpg', 'png'])])
+    submit = SubmitField('Update Horizontal Panel')
+
 
