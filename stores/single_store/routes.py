@@ -83,13 +83,42 @@ def wishlist():
         'single-store/wishlist-page.djhtml'
         )
 
-@app.route("/account")
+@app.route("/account", methods=['GET', 'POST'])
 def user_account():
+    if current_user.is_authenticated:
+        return redirect(url_for('home'))
+    
+    form2 = RegistrationForm()
+    form1 = LoginForm()
+    if request.method == 'POST':
+        form_name = request.form['form-name']
+        if form_name == 'form1':
+            if form1.validate_on_submit():
+                user = User.query.filter_by(email = form1.email.data).first()
+                if user and bcrypt.check_password_hash(user.password, form1.password.data):
+                    login_user(user, remember=form1.remember.data)
+                    next_page = request.args.get('next')
+                    return redirect(next_page) if next_page else redirect(url_for('dashboard'))
+                else:
+                    flash('Login Unsuccessful. Please check email and password', 'danger')
+
+        elif form_name == 'form2':
+            
+            if form2.validate_on_submit():
+                hashed_password = bcrypt.generate_password_hash(form2.password.data).decode('utf-8')
+                user = User(userName=form2.username.data, email=form2.email.data, password=hashed_password)
+                db.session.add(user)
+                db.session.commit()
+                flash(f'Account created for {form2.username.data}! Please Login to continue', 'success')
+            else:
+                flash('Failed to Cerate Account', 'danger')
+
     return render_template(
-        'single-store/user-account/user-account.djhtml'
+        'single-store/user-account/user-account.djhtml', form1=form1, form2 = form2
         )
 
 @app.route("/dashboard")
+@login_required
 def user_dashboard():
     return render_template(
         'single-store/user-account/user-dashboard.djhtml'
@@ -137,35 +166,20 @@ def about():
     return render_template('about.html', title='About')
 
 
-@app.route("/register", methods=['GET', 'POST'])
-def register():
-    if current_user.is_authenticated:
-        return redirect(url_for('home'))
-    form = RegistrationForm()
-    if form.validate_on_submit():
-        hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
-        user = User(userName=form.username.data, email=form.email.data, password=hashed_password)
-        db.session.add(user)
-        db.session.commit()
-        flash(f'Account created for {form.username.data}!', 'success')
-        return redirect(url_for('login'))
-    return render_template('register.html', title='Register', form=form)
+# @app.route("/register", methods=['GET', 'POST'])
+# def register():
+#     if current_user.is_authenticated:
+#         return redirect(url_for('home'))
+#     form = RegistrationForm()
+#     if form.validate_on_submit():
+#         hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+#         user = User(userName=form.username.data, email=form.email.data, password=hashed_password)
+#         db.session.add(user)
+#         db.session.commit()
+#         flash(f'Account created for {form.username.data}!', 'success')
+#         return redirect(url_for('login'))
+#     return render_template('register.html', title='Register', form=form)
 
-
-@app.route("/login", methods=['GET', 'POST'])
-def login():
-    if current_user.is_authenticated:
-        return redirect(url_for('home'))
-    form = LoginForm()
-    if form.validate_on_submit():
-        user = User.query.filter_by(email = form.email.data).first()
-        if user and bcrypt.check_password_hash(user.password, form.password.data):
-            login_user(user, remember=form.remember.data)
-            next_page = request.args.get('next')
-            return redirect(next_page) if next_page else redirect(url_for('home'))
-        else:
-            flash('Login Unsuccessful. Please check email and password', 'danger')
-    return render_template('login.html', title='Login', form=form)
 
 @app.route("/logout")
 @login_required
@@ -188,25 +202,25 @@ def save_picture(form_picture, name, path, width, height):
     return picture_fn
 
 
-@app.route("/account", methods=['GET', 'POST'])
-@login_required
-def account():
-    form = UpdateAccountForm()
-    if form.validate_on_submit():
-        if form.picture.data:
-            random_hex = secrets.token_hex(4)
-            picture_file = save_picture(form.picture.data, random_hex + current_user.username, 'users', 700, 700)
-            current_user.image_file = picture_file
-        current_user.username = form.username.data
-        current_user.email = form.email.data
-        db.session.commit()
-        flash('Your Account has been udated!', 'success')
-        return redirect(url_for('account'))
-    elif request.method == 'GET':
-        form.username.data = current_user.username
-        form.email.data = current_user.email
-    image_file = url_for('static', filename = 'profile_pics/' + current_user.image_file)
-    return render_template('account.html', title='Account', image_file=image_file, form = form)
+# @app.route("/account", methods=['GET', 'POST'])
+# @login_required
+# def account():
+#     form = UpdateAccountForm()
+#     if form.validate_on_submit():
+#         if form.picture.data:
+#             random_hex = secrets.token_hex(4)
+#             picture_file = save_picture(form.picture.data, random_hex + current_user.username, 'users', 700, 700)
+#             current_user.image_file = picture_file
+#         current_user.username = form.username.data
+#         current_user.email = form.email.data
+#         db.session.commit()
+#         flash('Your Account has been udated!', 'success')
+#         return redirect(url_for('account'))
+#     elif request.method == 'GET':
+#         form.username.data = current_user.username
+#         form.email.data = current_user.email
+#     image_file = url_for('static', filename = 'profile_pics/' + current_user.image_file)
+#     return render_template('account.html', title='Account', image_file=image_file, form = form)
 
 
 @app.route("/add_product", methods=['GET', 'POST'])
