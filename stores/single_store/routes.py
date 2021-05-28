@@ -640,11 +640,11 @@ def edit_horizontal(horizontalId):
 def str2Class(str):
     return getattr(sys.modules[__name__], str)
 
-@app.route("/lists/<table>")
+@app.route("/lists/<tables>")
 @login_required
 @restricted(access_level="Admin")
-def lists(table):
-    table = str2Class(table)
+def lists(tables):
+    table = str2Class(tables)
 
     table_col = table.__table__.columns.keys()
     table_row = table.query.all()
@@ -653,4 +653,18 @@ def lists(table):
         return redirect(url_for('home'))
     
     return render_template(
-		'lists.html', table_row = table_row, table_col = table_col)
+		'lists.html', tables = tables, table_row = table_row, table_col = table_col)
+
+@app.route("/delete/<tables>/<int:id>")
+@login_required
+@restricted(access_level="Admin")
+def delete(tables, id):
+    print(tables)
+    print(id)
+    table = str2Class(tables)
+    if table.query.filter_by(id=id).delete():
+        db.session.commit()
+        print("Success")
+    else:
+        print("Failed")
+    return redirect('/lists/'+tables)
