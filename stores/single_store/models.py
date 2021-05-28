@@ -22,7 +22,7 @@ class AdminView(ModelView):
         return current_user.role == "Admin"
     
     def inaccessible_callback(self, name, **kwargs):
-        return redirect(url_for('login'))
+        return redirect(url_for('account'))
 
 
 class MyAdminIndexView(AdminIndexView):
@@ -30,7 +30,7 @@ class MyAdminIndexView(AdminIndexView):
         return current_user.is_authenticated
     
     def inaccessible_callback(self, name, **kwargs):
-        return redirect(url_for('login'))
+        return redirect(url_for('account'))
 
 
 class User(db.Model, UserMixin):
