@@ -91,12 +91,12 @@ class Product(db.Model):
     material = db.Column(db.String(50), nullable = True)
     shortDescription = db.Column(db.Text, nullable = True)
     longDescription = db.Column(db.Text, nullable = True)
-    imageFile = db.Column(db.Text, nullable = False, default = 'default.jpg')
+    imageFile = db.Column(db.Text, nullable = True, default = 'default.jpg')
     imageGallery = db.Column(db.Text, nullable = True)
     featured = db.Column(db.Boolean, nullable = False, default = False)
     tags = db.Column(db.Text, nullable = True)
 
-    badgeDuration = db.Column(db.String(50), nullable = True)
+    badgeDuration = db.Column(db.String(20), nullable = True)
     excludeBadge = db.Column(db.Boolean, nullable = False, default = False)
     dateCreated = db.Column(db.DateTime, nullable = False, default = datetime.utcnow)
 
@@ -173,7 +173,7 @@ class Category(db.Model):
     slug = db.Column(db.Text, nullable = False, unique = True)
     parentCategory = db.Column(db.Text, nullable = False, default = 'None')
     description = db.Column(db.Text, nullable = True)
-    imageFile = db.Column(db.Text, nullable = False, default = 'category.jpg')
+    imageFile = db.Column(db.Text, nullable = True, default = 'category.jpg')
 
     def __repr__(self):
         return f"Post('{self.name}', '{self.parentCategory}', '{self.description}', '{self.imageFile}')"
@@ -185,14 +185,14 @@ class Brand(db.Model):
     name = db.Column(db.Text, nullable = False)
     slug = db.Column(db.Text, nullable = False, unique = True)
     description = db.Column(db.Text, nullable = True)
-    imageFile = db.Column(db.Text, nullable = False, default = 'Brand.jpg')
+    imageFile = db.Column(db.Text, nullable = True, default = 'Brand.jpg')
 
     def __repr__(self):
         return f"Post('{self.name}', '{self.description}', '{self.imageFile}')"
 
 
 class Hero(db.Model):
-    __tablename__ = 'hero_section'
+    __tablename__ = 'hero'
     id = db.Column(db.Integer, primary_key = True)
     title = db.Column(db.Text, nullable = False)
 
@@ -207,19 +207,19 @@ class Features(db.Model):
     __tablename__ = 'features'
     id = db.Column(db.Integer, primary_key = True)
     title = db.Column(db.Text, nullable = False)
-    description = db.Column(db.Text, nullable = False, unique = False)
+    description = db.Column(db.Text, nullable = True, unique = False)
     icon = db.Column(db.Text, nullable = True)
 
     def __repr__(self):
         return f"Post('{self.title}', '{self.description}', '{self.icon}')"
 
 class HorizontalPanel(db.Model):
-    __tablename__ = 'horizontal_panel'
+    __tablename__ = 'horizontalpanel'
     id = db.Column(db.Integer, primary_key = True)
     title = db.Column(db.Text, nullable = False)
     description = db.Column(db.Text, nullable = True)
     button = db.Column(db.String(20), nullable = True)
-    imageFile = db.Column(db.Text, nullable = False, default = 'Brand.jpg')
+    imageFile = db.Column(db.Text, nullable = True, default = 'Brand.jpg')
 
     def __repr__(self):
         return f"Post('{self.title}', '{self.description}', '{self.button}', '{self.imageFile}')"
