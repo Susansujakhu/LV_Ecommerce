@@ -589,6 +589,8 @@ def str2Class(str):
     return getattr(sys.modules[__name__], str)
 
 @app.route("/lists/<table>")
+@login_required
+@restricted(access_level="Admin")
 def lists(table):
     table = str2Class(table)
 
@@ -600,4 +602,4 @@ def lists(table):
     
     return render_template(
 		'lists.html', table_row = table_row, table_col = table_col)
-		
+
