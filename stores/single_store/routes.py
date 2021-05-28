@@ -581,4 +581,8 @@ def edit_feature(featureId):
 #     post = User.query.get_or_404(post_id)
 #     return render_template('post.html', title = post.title, post =post)
 
-
+@app.route("/404")
+def error_page():
+    return render_template(
+        'single-store/404-page.djhtml'
+        )
