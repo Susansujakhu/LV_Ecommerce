@@ -28,7 +28,7 @@ db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 login_manager = LoginManager(app)
 mail = Mail(app)
-login_manager.login_view = 'account'
+login_manager.login_view = '/account'
 login_manager.login_message_category = 'info'
 
 
