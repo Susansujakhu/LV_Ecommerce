@@ -40,14 +40,21 @@ def restricted(access_level):
 def not_found(e):
     return render_template("single-store/404-page.djhtml")
 
+@app.context_processor
+def global_attr():
+    products = Product.query.all()
+    return dict(products = products)
+
 @app.route("/")
 def home():
     heroSlider = Hero.query.all()
     featuresService = Features.query.all()
-    products = Product.query.all()
+    
     horizontalPanel = HorizontalPanel.query.get(1) # id=1 data fetch from horizontalpanel db
+    if horizontalPanel is None:
+        return redirect('lists/HorizontalPanel')
     return render_template(
-        'single-store/home.djhtml', heroSlider = heroSlider, featuresService = featuresService, products = products, horizontalPanel = horizontalPanel)
+        'single-store/home.djhtml', heroSlider = heroSlider, featuresService = featuresService, horizontalPanel = horizontalPanel)
 
 @app.route("/single/<int:productId>")
 def single_product(productId):
