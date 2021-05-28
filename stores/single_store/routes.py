@@ -45,8 +45,9 @@ def home():
     heroSlider = Hero.query.all()
     featuresService = Features.query.all()
     products = Product.query.all()
+    horizontalPanel = HorizontalPanel.query.get(1) # id=1 data fetch from horizontalpanel db
     return render_template(
-        'single-store/home.djhtml', heroSlider = heroSlider, featuresService = featuresService, products = products)
+        'single-store/home.djhtml', heroSlider = heroSlider, featuresService = featuresService, products = products, horizontalPanel = horizontalPanel)
 
 @app.route("/single/<int:productId>")
 def single_product(productId):
