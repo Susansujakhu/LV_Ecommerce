@@ -6,7 +6,7 @@ from single_store import app, db, bcrypt
 from single_store.forms import BrandForm, EditBrandForm, FeaturesForm, EditFeaturesForm, HeroForm, EditHeroForm, RegistrationForm, LoginForm, UpdateAccountForm, ProductForm, EditProductForm, CategoryForm,EditCategoryForm
 from single_store.models import Attributes, Brand, Cart, Category, Features, Hero, Order, Product, Rating, Shipping, User, MyAdminIndexView, AdminView
 from flask_login import login_user, current_user, logout_user, login_required
-import secrets, os
+import secrets, os, sys
 from PIL import Image
 from flask_admin import Admin
 
@@ -35,6 +35,9 @@ def restricted(access_level):
         return wrapper
     return decorator
 
+@app.errorhandler(404)
+def not_found(e):
+    return render_template("404.html")
 
 @app.route("/")
 def home():
@@ -582,3 +585,19 @@ def edit_feature(featureId):
 #     return render_template('post.html', title = post.title, post =post)
 
 
+def str2Class(str):
+    return getattr(sys.modules[__name__], str)
+
+@app.route("/lists/<table>")
+def lists(table):
+    table = str2Class(table)
+
+    table_col = table.__table__.columns.keys()
+    table_row = table.query.all()
+
+    if table_row is None:
+        return redirect(url_for('home'))
+    
+    return render_template(
+		'lists.html', table_row = table_row, table_col = table_col)
+		
