@@ -3,8 +3,8 @@ from functools import wraps
 from flask import render_template, url_for, flash, redirect, request, Response
 from flask.globals import session
 from single_store import app, db, bcrypt
-from single_store.forms import BrandForm, EditBrandForm, FeaturesForm, EditFeaturesForm, HeroForm, EditHeroForm, RegistrationForm, LoginForm, UpdateAccountForm, ProductForm, EditProductForm, CategoryForm,EditCategoryForm
-from single_store.models import Attributes, Brand, Cart, Category, Features, Hero, Order, Product, Rating, Shipping, User, MyAdminIndexView, AdminView
+from single_store.forms import HorizontalPanelForm, EditHorizontalPanelForm, BrandForm, EditBrandForm, FeaturesForm, EditFeaturesForm, HeroForm, EditHeroForm, RegistrationForm, LoginForm, UpdateAccountForm, ProductForm, EditProductForm, CategoryForm,EditCategoryForm
+from single_store.models import Attributes,HorizontalPanel, Brand, Cart, Category, Features, Hero, Order, Product, Rating, Shipping, User, MyAdminIndexView, AdminView
 from flask_login import login_user, current_user, logout_user, login_required
 import secrets, os, sys
 from PIL import Image
@@ -23,6 +23,7 @@ admin.add_view(AdminView(Category, db.session))
 admin.add_view(AdminView(Brand, db.session))
 admin.add_view(AdminView(Hero, db.session))
 admin.add_view(AdminView(Features, db.session))
+admin.add_view(AdminView(HorizontalPanel, db.session))
 
 
 def restricted(access_level):
@@ -468,9 +469,7 @@ def add_hero():
     form = HeroForm()
         
     if form.validate_on_submit():
-        print("<<<<<<<<<<<<<")
         if form.imageFile.data:
-            print(">>>>>>>>>>>")
             random_hex = secrets.token_hex(4)
             image = save_picture(form.imageFile.data, random_hex + form.title.data, 'hero/desktop', 840, 395)
             image = save_picture(form.imageFile.data, random_hex + form.title.data, 'hero/mobile', 510, 395)
@@ -565,7 +564,59 @@ def edit_feature(featureId):
         form.title.icon = features.icon
     return render_template('edit_feature.html', title=form.title.data, form=form)
 
+@app.route("/add_horizontal", methods=['GET', 'POST'])
+@login_required
+@restricted(access_level="Admin")
+def add_horizontal():
 
+    horizontal_table = HorizontalPanel()
+    form = HorizontalPanelForm()
+        
+    if form.validate_on_submit():
+        if form.imageFile.data:
+            random_hex = secrets.token_hex(4)
+            image = save_picture(form.imageFile.data, random_hex + form.title.data, 'horizontalPanel/desktop', 840, 395)
+            image = save_picture(form.imageFile.data, random_hex + form.title.data, 'horizontalPanel/mobile', 510, 395)
+
+        if request.form.get('submit'):
+            horizontal = HorizontalPanel(title = form.title.data, 
+                            description = form.description.data,
+                            button = form.button.data,
+                            imageFile =image,
+                            )
+            db.session.add(horizontal)
+            db.session.commit()
+            flash(form.title.data+' Horizontal Panel section Added Successful!', 'success')
+    return render_template('add_horizontalPanel.html', title='New Horizontal Panel', form=form)
+
+@app.route("/edit_horizontal/<int:horizontalId>", methods=['GET', 'POST'])
+@login_required
+@restricted(access_level="Admin")
+def edit_horizontal(horizontalId):
+
+    horizontal=HorizontalPanel.query.get_or_404(horizontalId)
+    form = EditHorizontalPanelForm()
+        
+    if form.validate_on_submit():
+        if form.imageFile.data:
+            random_hex = secrets.token_hex(4)
+            image = save_picture(form.imageFile.data, random_hex + form.title.data, 'horizontalPanel/desktop', 840, 395)
+            image = save_picture(form.imageFile.data, random_hex + form.title.data, 'horizontalPanel/mobile', 510, 395)
+
+        if request.form.get('submit'):
+            horizontal.title = form.title.data
+            horizontal.description = form.description.data
+            horizontal.button = form.button.data
+            horizontal.imageFile =image
+            db.session.commit()
+            flash(form.title.data+' horizontal panel Updated Successful!', 'success')
+
+    elif request.method == 'GET' :
+        form.title.data = horizontal.title 
+        form.description.data = horizontal.description  
+        form.button.data = horizontal.button 
+        form.imageFile.data = horizontal.imageFile
+    return render_template('edit_horizontalPanel.html', title=horizontal.title, form=form)
 
 # @app.route("/post/new", methods=['GET', 'POST'])
 # @login_required
@@ -584,6 +635,7 @@ def edit_feature(featureId):
 #     post = User.query.get_or_404(post_id)
 #     return render_template('post.html', title = post.title, post =post)
 
+<<<<<<< HEAD
 
 def str2Class(str):
     return getattr(sys.modules[__name__], str)
@@ -603,3 +655,10 @@ def lists(table):
     return render_template(
 		'lists.html', table_row = table_row, table_col = table_col)
 
+=======
+@app.route("/404")
+def error_page():
+    return render_template(
+        'single-store/404-page.djhtml'
+        )
+>>>>>>> 2b45c866eec030056cc0c1cc573e34b3312db6be

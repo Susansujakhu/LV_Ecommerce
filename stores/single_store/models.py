@@ -212,3 +212,14 @@ class Features(db.Model):
 
     def __repr__(self):
         return f"Post('{self.title}', '{self.description}', '{self.icon}')"
+
+class HorizontalPanel(db.Model):
+    __tablename__ = 'horizontal_panel'
+    id = db.Column(db.Integer, primary_key = True)
+    title = db.Column(db.Text, nullable = False)
+    description = db.Column(db.Text, nullable = True)
+    button = db.Column(db.String(20), nullable = True)
+    imageFile = db.Column(db.Text, nullable = False, default = 'Brand.jpg')
+
+    def __repr__(self):
+        return f"Post('{self.title}', '{self.description}', '{self.button}', '{self.imageFile}')"
