@@ -9,18 +9,18 @@ from single_store.models import User
 
 class RegistrationForm(FlaskForm):
     username = StringField('Username',
-                           validators=[DataRequired(), Length(min=2, max=20)])
+                           validators=[DataRequired(), Length(min=2, max=20)], render_kw={"placeholder": "Enter Username"})
     email = StringField('Email',
-                        validators=[DataRequired(), Email()])
-    password = PasswordField('Password', validators=[DataRequired()])
+                        validators=[DataRequired(), Email()], render_kw={"placeholder": "Enter Email"})
+    password = PasswordField('Password', validators=[DataRequired()], render_kw={"placeholder": "Password"})
     confirm_password = PasswordField('Confirm Password',
-                                     validators=[DataRequired(), EqualTo('password')])
+                                     validators=[DataRequired(), EqualTo('password')], render_kw={"placeholder": "Re-Password"})
     submit = SubmitField('Sign Up')
 
-    def validate_username(self, username):
-        user = User.query.filter_by(userName = username.data).first()
-        if user:
-            raise ValidationError('Username already taken. Please choose different one')
+    # def validate_username(self, username):
+    #     user = User.query.filter_by(userName = username.data).first()
+    #     if user:
+    #         raise ValidationError('Username already taken. Please choose different one')
 
     def validate_email(self, email):
         email = User.query.filter_by(email=email.data).first()
@@ -30,8 +30,8 @@ class RegistrationForm(FlaskForm):
 
 class LoginForm(FlaskForm):
     email = StringField('Email',
-                        validators=[DataRequired(), Email()])
-    password = PasswordField('Password', validators=[DataRequired()])
+                        validators=[DataRequired(), Email()], render_kw={"placeholder": "Enter Email"})
+    password = PasswordField('Password', validators=[DataRequired()], render_kw={"placeholder": "Password"})
     remember = BooleanField('Remember Me')
     submit = SubmitField('Login')
 
