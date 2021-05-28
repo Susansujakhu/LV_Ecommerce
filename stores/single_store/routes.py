@@ -659,10 +659,10 @@ def lists(tables):
 @login_required
 @restricted(access_level="Admin")
 def delete(tables, id):
-    print(tables)
-    print(id)
     table = str2Class(tables)
+    table_name = tables.lower()
     if table.query.filter_by(id=id).delete():
+        db.session.execute("ALTER SEQUENCE "+ table_name +"_id_seq RESTART WITH 1")
         db.session.commit()
         print("Success")
     else:
