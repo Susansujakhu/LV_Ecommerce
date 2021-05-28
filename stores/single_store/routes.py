@@ -38,7 +38,7 @@ def restricted(access_level):
 
 @app.errorhandler(404)
 def not_found(e):
-    return render_template("404.html")
+    return render_template("single-store/404-page.djhtml")
 
 @app.route("/")
 def home():
@@ -653,9 +653,3 @@ def lists(table):
     
     return render_template(
 		'lists.html', table_row = table_row, table_col = table_col)
-
-@app.route("/404")
-def error_page():
-    return render_template(
-        'single-store/404-page.djhtml'
-        )
