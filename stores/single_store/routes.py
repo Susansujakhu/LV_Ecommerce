@@ -635,7 +635,6 @@ def edit_horizontal(horizontalId):
 #     post = User.query.get_or_404(post_id)
 #     return render_template('post.html', title = post.title, post =post)
 
-<<<<<<< HEAD
 
 def str2Class(str):
     return getattr(sys.modules[__name__], str)
@@ -655,10 +654,8 @@ def lists(table):
     return render_template(
 		'lists.html', table_row = table_row, table_col = table_col)
 
-=======
 @app.route("/404")
 def error_page():
     return render_template(
         'single-store/404-page.djhtml'
         )
->>>>>>> 2b45c866eec030056cc0c1cc573e34b3312db6be
