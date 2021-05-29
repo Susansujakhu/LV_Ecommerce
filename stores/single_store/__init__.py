@@ -1,4 +1,3 @@
-
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
@@ -10,6 +9,7 @@ app = Flask(__name__,
 	static_folder='static')
 app.config.from_object("config.DevelopmentConfig")
 app.jinja_env.add_extension('jinja2.ext.do')
+app.jinja_env.add_extension('jinja2.ext.loopcontrols')
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:sushansujakhu14@localhost/ecommerce'
 # app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 # # POSTGRES = {
