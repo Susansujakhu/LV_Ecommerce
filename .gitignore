@@ -140,3 +140,6 @@ single_store/__init__.py
 
 # config file
 stores/config.py
+
+# assets
+stores/single_store/static/assets/images
