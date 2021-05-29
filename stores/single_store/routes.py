@@ -43,7 +43,8 @@ def not_found(e):
 @app.context_processor
 def global_attr():
     products = Product.query.all()
-    return dict(products = products)
+    form1 = LoginForm()
+    return dict(products = products, form1=form1)
 
 @app.route("/")
 def home():
@@ -51,8 +52,18 @@ def home():
     featuresService = Features.query.all()
     
     horizontalPanel = HorizontalPanel.query.get(1) # id=1 data fetch from horizontalpanel db
+    
+    if not heroSlider:
+        heroSlider = Hero(title = "The Hero Section",
+                                            description = "Write The Descriptions Here",
+                                            button = "Explore More",
+                                            imageFile = "default.jpg")
+        heroSlider = [heroSlider]
     if horizontalPanel is None:
-        return redirect('lists/HorizontalPanel')
+        horizontalPanel = HorizontalPanel(title = "The Horizontal panel ad banner",
+                                            description = "Write The Descriptions Here",
+                                            button = "Shop Now",
+                                            imageFile = "default.jpg")
     return render_template(
         'single-store/home.djhtml', heroSlider = heroSlider, featuresService = featuresService, horizontalPanel = horizontalPanel)
 
@@ -105,7 +116,7 @@ def user_account():
                 if user and bcrypt.check_password_hash(user.password, form1.password.data):
                     login_user(user, remember=form1.remember.data)
                     next_page = request.args.get('next')
-                    return redirect(next_page) if next_page else redirect(url_for('dashboard'))
+                    return redirect(next_page) if next_page else redirect(url_for('user_dashboard'))
                 else:
                     flash('Login Unsuccessful. Please check email and password', 'danger')
 
