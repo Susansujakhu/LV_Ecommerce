@@ -1,6 +1,8 @@
 {% extends "layout.html" %}
 {% block content %}
     <h1>Tables</h1>
+    {% set link = "add_"+tables.lower() %}
+    <a href="/{{link}}">Create {{tables}}</a>
     <table class="table table-striped">
         <thead>
           <tr>
