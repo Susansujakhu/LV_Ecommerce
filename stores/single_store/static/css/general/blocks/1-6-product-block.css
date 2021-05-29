@@ -42,6 +42,8 @@
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
   margin: -6px;
+  flex-grow: 1;
+  align-items: flex-start;
 }
 
 .block-products-list-item {
@@ -49,6 +51,7 @@
   display: -ms-flexbox;
   display: flex;
   width: calc(33.3333% - 12px);
+  /*height: calc(100% - 60%);*/
   margin: 6px;
 }
 

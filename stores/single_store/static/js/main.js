@@ -256,7 +256,7 @@
             // timeout ONLY_FOR_DEMO!
             const timeout = setTimeout(function() {
                 xhr = $.ajax({
-                    url: 'quickview.html',
+                    url: 'quick-view-modal-block.html',
                     success: function(data) {
                         quickview.cancelPreviousModal = function() {};
                         button.removeClass('product-card-quickview--preload');
@@ -343,6 +343,7 @@
                 },
                 'horizontal': {
                     items: 3,
+                    slideBy: 'page',
                     responsive: {
                         1200: {items: 3, margin: 14},
                         992:  {items: 3, margin: 10},

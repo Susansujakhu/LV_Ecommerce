@@ -104,6 +104,10 @@
           flex-grow: 1;
 }
 
+.block-products-carousel[data-layout="horizontal"] .block-products-carousel-cell {
+  align-items: flex-start;
+}
+
 .block-products-carousel-cell + .block-products-carousel-cell {
   margin-top: 14px;
 }

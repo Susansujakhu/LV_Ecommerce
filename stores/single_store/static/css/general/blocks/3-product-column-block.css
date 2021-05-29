@@ -14,13 +14,10 @@
   .block-product-columns .product-card .product-card-image {
     width: 110px;
   }
-  .block-product-columns .product-card .product-card-rating {
+  /*.block-product-columns .product-card .product-card-rating {
     display: none;
-  }
+  }*/
   .block-product-columns .product-card .product-card-actions {
     left: 110px;
-  }
-  [dir=rtl] .block-product-columns .product-card .product-card-actions {
-    right: 110px;
   }
 }
