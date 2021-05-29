@@ -1693,44 +1693,50 @@
             </button>
         </div>
         <div class="account-menu">
-            <form class="account-menu-form">
-                <div class="account-menu-form-title">Log In to Your Account</div>
-                <div class="form-group">
-                    <label for="header-signin-email" class="sr-only">Email address</label>
-                    <input id="header-signin-email" type="email" class="form-control form-control-sm" placeholder="Email address">
-                </div>
-                <div class="form-group">
-                    <label for="header-signin-password" class="sr-only">Password</label>
-                    <div class="account-menu-form-forgot">
-                        <input id="header-signin-password" type="password" class="form-control form-control-sm" placeholder="Password">
-                        <a href="" class="account-menu-form-forgot-link">Forgot?</a>
+            {% if current_user.is_authenticated %}
+                <div class="account-menu-divider"></div>
+                <a href="account-dashboard.html" class="account-menu-user">
+                    <div class="account-menu-user-avatar">
+                        <img src="images/avatars/avatar-3.jpg" alt="">
                     </div>
-                </div>
-                <div class="form-group account-menu-form-button">
-                    <button type="submit" class="btn btn-primary btn-sm">Login</button>
-                </div>
-                <div class="account-menu-form-link"><a href="account-login.html">Create An Account</a></div>
-            </form>
-            <div class="account-menu-divider"></div>
-            <a href="account-dashboard.html" class="account-menu-user">
-                <div class="account-menu-user-avatar">
-                    <img src="images/avatars/avatar-3.jpg" alt="">
-                </div>
-                <div class="account-menu-user-info">
-                    <div class="account-menu-user-name">Helena Garcia</div>
-                    <div class="account-menu-user-email">stroyka@example.com</div>
-                </div>
-            </a>
-            <div class="account-menu-divider"></div>
-            <ul class="account-menu-links">
-                <li><a href="/dashboard">Dashboard</a></li>
-                <li><a href="/order-details">Order Details</a></li>
-                <li><a href="/order-history">Order History</a></li>
-            </ul>
-            <div class="account-menu-divider"></div>
-            <ul class="account-menu-links">
-                <li><a href="#">Logout</a></li>
-            </ul>
+                    <div class="account-menu-user-info">
+                        <div class="account-menu-user-name">{{current_user.userName}}</div>
+                        <div class="account-menu-user-email">{{current_user.email}}</div>
+                    </div>
+                </a>
+                <div class="account-menu-divider"></div>
+                <ul class="account-menu-links">
+                    <li><a href="/dashboard">Dashboard</a></li>
+                    <li><a href="/order-details">Order Details</a></li>
+                    <li><a href="/order-history">Order History</a></li>
+                </ul>
+                <div class="account-menu-divider"></div>
+                <ul class="account-menu-links">
+                    <li><a href="/logout">Logout</a></li>
+                </ul>
+            {% else %}
+                <form class="account-menu-form" method="POST" action="/account">
+                <input type="hidden" name="form-name" value="form1">
+                    {{ form1.hidden_tag() }}
+                    <div class="account-menu-form-title">Log In to Your Account</div>
+                    <div class="form-group">
+                        <label for="header-signin-email" class="sr-only">Email address</label>
+                        <input id="header-signin-email" name='email' type="email" class="form-control form-control-sm" placeholder="Email address">
+                    </div>
+                    <div class="form-group">
+                        <label for="header-signin-password" class="sr-only">Password</label>
+                        <div class="account-menu-form-forgot">
+                            <input id="header-signin-password" name='password' type="password" class="form-control form-control-sm" placeholder="Password">
+                            <a href="" class="account-menu-form-forgot-link">Forgot?</a>
+                        </div>
+                    </div>
+                    <div class="form-group account-menu-form-button">
+                        {{ form1.submit(class="btn btn-primary btn-sm") }}
+                    </div>
+                    <div class="account-menu-form-link"><a href="/account">Create An Account</a></div>
+                </form>
+            {% endif %}
+            
         </div>
     </div>
 </div>
