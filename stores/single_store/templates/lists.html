@@ -1,34 +1,44 @@
-{% extends "layout.html" %}
+{% set pageTitle = "Lists of "+tables %}
+{% extends 'single-store/base.djhtml' %}
+
+{% block head %}
+{% endblock %}
+
 {% block content %}
-    <h1>Tables</h1>
-    {% set link = "add_"+tables.lower() %}
-    <a href="/{{link}}">Create {{tables}}</a>
-    <table class="table table-striped">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Edit/Delete</th>
-            {% set table_columns = [] %}
-            {% for columns in table_col[1:] %}
-                {% do table_columns.append(columns) %}
-                <th scope="col">{{columns}}</th>
+
+{% set link = "add_"+tables.lower() %}
+<a href="/{{link}}">Create {{tables}}</a>
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Edit/Delete</th>
+        {% set table_columns = [] %}
+        {% for columns in table_col[1:] %}
+            {% do table_columns.append(columns) %}
+            <th scope="col">{{columns}}</th>
+        {% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+        
+        {% for rows in table_row %}
+        <tr>
+            <th scope="row">{{ loop.index }}</th>
+            <th><a href="/edit_product/{{rows['id']}}">Edit</a>/<a href="/delete/{{tables}}/{{rows['id']}}">Delete</a></th>
+            {% for column_data in table_columns %}
+            <td>{{rows[column_data]}}</td>
             {% endfor %}
-          </tr>
-        </thead>
-        <tbody>
             
-            {% for rows in table_row %}
-            <tr>
-                <th scope="row">{{ loop.index }}</th>
-                <th><a href="/edit_product/{{rows['id']}}">Edit</a>/<a href="/delete/{{tables}}/{{rows['id']}}">Delete</a></th>
-                {% for column_data in table_columns %}
-                <td>{{rows[column_data]}}</td>
-                {% endfor %}
-                
-            </tr>
-      
-                
-            {% endfor %}   
-        </tbody>
-      </table>
-{% endblock content %}
+        </tr>
+  
+            
+        {% endfor %}   
+    </tbody>
+  </table>
+{% endblock %}
+
+{% block container %}{% endblock %}
+
+{% block tail %}
+{% endblock %}
