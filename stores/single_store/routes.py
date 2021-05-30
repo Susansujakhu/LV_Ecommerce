@@ -613,7 +613,7 @@ def edit_feature(featureId):
         form.title.icon = features.icon
     return render_template('edit_feature.html', title=form.title.data, form=form)
 
-@app.route("/add_horizontal", methods=['GET', 'POST'])
+@app.route("/add_horizontalpanel", methods=['GET', 'POST'])
 @login_required
 @restricted(access_level="Admin")
 def add_horizontal():
