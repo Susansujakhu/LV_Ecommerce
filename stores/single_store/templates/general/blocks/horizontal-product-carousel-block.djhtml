@@ -7,12 +7,6 @@
         <div class="block-header">
             <h3 class="block-header-title">New Arrivals</h3>
             <div class="block-header-divider"></div>
-            <ul class="block-header-groups-list">
-                <li><button type="button" class="block-header-group  block-header-group--active ">All</button></li>
-                <li><button type="button" class="block-header-group ">Power Tools</button></li>
-                <li><button type="button" class="block-header-group ">Hand Tools</button></li>
-                <li><button type="button" class="block-header-group ">Plumbing</button></li>
-            </ul>
             <div class="block-header-arrows-list">
                 <button class="block-header-arrow block-header-arrow--left" type="button">
                     <svg width="7px" height="11px">

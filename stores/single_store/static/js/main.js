@@ -251,11 +251,8 @@
             }
 
             button.addClass('product-card-quickview--preload');
-
-            let xhr = null;
-            // timeout ONLY_FOR_DEMO!
-            const timeout = setTimeout(function() {
-                xhr = $.ajax({
+       
+            let xhr = $.ajax({
                     url: 'quick-view-modal-block.html',
                     success: function(data) {
                         quickview.cancelPreviousModal = function() {};
@@ -268,7 +265,6 @@
                         modal.modal('show');
                     }
                 });
-            }, 1000);
 
             quickview.cancelPreviousModal = function() {
                 button.removeClass('product-card-quickview--preload');
@@ -276,9 +272,6 @@
                 if (xhr) {
                     xhr.abort();
                 }
-
-                // timeout ONLY_FOR_DEMO!
-                clearTimeout(timeout);
             };
         }
     };
@@ -379,57 +372,6 @@
             }
 
             owl.owlCarousel(owlOptions);
-
-            $(this).find('.block-header-group').on('click', function(event) {
-                const block = $(this).closest('.block-products-carousel');
-
-                event.preventDefault();
-
-                if ($(this).is('.block-header-group--active')) {
-                    return;
-                }
-
-                cancelPreviousTabChange();
-
-                block.addClass('block-products-carousel--loading');
-                $(this).closest('.block-header-groups-list').find('.block-header-group--active').removeClass('block-header-group--active');
-                $(this).addClass('block-header-group--active');
-
-                // timeout ONLY_FOR_DEMO! you can replace it with an ajax request
-                let timer;
-                timer = setTimeout(function() {
-                    let items = block.find('.owl-carousel .owl-item:not(".cloned") .block-products-carousel-column');
-
-                    /*** this is ONLY_FOR_DEMO! / start */
-                    /**/ const itemsArray = items.get();
-                    /**/ const newItemsArray = [];
-                    /**/
-                    /**/ while (itemsArray.length > 0) {
-                    /**/     const randomIndex = Math.floor(Math.random() * itemsArray.length);
-                    /**/     const randomItem = itemsArray.splice(randomIndex, 1)[0];
-                    /**/
-                    /**/     newItemsArray.push(randomItem);
-                    /**/ }
-                    /**/ items = $(newItemsArray);
-                    /*** this is ONLY_FOR_DEMO! / end */
-
-                    block.find('.owl-carousel')
-                        .trigger('replace.owl.carousel', [items])
-                        .trigger('refresh.owl.carousel')
-                        .trigger('to.owl.carousel', [0, 0]);
-
-                    $('.product-card-quickview', block).on('click', function() {
-                        quickview.clickHandler.apply(this, arguments);
-                    });
-
-                    block.removeClass('block-products-carousel--loading');
-                }, 1000);
-                cancelPreviousTabChange = function() {
-                    // timeout ONLY_FOR_DEMO!
-                    clearTimeout(timer);
-                    cancelPreviousTabChange = function() {};
-                };
-            });
 
             $(this).find('.block-header-arrow--left').on('click', function() {
                 owl.trigger('prev.owl.carousel', [500]);
@@ -857,32 +799,5 @@
     */
     $(function () {
         $('.form-control-select2, .block-finder-select').select2({width: ''});
-    });
-
-    /*
-    // totop
-    */
-    $(function () {
-        let show = false;
-
-        $('.totop-button').on('click', function() {
-            $('html, body').animate({scrollTop: 0}, '300');
-        });
-
-        let fixedPositionStart = 300;
-
-        window.addEventListener('scroll', function() {
-            if (window.pageYOffset >= fixedPositionStart) {
-                if (!show) {
-                    show = true;
-                    $('.totop').addClass('totop--show');
-                }
-            } else {
-                if (show) {
-                    show = false;
-                    $('.totop').removeClass('totop--show');
-                }
-            }
-        }, passiveSupported ? {passive: true} : false);
     });
 })(jQuery);

@@ -1,20 +1,10 @@
 <link rel="stylesheet" type="text/css" href= "{{ url_for('static', filename='css/general/blocks/product-carousel-block.css') }}" }}>
 
-{# {% set products = ['1','2','3','4','5','6','7','8'] %} #}
-{# {% set products = ['1'] %} #}
-
-<!-- .block-products-carousel -->
 <div class="block block-products-carousel" data-layout="grid-4" data-mobile-grid-columns="2">
     <div class="container">
         <div class="block-header">
             <h3 class="block-header-title">Featured Products</h3>
             <div class="block-header-divider"></div>
-            <ul class="block-header-groups-list">
-                <li><button type="button" class="block-header-group  block-header-group--active ">All</button></li>
-                <li><button type="button" class="block-header-group ">Power Tools</button></li>
-                <li><button type="button" class="block-header-group ">Hand Tools</button></li>
-                <li><button type="button" class="block-header-group ">Plumbing</button></li>
-            </ul>
             <div class="block-header-arrows-list">
                 <button class="block-header-arrow block-header-arrow--left" type="button">
                     <svg width="7px" height="11px">
