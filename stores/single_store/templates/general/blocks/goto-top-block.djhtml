@@ -1,0 +1,41 @@
+<link rel="stylesheet" type="text/css" href= "{{ url_for('static', filename='css/general/blocks/goto-top-block.css') }}" }}>
+
+<div class="totop">
+    <div class="totop-body">
+        <div class="totop-start"></div>
+        <div class="totop-container container"></div>
+        <div class="totop-end">
+            <button type="button" class="totop-button">
+                <svg width="13px" height="8px">
+                    <use xlink:href="/static/assets/icons/sprite.svg#arrow-rounded-up-13x8"></use>
+                </svg>
+            </button>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        let show = false;
+
+        $('.totop-button').on('click', function() {
+            $('html, body').animate({scrollTop: 0}, '300');
+        });
+
+        let fixedPositionStart = 300;
+
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset >= fixedPositionStart) {
+                if (!show) {
+                    show = true;
+                    $('.totop').addClass('totop--show');
+                }
+            } else {
+                if (show) {
+                    show = false;
+                    $('.totop').removeClass('totop--show');
+                }
+            }
+        });
+    });
+</script>

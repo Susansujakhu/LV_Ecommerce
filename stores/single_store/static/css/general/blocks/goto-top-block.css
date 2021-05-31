@@ -1,0 +1,116 @@
+.totop {
+  position: relative;
+  z-index: 9;
+  pointer-events: none;
+  visibility: hidden;
+  opacity: 0;
+  -webkit-transition: opacity .3s,
+ visibility 0s .3s;
+  transition: opacity .3s,
+ visibility 0s .3s;
+}
+
+.totop-body {
+  position: fixed;
+  bottom: 36px;
+  left: 0;
+  top: auto;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: -20px;
+}
+
+.totop-container {
+  margin: 0 -15px;
+}
+
+.totop-start,
+.totop-end {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  -ms-flex-preferred-size: 0;
+      flex-basis: 0;
+  min-width: 0;
+}
+
+.totop-end {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: row-reverse;
+          flex-direction: row-reverse;
+}
+
+.totop-end:before {
+  content: '';
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+}
+
+.totop-button {
+  pointer-events: auto;
+  width: 39px;
+  height: 39px;
+  border-radius: 19.5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+  color: #fff;
+  background: #333;
+  fill: currentColor;
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+  -webkit-transition: background-color .15s,
+ color .15s;
+  transition: background-color .15s,
+ color .15s;
+  margin-left: 80px;
+  margin-right: 24px;
+}
+
+.totop-button:focus {
+  outline: none;
+}
+
+@media (hover: hover) {
+  .totop-button:hover {
+    color: #fff;
+    background: #4d4d4d;
+  }
+}
+
+.totop-button:active {
+  color: #fff;
+  background: #333;
+}
+
+.totop-button svg {
+  margin-top: -2px;
+  margin-bottom: 1px;
+}
+
+.totop--show {
+  visibility: visible;
+  opacity: 1;
+  -webkit-transition-delay: 0s, 0s;
+          transition-delay: 0s, 0s;
+}
