@@ -1,0 +1,76 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="content-section">
+    <form method="POST" action="" enctype="multipart/form-data">
+        {{ form.csrf_token }}
+        {{ form.form_type }}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">New {{title}}</legend>
+          <script>let slug</script>
+            {% for field in form if field.name != 'csrf_token' %}
+              {% if field.name != 'form_type' %}
+                {% if loop.index ==1 %}
+                {% set id = field.name %}
+                <script>
+                  window.addEventListener('DOMContentLoaded', (event) => {
+                    console.log('DOM fully loaded and parsed');
+                    let name = document.getElementById('{{id}}');
+                    slug = document.getElementById('slug');
+                    console.log(slug)
+                    slug.onfocus = function () {
+                        product_name = name.value;
+                        product_name = product_name.toLowerCase();
+                        product_name = product_name.replace(/ /g, "-");
+                        slug.value = product_name;
+                    }
+                });
+               </script>
+                {% endif %}
+            <div class="form-group">
+              {{ field.label(class="form-control-label") }}
+              {{ field(class="form-control") }}
+
+              {% for error in field.errors %}
+                <div class="error">{{ error }}</div>
+              {% endfor %}
+            </div>
+          {% endif %}
+        {% endfor %}
+            
+        </fieldset>
+
+    </form>
+</div>
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+
+
+<script>
+      $('#shortDescription').summernote({
+        tabsize: 2,
+        height: 250,
+        toolbar: [
+          ['style', ['style']],
+          ['font', ['bold', 'underline', 'clear']],
+          ['color', ['color']],
+          ['para', ['ul', 'ol', 'paragraph']],
+          ['table', ['table']],
+          ['insert', ['link', 'picture', 'video']],
+          ['view', ['fullscreen', 'codeview', 'help']]
+        ]
+      });
+
+      $('#longDescription').summernote({
+        tabsize: 2,
+        height: 300,
+        
+      });
+</script>
+
+{% endblock content %}
