@@ -4,8 +4,10 @@ from flask_wtf.file import FileField, FileAllowed
 from flask_login import current_user
 from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField
 from wtforms.fields.core import IntegerField, SelectField
+from wtforms.fields.simple import HiddenField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from single_store.models import User
+from wtforms import MultipleFileField
 
 class RegistrationForm(FlaskForm):
     username = StringField('Username',
@@ -59,7 +61,6 @@ class UpdateAccountForm(FlaskForm):
                 raise ValidationError('Email already Registered')
 
 
-
 class ProductForm(FlaskForm):
     productName = StringField('Product Name', validators=[DataRequired()])
     slug = StringField('Slug', validators=[DataRequired()])
@@ -76,7 +77,7 @@ class ProductForm(FlaskForm):
     shortDescription = TextAreaField('Short Description')
     longDescription = TextAreaField('Long Description')
     imageFile = FileField('Set Featured image', validators = [FileAllowed(['jpg', 'png'])])
-    imageGallery = FileField('Gallery', validators = [FileAllowed(['jpg', 'png'])])
+    imageGallery = MultipleFileField('Gallery', validators = [FileAllowed(['jpg', 'png'])])
     tags = StringField('Tags')
     badgeDuration = IntegerField('Badge Durations')
     excludeBadge = BooleanField("Exclude Badge")
@@ -84,8 +85,6 @@ class ProductForm(FlaskForm):
     # product_user_id = current_user
 
     submit = SubmitField('Add Product')
-
-    edit = SubmitField('Save Changes')
 
 class EditProductForm(FlaskForm):
     productName = StringField('Product Name', validators=[DataRequired()])
@@ -185,4 +184,6 @@ class EditHorizontalPanelForm(FlaskForm):
     imageFile = FileField('Horizontal Panel Image', validators = [FileAllowed(['jpg', 'png'])])
     submit = SubmitField('Update Horizontal Panel')
 
-
+class DynamicForm(FlaskForm):
+    form_type = HiddenField(default='FormType', render_kw={ 'type':'hidden' })
+    # name = StringField() 
