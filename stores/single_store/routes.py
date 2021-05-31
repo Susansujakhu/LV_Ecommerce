@@ -55,7 +55,7 @@ def global_attr():
         for cart_row in cart:
             for rows in products:
                 if cart_row.product_id == rows.id:
-                    totalCart =rows.price+totalCart
+                    totalCart = (cart_row.quantity*rows.price)+totalCart
     else:
         cart = Cart.query.filter_by(userId = 1233).all()
     return dict(products = products, form1=form1, cart=cart, totalCart=totalCart)
@@ -738,188 +738,37 @@ def delete(tables, id):
 @login_required
 def addCart(productId):
     product= Product.query.get(productId)
-    quantityValue = 1
-    addCart = Cart(
+    cart=Cart.query.filter_by(product_id=productId).first()
+    if cart is None:
+        quantityValue = 1
+        addCart = Cart(
                     quantity =quantityValue,
                     color = product.color,
                     size = product.size,
                     cart_user_id = current_user,
                     cart_product_id=product,
                     )
-    print(addCart)
-    db.session.add(addCart)
-    db.session.commit()
-    # return render_template("404.html")
+        print(addCart)
+        db.session.add(addCart)
+        db.session.commit()
+    else:
+        quantityValue=cart.quantity
+        quantityValue = quantityValue+1
+        db.session.query(Cart).filter(Cart.product_id == productId).update({'quantity':quantityValue}, synchronize_session=False)
+        db.session.commit()
     return redirect('/')
 
 
-@app.route("/add/<tables>", methods=['GET', 'POST'])
+@app.route("/delete_cart/<int:productId>")
 @login_required
-@restricted(access_level="Admin")
-def add(tables):
-    tables = tables.capitalize()
-    table_name = str2Class(tables)
-    table_head = table_name.__table__.columns.keys()
-
-    form_name = tables+"Form"
-    formName = str2Class(form_name)
-    form = formName()
-
-    form_data = {formfield : value for formfield, value in form.data.items()}
-    for formfield, value in form.data.items():
-        if formfield == 'category':
-            form.category.choices = [(category.name) for category in Category.query.with_entities(Category.name).all()] #db.session.query(Category.name)
-        if formfield == 'brand':
-            form.brand.choices = [(brand.name) for brand in Brand.query.with_entities(Brand.name).all()]
-        if formfield == 'parentCategory':
-            form.parentCategory.choices = ['None']+[(category.name) for category in Category.query.with_entities(Category.name).all()]
-    if form.validate_on_submit():
-        data = {formfield : value for formfield, value in form.data.items()}
-        data.popitem()
-        data.popitem()
-
-        for formfield, value in form.data.items():
-            if formfield == 'imageFile':
-                if form.imageFile.data:
-                    random_hex = secrets.token_hex(4)
-                    f = form.imageFile.data
-                    print(f)
-                    split_name = f.filename.split(".")
-                    print(split_name)
-                    if tables == "Category":
-                        featuredImage = save_picture(f, split_name[0]+random_hex+ split_name[1], 'category', 700, 700)
-                    elif tables == "Hero":
-                        featuredImage = save_picture(f, split_name[0]+random_hex+ split_name[1], 'hero/desktop', 840, 395)
-                        featuredImage = save_picture(f, split_name[0]+random_hex+ split_name[1], 'hero/mobile', 510, 395)
-                    elif tables == "Brand":
-                        featuredImage = save_picture(f, split_name[0]+random_hex+ split_name[1], 'brand', 700, 700)
-                    elif tables == "HorizontalPanel":
-                        featuredImage = save_picture(f, split_name[0]+random_hex+ split_name[1], 'horizontalpanel/desktop', 1110, 170)
-                        featuredImage = save_picture(f, split_name[0]+random_hex+ split_name[1], 'horizontalpanel/mobile', 510, 390)
-                    else:
-                        featuredImage = save_picture(f, split_name[0]+random_hex+ split_name[1], 'products', 700, 700)
-                    featuredImage = secure_filename(featuredImage)
-                    data['imageFile'] = featuredImage
-
-            if formfield == 'imageGallery':
-                if form.imageGallery.data:
-                    galleryImages = ""
-                    # file_list = request.files.getlist('imageGallery')
-                    for f in form.imageGallery.data:
-                        random_hex = secrets.token_hex(4)
-                        split_name = f.filename.split(".")
-                        images = save_picture(f, split_name[0]+random_hex+ split_name[1], 'gallery', 700, 700)
-                        img = secure_filename(images)
-                        galleryImages = galleryImages + "," + img
-
-                    data['imageGallery'] = galleryImages
-
-        actual_data = data
-        dt = datetime.now(timezone.utc)
-        actual_data['dateCreated'] = dt
-        actual_data['userId'] = current_user.userId
-        table_db = tables.lower()
-        
-        insert_table = table(table_db,
-                         *[column(field) for field in table_head[1:]])
-        insert_dict = [actual_data]
-        db.session.execute(insert_table.insert(), insert_dict)
+def deleteCart(productId):
+    if Cart.query.filter_by(product_id=productId).delete():
+        db.session.execute("ALTER SEQUENCE Cart_id_seq RESTART WITH 1")
         db.session.commit()
-
-        flash('Feature Added Successful!', 'success')
-        for key, value in form_data.items():
-            setattr(DynamicForm, key, StringField(value))
-            form = DynamicForm()
-        
-    return render_template('add.html', title=tables, form=form, table_head=table_head)
+        print("Success")
+    else:
+        print("Failed")
+    return redirect('/')
 
 
 
-
-
-
-
-
-@app.route("/edit/<tables>/<int:id>", methods=['GET', 'POST'])
-@login_required
-@restricted(access_level="Admin")
-def edit(tables, id):
-    tables = tables.capitalize()
-    table_name = str2Class(tables)
-    table_head = table_name.__table__.columns.keys()
-
-    form_name = tables+"Form"
-    formName = str2Class(form_name)
-    form = formName()
-
-    form_data = {formfield : value for formfield, value in form.data.items()}
-    for formfield, value in form.data.items():
-        if formfield == 'category':
-            form.category.choices = [(category.name) for category in Category.query.with_entities(Category.name).all()] #db.session.query(Category.name)
-        if formfield == 'brand':
-            form.brand.choices = [(brand.name) for brand in Brand.query.with_entities(Brand.name).all()]
-        if formfield == 'parentCategory':
-            form.parentCategory.choices = ['None']+[(category.name) for category in Category.query.with_entities(Category.name).all()]
-    if form.validate_on_submit():
-        data = {formfield : value for formfield, value in form.data.items()}
-        data.popitem()
-        data.popitem()
-
-        for formfield, value in form.data.items():
-            if formfield == 'imageFile':
-                if form.imageFile.data:
-                    random_hex = secrets.token_hex(4)
-                    f = form.imageFile.data
-                    split_name = f.filename.split(".")
-                    if tables == "Category":
-                        featuredImage = save_picture(f, split_name[0]+random_hex+ split_name[1], 'category', 700, 700)
-                    elif tables == "Hero":
-                        featuredImage = save_picture(f, split_name[0]+random_hex+ split_name[1], 'hero/desktop', 840, 395)
-                        featuredImage = save_picture(f, split_name[0]+random_hex+ split_name[1], 'hero/mobile', 510, 395)
-                    elif tables == "Brand":
-                        featuredImage = save_picture(f, split_name[0]+random_hex+ split_name[1], 'brand', 700, 700)
-                    elif tables == "HorizontalPanel":
-                        featuredImage = save_picture(f, split_name[0]+random_hex+ split_name[1], 'horizontalpanel/desktop', 1110, 170)
-                        featuredImage = save_picture(f, split_name[0]+random_hex+ split_name[1], 'horizontalpanel/mobile', 510, 390)
-                    else:
-                        featuredImage = save_picture(f, split_name[0]+random_hex+ split_name[1], 'products', 700, 700)
-                    featuredImage = secure_filename(featuredImage)
-                    data['imageFile'] = featuredImage
-
-            if formfield == 'imageGallery':
-                if form.imageGallery.data:
-                    galleryImages = ""
-                    # file_list = request.files.getlist('imageGallery')
-                    for f in form.imageGallery.data:
-                        random_hex = secrets.token_hex(4)
-                        split_name = f.filename.split(".")
-                        images = save_picture(f, split_name[0]+random_hex+ split_name[1], 'gallery', 700, 700)
-                        img = secure_filename(images)
-                        galleryImages = galleryImages + "," + img
-
-                    data['imageGallery'] = galleryImages
-
-        actual_data = data
-        dt = datetime.now(timezone.utc)
-        actual_data['dateCreated'] = dt
-        actual_data['userId'] = current_user.userId
-
-        db.session.query(table_name).filter(table_name.id == id).update(actual_data, synchronize_session=False)
-        db.session.commit()
-
-        flash('Feature Added Successful!', 'success')
-        for key, value in form_data.items():
-            setattr(DynamicForm, key, StringField(value))
-            form = DynamicForm()
-    
-    elif request.method == 'GET' :
-        table_object = table_name.query.get_or_404(id)
-        
-
-        for items, value in table_object.__dict__.items():
-            print(items)
-            form.productName.data = "table_object.productName"
-
-    return render_template('add.html', title=tables, form=form, table_head=table_head)
-
-    sadasdasd

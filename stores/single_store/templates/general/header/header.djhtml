@@ -1342,7 +1342,7 @@
                             <span class="dropcart-product-price">{{currency}} {{rows['price']}}</span>
                         </div>
                     </div>
-                    <button type="button" class="dropcart-product-remove btn btn-light btn-sm btn-svg-icon">
+                    <button type="button" class="dropcart-product-remove btn btn-light btn-sm btn-svg-icon" onclick="window.location.href='delete_cart/{{cart_row.product_id}}'">
                         <svg width="10px" height="10px">
                             <use xlink:href="/static/assets/icons/sprite.svg#cross-10"></use>
                         </svg>
