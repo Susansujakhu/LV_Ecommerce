@@ -2,14 +2,19 @@
 from functools import wraps
 from flask import render_template, url_for, flash, redirect, request, Response
 from flask.globals import session
+from sqlalchemy.sql.expression import text
+from werkzeug.datastructures import MultiDict
+from wtforms.fields.core import StringField
 from single_store import app, db, bcrypt
-from single_store.forms import HorizontalPanelForm, EditHorizontalPanelForm, BrandForm, EditBrandForm, FeaturesForm, EditFeaturesForm, HeroForm, EditHeroForm, RegistrationForm, LoginForm, UpdateAccountForm, ProductForm, EditProductForm, CategoryForm,EditCategoryForm
+from single_store.forms import DynamicForm, HorizontalPanelForm, EditHorizontalPanelForm, BrandForm, EditBrandForm, FeaturesForm, EditFeaturesForm, HeroForm, EditHeroForm, RegistrationForm, LoginForm, UpdateAccountForm, ProductForm, EditProductForm, CategoryForm,EditCategoryForm
 from single_store.models import Attributes,HorizontalPanel, Brand, Cart, Category, Features, Hero, Order, Product, Rating, Shipping, User, MyAdminIndexView, AdminView
 from flask_login import login_user, current_user, logout_user, login_required
 import secrets, os, sys
 from PIL import Image
 from flask_admin import Admin
-
+from werkzeug.utils import secure_filename
+from datetime import datetime, timezone
+from sqlalchemy.sql import table, column
 
 admin = Admin(app, name='Dashboard', index_view = MyAdminIndexView())
 admin.add_view(AdminView(User, db.session))
@@ -42,7 +47,7 @@ def not_found(e):
 
 @app.context_processor
 def global_attr():
-    totalCart = 0;
+    totalCart = 0
     form1 = LoginForm()
     products = Product.query.all()
     if current_user.is_authenticated:
@@ -69,10 +74,10 @@ def home():
                                             imageFile = "default.jpg")
         heroSlider = [heroSlider]
     if horizontalPanel is None:
-        horizontalPanel = HorizontalPanel(title = "The Horizontal panel ad banner",
-                                            description = "Write The Descriptions Here",
-                                            button = "Shop Now",
-                                            imageFile = "default.jpg")
+        horizontalPanel = HorizontalPanel(title = "The Horizontal panel ad banner")
+        horizontalPanel = HorizontalPanel(description = "Write The Descriptions Here")
+        horizontalPanel = HorizontalPanel(button = "Shop Now")
+        horizontalPanel = HorizontalPanel(imageFile = "default.jpg")
     return render_template(
         'single-store/home.djhtml', heroSlider = heroSlider, featuresService = featuresService, horizontalPanel = horizontalPanel)
 
@@ -314,8 +319,9 @@ def add_product():
                             featured = form.featured.data,
                             product_user_id = current_user,
                             )
-            db.session.add(product)
-            db.session.commit()
+            print(product)
+            # db.session.add(product)
+            # db.session.commit()
             flash(form.productName.data+' Product Added Successful!', 'success')
         else:
             # form.productName.data = 
@@ -701,6 +707,7 @@ def str2Class(str):
 @login_required
 @restricted(access_level="Admin")
 def lists(tables):
+    tables = tables.capitalize()
     table = str2Class(tables)
 
     table_col = table.__table__.columns.keys()
@@ -726,9 +733,9 @@ def delete(tables, id):
         print("Failed")
     return redirect('/lists/'+tables)
 
+
 @app.route("/add_cart/<int:productId>")
 @login_required
-@restricted(access_level="Admin")
 def addCart(productId):
     product= Product.query.get(productId)
     quantityValue = 1
@@ -746,3 +753,173 @@ def addCart(productId):
     return redirect('/')
 
 
+@app.route("/add/<tables>", methods=['GET', 'POST'])
+@login_required
+@restricted(access_level="Admin")
+def add(tables):
+    tables = tables.capitalize()
+    table_name = str2Class(tables)
+    table_head = table_name.__table__.columns.keys()
+
+    form_name = tables+"Form"
+    formName = str2Class(form_name)
+    form = formName()
+
+    form_data = {formfield : value for formfield, value in form.data.items()}
+    for formfield, value in form.data.items():
+        if formfield == 'category':
+            form.category.choices = [(category.name) for category in Category.query.with_entities(Category.name).all()] #db.session.query(Category.name)
+        if formfield == 'brand':
+            form.brand.choices = [(brand.name) for brand in Brand.query.with_entities(Brand.name).all()]
+        if formfield == 'parentCategory':
+            form.parentCategory.choices = ['None']+[(category.name) for category in Category.query.with_entities(Category.name).all()]
+    if form.validate_on_submit():
+        data = {formfield : value for formfield, value in form.data.items()}
+        data.popitem()
+        data.popitem()
+
+        for formfield, value in form.data.items():
+            if formfield == 'imageFile':
+                if form.imageFile.data:
+                    random_hex = secrets.token_hex(4)
+                    f = form.imageFile.data
+                    print(f)
+                    split_name = f.filename.split(".")
+                    print(split_name)
+                    if tables == "Category":
+                        featuredImage = save_picture(f, split_name[0]+random_hex+ split_name[1], 'category', 700, 700)
+                    elif tables == "Hero":
+                        featuredImage = save_picture(f, split_name[0]+random_hex+ split_name[1], 'hero/desktop', 840, 395)
+                        featuredImage = save_picture(f, split_name[0]+random_hex+ split_name[1], 'hero/mobile', 510, 395)
+                    elif tables == "Brand":
+                        featuredImage = save_picture(f, split_name[0]+random_hex+ split_name[1], 'brand', 700, 700)
+                    elif tables == "HorizontalPanel":
+                        featuredImage = save_picture(f, split_name[0]+random_hex+ split_name[1], 'horizontalpanel/desktop', 1110, 170)
+                        featuredImage = save_picture(f, split_name[0]+random_hex+ split_name[1], 'horizontalpanel/mobile', 510, 390)
+                    else:
+                        featuredImage = save_picture(f, split_name[0]+random_hex+ split_name[1], 'products', 700, 700)
+                    featuredImage = secure_filename(featuredImage)
+                    data['imageFile'] = featuredImage
+
+            if formfield == 'imageGallery':
+                if form.imageGallery.data:
+                    galleryImages = ""
+                    # file_list = request.files.getlist('imageGallery')
+                    for f in form.imageGallery.data:
+                        random_hex = secrets.token_hex(4)
+                        split_name = f.filename.split(".")
+                        images = save_picture(f, split_name[0]+random_hex+ split_name[1], 'gallery', 700, 700)
+                        img = secure_filename(images)
+                        galleryImages = galleryImages + "," + img
+
+                    data['imageGallery'] = galleryImages
+
+        actual_data = data
+        dt = datetime.now(timezone.utc)
+        actual_data['dateCreated'] = dt
+        actual_data['userId'] = current_user.userId
+        table_db = tables.lower()
+        
+        insert_table = table(table_db,
+                         *[column(field) for field in table_head[1:]])
+        insert_dict = [actual_data]
+        db.session.execute(insert_table.insert(), insert_dict)
+        db.session.commit()
+
+        flash('Feature Added Successful!', 'success')
+        for key, value in form_data.items():
+            setattr(DynamicForm, key, StringField(value))
+            form = DynamicForm()
+        
+    return render_template('add.html', title=tables, form=form, table_head=table_head)
+
+
+
+
+
+
+
+
+@app.route("/edit/<tables>/<int:id>", methods=['GET', 'POST'])
+@login_required
+@restricted(access_level="Admin")
+def edit(tables, id):
+    tables = tables.capitalize()
+    table_name = str2Class(tables)
+    table_head = table_name.__table__.columns.keys()
+
+    form_name = tables+"Form"
+    formName = str2Class(form_name)
+    form = formName()
+
+    form_data = {formfield : value for formfield, value in form.data.items()}
+    for formfield, value in form.data.items():
+        if formfield == 'category':
+            form.category.choices = [(category.name) for category in Category.query.with_entities(Category.name).all()] #db.session.query(Category.name)
+        if formfield == 'brand':
+            form.brand.choices = [(brand.name) for brand in Brand.query.with_entities(Brand.name).all()]
+        if formfield == 'parentCategory':
+            form.parentCategory.choices = ['None']+[(category.name) for category in Category.query.with_entities(Category.name).all()]
+    if form.validate_on_submit():
+        data = {formfield : value for formfield, value in form.data.items()}
+        data.popitem()
+        data.popitem()
+
+        for formfield, value in form.data.items():
+            if formfield == 'imageFile':
+                if form.imageFile.data:
+                    random_hex = secrets.token_hex(4)
+                    f = form.imageFile.data
+                    split_name = f.filename.split(".")
+                    if tables == "Category":
+                        featuredImage = save_picture(f, split_name[0]+random_hex+ split_name[1], 'category', 700, 700)
+                    elif tables == "Hero":
+                        featuredImage = save_picture(f, split_name[0]+random_hex+ split_name[1], 'hero/desktop', 840, 395)
+                        featuredImage = save_picture(f, split_name[0]+random_hex+ split_name[1], 'hero/mobile', 510, 395)
+                    elif tables == "Brand":
+                        featuredImage = save_picture(f, split_name[0]+random_hex+ split_name[1], 'brand', 700, 700)
+                    elif tables == "HorizontalPanel":
+                        featuredImage = save_picture(f, split_name[0]+random_hex+ split_name[1], 'horizontalpanel/desktop', 1110, 170)
+                        featuredImage = save_picture(f, split_name[0]+random_hex+ split_name[1], 'horizontalpanel/mobile', 510, 390)
+                    else:
+                        featuredImage = save_picture(f, split_name[0]+random_hex+ split_name[1], 'products', 700, 700)
+                    featuredImage = secure_filename(featuredImage)
+                    data['imageFile'] = featuredImage
+
+            if formfield == 'imageGallery':
+                if form.imageGallery.data:
+                    galleryImages = ""
+                    # file_list = request.files.getlist('imageGallery')
+                    for f in form.imageGallery.data:
+                        random_hex = secrets.token_hex(4)
+                        split_name = f.filename.split(".")
+                        images = save_picture(f, split_name[0]+random_hex+ split_name[1], 'gallery', 700, 700)
+                        img = secure_filename(images)
+                        galleryImages = galleryImages + "," + img
+
+                    data['imageGallery'] = galleryImages
+
+        actual_data = data
+        dt = datetime.now(timezone.utc)
+        actual_data['dateCreated'] = dt
+        actual_data['userId'] = current_user.userId
+
+        db.session.query(table_name).filter(table_name.id == id).update(actual_data, synchronize_session=False)
+        db.session.commit()
+
+        flash('Feature Added Successful!', 'success')
+        for key, value in form_data.items():
+            setattr(DynamicForm, key, StringField(value))
+            form = DynamicForm()
+    
+    elif request.method == 'GET' :
+        table_object = table_name.query.get_or_404(id)
+        
+
+        for items, value in table_object.__dict__.items():
+            print(items)
+            form.productName.data = "table_object.productName"
+
+    return render_template('add.html', title=tables, form=form, table_head=table_head)
+
+    sadasdasd
