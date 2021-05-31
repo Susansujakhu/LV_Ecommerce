@@ -13,11 +13,7 @@ from flask_admin import AdminIndexView
 def load_user(user_id):
     return User.query.get(int(user_id))
 
-
-
 class AdminView(ModelView):
-
-
     def is_accessible(self):
         return current_user.role == "Admin"
     
@@ -49,6 +45,8 @@ class User(db.Model, UserMixin):
     userCart = db.relationship('Cart', backref = 'cart_user_id', lazy = True) 
     userOrder = db.relationship('Order', backref = 'order_user_id', lazy = True) 
     userRating = db.relationship('Rating', backref = 'rating_user_id', lazy = True) 
+    userWishlist = db.relationship('Wishlist', backref = 'wishlist_user_id', lazy = True) 
+    userCompare = db.relationship('Compare', backref = 'compare_user_id', lazy = True) 
 
     def get_id(self):
         return (self.userId)
@@ -98,7 +96,7 @@ class Product(db.Model):
 
     badgeDuration = db.Column(db.String(20), nullable = True)
     excludeBadge = db.Column(db.Boolean, nullable = False, default = False)
-    dateCreated = db.Column(db.DateTime, nullable = False, default = datetime.utcnow)
+    dateCreated = db.Column(db.DateTime, nullable = True, default = datetime.utcnow)
 
     userId = db.Column(db.Integer, db.ForeignKey('user.userId'), nullable = False) # User Id
 
@@ -223,3 +221,23 @@ class HorizontalPanel(db.Model):
 
     def __repr__(self):
         return f"Post('{self.title}', '{self.description}', '{self.button}', '{self.imageFile}')"
+
+class Wishlist(db.Model):
+    __tablename__ = 'wishlist'
+    id = db.Column(db.Integer, primary_key = True)
+    product_list = db.Column(db.Text, nullable = False)
+
+    userId = db.Column(db.Integer, db.ForeignKey('user.userId'), nullable = False)
+    
+    def __repr__(self):
+        return f"Post('{self.product_list}')"
+
+class Compare(db.Model):
+    __tablename__ = 'compare'
+    id = db.Column(db.Integer, primary_key = True)
+    product_list = db.Column(db.Text, nullable = False)
+
+    userId = db.Column(db.Integer, db.ForeignKey('user.userId'), nullable = False)
+    
+    def __repr__(self):
+        return f"Post('{self.product_list}')"
