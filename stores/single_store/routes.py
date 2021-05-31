@@ -67,6 +67,10 @@ def home():
     return render_template(
         'single-store/home.djhtml', heroSlider = heroSlider, featuresService = featuresService, horizontalPanel = horizontalPanel)
 
+@app.route("/quickview")
+def quickview():
+    render_template("single-store/quick-view-modal-block.html")
+
 @app.route("/single/<int:productId>")
 def single_product(productId):
     product = Product.query.get(productId)
@@ -99,6 +103,18 @@ def checkout():
 def wishlist():
     return render_template(
         'single-store/wishlist-page.djhtml'
+        )
+
+@app.route("/compare")
+def compare():
+    return render_template(
+        'single-store/compare-page.djhtml'
+        )
+
+@app.route("/admin-dashboard")
+def admin_dashboard():
+    return render_template(
+        'single-store/admin/dashboard.djhtml'
         )
 
 @app.route("/account", methods=['GET', 'POST'])
@@ -608,8 +624,8 @@ def add_horizontal():
     if form.validate_on_submit():
         if form.imageFile.data:
             random_hex = secrets.token_hex(4)
-            image = save_picture(form.imageFile.data, random_hex + form.title.data, 'horizontalPanel/desktop', 840, 395)
-            image = save_picture(form.imageFile.data, random_hex + form.title.data, 'horizontalPanel/mobile', 510, 395)
+            image = save_picture(form.imageFile.data, random_hex + form.title.data, 'horizontalPanel/desktop', 1110, 170)
+            image = save_picture(form.imageFile.data, random_hex + form.title.data, 'horizontalPanel/mobile', 510, 390)
 
         if request.form.get('submit'):
             horizontal = HorizontalPanel(title = form.title.data, 
