@@ -1,3 +1,13 @@
+{% set currency = 'Rs.'%}
+{# {% set total = [] %}
+{% set a = 1000000 %}
+{% for cart_row in cart %}
+    {% for rows in products if cart_row.product_id == rows.id %}  
+ 
+          <span class="d-none"> {{ total.append(rows['price']) }} </span>
+    {% endfor %}
+{% endfor %}
+{{ total|sum }} #}
 <header class="site-header d-lg-none">
     <!-- data-sticky-mode - one of [pullToShow, alwaysOnTop] -->
     <div class="mobile-header mobile-header--sticky" data-sticky-mode="pullToShow">
@@ -1310,30 +1320,39 @@
             </button>
         </div>
         <div class="dropcart-products-list">
-            <div class="dropcart-product">
-                <div class="product-image dropcart-product-image">
-                    <a href="product.html" class="product-image-body">
-                        <img class="product-image-img" src="images/products/product-1.jpg" alt="">
-                    </a>
-                </div>
-                <div class="dropcart-product-info">
-                    <div class="dropcart-product-name"><a href="product.html">Electric Planer Brandix KL370090G 300 Watts</a></div>
-                    <ul class="dropcart-product-options">
-                        <li>Color: Yellow</li>
-                        <li>Material: Aluminium</li>
-                    </ul>
-                    <div class="dropcart-product-meta">
-                        <span class="dropcart-product-quantity">2</span> ×
-                        <span class="dropcart-product-price">$699.00</span>
+
+            {% for cart_row in cart %}
+                {% for rows in products if cart_row.product_id == rows.id %}
+                {% set imagename = rows['imageFile'] %}
+
+                <div class="dropcart-product">
+                    <div class="product-image dropcart-product-image">
+                        <a href="product.html" class="product-image-body">
+                            <img class="product-image-img" src="{{url_for('static', filename='assets/images/products/'+ imagename )}}" alt="">
+                        </a>
                     </div>
+                    <div class="dropcart-product-info">
+                        <div class="dropcart-product-name"><a href="product.html">{{rows['productName']}}</a></div>
+                        <ul class="dropcart-product-options">
+                            <li>Color: {{cart_row.color}}</li>
+                            <li>Material: {{rows['material']}} </li>
+                        </ul>
+                        <div class="dropcart-product-meta">
+                            <span class="dropcart-product-quantity">{{cart_row.quantity}}</span> ×
+                            <span class="dropcart-product-price">{{currency}} {{rows['price']}}</span>
+                        </div>
+                    </div>
+                    <button type="button" class="dropcart-product-remove btn btn-light btn-sm btn-svg-icon">
+                        <svg width="10px" height="10px">
+                            <use xlink:href="/static/assets/icons/sprite.svg#cross-10"></use>
+                        </svg>
+                    </button>
                 </div>
-                <button type="button" class="dropcart-product-remove btn btn-light btn-sm btn-svg-icon">
-                    <svg width="10px" height="10px">
-                        <use xlink:href="/static/assets/icons/sprite.svg#cross-10"></use>
-                    </svg>
-                </button>
-            </div>
-            <div class="dropcart-product">
+
+                {% endfor %}
+            {% endfor %}
+
+          {#   <div class="dropcart-product">
                 <div class="product-image dropcart-product-image">
                     <a href="product.html" class="product-image-body">
                         <img class="product-image-img" src="images/products/product-2.jpg" alt="">
@@ -1373,13 +1392,13 @@
                         <use xlink:href="/static/assets/icons/sprite.svg#cross-10"></use>
                     </svg>
                 </button>
-            </div>
+            </div> #}
         </div>
         <div class="dropcart-totals">
             <table>
                 <tr>
                     <th>Subtotal</th>
-                    <td>$5,877.00</td>
+                    <td>{{currency}} {{totalCart}}</td>
                 </tr>
                 <tr>
                     <th>Shipping</th>
@@ -1391,7 +1410,7 @@
                 </tr>
                 <tr>
                     <th>Total</th>
-                    <td>$5,902.00</td>
+                    <td>{{currency}} {{totalCart}}</td>
                 </tr>
             </table>
         </div>

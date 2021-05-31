@@ -42,9 +42,18 @@ def not_found(e):
 
 @app.context_processor
 def global_attr():
-    products = Product.query.all()
+    totalCart = 0;
     form1 = LoginForm()
-    return dict(products = products, form1=form1)
+    products = Product.query.all()
+    if current_user.is_authenticated:
+        cart = Cart.query.filter_by(userId = current_user.userId).all()
+        for cart_row in cart:
+            for rows in products:
+                if cart_row.product_id == rows.id:
+                    totalCart =rows.price+totalCart
+    else:
+        cart = Cart.query.filter_by(userId = 1233).all()
+    return dict(products = products, form1=form1, cart=cart, totalCart=totalCart)
 
 @app.route("/")
 def home():
@@ -716,3 +725,24 @@ def delete(tables, id):
     else:
         print("Failed")
     return redirect('/lists/'+tables)
+
+@app.route("/add_cart/<int:productId>")
+@login_required
+@restricted(access_level="Admin")
+def addCart(productId):
+    product= Product.query.get(productId)
+    quantityValue = 1
+    addCart = Cart(
+                    quantity =quantityValue,
+                    color = product.color,
+                    size = product.size,
+                    cart_user_id = current_user,
+                    cart_product_id=product,
+                    )
+    print(addCart)
+    db.session.add(addCart)
+    db.session.commit()
+    # return render_template("404.html")
+    return redirect('/')
+
+
