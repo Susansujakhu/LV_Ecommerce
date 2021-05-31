@@ -1,0 +1,16 @@
+{% set pageTitle = "Compare" %}
+{% extends 'single-store/base.djhtml' %}
+
+{% block head %}
+{% endblock %}
+
+{# {% block bodyHead %}{% endblock %} #}
+
+{% block content %}
+	{% include '/general/blocks/compare-block.djhtml' %}
+{% endblock %}
+
+{% block container %}{% endblock %}
+
+{% block tail %}
+{% endblock %}
