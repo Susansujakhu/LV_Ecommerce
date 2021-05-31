@@ -105,18 +105,5 @@
                 </div>
             </div>
         </div>
-        <div class="totop">
-            <div class="totop-body">
-                <div class="totop-start"></div>
-                <div class="totop-container container"></div>
-                <div class="totop-end">
-                    <button type="button" class="totop-button">
-                        <svg width="13px" height="8px">
-                            <use xlink:href="images/sprite.svg#arrow-rounded-up-13x8"></use>
-                        </svg>
-                    </button>
-                </div>
-            </div>
-        </div>
     </div>
 </footer>
