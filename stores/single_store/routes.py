@@ -48,6 +48,7 @@ def not_found(e):
 @app.context_processor
 def global_attr():
     totalCart = 0
+    cartProductNumber=0
     form1 = LoginForm()
     products = Product.query.all()
     if current_user.is_authenticated:
@@ -55,10 +56,12 @@ def global_attr():
         for cart_row in cart:
             for rows in products:
                 if cart_row.product_id == rows.id:
-                    totalCart =rows.price+totalCart
+                    totalCart = (cart_row.quantity*rows.price)+totalCart
+                    cartProductNumber=cartProductNumber+1
     else:
         cart = Cart.query.filter_by(userId = 1233).all()
-    return dict(products = products, form1=form1, cart=cart, totalCart=totalCart)
+    return dict(products = products, form1=form1, cart=cart, totalCart=totalCart, cartProductNumber=cartProductNumber)
+
 
 @app.route("/")
 def home():
@@ -756,19 +759,41 @@ def delete(tables, id):
 @login_required
 def addCart(productId):
     product= Product.query.get(productId)
-    quantityValue = 1
-    addCart = Cart(
+    cart=Cart.query.filter_by(product_id=productId).first()
+    print(cart)
+    if cart is None:
+        quantityValue = 1
+        addCart = Cart(
                     quantity =quantityValue,
                     color = product.color,
                     size = product.size,
                     cart_user_id = current_user,
                     cart_product_id=product,
                     )
-    print(addCart)
-    db.session.add(addCart)
-    db.session.commit()
-    # return render_template("404.html")
+        print(addCart)
+        db.session.add(addCart)
+        db.session.commit()
+    else:
+        quantityValue=cart.quantity
+        quantityValue = quantityValue+1
+        db.session.query(Cart).filter(Cart.product_id == productId).update({'quantity':quantityValue}, synchronize_session=False)
+        db.session.commit()
     return redirect('/')
+
+
+@app.route("/delete_cart/<int:productId>/<string:page>")
+@login_required
+def deleteCart(productId,page):
+    if Cart.query.filter_by(product_id=productId).delete():
+        db.session.execute("ALTER SEQUENCE cart_id_seq RESTART WITH 1")
+        db.session.commit()
+        print("Success")
+    else:
+        print("Failed")
+    if page=='cart2':
+        return redirect('/cart')
+    return redirect('/')
+
 
 @app.route("/wishlist/<int:productId>")
 @login_required
