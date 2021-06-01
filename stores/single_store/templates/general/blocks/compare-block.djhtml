@@ -3,41 +3,35 @@
         <div class="table-responsive">
             <table class="compare-table">
                 <tbody>
+                    
+ 
                     <tr>
                         <th>Product</th>
-                        <td>
-                            <a class="compare-table-product-link" href="product.html">
-                                <div class="compare-table-product-image product-image">
-                                    <div class="product-image-body">
-                                        <img class="product-image-img" src="images/products/product-1.jpg" alt="">
-                                    </div>
-                                </div>
-                                <div class="compare-table-product-name">Electric Planer Brandix KL370090G 300 Watts</div>
-                            </a>
-                        </td>
-                        <td>
-                            <a class="compare-table-product-link" href="product.html">
-                                <div class="compare-table-product-image product-image">
-                                    <div class="product-image-body">
-                                        <img class="product-image-img" src="images/products/product-2.jpg" alt="">
-                                    </div>
-                                </div>
-                                <div class="compare-table-product-name">Undefined Tool IRadix DPS3000SY 2700 Watts</div>
-                            </a>
-                        </td>
-                        <td>
-                            <a class="compare-table-product-link" href="product.html">
-                                <div class="compare-table-product-image product-image">
-                                    <div class="product-image-body">
-                                        <img class="product-image-img" src="images/products/product-3.jpg" alt="">
-                                    </div>
-                                </div>
-                                <div class="compare-table-product-name">Drill Screwdriver Brandix ALX7054 200 Watts</div>
-                            </a>
-                        </td>
+                        {% for product in products %}
+                        {% for compare_product in product_lists %}
+                            {% if compare_product|int == product.id %}
+                            <td>
+                                        <a class="compare-table-product-link" href="product.html">
+                                            <div class="compare-table-product-image product-image">
+                                                <div class="product-image-body">
+                                                    <img class="product-image-img" src="{{url_for('static',filename='assets/images/products/'+product.imageFile)}}" alt="">
+                                                </div>
+                                            </div>
+                                            <div class="compare-table-product-name">{{product.productName}}</div>
+                                        </a>
+                                    </td>
+                    {% endif %}
+                        {% endfor %}
+                    {% endfor %}
+                                    
+                                
                     </tr>
+
                     <tr>
                         <th>Rating</th>
+                        {% for product in products %}
+                        {% for compare_product in product_lists %}
+                            {% if compare_product|int == product.id %}
                         <td>
                             <div class="compare-table-product-rating">
                                 <div class="rating">
@@ -129,237 +123,93 @@
                                 7 Reviews
                             </div>
                         </td>
-                        <td>
-                            <div class="compare-table-product-rating">
-                                <div class="rating">
-                                    <div class="rating-body">
-                                        <svg class="rating-star rating-star--active" width="13px" height="12px">
-                                            <g class="rating-fill">
-                                                <use xlink:href="images/sprite.svg#star-normal"></use>
-                                            </g>
-                                            <g class="rating-stroke">
-                                                <use xlink:href="images/sprite.svg#star-normal-stroke"></use>
-                                            </g>
-                                        </svg>
-                                        <div class="rating-star rating-star--only-edge rating-star--active">
-                                            <div class="rating-fill">
-                                                <div class="fake-svg-icon"></div>
-                                            </div>
-                                            <div class="rating-stroke">
-                                                <div class="fake-svg-icon"></div>
-                                            </div>
-                                        </div>
-                                        <svg class="rating-star rating-star--active" width="13px" height="12px">
-                                            <g class="rating-fill">
-                                                <use xlink:href="images/sprite.svg#star-normal"></use>
-                                            </g>
-                                            <g class="rating-stroke">
-                                                <use xlink:href="images/sprite.svg#star-normal-stroke"></use>
-                                            </g>
-                                        </svg>
-                                        <div class="rating-star rating-star--only-edge rating-star--active">
-                                            <div class="rating-fill">
-                                                <div class="fake-svg-icon"></div>
-                                            </div>
-                                            <div class="rating-stroke">
-                                                <div class="fake-svg-icon"></div>
-                                            </div>
-                                        </div>
-                                        <svg class="rating-star rating-star--active" width="13px" height="12px">
-                                            <g class="rating-fill">
-                                                <use xlink:href="images/sprite.svg#star-normal"></use>
-                                            </g>
-                                            <g class="rating-stroke">
-                                                <use xlink:href="images/sprite.svg#star-normal-stroke"></use>
-                                            </g>
-                                        </svg>
-                                        <div class="rating-star rating-star--only-edge rating-star--active">
-                                            <div class="rating-fill">
-                                                <div class="fake-svg-icon"></div>
-                                            </div>
-                                            <div class="rating-stroke">
-                                                <div class="fake-svg-icon"></div>
-                                            </div>
-                                        </div>
-                                        <svg class="rating-star rating-star--active" width="13px" height="12px">
-                                            <g class="rating-fill">
-                                                <use xlink:href="images/sprite.svg#star-normal"></use>
-                                            </g>
-                                            <g class="rating-stroke">
-                                                <use xlink:href="images/sprite.svg#star-normal-stroke"></use>
-                                            </g>
-                                        </svg>
-                                        <div class="rating-star rating-star--only-edge rating-star--active">
-                                            <div class="rating-fill">
-                                                <div class="fake-svg-icon"></div>
-                                            </div>
-                                            <div class="rating-stroke">
-                                                <div class="fake-svg-icon"></div>
-                                            </div>
-                                        </div>
-                                        <svg class="rating-star rating-star--active" width="13px" height="12px">
-                                            <g class="rating-fill">
-                                                <use xlink:href="images/sprite.svg#star-normal"></use>
-                                            </g>
-                                            <g class="rating-stroke">
-                                                <use xlink:href="images/sprite.svg#star-normal-stroke"></use>
-                                            </g>
-                                        </svg>
-                                        <div class="rating-star rating-star--only-edge rating-star--active">
-                                            <div class="rating-fill">
-                                                <div class="fake-svg-icon"></div>
-                                            </div>
-                                            <div class="rating-stroke">
-                                                <div class="fake-svg-icon"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="compare-table-product-rating-legend">
-                                7 Reviews
-                            </div>
-                        </td>
-                        <td>
-                            <div class="compare-table-product-rating">
-                                <div class="rating">
-                                    <div class="rating-body">
-                                        <svg class="rating-star rating-star--active" width="13px" height="12px">
-                                            <g class="rating-fill">
-                                                <use xlink:href="images/sprite.svg#star-normal"></use>
-                                            </g>
-                                            <g class="rating-stroke">
-                                                <use xlink:href="images/sprite.svg#star-normal-stroke"></use>
-                                            </g>
-                                        </svg>
-                                        <div class="rating-star rating-star--only-edge rating-star--active">
-                                            <div class="rating-fill">
-                                                <div class="fake-svg-icon"></div>
-                                            </div>
-                                            <div class="rating-stroke">
-                                                <div class="fake-svg-icon"></div>
-                                            </div>
-                                        </div>
-                                        <svg class="rating-star rating-star--active" width="13px" height="12px">
-                                            <g class="rating-fill">
-                                                <use xlink:href="images/sprite.svg#star-normal"></use>
-                                            </g>
-                                            <g class="rating-stroke">
-                                                <use xlink:href="images/sprite.svg#star-normal-stroke"></use>
-                                            </g>
-                                        </svg>
-                                        <div class="rating-star rating-star--only-edge rating-star--active">
-                                            <div class="rating-fill">
-                                                <div class="fake-svg-icon"></div>
-                                            </div>
-                                            <div class="rating-stroke">
-                                                <div class="fake-svg-icon"></div>
-                                            </div>
-                                        </div>
-                                        <svg class="rating-star rating-star--active" width="13px" height="12px">
-                                            <g class="rating-fill">
-                                                <use xlink:href="images/sprite.svg#star-normal"></use>
-                                            </g>
-                                            <g class="rating-stroke">
-                                                <use xlink:href="images/sprite.svg#star-normal-stroke"></use>
-                                            </g>
-                                        </svg>
-                                        <div class="rating-star rating-star--only-edge rating-star--active">
-                                            <div class="rating-fill">
-                                                <div class="fake-svg-icon"></div>
-                                            </div>
-                                            <div class="rating-stroke">
-                                                <div class="fake-svg-icon"></div>
-                                            </div>
-                                        </div>
-                                        <svg class="rating-star rating-star--active" width="13px" height="12px">
-                                            <g class="rating-fill">
-                                                <use xlink:href="images/sprite.svg#star-normal"></use>
-                                            </g>
-                                            <g class="rating-stroke">
-                                                <use xlink:href="images/sprite.svg#star-normal-stroke"></use>
-                                            </g>
-                                        </svg>
-                                        <div class="rating-star rating-star--only-edge rating-star--active">
-                                            <div class="rating-fill">
-                                                <div class="fake-svg-icon"></div>
-                                            </div>
-                                            <div class="rating-stroke">
-                                                <div class="fake-svg-icon"></div>
-                                            </div>
-                                        </div>
-                                        <svg class="rating-star " width="13px" height="12px">
-                                            <g class="rating-fill">
-                                                <use xlink:href="images/sprite.svg#star-normal"></use>
-                                            </g>
-                                            <g class="rating-stroke">
-                                                <use xlink:href="images/sprite.svg#star-normal-stroke"></use>
-                                            </g>
-                                        </svg>
-                                        <div class="rating-star rating-star--only-edge ">
-                                            <div class="rating-fill">
-                                                <div class="fake-svg-icon"></div>
-                                            </div>
-                                            <div class="rating-stroke">
-                                                <div class="fake-svg-icon"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="compare-table-product-rating-legend">
-                                7 Reviews
-                            </div>
-                        </td>
+                        {% endif %}
+                        {% endfor %}
+                    {% endfor %}
                     </tr>
                     <tr>
                         <th>Availability</th>
+                        {% for product in products %}
+                        {% for compare_product in product_lists %}
+                            {% if compare_product|int == product.id %}
                         <td><span class="compare-table-product-badge badge badge-success">In Stock</span></td>
-                        <td><span class="compare-table-product-badge badge badge-success">In Stock</span></td>
-                        <td><span class="compare-table-product-badge badge badge-success">In Stock</span></td>
+                        {% endif %}
+                        {% endfor %}
+                    {% endfor %}
                     </tr>
                     <tr>
                         <th>Price</th>
-                        <td>$749.00</td>
-                        <td>$1,019.00</td>
-                        <td>$850.00</td>
+                        {% for product in products %}
+                        {% for compare_product in product_lists %}
+                            {% if compare_product|int == product.id %}
+                        <td>{{product.price}}</td>
+                        {% endif %}
+                        {% endfor %}
+                    {% endfor %}
                     </tr>
                     <tr>
                         <th>Add To Cart</th>
-                        <td><button class="btn btn-primary">Add To Cart</button></td>
-                        <td><button class="btn btn-primary">Add To Cart</button></td>
-                        <td><button class="btn btn-primary">Add To Cart</button></td>
+                        {% for product in products %}
+                        {% for compare_product in product_lists %}
+                            {% if compare_product|int == product.id %}
+                        <td><button class="btn btn-primary" onclick="window.location.href='/add_cart/{{ product.id }}'">Add To Cart</button></td>
+                    {% endif %}
+                        {% endfor %}
+                    {% endfor %}
                     </tr>
                     <tr>
                         <th>SKU</th>
+                        {% for product in products %}
+                        {% for compare_product in product_lists %}
+                            {% if compare_product|int == product.id %}
                         <td>83690/32</td>
-                        <td>83590/15</td>
-                        <td>1590/78</td>
+                    {% endif %}
+                        {% endfor %}
+                    {% endfor %}
                     </tr>
                     <tr>
+                    
                         <th>Weight</th>
-                        <td>15 Kg</td>
-                        <td>7 Kg</td>
-                        <td>11 Kg</td>
+                        {% for product in products %}
+                        {% for compare_product in product_lists %}
+                            {% if compare_product|int == product.id %}
+                        <td>{{product.weight}}</td>
+                        {% endif %}
+                        {% endfor %}
+                    {% endfor %}
                     </tr>
                     <tr>
+                    
                         <th>Color</th>
-                        <td>Red</td>
-                        <td>Brown</td>
-                        <td>Gray</td>
+                        {% for product in products %}
+                        {% for compare_product in product_lists %}
+                            {% if compare_product|int == product.id %}
+                        <td>{{product.color}}</td>
+                    {% endif %}
+                        {% endfor %}
+                    {% endfor %}
                     </tr>
                     <tr>
                         <th>Material</th>
-                        <td>Wood</td>
-                        <td>Plastic</td>
-                        <td>Metal</td>
+                        {% for product in products %}
+                        {% for compare_product in product_lists %}
+                            {% if compare_product|int == product.id %}
+                        <td>{{material}}</td>
+                    {% endif %}
+                        {% endfor %}
+                    {% endfor %}
                     </tr>
                     <tr>
                         <th></th>
-                        <td><button class="btn btn-secondary btn-sm">Remove</button></td>
-                        <td><button class="btn btn-secondary btn-sm">Remove</button></td>
-                        <td><button class="btn btn-secondary btn-sm">Remove</button></td>
+                        {% for product in products %}
+                        {% for compare_product in product_lists %}
+                            {% if compare_product|int == product.id %}
+                        <td><button class="btn btn-secondary btn-sm" onclick="window.location.href='/users/compare/{{ product.id }}'">Remove</button></td>
+                        {% endif %}
+                        {% endfor %}
+                    {% endfor %}
                     </tr>
+                    
                 </tbody>
             </table>
         </div>

@@ -141,13 +141,13 @@
                                
                                 <button class="btn btn-primary product-card-addtocart" onclick="window.location.href='/add_cart/{{ items['id']}}'" type="button">Add To Cart</button>
                                 <button class="btn btn-secondary product-card-addtocart product-card-addtocart--list" type="button">Add To Cart</button>
-                                <button class="btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card-wishlist" type="button">
+                                <button class="btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card-wishlist" onclick="window.location.href='/wishlist/{{ items['id']}}'" type="button">
                                     <svg width="16px" height="16px">
                                         <use xlink:href="/static/assets/icons/sprite.svg#wishlist-16"></use>
                                     </svg>
                                     <span class="fake-svg-icon fake-svg-icon--wishlist-16"></span>
                                 </button>
-                                <button class="btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card-compare" type="button">
+                                <button class="btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card-compare" onclick="window.location.href='/compare/{{ items['id']}}'" type="button">
                                     <svg width="16px" height="16px">
                                         <use xlink:href="/static/assets/icons/sprite.svg#compare-16"></use>
                                     </svg>
@@ -291,13 +291,13 @@
                                 <div class="product-card-buttons">
                                     <button class="btn btn-primary product-card-addtocart" onclick="window.location.href='/add_cart/{{ items['id']}}'" type="button">Add To Cart</button>
                                     <button class="btn btn-secondary product-card-addtocart product-card-addtocart--list" type="button">Add To Cart</button>
-                                    <button class="btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card-wishlist" type="button">
+                                    <button class="btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card-wishlist" onclick="window.location.href='/wishlist/{{ items['id']}}'" type="button">
                                         <svg width="16px" height="16px">
                                             <use xlink:href="/static/assets/icons/sprite.svg#wishlist-16"></use>
                                         </svg>
                                         <span class="fake-svg-icon fake-svg-icon--wishlist-16"></span>
                                     </button>
-                                    <button class="btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card-compare" type="button">
+                                    <button class="btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card-compare" onclick="window.location.href='/compare/{{ items['id']}}'" type="button">
                                         <svg width="16px" height="16px">
                                             <use xlink:href="/static/assets/icons/sprite.svg#compare-16"></use>
                                         </svg>
