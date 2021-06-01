@@ -1324,7 +1324,6 @@
             {% for cart_row in cart %}
                 {% for rows in products if cart_row.product_id == rows.id %}
                 {% set imagename = rows['imageFile'] %}
-
                 <div class="dropcart-product">
                     <div class="product-image dropcart-product-image">
                         <a href="product.html" class="product-image-body">
@@ -1342,7 +1341,7 @@
                             <span class="dropcart-product-price">{{currency}} {{rows['price']}}</span>
                         </div>
                     </div>
-                    <button type="button" class="dropcart-product-remove btn btn-light btn-sm btn-svg-icon" onclick="window.location.href='delete_cart/{{cart_row.product_id}}'">
+                    <button type="button" class="dropcart-product-remove btn btn-light btn-sm btn-svg-icon" onclick="window.location.href='delete_cart/{{cart_row.product_id}}/card1'">
                         <svg width="10px" height="10px">
                             <use xlink:href="/static/assets/icons/sprite.svg#cross-10"></use>
                         </svg>

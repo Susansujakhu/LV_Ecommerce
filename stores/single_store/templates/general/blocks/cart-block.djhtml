@@ -1,6 +1,7 @@
-{% set cartProductNumber = 0 %}
-
+{% set currency = 'Rs.'%}
+{# cartProductNumber is used for checking user cart is empty or not #}
 {% if cartProductNumber >= 1 %}
+
     <div class="cart block">
         <div class="container">
             <table class="cart-table cart-table">
@@ -15,39 +16,47 @@
                     </tr>
                 </thead>
                 <tbody class="cart-table-body">
+
+                {% for cart_row in cart %}
+                    {% for rows in products if cart_row.product_id == rows.id %}
+                    {% set imagename = rows['imageFile'] %}
+
                     <tr class="cart-table-row">
                         <td class="cart-table-column cart-table-column--image">
                             <div class="product-image">
                                 <a href="" class="product-image-body">
-                                    <img class="product-image-img" src="images/products/product-1.jpg" alt="">
+                                    <img class="product-image-img" src="{{url_for('static', filename='assets/images/products/'+ imagename )}}" alt="">
                                 </a>
                             </div>
                         </td>
                         <td class="cart-table-column cart-table-column--product">
-                            <a href="" class="cart-table-product-name">Electric Planer Brandix KL370090G 300 Watts</a>
+                            <a href="" class="cart-table-product-name">{{rows['productName']}}</a>
                             <ul class="cart-table-options">
-                                <li>Color: Yellow</li>
-                                <li>Material: Aluminium</li>
+                                <li>Color: {{cart_row.color}}</li>
+                                <li>Material: {{rows['material']}}</li>
                             </ul>
                         </td>
-                        <td class="cart-table-column cart-table-column--price" data-title="Price">$699.00</td>
+                        <td class="cart-table-column cart-table-column--price" data-title="Price">{{currency}} {{rows['price']}}</td>
                         <td class="cart-table-column cart-table-column--quantity" data-title="Quantity">
                             <div class="input-number">
-                                <input class="form-control input-number-input" type="number" min="1" value="2">
+                                <input class="form-control input-number-input" type="number" min="1" value="{{cart_row.quantity}}">
                                 <div class="input-number-add"></div>
                                 <div class="input-number-sub"></div>
                             </div>
                         </td>
-                        <td class="cart-table-column cart-table-column--total" data-title="Total">$1,398.00</td>
+                        <td class="cart-table-column cart-table-column--total" data-title="Total">{{currency}} {{cart_row.quantity*rows['price']}}</td>
                         <td class="cart-table-column cart-table-column--remove">
-                            <button type="button" class="btn btn-light btn-sm btn-svg-icon">
+                            <button type="button" onclick="window.location.href='delete_cart/{{cart_row.product_id}}/cart2'" class="btn btn-light btn-sm btn-svg-icon">
                                 <svg width="12px" height="12px">
                                     <use xlink:href="/static/assets/icons/sprite.svg#cross-12"></use>
                                 </svg>
                             </button>
                         </td>
                     </tr>
-                    <tr class="cart-table-row">
+
+                    {% endfor %}
+                {% endfor %}
+                    {# <tr class="cart-table-row">
                         <td class="cart-table-column cart-table-column--image">
                             <div class="product-image">
                                 <a href="" class="product-image-body">
@@ -105,7 +114,7 @@
                                 </svg>
                             </button>
                         </td>
-                    </tr>
+                    </tr> #}
                 </tbody>
             </table>
             <div class="cart-actions">
@@ -149,7 +158,7 @@
                                 <tfoot class="cart-totals-footer">
                                     <tr>
                                         <th>Total</th>
-                                        <td>$5,902.00</td>
+                                        <td>{{currency}} {{totalCart}}</td>
                                     </tr>
                                 </tfoot>
                             </table>

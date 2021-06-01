@@ -48,6 +48,7 @@ def not_found(e):
 @app.context_processor
 def global_attr():
     totalCart = 0
+    cartProductNumber=0
     form1 = LoginForm()
     products = Product.query.all()
     if current_user.is_authenticated:
@@ -56,9 +57,10 @@ def global_attr():
             for rows in products:
                 if cart_row.product_id == rows.id:
                     totalCart = (cart_row.quantity*rows.price)+totalCart
+                    cartProductNumber=cartProductNumber+1
     else:
         cart = Cart.query.filter_by(userId = 1233).all()
-    return dict(products = products, form1=form1, cart=cart, totalCart=totalCart)
+    return dict(products = products, form1=form1, cart=cart, totalCart=totalCart, cartProductNumber=cartProductNumber)
 
 @app.route("/")
 def home():
@@ -739,6 +741,7 @@ def delete(tables, id):
 def addCart(productId):
     product= Product.query.get(productId)
     cart=Cart.query.filter_by(product_id=productId).first()
+    print(cart)
     if cart is None:
         quantityValue = 1
         addCart = Cart(
@@ -759,15 +762,17 @@ def addCart(productId):
     return redirect('/')
 
 
-@app.route("/delete_cart/<int:productId>")
+@app.route("/delete_cart/<int:productId>/<string:page>")
 @login_required
-def deleteCart(productId):
+def deleteCart(productId,page):
     if Cart.query.filter_by(product_id=productId).delete():
-        db.session.execute("ALTER SEQUENCE Cart_id_seq RESTART WITH 1")
+        db.session.execute("ALTER SEQUENCE cart_id_seq RESTART WITH 1")
         db.session.commit()
         print("Success")
     else:
         print("Failed")
+    if page=='cart2':
+        return redirect('/cart')
     return redirect('/')
 
 
