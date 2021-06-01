@@ -132,8 +132,12 @@ def wishlist():
 @login_required
 def compare():
     compare_products = Compare.query.filter(Compare.userId == current_user.userId).first()
-    product_lists = compare_products.product_list
-    product_lists = product_lists.split(",")
+    if compare_products is None:
+        print("Add Some Products to compare first")
+        product_lists = ""
+    else:
+        product_lists = compare_products.product_list
+        product_lists = product_lists.split(",")
 
     return render_template(
         'single-store/compare-page.djhtml', product_lists = product_lists
@@ -795,11 +799,16 @@ def deleteCart(productId,page):
     return redirect('/')
 
 
-@app.route("/wishlist/<int:productId>")
+@app.route("/wishlist", methods=['GET', 'POST'])
 @login_required
-def addWishlist(productId):
+def addWishlist():
+    if request.method == "POST":
+        print("&&&&&&&&&&&&&&&&&&")
+        productId= int(float(request.get_data()))
+
+    
+    print(productId)
     wishlist_list = Wishlist.query.filter_by(userId = current_user.userId).first()
-    print(wishlist_list)
     if wishlist_list is None:
         add_wishlist = Wishlist(
                             product_list = productId,
@@ -819,7 +828,7 @@ def addWishlist(productId):
                 actual_data = {'product_list':data}
                 db.session.query(Wishlist).filter(Wishlist.userId == current_user.userId).update(actual_data, synchronize_session=False)
                 db.session.commit()
-    return redirect('/')
+    return ('', 204)
 
 @app.route("/users/<tables>/<int:id>")
 @login_required
