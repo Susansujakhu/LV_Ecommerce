@@ -1,4 +1,4 @@
-
+import json
 from functools import wraps
 from flask import render_template, url_for, flash, redirect, request, Response
 from flask.globals import session
@@ -7,7 +7,7 @@ from werkzeug.datastructures import MultiDict
 from wtforms.fields.core import StringField
 from single_store import app, db, bcrypt
 from single_store.forms import DynamicForm, HorizontalPanelForm, EditHorizontalPanelForm, BrandForm, EditBrandForm, FeaturesForm, EditFeaturesForm, HeroForm, EditHeroForm, RegistrationForm, LoginForm, UpdateAccountForm, ProductForm, EditProductForm, CategoryForm,EditCategoryForm
-from single_store.models import Attributes,HorizontalPanel, Brand, Cart, Category, Features, Hero, Order, Product, Rating, Shipping, User, MyAdminIndexView, AdminView
+from single_store.models import Attributes, Compare,HorizontalPanel, Brand, Cart, Category, Features, Hero, Order, Product, Rating, Shipping, User, MyAdminIndexView, AdminView, Wishlist
 from flask_login import login_user, current_user, logout_user, login_required
 import secrets, os, sys
 from PIL import Image
@@ -48,7 +48,6 @@ def not_found(e):
 @app.context_processor
 def global_attr():
     totalCart = 0
-    cartProductNumber=0
     form1 = LoginForm()
     products = Product.query.all()
     if current_user.is_authenticated:
@@ -56,11 +55,10 @@ def global_attr():
         for cart_row in cart:
             for rows in products:
                 if cart_row.product_id == rows.id:
-                    totalCart = (cart_row.quantity*rows.price)+totalCart
-                    cartProductNumber=cartProductNumber+1
+                    totalCart =rows.price+totalCart
     else:
         cart = Cart.query.filter_by(userId = 1233).all()
-    return dict(products = products, form1=form1, cart=cart, totalCart=totalCart, cartProductNumber=cartProductNumber)
+    return dict(products = products, form1=form1, cart=cart, totalCart=totalCart)
 
 @app.route("/")
 def home():
@@ -94,8 +92,8 @@ def single_product(productId):
         return redirect(url_for('home'))
     
     return render_template(
-		'single-store/single-product-page.djhtml', title = product.productName, product = product)
-		
+        'single-store/single-product-page.djhtml', title = product.productName, product = product)
+        
 
 @app.route("/shop")
 def shop():
@@ -104,27 +102,38 @@ def shop():
         )
 
 @app.route("/cart")
+@login_required
 def cart():
     return render_template(
         'single-store/cart-page.djhtml'
         )
 
 @app.route("/checkout")
+@login_required
 def checkout():
     return render_template(
         'single-store/checkout-page.djhtml'
         )
 
 @app.route("/wishlist")
+@login_required
 def wishlist():
+    wishlist_products = Wishlist.query.filter(Wishlist.userId == current_user.userId).first()
+    product_lists = wishlist_products.product_list
+    product_lists = product_lists.split(",")
     return render_template(
-        'single-store/wishlist-page.djhtml'
+        'single-store/wishlist-page.djhtml', product_lists = product_lists
         )
 
 @app.route("/compare")
+@login_required
 def compare():
+    compare_products = Compare.query.filter(Compare.userId == current_user.userId).first()
+    product_lists = compare_products.product_list
+    product_lists = product_lists.split(",")
+
     return render_template(
-        'single-store/compare-page.djhtml'
+        'single-store/compare-page.djhtml', product_lists = product_lists
         )
 
 @app.route("/admin-dashboard")
@@ -175,36 +184,42 @@ def user_dashboard():
         )
 
 @app.route("/address-book")
+@login_required
 def address_book():
     return render_template(
         'single-store/user-account/address-book.djhtml'
         )
 
 @app.route("/edit-address")
+@login_required
 def edit_address():
     return render_template(
         'single-store/user-account/edit-address.djhtml'
         )
 
 @app.route("/edit-profile")
+@login_required
 def edit_profile():
     return render_template(
         'single-store/user-account/edit-profile.djhtml'
         )
 
 @app.route("/order-details")
+@login_required
 def order_details():
     return render_template(
         'single-store/user-account/order-details.djhtml'
         )
 
 @app.route("/order-history")
+@login_required
 def order_history():
     return render_template(
         'single-store/user-account/order-history.djhtml'
         )
 
 @app.route("/change-password")
+@login_required
 def change_password():
     return render_template(
         'single-store/user-account/password.djhtml'
@@ -719,12 +734,13 @@ def lists(tables):
         return redirect(url_for('home'))
     
     return render_template(
-		'lists.html', tables = tables, table_row = table_row, table_col = table_col)
+        'lists.html', tables = tables, table_row = table_row, table_col = table_col)
 
 @app.route("/delete/<tables>/<int:id>")
 @login_required
 @restricted(access_level="Admin")
 def delete(tables, id):
+    tables = tables.capitalize()
     table = str2Class(tables)
     table_name = tables.lower()
     if table.query.filter_by(id=id).delete():
@@ -740,40 +756,252 @@ def delete(tables, id):
 @login_required
 def addCart(productId):
     product= Product.query.get(productId)
-    cart=Cart.query.filter_by(product_id=productId).first()
-    print(cart)
-    if cart is None:
-        quantityValue = 1
-        addCart = Cart(
+    quantityValue = 1
+    addCart = Cart(
                     quantity =quantityValue,
                     color = product.color,
                     size = product.size,
                     cart_user_id = current_user,
                     cart_product_id=product,
                     )
-        print(addCart)
-        db.session.add(addCart)
-        db.session.commit()
-    else:
-        quantityValue=cart.quantity
-        quantityValue = quantityValue+1
-        db.session.query(Cart).filter(Cart.product_id == productId).update({'quantity':quantityValue}, synchronize_session=False)
-        db.session.commit()
+    print(addCart)
+    db.session.add(addCart)
+    db.session.commit()
+    # return render_template("404.html")
     return redirect('/')
 
-
-@app.route("/delete_cart/<int:productId>/<string:page>")
+@app.route("/wishlist/<int:productId>")
 @login_required
-def deleteCart(productId,page):
-    if Cart.query.filter_by(product_id=productId).delete():
-        db.session.execute("ALTER SEQUENCE cart_id_seq RESTART WITH 1")
+def addWishlist(productId):
+    wishlist_list = Wishlist.query.filter_by(userId = current_user.userId).first()
+    print(wishlist_list)
+    if wishlist_list is None:
+        add_wishlist = Wishlist(
+                            product_list = productId,
+                            wishlist_user_id = current_user,
+                            )
+        db.session.add(add_wishlist)
         db.session.commit()
-        print("Success")
     else:
-        print("Failed")
-    if page=='cart2':
-        return redirect('/cart')
+        list_product = wishlist_list.product_list.split(",")
+        count = len(list_product)
+        for i in range(count):
+            if int(list_product[i]) == productId:
+                print("Already In Wishlist")
+                break
+            elif i+1 == count:
+                data = wishlist_list.product_list + "," +str(productId)
+                actual_data = {'product_list':data}
+                db.session.query(Wishlist).filter(Wishlist.userId == current_user.userId).update(actual_data, synchronize_session=False)
+                db.session.commit()
+    return redirect('/')
+
+@app.route("/users/<tables>/<int:id>")
+@login_required
+def delete_wishlist(id, tables):
+    urll = tables
+    tables = tables.capitalize()
+    table_name = str2Class(tables)
+    product_list = table_name.query.filter_by(userId = current_user.userId).first()
+    list_product = product_list.product_list.split(",")
+    list_product.remove(str(id))
+    listToStr = ','.join([str(elem) for elem in list_product])
+    db.session.query(table_name).filter(table_name.userId == current_user.userId).update({'product_list':listToStr}, synchronize_session=False)
+    db.session.commit()
+    return redirect('/'+urll)
+
+@app.route("/compare/<int:productId>")
+@login_required
+def addCompare(productId):
+    compare_list = Compare.query.filter_by(userId = current_user.userId).first()
+    print(compare_list)
+    if compare_list is None:
+        add_compare = Compare(
+                            product_list = productId,
+                            compare_user_id = current_user,
+                            )
+        db.session.add(add_compare)
+        db.session.commit()
+    else:
+        list_product = compare_list.product_list.split(",")
+        count = len(list_product)
+        for i in range(count):
+            if int(list_product[i]) == productId:
+                print("Already in Compare List")
+                break
+            elif i+1 == count:
+                data = compare_list.product_list + "," +str(productId)
+                actual_data = {'product_list':data}
+                db.session.query(Compare).filter(Compare.userId == current_user.userId).update(actual_data, synchronize_session=False)
+                db.session.commit()
+    # return ('', 204)
     return redirect('/')
 
 
+@app.route("/add/<tables>", methods=['GET', 'POST'])
+@login_required
+@restricted(access_level="Admin")
+def add(tables):
+    tables = tables.capitalize()
+    table_name = str2Class(tables)
+    table_head = table_name.__table__.columns.keys()
 
+    form_name = tables+"Form"
+    formName = str2Class(form_name)
+    form = formName()
+
+    form_data = {formfield : value for formfield, value in form.data.items()}
+    for formfield, value in form.data.items():
+        if formfield == 'category':
+            form.category.choices = [(category.name) for category in Category.query.with_entities(Category.name).all()] #db.session.query(Category.name)
+        if formfield == 'brand':
+            form.brand.choices = [(brand.name) for brand in Brand.query.with_entities(Brand.name).all()]
+        if formfield == 'parentCategory':
+            form.parentCategory.choices = ['None']+[(category.name) for category in Category.query.with_entities(Category.name).all()]
+    if form.validate_on_submit():
+        data = {formfield : value for formfield, value in form.data.items()}
+        data.popitem()
+        data.popitem()
+
+        for formfield, value in form.data.items():
+            if formfield == 'imageFile':
+                if form.imageFile.data:
+                    random_hex = secrets.token_hex(4)
+                    f = form.imageFile.data
+                    print(f)
+                    split_name = f.filename.split(".")
+                    print(split_name)
+                    if tables == "Category":
+                        featuredImage = save_picture(f, split_name[0]+random_hex+ split_name[1], 'category', 700, 700)
+                    elif tables == "Hero":
+                        featuredImage = save_picture(f, split_name[0]+random_hex+ split_name[1], 'hero/desktop', 840, 395)
+                        featuredImage = save_picture(f, split_name[0]+random_hex+ split_name[1], 'hero/mobile', 510, 395)
+                    elif tables == "Brand":
+                        featuredImage = save_picture(f, split_name[0]+random_hex+ split_name[1], 'brand', 700, 700)
+                    elif tables == "HorizontalPanel":
+                        featuredImage = save_picture(f, split_name[0]+random_hex+ split_name[1], 'horizontalpanel/desktop', 1110, 170)
+                        featuredImage = save_picture(f, split_name[0]+random_hex+ split_name[1], 'horizontalpanel/mobile', 510, 390)
+                    else:
+                        featuredImage = save_picture(f, split_name[0]+random_hex+ split_name[1], 'products', 700, 700)
+                    featuredImage = secure_filename(featuredImage)
+                    data['imageFile'] = featuredImage
+
+            if formfield == 'imageGallery':
+                if form.imageGallery.data:
+                    galleryImages = ""
+                    # file_list = request.files.getlist('imageGallery')
+                    for f in form.imageGallery.data:
+                        random_hex = secrets.token_hex(4)
+                        split_name = f.filename.split(".")
+                        images = save_picture(f, split_name[0]+random_hex+ split_name[1], 'gallery', 700, 700)
+                        img = secure_filename(images)
+                        galleryImages = galleryImages + "," + img
+
+                    data['imageGallery'] = galleryImages
+
+        actual_data = data
+        dt = datetime.now(timezone.utc)
+        actual_data['dateCreated'] = dt
+        actual_data['userId'] = current_user.userId
+        table_db = tables.lower()
+        
+        insert_table = table(table_db,
+                         *[column(field) for field in table_head[1:]])
+        insert_dict = [actual_data]
+        db.session.execute(insert_table.insert(), insert_dict)
+        db.session.commit()
+
+        flash('Feature Added Successful!', 'success')
+        for key, value in form_data.items():
+            setattr(DynamicForm, key, StringField(value))
+            form = DynamicForm()
+        
+    return render_template('add.html', title=tables, form=form, table_head=table_head)
+
+
+
+
+
+
+
+
+@app.route("/edit/<tables>/<int:id>", methods=['GET', 'POST'])
+@login_required
+@restricted(access_level="Admin")
+def edit(tables, id):
+    tables = tables.capitalize()
+    table_name = str2Class(tables)
+    table_head = table_name.__table__.columns.keys()
+
+    form_name = tables+"Form"
+    formName = str2Class(form_name)
+    form = formName()
+
+    form_data = {formfield : value for formfield, value in form.data.items()}
+    for formfield, value in form.data.items():
+        if formfield == 'category':
+            form.category.choices = [(category.name) for category in Category.query.with_entities(Category.name).all()] #db.session.query(Category.name)
+        if formfield == 'brand':
+            form.brand.choices = [(brand.name) for brand in Brand.query.with_entities(Brand.name).all()]
+        if formfield == 'parentCategory':
+            form.parentCategory.choices = ['None']+[(category.name) for category in Category.query.with_entities(Category.name).all()]
+    if form.validate_on_submit():
+        data = {formfield : value for formfield, value in form.data.items()}
+        data.popitem()
+        data.popitem()
+
+        for formfield, value in form.data.items():
+            if formfield == 'imageFile':
+                if form.imageFile.data:
+                    random_hex = secrets.token_hex(4)
+                    f = form.imageFile.data
+                    split_name = f.filename.split(".")
+                    if tables == "Category":
+                        featuredImage = save_picture(f, split_name[0]+random_hex+ split_name[1], 'category', 700, 700)
+                    elif tables == "Hero":
+                        featuredImage = save_picture(f, split_name[0]+random_hex+ split_name[1], 'hero/desktop', 840, 395)
+                        featuredImage = save_picture(f, split_name[0]+random_hex+ split_name[1], 'hero/mobile', 510, 395)
+                    elif tables == "Brand":
+                        featuredImage = save_picture(f, split_name[0]+random_hex+ split_name[1], 'brand', 700, 700)
+                    elif tables == "HorizontalPanel":
+                        featuredImage = save_picture(f, split_name[0]+random_hex+ split_name[1], 'horizontalpanel/desktop', 1110, 170)
+                        featuredImage = save_picture(f, split_name[0]+random_hex+ split_name[1], 'horizontalpanel/mobile', 510, 390)
+                    else:
+                        featuredImage = save_picture(f, split_name[0]+random_hex+ split_name[1], 'products', 700, 700)
+                    featuredImage = secure_filename(featuredImage)
+                    data['imageFile'] = featuredImage
+
+            if formfield == 'imageGallery':
+                if form.imageGallery.data:
+                    galleryImages = ""
+                    # file_list = request.files.getlist('imageGallery')
+                    for f in form.imageGallery.data:
+                        random_hex = secrets.token_hex(4)
+                        split_name = f.filename.split(".")
+                        images = save_picture(f, split_name[0]+random_hex+ split_name[1], 'gallery', 700, 700)
+                        img = secure_filename(images)
+                        galleryImages = galleryImages + "," + img
+
+                    data['imageGallery'] = galleryImages
+
+        actual_data = data
+        dt = datetime.now(timezone.utc)
+        actual_data['dateCreated'] = dt
+        actual_data['userId'] = current_user.userId
+
+        db.session.query(table_name).filter(table_name.id == id).update(actual_data, synchronize_session=False)
+        db.session.commit()
+
+        flash('Feature Added Successful!', 'success')
+        
+    
+
+    table_object = table_name.query.get_or_404(id)
+    
+    a = {}
+    for items, value in table_object.__dict__.items():
+        a[items] = value
+
+    return render_template('add.html', title=tables, form=form, table_head=table_head, product_dict=a)
+
+ 
