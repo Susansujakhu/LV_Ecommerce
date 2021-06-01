@@ -1,0 +1,694 @@
+<!-- desktop site-header -->
+<header class="site-header d-lg-block d-none">
+    <div class="site-header">
+        <!-- .topbar -->
+        <div class="site-header-topbar topbar">
+            <div class="topbar-container container">
+                <div class="topbar-row">
+                    <div class="topbar-item topbar-item--link">
+                        <a class="topbar-link" href="/compare">Compare</a>
+                    </div>
+                    <div class="topbar-item topbar-item--link">
+                        <a class="topbar-link" href="/track-order">Track Your Order</a>
+                    </div>
+                    <div class="topbar-item topbar-item--link">
+                        <a class="topbar-link" href="#">Store Location</a>
+                    </div>
+                    <div class="topbar-spring"></div>
+                    <div class="topbar-item">
+                        <div class="topbar-dropdown">
+                            <button class="topbar-dropdown-btn" type="button">
+                                Currency: <span class="topbar-item-value">USD</span>
+                                <svg width="7px" height="5px">
+                                    <use xlink:href="/static/assets/icons/sprite.svg#arrow-rounded-down-7x5"></use>
+                                </svg>
+                            </button>
+                            <div class="topbar-dropdown-body">
+                                <!-- .menu -->
+                                <div class="menu menu--layout--topbar ">
+                                    <div class="menu-submenus-container"></div>
+                                    <ul class="menu-list">
+                                        <li class="menu-item">
+                                            <!-- This is a synthetic element that allows to adjust the vertical offset of the submenu using CSS. -->
+                                            <div class="menu-item-submenu-offset"></div>
+                                            <a class="menu-item-link" href="">
+                                                € Euro
+                                            </a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <!-- This is a synthetic element that allows to adjust the vertical offset of the submenu using CSS. -->
+                                            <div class="menu-item-submenu-offset"></div>
+                                            <a class="menu-item-link" href="">
+                                                £ Pound Sterling
+                                            </a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <!-- This is a synthetic element that allows to adjust the vertical offset of the submenu using CSS. -->
+                                            <div class="menu-item-submenu-offset"></div>
+                                            <a class="menu-item-link" href="">
+                                                $ US Dollar
+                                            </a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <!-- This is a synthetic element that allows to adjust the vertical offset of the submenu using CSS. -->
+                                            <div class="menu-item-submenu-offset"></div>
+                                            <a class="menu-item-link" href="">
+                                                ₽ Russian Ruble
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!-- .menu / end -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="topbar-item">
+                        <div class="topbar-dropdown">
+                            <button class="topbar-dropdown-btn" type="button">
+                                Language: <span class="topbar-item-value">EN</span>
+                                <svg width="7px" height="5px">
+                                    <use xlink:href="/static/assets/icons/sprite.svg#arrow-rounded-down-7x5"></use>
+                                </svg>
+                            </button>
+                            <div class="topbar-dropdown-body">
+                                <!-- .menu -->
+                                <div class="menu menu--layout--topbar  menu--with-icons ">
+                                    <div class="menu-submenus-container"></div>
+                                    <ul class="menu-list">
+                                        <li class="menu-item">
+                                            <!-- This is a synthetic element that allows to adjust the vertical offset of the submenu using CSS. -->
+                                            <div class="menu-item-submenu-offset"></div>
+                                            <a class="menu-item-link" href="">
+                                                <div class="menu-item-icon"><img srcset="images/languages/language-1.png 1x, images/languages/language-1@2x.png 2x" src="images/languages/language-1.png" alt=""></div>
+                                                English
+                                            </a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <!-- This is a synthetic element that allows to adjust the vertical offset of the submenu using CSS. -->
+                                            <div class="menu-item-submenu-offset"></div>
+                                            <a class="menu-item-link" href="">
+                                                <div class="menu-item-icon"><img srcset="images/languages/language-2.png 1x, images/languages/language-2@2x.png 2x" src="images/languages/language-2.png" alt=""></div>
+                                                French
+                                            </a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <!-- This is a synthetic element that allows to adjust the vertical offset of the submenu using CSS. -->
+                                            <div class="menu-item-submenu-offset"></div>
+                                            <a class="menu-item-link" href="">
+                                                <div class="menu-item-icon"><img srcset="images/languages/language-3.png 1x, images/languages/language-3@2x.png 2x" src="images/languages/language-3.png" alt=""></div>
+                                                German
+                                            </a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <!-- This is a synthetic element that allows to adjust the vertical offset of the submenu using CSS. -->
+                                            <div class="menu-item-submenu-offset"></div>
+                                            <a class="menu-item-link" href="">
+                                                <div class="menu-item-icon"><img srcset="images/languages/language-4.png 1x, images/languages/language-4@2x.png 2x" src="images/languages/language-4.png" alt=""></div>
+                                                Russian
+                                            </a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <!-- This is a synthetic element that allows to adjust the vertical offset of the submenu using CSS. -->
+                                            <div class="menu-item-submenu-offset"></div>
+                                            <a class="menu-item-link" href="">
+                                                <div class="menu-item-icon"><img srcset="images/languages/language-5.png 1x, images/languages/language-5@2x.png 2x" src="images/languages/language-5.png" alt=""></div>
+                                                Italian
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!-- .menu / end -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- .topbar / end -->
+        <div class="site-header-middle container">
+            <div class="site-header-logo">
+                <a href="/">
+                    <!-- logo -->
+                    <h2>LV Stores</h2>
+                    <!-- logo / end -->
+                </a>
+            </div>
+            <div class="site-header-search">
+                <div class="search search--location--header ">
+                    <div class="search-body">
+                        <form class="search-form" action="">
+                            <select class="search-categories" aria-label="Category">
+                                <option value="all">All Categories</option>
+                                <option>Instruments</option>
+                                <option>&nbsp;&nbsp;&nbsp;&nbsp;Power Tools</option>
+                                <option>&nbsp;&nbsp;&nbsp;&nbsp;Hand Tools</option>
+                                <option>&nbsp;&nbsp;&nbsp;&nbsp;Machine Tools</option>
+                                <option>&nbsp;&nbsp;&nbsp;&nbsp;Power Machinery</option>
+                                <option>&nbsp;&nbsp;&nbsp;&nbsp;Measurement</option>
+                                <option>&nbsp;&nbsp;&nbsp;&nbsp;Clothes and PPE</option>
+                                <option>Electronics</option>
+                                <option>Computers</option>
+                                <option>Automotive</option>
+                                <option>Furniture & Appliances</option>
+                                <option>Music & Books</option>
+                                <option>Health & Beauty</option>
+                            </select>
+                            <input class="search-input" name="search" placeholder="Search over 10,000 products" aria-label="Site search" type="text" autocomplete="off">
+                            <button class="search-button search-button--type--submit" type="submit">
+                                <svg width="20px" height="20px">
+                                    <use xlink:href="/static/assets/icons/sprite.svg#search-20"></use>
+                                </svg>
+                            </button>
+                            <div class="search-border"></div>
+                        </form>
+                        <div class="search-suggestions suggestions suggestions--location--header"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="site-header-phone">
+                <div class="site-header-phone-title">Customer Service</div>
+                <div class="site-header-phone-number">(800) 060-0730</div>
+            </div>
+        </div>
+        <div class="site-header-nav-panel">
+            <!-- data-sticky-mode - one of [pullToShow, alwaysOnTop] -->
+            <div class="nav-panel nav-panel--sticky" data-sticky-mode="pullToShow">
+                <div class="nav-panel-container container">
+                    <div class="nav-panel-row">
+                        <div class="nav-panel-departments">
+                            <!-- .departments -->
+                            {% if pageTitle == "Home" %}
+                                <div class="departments  departments--open departments--fixed" data-departments-fixed-by=".block-slideshow">
+                            {% else %}
+                                <div class="departments" data-departments-fixed-by=".block-slideshow">
+                            {% endif %}
+                                <div class="departments-body">
+                                    <div class="departments-links-wrapper">
+                                        <div class="departments-submenus-container"></div>
+                                        <ul class="departments-links">
+                                            <li class="departments-item">
+                                                <a class="departments-item-link" href="">
+                                                    Power Tools
+                                                    <svg class="departments-item-arrow" width="6px" height="9px">
+                                                        <use xlink:href="/static/assets/icons/sprite.svg#arrow-rounded-right-6x9"></use>
+                                                    </svg>
+                                                </a>
+                                                <div class="departments-submenu departments-submenu--type--megamenu departments-submenu--size--xl">
+                                                    <!-- .megamenu -->
+                                                    <div class="megamenu  megamenu--departments ">
+                                                        <div class="megamenu-body" style="background-image: url('images/megamenu/megamenu-1.jpg');">
+                                                            <div class="row">
+                                                                <div class="col-3">
+                                                                    <ul class="megamenu-links megamenu-links--level--0">
+                                                                        <li class="megamenu-item  megamenu-item--with-submenu ">
+                                                                            <a href="">Power Tools</a>
+                                                                            <ul class="megamenu-links megamenu-links--level--1">
+                                                                                <li class="megamenu-item"><a href="">Engravers</a></li>
+                                                                                <li class="megamenu-item"><a href="">Drills</a></li>
+                                                                                <li class="megamenu-item"><a href="">Wrenches</a></li>
+                                                                                <li class="megamenu-item"><a href="">Plumbing</a></li>
+                                                                                <li class="megamenu-item"><a href="">Wall Chaser</a></li>
+                                                                                <li class="megamenu-item"><a href="">Pneumatic Tools</a></li>
+                                                                                <li class="megamenu-item"><a href="">Milling Cutters</a></li>
+                                                                            </ul>
+                                                                        </li>
+                                                                        <li class="megamenu-item ">
+                                                                            <a href="">Workbenches</a>
+                                                                        </li>
+                                                                        <li class="megamenu-item ">
+                                                                            <a href="">Presses</a>
+                                                                        </li>
+                                                                        <li class="megamenu-item ">
+                                                                            <a href="">Spray Guns</a>
+                                                                        </li>
+                                                                        <li class="megamenu-item ">
+                                                                            <a href="">Riveters</a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                                <div class="col-3">
+                                                                    <ul class="megamenu-links megamenu-links--level--0">
+                                                                        <li class="megamenu-item  megamenu-item--with-submenu ">
+                                                                            <a href="">Hand Tools</a>
+                                                                            <ul class="megamenu-links megamenu-links--level--1">
+                                                                                <li class="megamenu-item"><a href="">Screwdrivers</a></li>
+                                                                                <li class="megamenu-item"><a href="">Handsaws</a></li>
+                                                                                <li class="megamenu-item"><a href="">Knives</a></li>
+                                                                                <li class="megamenu-item"><a href="">Axes</a></li>
+                                                                                <li class="megamenu-item"><a href="">Multitools</a></li>
+                                                                                <li class="megamenu-item"><a href="">Paint Tools</a></li>
+                                                                            </ul>
+                                                                        </li>
+                                                                        <li class="megamenu-item  megamenu-item--with-submenu ">
+                                                                            <a href="">Garden Equipment</a>
+                                                                            <ul class="megamenu-links megamenu-links--level--1">
+                                                                                <li class="megamenu-item"><a href="">Motor Pumps</a></li>
+                                                                                <li class="megamenu-item"><a href="">Chainsaws</a></li>
+                                                                                <li class="megamenu-item"><a href="">Electric Saws</a></li>
+                                                                                <li class="megamenu-item"><a href="">Brush Cutters</a></li>
+                                                                            </ul>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                                <div class="col-3">
+                                                                    <ul class="megamenu-links megamenu-links--level--0">
+                                                                        <li class="megamenu-item  megamenu-item--with-submenu ">
+                                                                            <a href="">Machine Tools</a>
+                                                                            <ul class="megamenu-links megamenu-links--level--1">
+                                                                                <li class="megamenu-item"><a href="">Thread Cutting</a></li>
+                                                                                <li class="megamenu-item"><a href="">Chip Blowers</a></li>
+                                                                                <li class="megamenu-item"><a href="">Sharpening Machines</a></li>
+                                                                                <li class="megamenu-item"><a href="">Pipe Cutters</a></li>
+                                                                                <li class="megamenu-item"><a href="">Slotting machines</a></li>
+                                                                                <li class="megamenu-item"><a href="">Lathes</a></li>
+                                                                            </ul>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                                <div class="col-3">
+                                                                    <ul class="megamenu-links megamenu-links--level--0">
+                                                                        <li class="megamenu-item  megamenu-item--with-submenu ">
+                                                                            <a href="">Instruments</a>
+                                                                            <ul class="megamenu-links megamenu-links--level--1">
+                                                                                <li class="megamenu-item"><a href="">Welding Equipment</a></li>
+                                                                                <li class="megamenu-item"><a href="">Power Tools</a></li>
+                                                                                <li class="megamenu-item"><a href="">Hand Tools</a></li>
+                                                                                <li class="megamenu-item"><a href="">Measuring Tool</a></li>
+                                                                            </ul>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- .megamenu / end -->
+                                                </div>
+                                            </li>
+                                            <li class="departments-item">
+                                                <a class="departments-item-link" href="">
+                                                    Hand Tools
+                                                    <svg class="departments-item-arrow" width="6px" height="9px">
+                                                        <use xlink:href="/static/assets/icons/sprite.svg#arrow-rounded-right-6x9"></use>
+                                                    </svg>
+                                                </a>
+                                                <div class="departments-submenu departments-submenu--type--megamenu departments-submenu--size--lg">
+                                                    <!-- .megamenu -->
+                                                    <div class="megamenu  megamenu--departments ">
+                                                        <div class="megamenu-body" style="background-image: url('images/megamenu/megamenu-2.jpg');">
+                                                            <div class="row">
+                                                                <div class="col-4">
+                                                                    <ul class="megamenu-links megamenu-links--level--0">
+                                                                        <li class="megamenu-item  megamenu-item--with-submenu ">
+                                                                            <a href="">Hand Tools</a>
+                                                                            <ul class="megamenu-links megamenu-links--level--1">
+                                                                                <li class="megamenu-item"><a href="">Screwdrivers</a></li>
+                                                                                <li class="megamenu-item"><a href="">Handsaws</a></li>
+                                                                                <li class="megamenu-item"><a href="">Knives</a></li>
+                                                                                <li class="megamenu-item"><a href="">Axes</a></li>
+                                                                                <li class="megamenu-item"><a href="">Multitools</a></li>
+                                                                                <li class="megamenu-item"><a href="">Paint Tools</a></li>
+                                                                            </ul>
+                                                                        </li>
+                                                                        <li class="megamenu-item  megamenu-item--with-submenu ">
+                                                                            <a href="">Garden Equipment</a>
+                                                                            <ul class="megamenu-links megamenu-links--level--1">
+                                                                                <li class="megamenu-item"><a href="">Motor Pumps</a></li>
+                                                                                <li class="megamenu-item"><a href="">Chainsaws</a></li>
+                                                                                <li class="megamenu-item"><a href="">Electric Saws</a></li>
+                                                                                <li class="megamenu-item"><a href="">Brush Cutters</a></li>
+                                                                            </ul>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                                <div class="col-4">
+                                                                    <ul class="megamenu-links megamenu-links--level--0">
+                                                                        <li class="megamenu-item  megamenu-item--with-submenu ">
+                                                                            <a href="">Machine Tools</a>
+                                                                            <ul class="megamenu-links megamenu-links--level--1">
+                                                                                <li class="megamenu-item"><a href="">Thread Cutting</a></li>
+                                                                                <li class="megamenu-item"><a href="">Chip Blowers</a></li>
+                                                                                <li class="megamenu-item"><a href="">Sharpening Machines</a></li>
+                                                                                <li class="megamenu-item"><a href="">Pipe Cutters</a></li>
+                                                                                <li class="megamenu-item"><a href="">Slotting machines</a></li>
+                                                                                <li class="megamenu-item"><a href="">Lathes</a></li>
+                                                                            </ul>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                                <div class="col-4">
+                                                                    <ul class="megamenu-links megamenu-links--level--0">
+                                                                        <li class="megamenu-item  megamenu-item--with-submenu ">
+                                                                            <a href="">Instruments</a>
+                                                                            <ul class="megamenu-links megamenu-links--level--1">
+                                                                                <li class="megamenu-item"><a href="">Welding Equipment</a></li>
+                                                                                <li class="megamenu-item"><a href="">Power Tools</a></li>
+                                                                                <li class="megamenu-item"><a href="">Hand Tools</a></li>
+                                                                                <li class="megamenu-item"><a href="">Measuring Tool</a></li>
+                                                                            </ul>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- .megamenu / end -->
+                                                </div>
+                                            </li>
+                                            <li class="departments-item">
+                                                <a class="departments-item-link" href="">
+                                                    Machine Tools
+                                                    <svg class="departments-item-arrow" width="6px" height="9px">
+                                                        <use xlink:href="/static/assets/icons/sprite.svg#arrow-rounded-right-6x9"></use>
+                                                    </svg>
+                                                </a>
+                                                <div class="departments-submenu departments-submenu--type--megamenu departments-submenu--size--nl">
+                                                    <!-- .megamenu -->
+                                                    <div class="megamenu  megamenu--departments ">
+                                                        <div class="megamenu-body" style="background-image: url('images/megamenu/megamenu-3.jpg');">
+                                                            <div class="row">
+                                                                <div class="col-6">
+                                                                    <ul class="megamenu-links megamenu-links--level--0">
+                                                                        <li class="megamenu-item  megamenu-item--with-submenu ">
+                                                                            <a href="">Hand Tools</a>
+                                                                            <ul class="megamenu-links megamenu-links--level--1">
+                                                                                <li class="megamenu-item"><a href="">Screwdrivers</a></li>
+                                                                                <li class="megamenu-item"><a href="">Handsaws</a></li>
+                                                                                <li class="megamenu-item"><a href="">Knives</a></li>
+                                                                                <li class="megamenu-item"><a href="">Axes</a></li>
+                                                                                <li class="megamenu-item"><a href="">Multitools</a></li>
+                                                                                <li class="megamenu-item"><a href="">Paint Tools</a></li>
+                                                                            </ul>
+                                                                        </li>
+                                                                        <li class="megamenu-item  megamenu-item--with-submenu ">
+                                                                            <a href="">Garden Equipment</a>
+                                                                            <ul class="megamenu-links megamenu-links--level--1">
+                                                                                <li class="megamenu-item"><a href="">Motor Pumps</a></li>
+                                                                                <li class="megamenu-item"><a href="">Chainsaws</a></li>
+                                                                                <li class="megamenu-item"><a href="">Electric Saws</a></li>
+                                                                                <li class="megamenu-item"><a href="">Brush Cutters</a></li>
+                                                                            </ul>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                                <div class="col-6">
+                                                                    <ul class="megamenu-links megamenu-links--level--0">
+                                                                        <li class="megamenu-item  megamenu-item--with-submenu ">
+                                                                            <a href="">Instruments</a>
+                                                                            <ul class="megamenu-links megamenu-links--level--1">
+                                                                                <li class="megamenu-item"><a href="">Welding Equipment</a></li>
+                                                                                <li class="megamenu-item"><a href="">Power Tools</a></li>
+                                                                                <li class="megamenu-item"><a href="">Hand Tools</a></li>
+                                                                                <li class="megamenu-item"><a href="">Measuring Tool</a></li>
+                                                                            </ul>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- .megamenu / end -->
+                                                </div>
+                                            </li>
+                                            <li class="departments-item">
+                                                <a class="departments-item-link" href="">
+                                                    Building Supplies
+                                                    <svg class="departments-item-arrow" width="6px" height="9px">
+                                                        <use xlink:href="/static/assets/icons/sprite.svg#arrow-rounded-right-6x9"></use>
+                                                    </svg>
+                                                </a>
+                                                <div class="departments-submenu departments-submenu--type--megamenu departments-submenu--size--sm">
+                                                    <!-- .megamenu -->
+                                                    <div class="megamenu  megamenu--departments ">
+                                                        <div class="megamenu-body">
+                                                            <div class="row">
+                                                                <div class="col-12">
+                                                                    <ul class="megamenu-links megamenu-links--level--0">
+                                                                        <li class="megamenu-item  megamenu-item--with-submenu ">
+                                                                            <a href="">Hand Tools</a>
+                                                                            <ul class="megamenu-links megamenu-links--level--1">
+                                                                                <li class="megamenu-item"><a href="">Screwdrivers</a></li>
+                                                                                <li class="megamenu-item"><a href="">Handsaws</a></li>
+                                                                                <li class="megamenu-item"><a href="">Knives</a></li>
+                                                                                <li class="megamenu-item"><a href="">Axes</a></li>
+                                                                                <li class="megamenu-item"><a href="">Multitools</a></li>
+                                                                                <li class="megamenu-item"><a href="">Paint Tools</a></li>
+                                                                            </ul>
+                                                                        </li>
+                                                                        <li class="megamenu-item  megamenu-item--with-submenu ">
+                                                                            <a href="">Garden Equipment</a>
+                                                                            <ul class="megamenu-links megamenu-links--level--1">
+                                                                                <li class="megamenu-item"><a href="">Motor Pumps</a></li>
+                                                                                <li class="megamenu-item"><a href="">Chainsaws</a></li>
+                                                                                <li class="megamenu-item"><a href="">Electric Saws</a></li>
+                                                                                <li class="megamenu-item"><a href="">Brush Cutters</a></li>
+                                                                            </ul>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- .megamenu / end -->
+                                                </div>
+                                            </li>
+                                            <li class="departments-item">
+                                                <a class="departments-item-link" href="">
+                                                    Electrical
+                                                    <svg class="departments-item-arrow" width="6px" height="9px">
+                                                        <use xlink:href="/static/assets/icons/sprite.svg#arrow-rounded-right-6x9"></use>
+                                                    </svg>
+                                                </a>
+                                                <div class="departments-submenu departments-submenu--type--menu">
+                                                    <!-- .menu -->
+                                                    <div class="menu menu--layout--classic ">
+                                                        <div class="menu-submenus-container"></div>
+                                                        <ul class="menu-list">
+                                                            <li class="menu-item">
+                                                                <!-- This is a synthetic element that allows to adjust the vertical offset of the submenu using CSS. -->
+                                                                <div class="menu-item-submenu-offset"></div>
+                                                                <a class="menu-item-link" href="">
+                                                                    Soldering Equipment
+                                                                    <svg class="menu-item-arrow" width="6px" height="9px">
+                                                                        <use xlink:href="/static/assets/icons/sprite.svg#arrow-rounded-right-6x9"></use>
+                                                                    </svg>
+                                                                </a>
+                                                                <div class="menu-submenu">
+                                                                    <!-- .menu -->
+                                                                    <div class="menu menu--layout--classic ">
+                                                                        <div class="menu-submenus-container"></div>
+                                                                        <ul class="menu-list">
+                                                                            <li class="menu-item">
+                                                                                <!-- This is a synthetic element that allows to adjust the vertical offset of the submenu using CSS. -->
+                                                                                <div class="menu-item-submenu-offset"></div>
+                                                                                <a class="menu-item-link" href="">
+                                                                                    Soldering Station
+                                                                                </a>
+                                                                            </li>
+                                                                            <li class="menu-item">
+                                                                                <!-- This is a synthetic element that allows to adjust the vertical offset of the submenu using CSS. -->
+                                                                                <div class="menu-item-submenu-offset"></div>
+                                                                                <a class="menu-item-link" href="">
+                                                                                    Soldering Dryers
+                                                                                </a>
+                                                                            </li>
+                                                                            <li class="menu-item">
+                                                                                <!-- This is a synthetic element that allows to adjust the vertical offset of the submenu using CSS. -->
+                                                                                <div class="menu-item-submenu-offset"></div>
+                                                                                <a class="menu-item-link" href="">
+                                                                                    Gas Soldering Iron
+                                                                                </a>
+                                                                            </li>
+                                                                            <li class="menu-item">
+                                                                                <!-- This is a synthetic element that allows to adjust the vertical offset of the submenu using CSS. -->
+                                                                                <div class="menu-item-submenu-offset"></div>
+                                                                                <a class="menu-item-link" href="">
+                                                                                    Electric Soldering Iron
+                                                                                </a>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                    <!-- .menu / end -->
+                                                                </div>
+                                                            </li>
+                                                            <li class="menu-item">
+                                                                <!-- This is a synthetic element that allows to adjust the vertical offset of the submenu using CSS. -->
+                                                                <div class="menu-item-submenu-offset"></div>
+                                                                <a class="menu-item-link" href="">
+                                                                    Light Bulbs
+                                                                </a>
+                                                            </li>
+                                                            <li class="menu-item">
+                                                                <!-- This is a synthetic element that allows to adjust the vertical offset of the submenu using CSS. -->
+                                                                <div class="menu-item-submenu-offset"></div>
+                                                                <a class="menu-item-link" href="">
+                                                                    Batteries
+                                                                </a>
+                                                            </li>
+                                                            <li class="menu-item">
+                                                                <!-- This is a synthetic element that allows to adjust the vertical offset of the submenu using CSS. -->
+                                                                <div class="menu-item-submenu-offset"></div>
+                                                                <a class="menu-item-link" href="">
+                                                                    Light Fixtures
+                                                                </a>
+                                                            </li>
+                                                            <li class="menu-item">
+                                                                <!-- This is a synthetic element that allows to adjust the vertical offset of the submenu using CSS. -->
+                                                                <div class="menu-item-submenu-offset"></div>
+                                                                <a class="menu-item-link" href="">
+                                                                    Warm Floor
+                                                                </a>
+                                                            </li>
+                                                            <li class="menu-item">
+                                                                <!-- This is a synthetic element that allows to adjust the vertical offset of the submenu using CSS. -->
+                                                                <div class="menu-item-submenu-offset"></div>
+                                                                <a class="menu-item-link" href="">
+                                                                    Generators
+                                                                </a>
+                                                            </li>
+                                                            <li class="menu-item">
+                                                                <!-- This is a synthetic element that allows to adjust the vertical offset of the submenu using CSS. -->
+                                                                <div class="menu-item-submenu-offset"></div>
+                                                                <a class="menu-item-link" href="">
+                                                                    UPS
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <!-- .menu / end -->
+                                                </div>
+                                            </li>
+                                            <li class="departments-item">
+                                                <a class="departments-item-link" href="">
+                                                    Power Machinery
+                                                </a>
+                                            </li>
+                                            <li class="departments-item">
+                                                <a class="departments-item-link" href="">
+                                                    Measurement
+                                                </a>
+                                            </li>
+                                            <li class="departments-item">
+                                                <a class="departments-item-link" href="">
+                                                    Clothes & PPE
+                                                </a>
+                                            </li>
+                                            <li class="departments-item">
+                                                <a class="departments-item-link" href="">
+                                                    Plumbing
+                                                </a>
+                                            </li>
+                                            <li class="departments-item">
+                                                <a class="departments-item-link" href="">
+                                                    Storage & Organization
+                                                </a>
+                                            </li>
+                                            <li class="departments-item">
+                                                <a class="departments-item-link" href="">
+                                                    Welding & Soldering
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <button class="departments-button">
+                                    <svg class="departments-button-icon" width="18px" height="14px">
+                                        <use xlink:href="/static/assets/icons/sprite.svg#menu-18x14"></use>
+                                    </svg>
+                                    Shop By Category
+                                    <svg class="departments-button-arrow" width="9px" height="6px">
+                                        {# {% if pageTitle != "Home" %} #}
+                                        <use xlink:href="/static/assets/icons/sprite.svg#arrow-rounded-down-9x6"></use>
+                                         {# {% endif %} #}
+                                    </svg>
+                                </button>
+                            </div>
+                            <!-- .departments / end -->
+                        </div>
+                        <!-- .nav-links -->
+                        <div class="nav-panel-nav-links nav-links">
+                            <ul class="nav-links-list">
+                                <li class="nav-links-item">
+                                    <a class="nav-links-item-link" href="/">
+                                        <div class="nav-links-item-body">
+                                            Home
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="nav-links-item">
+                                    <a class="nav-links-item-link" href="/shop">
+                                        <div class="nav-links-item-body">
+                                            Blog
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="nav-links-item">
+                                    <a class="nav-links-item-link" href="/shop">
+                                        <div class="nav-links-item-body">
+                                            Shop
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="nav-links-item">
+                                    <a class="nav-links-item-link" href="/shop">
+                                        <div class="nav-links-item-body">
+                                            Top 10 Offers
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="nav-links-item">
+                                    <a class="nav-links-item-link" href="/shop">
+                                        <div class="nav-links-item-body">
+                                            On Sale
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="nav-links-item">
+                                    <a class="nav-links-item-link" href="/shop">
+                                        <div class="nav-links-item-body">
+                                            COVID-19 Essentials
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- .nav-links / end -->
+                        <div class="nav-panel-indicators">
+                            <div class="indicator">
+                                <a href="/wishlist" class="indicator-button">
+                                    <span class="indicator-area">
+                                        <svg width="20px" height="20px">
+                                            <use xlink:href="/static/assets/icons/sprite.svg#heart-20"></use>
+                                        </svg>
+                                        <span class="indicator-value">0</span>
+                                    </span>
+                                </a>
+                            </div>
+                            <div class="indicator">
+                                <a href="#" class="indicator-button" data-open="offcanvas-cart">
+                                    <span class="indicator-area">
+                                        <svg width="20px" height="20px">
+                                            <use xlink:href="/static/assets/icons/sprite.svg#cart-20"></use>
+                                        </svg>
+                                        <span class="indicator-value">
+                                            {{ cartProductNumber }}
+                                        </span>
+                                    </span>
+                                </a>
+                            </div>
+                            <div class="indicator">
+                                <a href="#" class="indicator-button" data-open="offcanvas-account">
+                                    <span class="indicator-area">
+                                        <svg width="20px" height="20px">
+                                            <use xlink:href="/static/assets/icons/sprite.svg#person-20"></use>
+                                        </svg>
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- desktop site-header / end -->
