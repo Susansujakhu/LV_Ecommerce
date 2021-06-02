@@ -62,6 +62,7 @@ def global_attr():
         else:
             wishlist_indicator = len(list_product)
         cart = Cart.query.filter_by(userId = current_user.userId).all()
+        print(cart)
         for cart_row in cart:
             for rows in products:
                 if cart_row.product_id == rows.id:
@@ -771,9 +772,11 @@ def delete(tables, id):
     return redirect('/lists/'+tables)
 
 
-@app.route("/add_cart/<int:productId>")
+@app.route("/add_cart", methods=["POST"])
 @login_required
-def addCart(productId):
+def add_Cart():
+    if request.method == "POST":
+        productId= int(request.get_data())
     product= Product.query.get(productId)
     cart=Cart.query.filter_by(product_id=productId).first()
     print(cart)
@@ -794,21 +797,23 @@ def addCart(productId):
         quantityValue = quantityValue+1
         db.session.query(Cart).filter(Cart.product_id == productId).update({'quantity':quantityValue}, synchronize_session=False)
         db.session.commit()
-    return redirect('/')
+    cart=Cart.query.filter_by(userId=current_user.userId).count()
+    print(cart)
+    return jsonify({'result': 'success', 'cartProductNumber': cart})
 
 
-@app.route("/delete_cart/<int:productId>/<string:page>")
+@app.route("/delete_cart", methods=["POST"])
 @login_required
-def deleteCart(productId,page):
+def deleteCart():
+    if request.method == "POST":
+        productId= int(request.get_data())
     if Cart.query.filter_by(product_id=productId).delete():
         db.session.execute("ALTER SEQUENCE cart_id_seq RESTART WITH 1")
         db.session.commit()
         print("Success")
     else:
         print("Failed")
-    if page=='cart2':
-        return redirect('/cart')
-    return redirect('/')
+    return jsonify({'result': 'success'})
 
 
 @app.route("/wishlistAdd", methods=['POST'])
@@ -1081,6 +1086,6 @@ def edit(tables, id):
     for items, value in table_object.__dict__.items():
         a[items] = value
 
-    return render_template('add.html', title=tables, form=form, table_head=table_head, product_dict=a)
+    return render_template('edit.html', title=tables, form=form, table_head=table_head, product_dict=a)
 
  
