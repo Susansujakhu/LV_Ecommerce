@@ -17,7 +17,7 @@
             {% for product_id in product_lists %}
                 {% for product in products %}
                     {% if product_id|int == product.id%}
-                        <tr class="wishlist-row">
+                        <tr id="row{{product.id}}" class="wishlist-row">
                             <td class="wishlist-column wishlist-column--image">
                                 <div class="product-image">
                                     <a href="" class="product-image-body">
@@ -125,7 +125,7 @@
                                 <button type="button" class="btn btn-primary btn-sm" onclick="window.location.href='/add_cart/{{ product.id }}'" >Add To Cart</button>
                             </td>
                             <td class="wishlist-column wishlist-column--remove">
-                                <button type="button" class="btn btn-light btn-sm btn-svg-icon" onclick="window.location.href='/users/wishlist/{{ product.id }}'">
+                                <button type="button" id="deleteWishlist" data-id="{{ product.id }}" class="btn btn-light btn-sm btn-svg-icon">
                                     <svg width="12px" height="12px">
                                         <use xlink:href="/static/assets/icons/sprite.svg#cross-12"></use>
                                     </svg>
@@ -136,237 +136,30 @@
                     {% endif %}
                 {% endfor %}
             {% endfor %}
-                {# <tr class="wishlist-row">
-                    <td class="wishlist-column wishlist-column--image">
-                        <div class="product-image">
-                            <a href="" class="product-image-body">
-                                <img class="product-image-img" src="images/products/product-2.jpg" alt="">
-                            </a>
-                        </div>
-                    </td>
-                    <td class="wishlist-column wishlist-column--product">
-                        <a href="" class="wishlist-product-name">Undefined Tool IRadix DPS3000SY 2700 watts</a>
-                        <div class="wishlist-product-rating">
-                            <div class="rating">
-                                <div class="rating-body">
-                                    <svg class="rating-star rating-star--active" width="13px" height="12px">
-                                        <g class="rating-fill">
-                                            <use xlink:href="/static/assets/icons/sprite.svg#star-normal"></use>
-                                        </g>
-                                        <g class="rating-stroke">
-                                            <use xlink:href="/static/assets/icons/sprite.svg#star-normal-stroke"></use>
-                                        </g>
-                                    </svg>
-                                    <div class="rating-star rating-star--only-edge rating-star--active">
-                                        <div class="rating-fill">
-                                            <div class="fake-svg-icon"></div>
-                                        </div>
-                                        <div class="rating-stroke">
-                                            <div class="fake-svg-icon"></div>
-                                        </div>
-                                    </div>
-                                    <svg class="rating-star rating-star--active" width="13px" height="12px">
-                                        <g class="rating-fill">
-                                            <use xlink:href="/static/assets/icons/sprite.svg#star-normal"></use>
-                                        </g>
-                                        <g class="rating-stroke">
-                                            <use xlink:href="/static/assets/icons/sprite.svg#star-normal-stroke"></use>
-                                        </g>
-                                    </svg>
-                                    <div class="rating-star rating-star--only-edge rating-star--active">
-                                        <div class="rating-fill">
-                                            <div class="fake-svg-icon"></div>
-                                        </div>
-                                        <div class="rating-stroke">
-                                            <div class="fake-svg-icon"></div>
-                                        </div>
-                                    </div>
-                                    <svg class="rating-star rating-star--active" width="13px" height="12px">
-                                        <g class="rating-fill">
-                                            <use xlink:href="/static/assets/icons/sprite.svg#star-normal"></use>
-                                        </g>
-                                        <g class="rating-stroke">
-                                            <use xlink:href="/static/assets/icons/sprite.svg#star-normal-stroke"></use>
-                                        </g>
-                                    </svg>
-                                    <div class="rating-star rating-star--only-edge rating-star--active">
-                                        <div class="rating-fill">
-                                            <div class="fake-svg-icon"></div>
-                                        </div>
-                                        <div class="rating-stroke">
-                                            <div class="fake-svg-icon"></div>
-                                        </div>
-                                    </div>
-                                    <svg class="rating-star " width="13px" height="12px">
-                                        <g class="rating-fill">
-                                            <use xlink:href="/static/assets/icons/sprite.svg#star-normal"></use>
-                                        </g>
-                                        <g class="rating-stroke">
-                                            <use xlink:href="/static/assets/icons/sprite.svg#star-normal-stroke"></use>
-                                        </g>
-                                    </svg>
-                                    <div class="rating-star rating-star--only-edge ">
-                                        <div class="rating-fill">
-                                            <div class="fake-svg-icon"></div>
-                                        </div>
-                                        <div class="rating-stroke">
-                                            <div class="fake-svg-icon"></div>
-                                        </div>
-                                    </div>
-                                    <svg class="rating-star " width="13px" height="12px">
-                                        <g class="rating-fill">
-                                            <use xlink:href="/static/assets/icons/sprite.svg#star-normal"></use>
-                                        </g>
-                                        <g class="rating-stroke">
-                                            <use xlink:href="/static/assets/icons/sprite.svg#star-normal-stroke"></use>
-                                        </g>
-                                    </svg>
-                                    <div class="rating-star rating-star--only-edge ">
-                                        <div class="rating-fill">
-                                            <div class="fake-svg-icon"></div>
-                                        </div>
-                                        <div class="rating-stroke">
-                                            <div class="fake-svg-icon"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="wishlist-product-rating-legend">
-                                7 Reviews
-                            </div>
-                        </div>
-                    </td>
-                    <td class="wishlist-column wishlist-column--stock">
-                        <div class="badge badge-success">In Stock</div>
-                    </td>
-                    <td class="wishlist-column wishlist-column--price">$849.00</td>
-                    <td class="wishlist-column wishlist-column--tocart">
-                        <button type="button" class="btn btn-primary btn-sm">Add To Cart</button>
-                    </td>
-                    <td class="wishlist-column wishlist-column--remove">
-                        <button type="button" class="btn btn-light btn-sm btn-svg-icon">
-                            <svg width="12px" height="12px">
-                                <use xlink:href="/static/assets/icons/sprite.svg#cross-12"></use>
-                            </svg>
-                        </button>
-                    </td>
-                </tr>
-                <tr class="wishlist-row">
-                    <td class="wishlist-column wishlist-column--image">
-                        <div class="product-image">
-                            <a href="" class="product-image-body">
-                                <img class="product-image-img" src="images/products/product-5.jpg" alt="">
-                            </a>
-                        </div>
-                    </td>
-                    <td class="wishlist-column wishlist-column--product">
-                        <a href="" class="wishlist-product-name">Brandix Router Power Tool 2017ERXPK</a>
-                        <div class="wishlist-product-rating">
-                            <div class="rating">
-                                <div class="rating-body">
-                                    <svg class="rating-star rating-star--active" width="13px" height="12px">
-                                        <g class="rating-fill">
-                                            <use xlink:href="/static/assets/icons/sprite.svg#star-normal"></use>
-                                        </g>
-                                        <g class="rating-stroke">
-                                            <use xlink:href="/static/assets/icons/sprite.svg#star-normal-stroke"></use>
-                                        </g>
-                                    </svg>
-                                    <div class="rating-star rating-star--only-edge rating-star--active">
-                                        <div class="rating-fill">
-                                            <div class="fake-svg-icon"></div>
-                                        </div>
-                                        <div class="rating-stroke">
-                                            <div class="fake-svg-icon"></div>
-                                        </div>
-                                    </div>
-                                    <svg class="rating-star rating-star--active" width="13px" height="12px">
-                                        <g class="rating-fill">
-                                            <use xlink:href="/static/assets/icons/sprite.svg#star-normal"></use>
-                                        </g>
-                                        <g class="rating-stroke">
-                                            <use xlink:href="/static/assets/icons/sprite.svg#star-normal-stroke"></use>
-                                        </g>
-                                    </svg>
-                                    <div class="rating-star rating-star--only-edge rating-star--active">
-                                        <div class="rating-fill">
-                                            <div class="fake-svg-icon"></div>
-                                        </div>
-                                        <div class="rating-stroke">
-                                            <div class="fake-svg-icon"></div>
-                                        </div>
-                                    </div>
-                                    <svg class="rating-star rating-star--active" width="13px" height="12px">
-                                        <g class="rating-fill">
-                                            <use xlink:href="/static/assets/icons/sprite.svg#star-normal"></use>
-                                        </g>
-                                        <g class="rating-stroke">
-                                            <use xlink:href="/static/assets/icons/sprite.svg#star-normal-stroke"></use>
-                                        </g>
-                                    </svg>
-                                    <div class="rating-star rating-star--only-edge rating-star--active">
-                                        <div class="rating-fill">
-                                            <div class="fake-svg-icon"></div>
-                                        </div>
-                                        <div class="rating-stroke">
-                                            <div class="fake-svg-icon"></div>
-                                        </div>
-                                    </div>
-                                    <svg class="rating-star rating-star--active" width="13px" height="12px">
-                                        <g class="rating-fill">
-                                            <use xlink:href="/static/assets/icons/sprite.svg#star-normal"></use>
-                                        </g>
-                                        <g class="rating-stroke">
-                                            <use xlink:href="/static/assets/icons/sprite.svg#star-normal-stroke"></use>
-                                        </g>
-                                    </svg>
-                                    <div class="rating-star rating-star--only-edge rating-star--active">
-                                        <div class="rating-fill">
-                                            <div class="fake-svg-icon"></div>
-                                        </div>
-                                        <div class="rating-stroke">
-                                            <div class="fake-svg-icon"></div>
-                                        </div>
-                                    </div>
-                                    <svg class="rating-star rating-star--active" width="13px" height="12px">
-                                        <g class="rating-fill">
-                                            <use xlink:href="/static/assets/icons/sprite.svg#star-normal"></use>
-                                        </g>
-                                        <g class="rating-stroke">
-                                            <use xlink:href="/static/assets/icons/sprite.svg#star-normal-stroke"></use>
-                                        </g>
-                                    </svg>
-                                    <div class="rating-star rating-star--only-edge rating-star--active">
-                                        <div class="rating-fill">
-                                            <div class="fake-svg-icon"></div>
-                                        </div>
-                                        <div class="rating-stroke">
-                                            <div class="fake-svg-icon"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="wishlist-product-rating-legend">
-                                11 Reviews
-                            </div>
-                        </div>
-                    </td>
-                    <td class="wishlist-column wishlist-column--stock">
-                        <div class="badge badge-success">In Stock</div>
-                    </td>
-                    <td class="wishlist-column wishlist-column--price">$1,210.00</td>
-                    <td class="wishlist-column wishlist-column--tocart">
-                        <button type="button" class="btn btn-primary btn-sm">Add To Cart</button>
-                    </td>
-                    <td class="wishlist-column wishlist-column--remove">
-                        <button type="button" class="btn btn-light btn-sm btn-svg-icon">
-                            <svg width="12px" height="12px">
-                                <use xlink:href="/static/assets/icons/sprite.svg#cross-12"></use>
-                            </svg>
-                        </button>
-                    </td>
-                </tr> #}
             </tbody>
         </table>
     </div>
 </div>
+<script>
+$(document).ready(function(){
+
+    var buttons = document.querySelectorAll('#deleteWishlist');
+    for (var i = 0; i < buttons.length; i++) {
+        buttons[i].onclick = function() {
+        var index = $(this).attr('data-id');
+        req = $.ajax({
+                url: "/users/wishlist",
+                type: "POST",
+                data: index,
+                }); 
+        req.done(function(data){
+            $('#row'+index).fadeOut('normal', function(){
+                document.location.href = this.location.href;
+            });
+            $('#wishlist_indicator').text(data.wishlist_indicator);
+
+        });
+    };
+    }
+});
+</script>
