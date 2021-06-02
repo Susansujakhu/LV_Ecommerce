@@ -1,16 +1,14 @@
 <div class="block">
     <div class="container">
         <div class="table-responsive">
-            <table class="compare-table">
+            <table id="main_table" class="compare-table">
                 <tbody>
-                    
- 
                     <tr>
                         <th>Product</th>
                         {% for product in products %}
                         {% for compare_product in product_lists %}
                             {% if compare_product|int == product.id %}
-                            <td>
+                            <td class="row{{product.id}}">
                                         <a class="compare-table-product-link" href="product.html">
                                             <div class="compare-table-product-image product-image">
                                                 <div class="product-image-body">
@@ -32,7 +30,7 @@
                         {% for product in products %}
                         {% for compare_product in product_lists %}
                             {% if compare_product|int == product.id %}
-                        <td>
+                        <td class="row{{product.id}}">
                             <div class="compare-table-product-rating">
                                 <div class="rating">
                                     <div class="rating-body">
@@ -132,7 +130,7 @@
                         {% for product in products %}
                         {% for compare_product in product_lists %}
                             {% if compare_product|int == product.id %}
-                        <td><span class="compare-table-product-badge badge badge-success">In Stock</span></td>
+                        <td class="row{{product.id}}"><span class="compare-table-product-badge badge badge-success">In Stock</span></td>
                         {% endif %}
                         {% endfor %}
                     {% endfor %}
@@ -142,7 +140,7 @@
                         {% for product in products %}
                         {% for compare_product in product_lists %}
                             {% if compare_product|int == product.id %}
-                        <td>{{product.price}}</td>
+                        <td class="row{{product.id}}">{{product.price}}</td>
                         {% endif %}
                         {% endfor %}
                     {% endfor %}
@@ -152,7 +150,7 @@
                         {% for product in products %}
                         {% for compare_product in product_lists %}
                             {% if compare_product|int == product.id %}
-                        <td><button class="btn btn-primary" onclick="window.location.href='/add_cart/{{ product.id }}'">Add To Cart</button></td>
+                        <td class="row{{product.id}}"><button class="btn btn-primary" onclick="window.location.href='/add_cart/{{ product.id }}'">Add To Cart</button></td>
                     {% endif %}
                         {% endfor %}
                     {% endfor %}
@@ -162,7 +160,7 @@
                         {% for product in products %}
                         {% for compare_product in product_lists %}
                             {% if compare_product|int == product.id %}
-                        <td>83690/32</td>
+                        <td class="row{{product.id}}">83690/32</td>
                     {% endif %}
                         {% endfor %}
                     {% endfor %}
@@ -173,7 +171,7 @@
                         {% for product in products %}
                         {% for compare_product in product_lists %}
                             {% if compare_product|int == product.id %}
-                        <td>{{product.weight}}</td>
+                        <td class="row{{product.id}}">{{product.weight}}</td>
                         {% endif %}
                         {% endfor %}
                     {% endfor %}
@@ -184,7 +182,7 @@
                         {% for product in products %}
                         {% for compare_product in product_lists %}
                             {% if compare_product|int == product.id %}
-                        <td>{{product.color}}</td>
+                        <td class="row{{product.id}}">{{product.color}}</td>
                     {% endif %}
                         {% endfor %}
                     {% endfor %}
@@ -194,7 +192,7 @@
                         {% for product in products %}
                         {% for compare_product in product_lists %}
                             {% if compare_product|int == product.id %}
-                        <td>{{material}}</td>
+                        <td class="row{{product.id}}">{{material}}</td>
                     {% endif %}
                         {% endfor %}
                     {% endfor %}
@@ -204,7 +202,7 @@
                         {% for product in products %}
                         {% for compare_product in product_lists %}
                             {% if compare_product|int == product.id %}
-                        <td><button class="btn btn-secondary btn-sm" onclick="window.location.href='/users/compare/{{ product.id }}'">Remove</button></td>
+                        <td class="row{{product.id}}"><button id="deleteCompare" data-id="{{product.id}}" class="btn btn-secondary btn-sm">Remove</button></td>
                         {% endif %}
                         {% endfor %}
                     {% endfor %}
@@ -215,3 +213,24 @@
         </div>
     </div>
 </div>
+
+<script>
+$(document).ready(function(){
+
+    var compare_deleteButtons = document.querySelectorAll('#deleteCompare');
+    for (var i = 0; i < compare_deleteButtons.length; i++) {
+        compare_deleteButtons[i].onclick = function() {
+        var compare_deleteIndex = $(this).attr('data-id');
+        req = $.ajax({
+                url: "/users/compare",
+                type: "POST",
+                data: compare_deleteIndex,
+                }); 
+        req.done(function(data){
+            
+            $('.row'+compare_deleteIndex).fadeOut(1000)
+        });
+    };
+    }
+});
+</script>
