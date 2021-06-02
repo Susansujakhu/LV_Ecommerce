@@ -22,7 +22,7 @@
                     {% for rows in products if cart_row.product_id == rows.id %}
                     {% set imagename = rows['imageFile'] %}
 
-                    <div class="dropcart-product">
+                    <div id="sidebar_cart{{cart_row.product_id}}" class="dropcart-product">
                         <div class="product-image dropcart-product-image">
                             <a href="product.html" class="product-image-body">
                                 <img class="product-image-img" src="{{url_for('static', filename='assets/images/products/'+ imagename )}}" alt="">
@@ -39,11 +39,11 @@
                                 <span class="dropcart-product-price">{{currency}} {{rows['price']}}</span>
                             </div>
                         </div>
-                        <button type="button" class="dropcart-product-remove btn btn-light btn-sm btn-svg-icon" onclick="window.location.href='delete_cart/{{cart_row.product_id}}/card1'">
+                        <button id="deleteCart" data-id="{{cart_row.product_id}}" type="button" class="dropcart-product-remove btn btn-light btn-sm btn-svg-icon">
                         <svg width="10px" height="10px">
                             <use xlink:href="/static/assets/icons/sprite.svg#cross-10"></use>
                         </svg>
-                    </button>
+                        </button>
                     </div>
                     {% endfor %}
                 {% endfor %}
@@ -133,3 +133,22 @@
     </div>
 </div>
 <!-- .dropaccount / end -->
+<script>
+$(document).ready(function(){
+
+    var cart_deleteButtons = document.querySelectorAll('#deleteCart');
+    for (var i = 0; i < cart_deleteButtons.length; i++) {
+        cart_deleteButtons[i].onclick = function() {
+        var cart_deleteIndex = $(this).attr('data-id');
+        req = $.ajax({
+                url: "/delete_cart",
+                type: "POST",
+                data: cart_deleteIndex,
+                }); 
+        req.done(function(data){
+            $('#sidebar_cart'+cart_deleteIndex).fadeOut(1000)
+        });
+    };
+    }
+});
+</script>
