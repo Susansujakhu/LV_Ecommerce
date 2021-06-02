@@ -659,7 +659,7 @@
                                         <svg width="20px" height="20px">
                                             <use xlink:href="/static/assets/icons/sprite.svg#heart-20"></use>
                                         </svg>
-                                        <span class="indicator-value">0</span>
+                                        <span id="wishlist_indicator" class="indicator-value">{{wishlist_indicator}}</span>
                                     </span>
                                 </a>
                             </div>
