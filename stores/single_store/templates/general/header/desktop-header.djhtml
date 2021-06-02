@@ -669,7 +669,7 @@
                                         <svg width="20px" height="20px">
                                             <use xlink:href="/static/assets/icons/sprite.svg#cart-20"></use>
                                         </svg>
-                                        <span class="indicator-value">
+                                        <span id="cart_indicator" class="indicator-value">
                                             {{ cartProductNumber }}
                                         </span>
                                     </span>
