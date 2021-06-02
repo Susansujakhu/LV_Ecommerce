@@ -3,6 +3,8 @@
         <div class="table-responsive">
             <table id="main_table" class="compare-table">
                 <tbody>
+                    
+ 
                     <tr>
                         <th>Product</th>
                         {% for product in products %}
