@@ -229,8 +229,9 @@ $(document).ready(function(){
                 data: compare_deleteIndex,
                 }); 
         req.done(function(data){
-            
-            $('.row'+compare_deleteIndex).fadeOut(1000)
+            $('.row'+compare_deleteIndex).fadeOut('normal', function(){
+                document.location.href = this.location.href;
+            });
         });
     };
     }
