@@ -1,7 +1,9 @@
 import json
 from functools import wraps
-from flask import render_template, url_for, flash, redirect, request, Response
+from flask import render_template, url_for, flash, redirect, request, Response, jsonify
+from flask.ctx import RequestContext
 from flask.globals import session
+from sqlalchemy.sql.elements import Null
 from sqlalchemy.sql.expression import text
 from werkzeug.datastructures import MultiDict
 from wtforms.fields.core import StringField
@@ -51,7 +53,14 @@ def global_attr():
     cartProductNumber=0
     form1 = LoginForm()
     products = Product.query.all()
+    
     if current_user.is_authenticated:
+        indicators = Wishlist.query.filter_by(userId = current_user.userId).first()
+        list_product = indicators.product_list.split(",")
+        if list_product[0] == '':
+            wishlist_indicator = 0
+        else:
+            wishlist_indicator = len(list_product)
         cart = Cart.query.filter_by(userId = current_user.userId).all()
         for cart_row in cart:
             for rows in products:
@@ -60,7 +69,8 @@ def global_attr():
                     cartProductNumber=cartProductNumber+1
     else:
         cart = Cart.query.filter_by(userId = 1233).all()
-    return dict(products = products, form1=form1, cart=cart, totalCart=totalCart, cartProductNumber=cartProductNumber)
+        wishlist_indicator = 0
+    return dict(products = products, form1=form1, cart=cart, totalCart=totalCart, cartProductNumber=cartProductNumber, wishlist_indicator=wishlist_indicator)
 
 
 @app.route("/")
@@ -132,6 +142,8 @@ def wishlist():
 @login_required
 def compare():
     compare_products = Compare.query.filter(Compare.userId == current_user.userId).first()
+    print("******************")
+    print(compare_products)
     if compare_products is None:
         print("Add Some Products to compare first")
         product_lists = ""
@@ -799,16 +811,15 @@ def deleteCart(productId,page):
     return redirect('/')
 
 
-@app.route("/wishlist", methods=['GET', 'POST'])
+@app.route("/wishlistAdd", methods=['POST'])
 @login_required
 def addWishlist():
+    updated = False
     if request.method == "POST":
-        print("&&&&&&&&&&&&&&&&&&")
-        productId= int(float(request.get_data()))
+        productId= int(request.get_data())
 
-    
-    print(productId)
     wishlist_list = Wishlist.query.filter_by(userId = current_user.userId).first()
+
     if wishlist_list is None:
         add_wishlist = Wishlist(
                             product_list = productId,
@@ -816,39 +827,66 @@ def addWishlist():
                             )
         db.session.add(add_wishlist)
         db.session.commit()
+        updated = True
     else:
-        list_product = wishlist_list.product_list.split(",")
-        count = len(list_product)
-        for i in range(count):
-            if int(list_product[i]) == productId:
-                print("Already In Wishlist")
-                break
-            elif i+1 == count:
-                data = wishlist_list.product_list + "," +str(productId)
-                actual_data = {'product_list':data}
-                db.session.query(Wishlist).filter(Wishlist.userId == current_user.userId).update(actual_data, synchronize_session=False)
-                db.session.commit()
-    return ('', 204)
+        product_l = wishlist_list.product_list
+        if product_l == "":
+            actual_data = {'product_list':productId}
+            db.session.query(Wishlist).filter(Wishlist.userId == current_user.userId).update(actual_data, synchronize_session=False)
+            db.session.commit()
+            updated = True
+        else:
+            list_product = wishlist_list.product_list.split(",")
+            count = len(list_product)
+            for i in range(count):
+                if int(list_product[i]) == productId:
+                    print("Already In Wishlist")
+                    updated = False
+                    break
+                elif i+1 == count:
+                    data = wishlist_list.product_list + "," +str(productId)
+                    actual_data = {'product_list':data}
+                    db.session.query(Wishlist).filter(Wishlist.userId == current_user.userId).update(actual_data, synchronize_session=False)
+                    db.session.commit()
+                    updated = True
+    if updated == True:
+        indicators = Wishlist.query.filter_by(userId = current_user.userId).first()
+        list_product = indicators.product_list.split(",")
+        wishlist_indicator = len(list_product)
+        print(wishlist_indicator)
+    return jsonify({'result': 'success', 'wishlist_indicator': wishlist_indicator})
 
-@app.route("/users/<tables>/<int:id>")
+@app.route("/users/<tables>", methods = ['POST'])
 @login_required
-def delete_wishlist(id, tables):
+def delete_wishlist(tables):
     urll = tables
     tables = tables.capitalize()
     table_name = str2Class(tables)
+    if request.method == "POST":
+        id = int(request.get_data())
     product_list = table_name.query.filter_by(userId = current_user.userId).first()
     list_product = product_list.product_list.split(",")
     list_product.remove(str(id))
     listToStr = ','.join([str(elem) for elem in list_product])
     db.session.query(table_name).filter(table_name.userId == current_user.userId).update({'product_list':listToStr}, synchronize_session=False)
     db.session.commit()
-    return redirect('/'+urll)
+    indicators = Wishlist.query.filter_by(userId = current_user.userId).first()
+    list_product = indicators.product_list.split(",")
+    if list_product[0] == '':
+            wishlist_indicator = 0
+    else:
+        wishlist_indicator = len(list_product)
 
-@app.route("/compare/<int:productId>")
+    return jsonify({'result': 'success', 'wishlist_indicator': wishlist_indicator})
+
+
+@app.route("/compare_add", methods=["POST"])
 @login_required
-def addCompare(productId):
-    compare_list = Compare.query.filter_by(userId = current_user.userId).first()
-    print(compare_list)
+def addCompare():
+    if request.method == "POST":
+        productId = int(request.get_data())
+    compare_list = Compare.query.filter(Compare.userId == current_user.userId).first()
+
     if compare_list is None:
         add_compare = Compare(
                             product_list = productId,
@@ -856,20 +894,27 @@ def addCompare(productId):
                             )
         db.session.add(add_compare)
         db.session.commit()
+
     else:
-        list_product = compare_list.product_list.split(",")
-        count = len(list_product)
-        for i in range(count):
-            if int(list_product[i]) == productId:
-                print("Already in Compare List")
-                break
-            elif i+1 == count:
-                data = compare_list.product_list + "," +str(productId)
-                actual_data = {'product_list':data}
-                db.session.query(Compare).filter(Compare.userId == current_user.userId).update(actual_data, synchronize_session=False)
-                db.session.commit()
+        product_l = compare_list.product_list
+        if product_l == "":
+            actual_data = {'product_list':productId}
+            db.session.query(Compare).filter(Compare.userId == current_user.userId).update(actual_data, synchronize_session=False)
+            db.session.commit()
+        else:
+            list_product = compare_list.product_list.split(",")
+            count = len(list_product)
+            for i in range(count):
+                if int(list_product[i]) == productId:
+                    print("Already in Compare List")
+                    break
+                elif i+1 == count:
+                    data = compare_list.product_list + "," +str(productId)
+                    actual_data = {'product_list':data}
+                    db.session.query(Compare).filter(Compare.userId == current_user.userId).update(actual_data, synchronize_session=False)
+                    db.session.commit()
     # return ('', 204)
-    return redirect('/')
+    return jsonify({'result': 'success'})
 
 
 @app.route("/add/<tables>", methods=['GET', 'POST'])
