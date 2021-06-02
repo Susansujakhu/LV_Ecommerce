@@ -139,7 +139,7 @@
                             </div>
                             <div class="product-card-buttons">
                                
-                                <button class="btn btn-primary product-card-addtocart" onclick="window.location.href='/add_cart/{{ items['id']}}'" type="button">Add To Cart</button>
+                                <button id="addCart" data-id="{{ items['id'] }}" class="btn btn-primary product-card-addtocart" type="button">Add To Cart</button>
                                 <button class="btn btn-secondary product-card-addtocart product-card-addtocart--list" type="button">Add To Cart</button>
                                 <button id="addWishlist" data-id="{{ items['id'] }}" class="btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card-wishlist" type="button">
                                 
@@ -291,7 +291,7 @@
                                     {{ currency }} {{ items['price']}}
                                 </div>
                                 <div class="product-card-buttons">
-                                    <button class="btn btn-primary product-card-addtocart" onclick="window.location.href='/add_cart/{{ items['id']}}'" type="button">Add To Cart</button>
+                                    <button id="addCart" data-id="{{ items['id'] }}" class="btn btn-primary product-card-addtocart" type="button">Add To Cart</button>
                                     <button class="btn btn-secondary product-card-addtocart product-card-addtocart--list" type="button">Add To Cart</button>
                                     
                                     
@@ -321,6 +321,23 @@
     </div>
 <script>
 $(document).ready(function(){
+var cart_buttons = document.querySelectorAll('#addCart');
+    for (var i = 0; i < cart_buttons.length; i++) {
+        cart_buttons[i].onclick = function() {
+        var cart_index = $(this).attr('data-id');
+        req = $.ajax({
+                url: "/add_cart",
+                type: "POST",
+                data: cart_index,
+                }); 
+        req.done(function(data){
+            $('#cart_indicator').text(data.cartProductNumber);
+        });
+        $(this).fadeOut(1000).fadeIn(1000);
+        $(this).css('fill', '#000000');
+    };
+    }
+
 
     var wishlist_buttons = document.querySelectorAll('#addWishlist');
     for (var i = 0; i < wishlist_buttons.length; i++) {
@@ -338,7 +355,7 @@ $(document).ready(function(){
         $(this).css('fill', '#000000');
     };
     }
-});
+
 
     var compare_buttons = document.querySelectorAll('#addCompare');
     for (var i = 0; i < compare_buttons.length; i++) {
@@ -350,14 +367,12 @@ $(document).ready(function(){
                 data: compare_index,
                 }); 
         req.done(function(data){
-            
+
         });
         $(this).fadeOut(1000).fadeIn(1000);
         $(this).css('fill', '#000000');
         
     };
     }
+});
 </script>
-
-
-
