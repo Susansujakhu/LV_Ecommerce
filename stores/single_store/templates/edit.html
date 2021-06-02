@@ -31,9 +31,18 @@
             </script>
           {% endif %}
           <div class="form-group">
+            {% set field_id = field.name %}
+            {% set field_value = product_dict[field_id] %}
             {{ field.label(class="form-control-label") }}
             {{ field(class="form-control") }}
-
+            <script>
+              $(document).ready(function () {
+                let name = "{{field_id}}";
+                let value = "{{field_value}}";
+                console.log(value)
+                $("#" + name).val(value);
+              });
+            </script>
             {% for error in field.errors %}
             <div class="error">{{ error }}</div>
             {% endfor %}
