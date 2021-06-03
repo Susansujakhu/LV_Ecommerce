@@ -94,7 +94,7 @@ class Product(db.Model):
     featured = db.Column(db.Boolean, nullable = False, default = False)
     tags = db.Column(db.Text, nullable = True)
 
-    badgeDuration = db.Column(db.String(20), nullable = True)
+    badgeDuration = db.Column(db.Integer, nullable = True)
     excludeBadge = db.Column(db.Boolean, nullable = False, default = False)
     dateCreated = db.Column(db.DateTime, nullable = True, default = datetime.utcnow)
 
