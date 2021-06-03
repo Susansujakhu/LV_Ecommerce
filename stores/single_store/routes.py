@@ -54,18 +54,25 @@ def global_attr():
     
     if current_user.is_authenticated:
         indicators = Wishlist.query.filter_by(userId = current_user.userId).first()
-        list_product = indicators.product_list.split(",")
-        if list_product[0] == '':
+        if indicators is None:
+            print("No Value")
             wishlist_indicator = 0
         else:
-            wishlist_indicator = len(list_product)
+            list_product = indicators.product_list.split(",")
+            if list_product[0] == '':
+                wishlist_indicator = 0
+            else:
+                wishlist_indicator = len(list_product)
         cart = Cart.query.filter_by(userId = current_user.userId).all()
-        print(cart)
-        for cart_row in cart:
-            for rows in products:
-                if cart_row.product_id == rows.id:
-                    totalCart = (cart_row.quantity*rows.price)+totalCart
-                    cartProductNumber=cartProductNumber+1
+        if cart is None:
+            print("No Cart Data")
+        else:
+            print(cart)
+            for cart_row in cart:
+                for rows in products:
+                    if cart_row.product_id == rows.id:
+                        totalCart = (cart_row.quantity*rows.price)+totalCart
+                        cartProductNumber=cartProductNumber+1
     else:
         cart = Cart.query.filter_by(userId = 1233).all()
         wishlist_indicator = 0
