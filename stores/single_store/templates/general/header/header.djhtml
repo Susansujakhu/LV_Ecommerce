@@ -16,6 +16,8 @@
                 </svg>
             </button>
         </div>
+        <div id="sidebarCart" cartLength="{{cart|length}}">
+        {% set cartProductNumber = cart|length %}
         {% if cart|length %}
             <div class="dropcart-products-list">
                 {% for cart_row in cart %}
@@ -52,7 +54,7 @@
                 <table>
                     <tr>
                         <th>Total</th>
-                        <td>{{currency}} {{totalCart}}</td>
+                        <td>{{currency}}<span id="total_cart"> {{totalCart}}</span></td>
                     </tr>
                 </table>
             </div>
@@ -68,6 +70,7 @@
                 </div>
             </div>
         {% endif %}
+        </div>
     </div>
 </div>
 <!-- .dropcart / end -->
@@ -77,7 +80,7 @@
     <div class="dropaccount-backdrop"></div>
     <div class="dropaccount-body">
         <div class="dropaccount-header">
-            <div class="dropaccount-title">Shopping Cart</div>
+            <div class="dropaccount-title">Account</div>
             <button class="dropaccount-close" type="button">
                 <svg width="12px" height="12px">
                     <use xlink:href="/static/assets/icons/sprite.svg#cross-12"></use>
@@ -133,11 +136,13 @@
     </div>
 </div>
 <!-- .dropaccount / end -->
-<script>
+{# <script>
 $(document).ready(function(){
-
+    console.log("Reached here");
     var cart_deleteButtons = document.querySelectorAll('#deleteCart');
-    for (var i = 0; i < cart_deleteButtons.length; i++) {
+    var cartProductNumber = $(sidebarCart).attr('cartLength');
+    console.log(cartProductNumber);
+    for (var i = 0; i < cartProductNumber; i++) {
         cart_deleteButtons[i].onclick = function() {
         var cart_deleteIndex = $(this).attr('data-id');
         req = $.ajax({
@@ -146,9 +151,133 @@ $(document).ready(function(){
                 data: cart_deleteIndex,
                 }); 
         req.done(function(data){
-            $('#sidebar_cart'+cart_deleteIndex).fadeOut(1000)
+            $('#sidebar_cart'+cart_deleteIndex).fadeOut(1000);
+            $('#cart_indicator').text(data.cartProductNumber);
+            
         });
     };
     }
+
+    var cart_buttons = document.querySelectorAll('#addCart');
+    for (var i = 0; i < cart_buttons.length; i++) {
+        cart_buttons[i].onclick = function() {
+        var cart_index = $(this).attr('data-id');
+        req = $.ajax({
+                url: "/add_cart",
+                type: "POST",
+                data: cart_index,
+                cache: false,
+                }); 
+        req.done(function(data){
+            $('#cart_indicator').text(data.cartProductNumber);
+            $("#sidebarCart").load(" #sidebarCart");
+        });
+        $(this).fadeOut(1000).fadeIn(1000);
+        $(this).css('fill', '#000000');
+    };
+    }
+
+
+    var wishlist_buttons = document.querySelectorAll('#addWishlist');
+    for (var i = 0; i < wishlist_buttons.length; i++) {
+        wishlist_buttons[i].onclick = function() {
+        var wishlist_index = $(this).attr('data-id');
+        req = $.ajax({
+                url: "/wishlistAdd",
+                type: "POST",
+                data: wishlist_index,
+                }); 
+        req.done(function(data){
+            $('#wishlist_indicator').text(data.wishlist_indicator);
+        });
+        $(this).fadeOut(1000).fadeIn(1000);
+        $(this).css('fill', '#000000');
+    };
+    }
+
+
+    var compare_buttons = document.querySelectorAll('#addCompare');
+    for (var i = 0; i < compare_buttons.length; i++) {
+        compare_buttons[i].onclick = function() {
+        var compare_index = $(this).attr('data-id');
+        req = $.ajax({
+                url: "/compare_add",
+                type: "POST",
+                data: compare_index,
+                }); 
+        req.done(function(data){
+
+        });
+        $(this).fadeOut(1000).fadeIn(1000);
+        $(this).css('fill', '#000000');
+        
+    };
+    }
+});
+</script> #}
+
+<script>
+$(document).ready(function(){
+    $(document).on('click', '#deleteCart', function(){
+        var cart_deleteIndex = $(this).attr('data-id');
+        req = $.ajax({
+                url: "/delete_cart",
+                type: "POST",
+                data: cart_deleteIndex,
+                }); 
+        req.done(function(data){
+            $('#sidebar_cart'+cart_deleteIndex).fadeOut('normal', function(){
+                $('#cart_indicator').text(data.cartProductNumber);
+                $('#main_cart'+cart_deleteIndex).fadeOut(1000);
+                $('#total_cart').text(data.totalCart);
+            });
+            
+        });
+    });
+
+    $(document).on('click', '#addCart', function(){
+        var cart_index = $(this).attr('data-id');
+        req = $.ajax({
+                url: "/add_cart",
+                type: "POST",
+                data: cart_index,
+                cache: false,
+                }); 
+        req.done(function(data){
+            $('#cart_indicator').text(data.cartProductNumber);
+            $("#sidebarCart").load(" #sidebarCart");
+        });
+        $(this).fadeOut(1000).fadeIn(1000);
+        $(this).css('fill', '#000000');
+    });
+
+    $(document).on('click', '#addWishlist', function(){
+        var wishlist_index = $(this).attr('data-id');
+        req = $.ajax({
+                url: "/wishlistAdd",
+                type: "POST",
+                data: wishlist_index,
+                }); 
+        req.done(function(data){
+            $('#wishlist_indicator').text(data.wishlist_indicator);
+        });
+        $(this).fadeOut(1000).fadeIn(1000);
+        $(this).css('fill', '#000000');
+    });
+ 
+    $(document).on('click', '#addCompare', function(){
+       var compare_index = $(this).attr('data-id');
+        req = $.ajax({
+                url: "/compare_add",
+                type: "POST",
+                data: compare_index,
+                }); 
+        req.done(function(data){
+
+        });
+        $(this).fadeOut(1000).fadeIn(1000);
+        $(this).css('fill', '#000000');
+    });
+
 });
 </script>
