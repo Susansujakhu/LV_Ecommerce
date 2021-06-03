@@ -12,7 +12,7 @@ import secrets, os, sys
 from PIL import Image
 from flask_admin import Admin
 from werkzeug.utils import secure_filename
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta 
 from sqlalchemy.sql import table, column
 from sqlalchemy import func
 
@@ -49,6 +49,7 @@ def not_found(e):
 def global_attr():
     totalCart = 0
     cartProductNumber=0
+    badgeForNew=False
     form1 = LoginForm()
     products = Product.query.all()
     
@@ -73,10 +74,13 @@ def global_attr():
                     if cart_row.product_id == rows.id:
                         totalCart = (cart_row.quantity*rows.price)+totalCart
                         cartProductNumber=cartProductNumber+1
+                        subDate=(rows.dateCreated+timedelta(rows.badgeDuration))-datetime.today()
+                        if (subDate.days)>=0:
+                            badgeForNew=True
     else:
         cart = Cart.query.filter_by(userId = 1233).all()
         wishlist_indicator = 0
-    return dict(products = products, form1=form1, cart=cart, totalCart=totalCart, cartProductNumber=cartProductNumber, wishlist_indicator=wishlist_indicator)
+    return dict(products = products, form1=form1, cart=cart, totalCart=totalCart, cartProductNumber=cartProductNumber, wishlist_indicator=wishlist_indicator, badgeForNew = badgeForNew)
 
 
 @app.route("/")
@@ -362,8 +366,8 @@ def add_product():
                             product_user_id = current_user,
                             )
             print(product)
-            # db.session.add(product)
-            # db.session.commit()
+            db.session.add(product)
+            db.session.commit()
             flash(form.productName.data+' Product Added Successful!', 'success')
         else:
             # form.productName.data = 

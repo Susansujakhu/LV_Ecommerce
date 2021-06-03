@@ -21,7 +21,22 @@
                             <span class="fake-svg-icon"></span>
                         </button>
                         <div class="product-card-badges-list">
-                            <div class="product-card-badge product-card-badge--new">New</div>
+                            
+                                {# condition for hot,sale,new and empty #}
+                                {% if items['excludeBadge']==False %}
+                                    {% if items['featured']==True %}
+                                        {% set badge='Hot' %}
+                                        {% set badgeColor='hot' %}
+                                    {% elif items['discount']>0 %}
+                                        {% set badge='Sale' %}
+                                        {% set badgeColor='sale' %}
+                                    {% elif badgeForNew==True %}
+                                        {% set badge='New'%}
+                                        {% set badgeColor='new' %}
+                                    {% endif %}
+                                    <div class="product-card-badge product-card-badge--{{badgeColor}}">{{badge}}</div>
+                                {% endif %}
+                            
                         </div>
                         <div class="product-card-image product-image">
                             <a href="single/{{ items['id'] }}" class="product-image-body">
@@ -174,7 +189,22 @@
                                 <span class="fake-svg-icon"></span>
                             </button>
                             <div class="product-card-badges-list">
-                                <div class="product-card-badge product-card-badge--hot">Hot</div>
+                            
+                                {# condition for hot,sale,new and empty #}
+                                {% if items['excludeBadge']==False %}
+                                    {% if items['featured']==True %}
+                                        {% set badge='Hot' %}
+                                        {% set badgeColor='hot' %}
+                                    {% elif items['discount']>0 %}
+                                        {% set badge='Sale' %}
+                                        {% set badgeColor='sale' %}
+                                    {% elif badgeForNew==True %}
+                                        {% set badge='New'%}
+                                        {% set badgeColor='new' %}
+                                    {% endif %}
+                                    <div class="product-card-badge product-card-badge--{{badgeColor}}">{{badge}}</div>
+                                {% endif %}
+                            
                             </div>
                             <div class="product-card-image product-image">
                                 <a href="single/{{ items['id'] }}" class="product-image-body">
