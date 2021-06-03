@@ -49,7 +49,7 @@ def not_found(e):
 def global_attr():
     totalCart = 0
     cartProductNumber=0
-    badgeForNew=False
+    badgeForNew=[]
     form1 = LoginForm()
     products = Product.query.all()
     if current_user.is_authenticated:
@@ -72,7 +72,11 @@ def global_attr():
                 for rows in products:
                     if cart_row.product_id == rows.id:
                         totalCart = (cart_row.quantity*rows.price)+totalCart
-                        cartProductNumber=cartProductNumber+1        
+                        cartProductNumber=cartProductNumber+1
+        for rows in products:
+            subDate=(rows.dateCreated+timedelta(rows.badgeDuration))-datetime.today()
+            if (subDate.days)>=0:
+                badgeForNew.append(rows.id)
     else:
         cart = Cart.query.filter_by(userId = 1233).all()
         wishlist_indicator = 0

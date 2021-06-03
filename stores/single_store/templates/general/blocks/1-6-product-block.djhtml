@@ -23,14 +23,14 @@
                         <div class="product-card-badges-list">
                             
                                 {# condition for hot,sale,new and empty #}
-                                {% if items['excludeBadge']==False %}
-                                    {% if items['featured']==True %}
+                                {% if items['excludeBadge'] == False %}
+                                    {% if items['featured'] == True %}
                                         {% set badge='Hot' %}
                                         {% set badgeColor='hot' %}
                                     {% elif items['discount']>0 %}
                                         {% set badge='Sale' %}
                                         {% set badgeColor='sale' %}
-                                    {% elif badgeForNew==True %}
+                                    {% elif items['id'] in badgeForNew %}
                                         {% set badge='New'%}
                                         {% set badgeColor='new' %}
                                     {% endif %}
@@ -190,7 +190,7 @@
                             </button>
                             <div class="product-card-badges-list">
                             
-                                {# condition for hot,sale,new and empty #}
+                                 {# condition for hot,sale,new and empty #}
                                 {% if items['excludeBadge']==False %}
                                     {% if items['featured']==True %}
                                         {% set badge='Hot' %}
@@ -198,7 +198,7 @@
                                     {% elif items['discount']>0 %}
                                         {% set badge='Sale' %}
                                         {% set badgeColor='sale' %}
-                                    {% elif badgeForNew==True %}
+                                    {% elif items['id'] in badgeForNew %}
                                         {% set badge='New'%}
                                         {% set badgeColor='new' %}
                                     {% endif %}
