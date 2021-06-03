@@ -52,7 +52,6 @@ def global_attr():
     badgeForNew=False
     form1 = LoginForm()
     products = Product.query.all()
-    
     if current_user.is_authenticated:
         indicators = Wishlist.query.filter_by(userId = current_user.userId).first()
         if indicators is None:
@@ -73,10 +72,7 @@ def global_attr():
                 for rows in products:
                     if cart_row.product_id == rows.id:
                         totalCart = (cart_row.quantity*rows.price)+totalCart
-                        cartProductNumber=cartProductNumber+1
-                        subDate=(rows.dateCreated+timedelta(rows.badgeDuration))-datetime.today()
-                        if (subDate.days)>=0:
-                            badgeForNew=True
+                        cartProductNumber=cartProductNumber+1        
     else:
         cart = Cart.query.filter_by(userId = 1233).all()
         wishlist_indicator = 0
