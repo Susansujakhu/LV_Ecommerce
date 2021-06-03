@@ -43,6 +43,7 @@
       flex-wrap: wrap;
   margin: -6px;
   flex-grow: 1;
+  align-items: flex-start;
 }
 
 .block-products-list-item {
