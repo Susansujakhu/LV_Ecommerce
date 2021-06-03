@@ -27,14 +27,142 @@
   }
 }
 
-@media (min-width: 768px) and (max-width: 991px) {
-  .block-categories--layout--compact .block-categories-item {
-    width: calc(50% - 12px);
+
+/*
+// .category-card
+*/
+.category-card {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.category-card-body {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  border-radius: 2px;
+  background: #fff;
+  -webkit-box-shadow: 0 1px 16px rgba(0, 0, 0, 0.04);
+          box-shadow: 0 1px 16px rgba(0, 0, 0, 0.04);
+  padding: 24px 20px;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+}
+
+.category-card-image {
+  width: 130px;
+}
+
+.category-card-image {
+  margin-right: 24px;
+}
+
+.category-card-image img {
+  max-width: 100%;
+}
+
+.category-card-content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.category-card-name {
+  margin-top: -2px;
+  font-weight: 500;
+  font-size: 17px;
+  line-height: 19px;
+}
+
+.category-card-name a {
+  color: inherit;
+  -webkit-transition: .15s;
+  transition: .15s;
+}
+
+.category-card-name a:hover {
+  color: #1a66ff;
+}
+
+.category-card-links {
+  list-style: none;
+  margin: 14px 0 0;
+  padding: 0;
+  font-size: 14px;
+  line-height: 22px;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+}
+
+.category-card-links a {
+  color: #6c757d;
+  -webkit-transition: .15s;
+  transition: .15s;
+}
+
+.category-card-links a:hover {
+  color: #1a66ff;
+}
+
+.category-card-all {
+  margin-top: 14px;
+  font-size: 14px;
+}
+
+.category-card-all a:hover {
+  text-decoration: underline;
+}
+
+.category-card-products {
+  display: none;
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .category-card--layout--classic .category-card-image {
+    width: 90px;
   }
 }
 
-@media (max-width: 767px) {
-  .block-categories--layout--compact .block-categories-item {
-    width: calc(100% - 12px);
+@media (min-width: 480px) and (max-width: 991px) {
+  .category-card--layout--classic .category-card-body {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    padding: 24px 28px;
+  }
+  .category-card--layout--classic .category-card-image {
+    width: auto;
+    margin: 0 0 18px;
   }
 }
+
+@media (min-width: 400px) and (max-width: 479px) {
+  .category-card--layout--classic .category-card-image {
+    width: 40%;
+  }
+}
+
+@media (max-width: 399px) {
+  .category-card--layout--classic .category-card-body {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    padding: 24px 28px;
+    text-align: center;
+  }
+  .category-card--layout--classic .category-card-image {
+    width: 120px;
+    margin: 0 auto 18px;
+  }
+}
+
+

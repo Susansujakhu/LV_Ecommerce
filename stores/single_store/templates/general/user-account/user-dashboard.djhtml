@@ -1,3 +1,5 @@
+<link rel="stylesheet" type="text/css" href= "{{ url_for('static', filename='css/general/user-account/user-dashboard.css') }}" }}>
+ 
     <div class="block">
         <div class="container">
             <div class="row">
@@ -6,28 +8,28 @@
                         <h4 class="account-nav-title">Navigation</h4>
                         <ul>
                             <li class="account-nav-item  account-nav-item--active ">
-                                <a href="account-dashboard.html">Dashboard</a>
+                                <a href="/dashboard">Dashboard</a>
                             </li>
                             <li class="account-nav-item ">
-                                <a href="account-profile.html">Edit Profile</a>
+                                <a href="/edit-profile">Edit Profile</a>
                             </li>
                             <li class="account-nav-item ">
-                                <a href="account-orders.html">Order History</a>
+                                <a href="/order-history">Order History</a>
                             </li>
                             <li class="account-nav-item ">
-                                <a href="account-order-details.html">Order Details</a>
+                                <a href="/order-details">Order Details</a>
                             </li>
                             <li class="account-nav-item ">
-                                <a href="account-addresses.html">Addresses</a>
+                                <a href="/address-book">Addresses</a>
                             </li>
                             <li class="account-nav-item ">
-                                <a href="account-edit-address.html">Edit Address</a>
+                                <a href="/edit-address">Edit Address</a>
                             </li>
                             <li class="account-nav-item ">
-                                <a href="account-password.html">Password</a>
+                                <a href="/change-password">Password</a>
                             </li>
                             <li class="account-nav-item ">
-                                <a href="account-login.html">Logout</a>
+                                <a href="/logout">Logout</a>
                             </li>
                         </ul>
                     </div>
