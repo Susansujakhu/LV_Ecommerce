@@ -1,11 +1,8 @@
 import json
 from functools import wraps
 from flask import render_template, url_for, flash, redirect, request, Response, jsonify
-from flask.ctx import RequestContext
 from flask.globals import session
-from sqlalchemy.sql.elements import Null
 from sqlalchemy.sql.expression import text
-from werkzeug.datastructures import MultiDict
 from wtforms.fields.core import StringField
 from single_store import app, db, bcrypt
 from single_store.forms import DynamicForm, HorizontalPanelForm, EditHorizontalPanelForm, BrandForm, EditBrandForm, FeaturesForm, EditFeaturesForm, HeroForm, EditHeroForm, RegistrationForm, LoginForm, UpdateAccountForm, ProductForm, EditProductForm, CategoryForm,EditCategoryForm
@@ -17,6 +14,7 @@ from flask_admin import Admin
 from werkzeug.utils import secure_filename
 from datetime import datetime, timezone
 from sqlalchemy.sql import table, column
+from sqlalchemy import func
 
 admin = Admin(app, name='Dashboard', index_view = MyAdminIndexView())
 admin.add_view(AdminView(User, db.session))
@@ -797,8 +795,8 @@ def add_Cart():
         quantityValue = quantityValue+1
         db.session.query(Cart).filter(Cart.product_id == productId).update({'quantity':quantityValue}, synchronize_session=False)
         db.session.commit()
-    cart=Cart.query.filter_by(userId=current_user.userId).count()
-    print(cart)
+    cart = Cart.query.filter_by(userId = current_user.userId).count()
+
     return jsonify({'result': 'success', 'cartProductNumber': cart})
 
 
@@ -807,13 +805,24 @@ def add_Cart():
 def deleteCart():
     if request.method == "POST":
         productId= int(request.get_data())
+        print(productId)
     if Cart.query.filter_by(product_id=productId).delete():
         db.session.execute("ALTER SEQUENCE cart_id_seq RESTART WITH 1")
         db.session.commit()
         print("Success")
     else:
         print("Failed")
-    return jsonify({'result': 'success'})
+    cart = Cart.query.filter_by(userId = current_user.userId).all()
+    products = Product.query.all()
+    totalCart = 0
+    cartProductNumber = 0
+    for cart_row in cart:
+        for rows in products:
+            if cart_row.product_id == rows.id:
+                totalCart = (cart_row.quantity*rows.price)+totalCart
+                cartProductNumber=cartProductNumber+1
+
+    return jsonify({'result': 'success', 'cartProductNumber':cartProductNumber, 'totalCart':totalCart})
 
 
 @app.route("/wishlistAdd", methods=['POST'])
@@ -832,33 +841,31 @@ def addWishlist():
                             )
         db.session.add(add_wishlist)
         db.session.commit()
-        updated = True
+
     else:
         product_l = wishlist_list.product_list
         if product_l == "":
             actual_data = {'product_list':productId}
             db.session.query(Wishlist).filter(Wishlist.userId == current_user.userId).update(actual_data, synchronize_session=False)
             db.session.commit()
-            updated = True
+
         else:
             list_product = wishlist_list.product_list.split(",")
             count = len(list_product)
             for i in range(count):
                 if int(list_product[i]) == productId:
                     print("Already In Wishlist")
-                    updated = False
                     break
                 elif i+1 == count:
                     data = wishlist_list.product_list + "," +str(productId)
                     actual_data = {'product_list':data}
                     db.session.query(Wishlist).filter(Wishlist.userId == current_user.userId).update(actual_data, synchronize_session=False)
                     db.session.commit()
-                    updated = True
-    if updated == True:
-        indicators = Wishlist.query.filter_by(userId = current_user.userId).first()
-        list_product = indicators.product_list.split(",")
-        wishlist_indicator = len(list_product)
-        print(wishlist_indicator)
+
+    indicators = Wishlist.query.filter_by(userId = current_user.userId).first()
+    list_product = indicators.product_list.split(",")
+    wishlist_indicator = len(list_product)
+    print(wishlist_indicator)
     return jsonify({'result': 'success', 'wishlist_indicator': wishlist_indicator})
 
 @app.route("/users/<tables>", methods = ['POST'])
