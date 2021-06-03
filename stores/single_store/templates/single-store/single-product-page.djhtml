@@ -1,4 +1,4 @@
-{% set pageTitle = "Product Name" %}
+{% set pageTitle = product['productName'] %}
 {% extends 'single-store/base.djhtml' %}
 
 {% block head %}

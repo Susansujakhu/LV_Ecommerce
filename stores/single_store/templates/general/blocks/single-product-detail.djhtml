@@ -1,3 +1,5 @@
+<link rel="stylesheet" type="text/css" href= "{{ url_for('static', filename='css/general/blocks/single-product-detail.css') }}" }}>
+
 {% set productName = product['productName']  %}
 {% set productSlug = product['slug']  %}
 {% set productPrice = product['price']  %}
@@ -39,7 +41,7 @@
                     attribute, in which case the width and height will be obtained from the naturalWidth
                     and naturalHeight property of img.product-image-img.
                     -->
-                                    <a href="images/products/product-16.jpg" data-width="700" data-height="700" class="product-image-body" target="_blank">
+                                    <a href="{{url_for('static',filename='assets/images/products/'+productImageFile)}}" data-width="700" data-height="700" class="product-image-body" target="_blank">
                                         <img class="product-image-img" src="{{url_for('static',filename='assets/images/products/'+productImageFile)}}" alt="">
                                     </a>
                                 </div>
@@ -239,13 +241,13 @@
                     <div class="product-description">
                         {{productShortDescription}}
                     </div>
-                    <ul class="product-features">
+                    {# <ul class="product-features">
                         <li>Speed: 750 RPM</li>
                         <li>Power Source: Cordless-Electric</li>
                         <li>Battery Cell Type: Lithium</li>
                         <li>Voltage: 20 Volts</li>
                         <li>Battery Capacity: 2 Ah</li>
-                    </ul>
+                    </ul> #}
                     {# <ul class="product-meta">
                         <li class="product-meta-availability">Availability: <span class="text-success">In Stock</span></li>
                         <li>Brand: <a href="">Wakita</a></li>

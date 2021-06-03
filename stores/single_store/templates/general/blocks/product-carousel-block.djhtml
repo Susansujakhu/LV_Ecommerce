@@ -1,6 +1,6 @@
 <link rel="stylesheet" type="text/css" href= "{{ url_for('static', filename='css/general/blocks/product-carousel-block.css') }}" }}>
 
-<div class="block block-products-carousel" data-layout="grid-4" data-mobile-grid-columns="2">
+<div class="block block-products-carousel" data-layout="grid-5" data-mobile-grid-columns="2">
     <div class="container">
         <div class="block-header">
             <h3 class="block-header-title">Featured Products</h3>
@@ -41,7 +41,7 @@
                                 </div>
                                 <div class="product-card-info">
                                     <div class="product-card-name">
-                                        <a href="product.html">{{items['productName']}}</a>
+                                        <a href="single/{{ items['id'] }}">{{items['productName']}}</a>
                                     </div>
                                     <div class="product-card-rating">
                                         <div class="product-card-rating-stars">
@@ -173,3 +173,75 @@
     </div>
 </div>
 <!-- .block-products-carousel / end -->
+
+<script type="text/javascript">
+    $(function() {
+        $('.block-products-carousel').each(function() {
+            const layout = $(this).data('layout');
+            const options = {
+                items: 4,
+                margin: 14,
+                nav: false,
+                dots: false,
+                loop: false,
+                stagePadding: 1,
+            };
+            const layoutOptions = {
+                'grid-4': {
+                    responsive: {
+                        1200: {items: 4, margin: 14},
+                        992:  {items: 4, margin: 10},
+                        768:  {items: 3, margin: 10},
+                    }
+                },
+                'grid-4-sm': {
+                    responsive: {
+                        1200: {items: 4, margin: 14},
+                        992:  {items: 3, margin: 10},
+                        768:  {items: 3, margin: 10},
+                    }
+                },
+                'grid-5': {
+                    responsive: {
+                        1200: {items: 5, margin: 12},
+                        992:  {items: 4, margin: 10},
+                        768:  {items: 3, margin: 10},
+                    }
+                },
+            };
+            const owl = $('.owl-carousel', this);
+            let cancelPreviousTabChange = function() {};
+
+            const owlOptions = $.extend({}, options, layoutOptions[layout]);
+
+            if (/^grid-/.test(layout)) {
+                let mobileResponsiveOptions;
+
+                if (parseFloat($(this).data('mobile-grid-columns')) === 2) {
+                    mobileResponsiveOptions = {
+                        420:  {items: 2, margin: 10},
+                        320:  {items: 2, margin: 0},
+                        0:    {items: 1},
+                    };
+                } else {
+                    mobileResponsiveOptions = {
+                        475:  {items: 2, margin: 10},
+                        0:    {items: 1},
+                    };
+                }
+
+                owlOptions.responsive = $.extend({}, owlOptions.responsive, mobileResponsiveOptions);
+            }
+
+            owl.owlCarousel(owlOptions);
+
+            $(this).find('.block-header-arrow--left').on('click', function() {
+                owl.trigger('prev.owl.carousel', [500]);
+            });
+            $(this).find('.block-header-arrow--right').on('click', function() {
+                owl.trigger('next.owl.carousel', [500]);
+            });
+        });
+    });
+</script>
+

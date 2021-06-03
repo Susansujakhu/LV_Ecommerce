@@ -1,0 +1,32 @@
+.track-order-container {
+  border: 2px solid #f0f0f0;
+  border-radius: 2px;
+}
+
+.track-order-content {
+  padding: 2rem;
+}
+
+.track-order-title {
+  margin-bottom: 1.75rem;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .track-order-title {
+    font-size: 26px;
+    margin-bottom: 1.5rem;
+  }
+  .track-order-content {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .track-order-title {
+    font-size: 26px;
+    margin-bottom: 1.5rem;
+  }
+  .track-order-content {
+    padding: 1.375rem;
+  }
+}

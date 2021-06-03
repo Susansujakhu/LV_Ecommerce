@@ -1,13 +1,12 @@
 <link rel="stylesheet" type="text/css" href= "{{ url_for('static', filename='css/general/blocks/1-6-product-block.css') }}" }}>
 
-{# {% set products = ['1','2','3','4','5','6'] %} #}
-{# {% set products = ['1','2','3','4','5'] %}
-{% set item = "6" %} #}
+
+{% set blockName = "Bestsellers" %}
 <!-- .block-products -->
 <div class="block block-products block-products--layout--large-first" data-mobile-grid-columns="2">
     <div class="container">
         <div class="block-header">
-            <h3 class="block-header-title">Bestsellers</h3>
+            <h3 class="block-header-title">{{ blockName }}</h3>
             <div class="block-header-divider"></div>
         </div>
         <div class="block-products-body">

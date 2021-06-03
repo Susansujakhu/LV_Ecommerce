@@ -1,14 +1,11 @@
-{% set parentPage = "Shop" %}
-{% set pageTitle = "Checkout" %}
+{% set pageTitle = "Track Your Order" %}
 {% extends 'single-store/base.djhtml' %}
 
 {% block head %}
 {% endblock %}
 
-{# {% block bodyHead %}{% endblock %} #}
-
 {% block content %}
-	{% include '/general/blocks/checkout-block.djhtml' %}
+	{% include '/general/blocks/track-order-block.djhtml' %}
 {% endblock %}
 
 {% block container %}{% endblock %}

@@ -1,0 +1,261 @@
+.site-footer {
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+}
+
+/* ----------------------------------------
+// Footer
+// ---------------------------------------- */
+/*
+// .footer-contacts
+*/
+.footer-contacts-title {
+  margin-bottom: 25px;
+}
+
+.footer-contacts-text {
+  font-size: 15px;
+  line-height: 22px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.footer-contacts-text {
+  padding-right: 20px;
+}
+
+[dir=rtl] .footer-contacts-text {
+  padding-left: 20px;
+}
+
+.footer-contacts-text a {
+  color: inherit;
+}
+
+.footer-contacts-contacts {
+  font-size: 15px;
+  line-height: 20px;
+  list-style: none;
+  padding: 0;
+  margin: 16px 0 0;
+}
+
+.footer-contacts-contacts a {
+  color: inherit;
+}
+
+.footer-contacts-contacts li {
+  padding: 4px 0;
+  position: relative;
+}
+
+.footer-contacts-icon {
+  display: inline-block;
+  text-align: center;
+  width: 22px;
+}
+
+.footer-contacts-icon {
+  margin-right: 2px;
+}
+
+[dir=rtl] .footer-contacts-icon {
+  margin-left: 2px;
+}
+
+@media (max-width: 767px) {
+  .footer-contacts {
+    text-align: center;
+  }
+  .footer-contacts-title {
+    font-size: 28px;
+    margin-bottom: 16px;
+  }
+  .footer-contacts-text {
+    padding: 0;
+  }
+}
+
+/*
+// .footer-links
+*/
+.footer-links-title {
+  margin-bottom: 22px;
+}
+
+.footer-links-list {
+  font-size: 15px;
+  line-height: 28px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links-list a {
+  color: inherit;
+  -webkit-transition: .15s;
+  transition: .15s;
+}
+
+.footer-links-list a:hover {
+  color: #1a66ff;
+}
+
+@media (max-width: 767px) {
+  .footer-links-title {
+    margin-bottom: 12px;
+  }
+  .footer-links {
+    margin-top: 42px;
+    text-align: center;
+  }
+}
+
+/*
+// .footer-newsletter
+*/
+.footer-newsletter-title {
+  margin-bottom: 25px;
+}
+
+.footer-newsletter-text {
+  font-size: 15px;
+  line-height: 22px;
+  margin-bottom: 14px;
+}
+
+.footer-newsletter-text--social {
+  margin-top: 20px;
+  margin-bottom: 0;
+}
+
+.footer-newsletter-social-links {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 8px;
+}
+
+.footer-newsletter-form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  max-width: 380px;
+}
+
+.footer-newsletter-form-input {
+  min-width: 0;
+}
+
+.footer-newsletter-form-button {
+  margin-left: 6px;
+}
+
+[dir=rtl] .footer-newsletter-form-button {
+  margin-right: 6px;
+}
+
+@media (max-width: 991px) {
+  .footer-newsletter {
+    margin-top: 42px;
+    max-width: 420px;
+  }
+  .footer-newsletter-title {
+    margin-bottom: 16px;
+  }
+}
+
+@media (max-width: 767px) {
+  .footer-newsletter {
+    text-align: center;
+  }
+  .footer-newsletter {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  [dir=rtl] .footer-newsletter {
+    margin-right: auto;
+    margin-left: auto;
+  }
+  .footer-newsletter-title {
+    font-size: 28px;
+  }
+  .footer-newsletter-form {
+    margin: 0 auto;
+  }
+  .footer-newsletter-social-links {
+    margin-top: 16px;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+}
+
+/*
+// .site-footer
+*/
+.site-footer {
+  margin-top: 16px;
+  background: transparent;
+  border-top: 1px solid #ebebeb;
+}
+
+.site-footer-widgets {
+  padding: 48px 0 54px;
+}
+
+.site-footer-bottom {
+  height: 54px;
+  border-top: 1px solid #ebebeb;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.site-footer-copyright {
+  font-size: 14px;
+}
+
+.site-footer-copyright a:hover {
+  text-decoration: underline;
+}
+
+.site-footer-payments img {
+  max-width: 100%;
+}
+
+.site-footer-widget + .site-footer-widget {
+  margin-top: 24px;
+}
+
+@media (max-width: 767px) {
+  .site-footer-widgets {
+    padding-bottom: 48px;
+  }
+  .site-footer-bottom {
+    padding: 20px 0 24px;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    height: auto;
+  }
+  .site-footer-payments {
+    -webkit-box-ordinal-group: 0;
+        -ms-flex-order: -1;
+            order: -1;
+  }
+  .site-footer-copyright + .site-footer-payments {
+    margin-bottom: 24px;
+  }
+  .site-footer-copyright,
+  .site-footer-payments {
+    width: 100%;
+    text-align: center;
+  }
+}

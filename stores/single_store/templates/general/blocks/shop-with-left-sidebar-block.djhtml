@@ -1,3 +1,5 @@
+<link rel="stylesheet" type="text/css" href= "{{ url_for('static', filename='css/general/blocks/shop-with-left-sidebar-block.css') }}" }}>
+
 <div class="container">
     <div class="shop-layout shop-layout--sidebar--start">
         <div class="shop-layout-sidebar">
@@ -16,7 +18,7 @@
                         <div class="widget-filters widget widget-filters--offcanvas--mobile" data-collapse data-collapse-opened-class="filter--opened">
                             <h4 class="widget-filters-title widget-title">Filters</h4>
                             <div class="widget-filters-list">
-                                <div class="widget-filters-item">
+                                {# <div class="widget-filters-item">
                                     <div class="filter filter--opened" data-collapse-item>
                                         <button type="button" class="filter-title" data-collapse-trigger>
                                             Categories
@@ -95,7 +97,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> #}
                                 <div class="widget-filters-item">
                                     <div class="filter filter--opened" data-collapse-item>
                                         <button type="button" class="filter-title" data-collapse-trigger>
@@ -259,7 +261,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="widget-filters-item">
+                                {# <div class="widget-filters-item">
                                     <div class="filter filter--opened" data-collapse-item>
                                         <button type="button" class="filter-title" data-collapse-trigger>
                                             Brand
@@ -364,7 +366,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> #}
                                 <div class="widget-filters-item">
                                     <div class="filter filter--opened" data-collapse-item>
                                         <button type="button" class="filter-title" data-collapse-trigger>
@@ -722,92 +724,28 @@
                         <div class="widget-products widget">
                             <h4 class="widget-title">Latest Products</h4>
                             <div class="widget-products-list">
+                                {% for items in products %}
                                 <div class="widget-products-item">
                                     <div class="widget-products-image">
                                         <div class="product-image">
-                                            <a href="product.html" class="product-image-body">
-                                                <img class="product-image-img" src="images/products/product-1.jpg" alt="">
+                                            <a href="single/{{ items['id'] }}" class="product-image-body">
+                                                <img class="product-image-img" src="{{url_for('static',filename='assets/images/products/'+items['imageFile'])}}" alt="">
                                             </a>
                                         </div>
                                     </div>
                                     <div class="widget-products-info">
                                         <div class="widget-products-name">
-                                            <a href="product.html">Electric Planer Brandix KL370090G 300 Watts</a>
+                                            <a href="single/{{ items['id'] }}">{{items['productName']}}</a>
                                         </div>
                                         <div class="widget-products-prices">
-                                            $749.00
+                                            {{ currency }} {{ items['price']}}
                                         </div>
                                     </div>
                                 </div>
-                                <div class="widget-products-item">
-                                    <div class="widget-products-image">
-                                        <div class="product-image">
-                                            <a href="product.html" class="product-image-body">
-                                                <img class="product-image-img" src="images/products/product-2.jpg" alt="">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="widget-products-info">
-                                        <div class="widget-products-name">
-                                            <a href="product.html">Undefined Tool IRadix DPS3000SY 2700 Watts</a>
-                                        </div>
-                                        <div class="widget-products-prices">
-                                            $1,019.00
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="widget-products-item">
-                                    <div class="widget-products-image">
-                                        <div class="product-image">
-                                            <a href="product.html" class="product-image-body">
-                                                <img class="product-image-img" src="images/products/product-3.jpg" alt="">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="widget-products-info">
-                                        <div class="widget-products-name">
-                                            <a href="product.html">Drill Screwdriver Brandix ALX7054 200 Watts</a>
-                                        </div>
-                                        <div class="widget-products-prices">
-                                            $850.00
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="widget-products-item">
-                                    <div class="widget-products-image">
-                                        <div class="product-image">
-                                            <a href="product.html" class="product-image-body">
-                                                <img class="product-image-img" src="images/products/product-4.jpg" alt="">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="widget-products-info">
-                                        <div class="widget-products-name">
-                                            <a href="product.html">Drill Series 3 Brandix KSR4590PQS 1500 Watts</a>
-                                        </div>
-                                        <div class="widget-products-prices">
-                                            <span class="widget-products-new-price">$949.00</span>
-                                            <span class="widget-products-old-price">$1189.00</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="widget-products-item">
-                                    <div class="widget-products-image">
-                                        <div class="product-image">
-                                            <a href="product.html" class="product-image-body">
-                                                <img class="product-image-img" src="images/products/product-5.jpg" alt="">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="widget-products-info">
-                                        <div class="widget-products-name">
-                                            <a href="product.html">Brandix Router Power Tool 2017ERXPK</a>
-                                        </div>
-                                        <div class="widget-products-prices">
-                                            $1,700.00
-                                        </div>
-                                    </div>
-                                </div>
+                                {% if loop.index == 4 %}
+                                    {% break %}
+                                {% endif %}
+                                {% endfor %}
                             </div>
                         </div>
                     </div>
@@ -873,6 +811,7 @@
                     </div>
                     <div class="products-view-list products-list" data-layout="grid-3-sidebar" data-with-features="false" data-mobile-grid-columns="2">
                         <div class="products-list-body">
+                            {% for items in products %}
                             <div class="products-list-item">
                                 <div class="product-card product-card--hidden-actions ">
                                     <button class="product-card-quickview" type="button">
@@ -885,13 +824,13 @@
                                         <div class="product-card-badge product-card-badge--new">New</div>
                                     </div>
                                     <div class="product-card-image product-image">
-                                        <a href="product.html" class="product-image-body">
-                                            <img class="product-image-img" src="images/products/product-1.jpg" alt="">
+                                        <a href="single/{{ items['id'] }}" class="product-image-body">
+                                            <img class="product-image-img" src="{{url_for('static',filename='assets/images/products/'+items['imageFile'])}}" alt="">
                                         </a>
                                     </div>
                                     <div class="product-card-info">
                                         <div class="product-card-name">
-                                            <a href="product.html">Electric Planer Brandix KL370090G 300 Watts</a>
+                                            <a href="single/{{ items['id'] }}">{{items['productName']}}</a>
                                         </div>
                                         <div class="product-card-rating">
                                             <div class="product-card-rating-stars">
@@ -982,20 +921,23 @@
                                             </div>
                                             <div class="product-card-rating-legend">9 Reviews</div>
                                         </div>
-                                        <ul class="product-card-features-list">
+                                        <div class="product-card-features-list">
+                                            {{items['shortDescription']}}
+                                        </div>
+                                        {# <ul class="product-card-features-list">
                                             <li>Speed: 750 RPM</li>
                                             <li>Power Source: Cordless-Electric</li>
                                             <li>Battery Cell Type: Lithium</li>
                                             <li>Voltage: 20 Volts</li>
                                             <li>Battery Capacity: 2 Ah</li>
-                                        </ul>
+                                        </ul> #}
                                     </div>
                                     <div class="product-card-actions">
                                         <div class="product-card-availability">
-                                            Availability: <span class="text-success">In Stock</span>
+                                            Availability: <span class="text-success">{{items['stock']}} In Stock</span>
                                         </div>
                                         <div class="product-card-prices">
-                                            $749.00
+                                            {{ currency }} {{ items['price']}}
                                         </div>
                                         <div class="product-card-buttons">
                                             <button class="btn btn-primary product-card-addtocart" type="button">Add To Cart</button>
@@ -1016,6 +958,7 @@
                                     </div>
                                 </div>
                             </div>
+                            {% endfor %}
                         </div>
                     </div>
                     <div class="products-view-pagination">

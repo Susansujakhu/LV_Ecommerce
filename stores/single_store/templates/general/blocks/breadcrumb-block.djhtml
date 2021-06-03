@@ -1,0 +1,23 @@
+<link rel="stylesheet" type="text/css" href= "{{ url_for('static', filename='css/general/blocks/breadcrumb-block.css') }}" }}>
+
+<div class="container page-breadcrumb-container">
+    <div class="page-breadcrumb">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="/">Home</a>
+                    <svg width="6px" height="9px">
+                        <use xlink:href="/static/assets/icons/sprite.svg#arrow-rounded-right-6x9"></use>
+                    </svg>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="">{{parentPage}}</a>
+                    <svg width="6px" height="9px">
+                        <use xlink:href="/static/assets/icons/sprite.svg#arrow-rounded-right-6x9"></use>
+                    </svg>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">{{ pageTitle }}</li>
+            </ol>
+        </nav>
+    </div>
+</div>

@@ -1,8 +1,8 @@
-.block-products-carousel {
+.horizontal-product-carousel {
   pointer-events: none;
 }
 
-.block-products-carousel .owl-stage {
+.horizontal-product-carousel .owl-stage {
   margin-bottom: 100px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -10,11 +10,11 @@
   pointer-events: auto;
 }
 
-.block-products-carousel .owl-stage-outer {
+.horizontal-product-carousel .owl-stage-outer {
   margin-bottom: -100px;
 }
 
-.block-products-carousel .owl-item {
+.horizontal-product-carousel .owl-item {
   -ms-flex-negative: 0;
       flex-shrink: 0;
   display: -webkit-box;
@@ -22,16 +22,16 @@
   display: flex;
 }
 
-.block-products-carousel .block-header {
+.horizontal-product-carousel .block-header {
   pointer-events: auto;
 }
 
-.block-products-carousel-slider {
+.horizontal-product-carousel-slider {
   position: relative;
   z-index: 2;
 }
 
-.block-products-carousel-preloader {
+.horizontal-product-carousel-preloader {
   position: absolute;
   z-index: 2;
   left: 0;
@@ -45,7 +45,7 @@
   transition: opacity .3s, visibility 0s .3s;
 }
 
-.block-products-carousel-preloader:after {
+.horizontal-product-carousel-preloader:after {
   display: block;
   content: '';
   position: absolute;
@@ -68,14 +68,14 @@
   border-radius: 50px;
 }
 
-.block-products-carousel--loading .block-products-carousel-preloader {
+.horizontal-product-carousel--loading .horizontal-product-carousel-preloader {
   -webkit-transition-delay: 0s, 0s;
           transition-delay: 0s, 0s;
   opacity: 1;
   visibility: visible;
 }
 
-.block-products-carousel-column {
+.horizontal-product-carousel-column {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -87,12 +87,12 @@
 }
 
 @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
-  .block-products-carousel-column {
+  .horizontal-product-carousel-column {
     display: block;
   }
 }
 
-.block-products-carousel-cell {
+.horizontal-product-carousel-cell {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -104,84 +104,102 @@
           flex-grow: 1;
 }
 
-.block-products-carousel[data-layout="horizontal"] .block-products-carousel-cell {
+.horizontal-product-carousel[data-layout="horizontal"] .horizontal-product-carousel-cell {
   flex-grow: 1;
   align-items: flex-start;
 }
 
-.block-products-carousel-cell + .block-products-carousel-cell {
+.horizontal-product-carousel-cell + .horizontal-product-carousel-cell {
   margin-top: 14px;
 }
 
-.block-products-carousel-cell .product-card {
+.horizontal-product-carousel-cell .product-card {
   width: 100%;
 }
 
-.block-products-carousel[data-layout="horizontal"] .product-card {
+.horizontal-product-carousel[data-layout="horizontal"] .product-card {
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
 }
 
-.block-products-carousel[data-layout="horizontal"] .product-card .product-card-image {
+.horizontal-product-carousel[data-layout="horizontal"] .product-card .product-card-image {
   width: 120px;
   padding: 16px;
 }
 
-.block-products-carousel[data-layout="horizontal"] .product-card .product-card-badges-list {
+.horizontal-product-carousel[data-layout="horizontal"] .product-card .product-card-badges-list {
   top: 10px;
 }
 
-.block-products-carousel[data-layout="horizontal"] .product-card .product-card-badges-list {
+.horizontal-product-carousel[data-layout="horizontal"] .product-card .product-card-badges-list {
   left: 10px;
 }
 
-.block-products-carousel[data-layout="horizontal"] .product-card .product-card-badge {
+.horizontal-product-carousel[data-layout="horizontal"] .product-card .product-card-badge {
   padding: 3px 5px 2px;
 }
 
-.block-products-carousel[data-layout="horizontal"] .product-card .product-card-info {
+.horizontal-product-carousel[data-layout="horizontal"] .product-card .product-card-info {
   padding-top: 14px;
   padding-bottom: 42px;
   width: 100%;
 }
 
-.block-products-carousel[data-layout="horizontal"] .product-card .product-card-info {
+.horizontal-product-carousel[data-layout="horizontal"] .product-card .product-card-info {
   padding-left: 0;
   padding-right: 30px;
 }
 
-.block-products-carousel[data-layout="horizontal"] .product-card .product-card-name {
+.horizontal-product-carousel[data-layout="horizontal"] .product-card .product-card-name {
   overflow: hidden;
   max-height: 38px;
 }
 
-.block-products-carousel[data-layout="horizontal"] .product-card .product-card-rating {
+.horizontal-product-carousel[data-layout="horizontal"] .product-card .product-card-rating {
   white-space: nowrap;
 }
 
-.block-products-carousel[data-layout="horizontal"] .product-card .product-card-description {
+.horizontal-product-carousel[data-layout="horizontal"] .product-card .product-card-description {
   display: none;
 }
 
-.block-products-carousel[data-layout="horizontal"] .product-card .product-card-availability {
+.horizontal-product-carousel[data-layout="horizontal"] .product-card .product-card-availability {
   display: none;
 }
 
-.block-products-carousel[data-layout="horizontal"] .product-card .product-card-buttons {
+.horizontal-product-carousel[data-layout="horizontal"] .product-card .product-card-buttons {
   display: none;
 }
 
-.block-products-carousel[data-layout="horizontal"] .product-card .product-card-actions {
+.horizontal-product-carousel[data-layout="horizontal"] .product-card .product-card-actions {
   position: absolute;
   bottom: 18px;
 }
 
-.block-products-carousel[data-layout="horizontal"] .product-card .product-card-actions {
+.horizontal-product-carousel[data-layout="horizontal"] .product-card .product-card-actions {
   left: 120px;
 }
 
-.block-products-carousel[data-layout="horizontal"] .product-card .product-card-features-list {
+.horizontal-product-carousel[data-layout="horizontal"] .product-card .product-card-features-list {
   display: none;
+}
+
+.horizontal-product-carousel[data-layout="horizontal"] .product-card .product-card-buttons {
+    display: block;
+    margin-top: 20px;
+}
+
+.horizontal-product-carousel[data-layout="horizontal"] .product-card .product-card-info {
+    padding-bottom: 100px;
+}
+
+.horizontal-product-carousel[data-layout="horizontal"] .product-card:hover .product-card-buttons {
+    display: block;
+    margin-top: 20px;
+}
+.horizontal-product-carousel[data-layout="horizontal"] .product-card:hover {
+    margin-bottom: -58px;
+    z-index: 3;
 }

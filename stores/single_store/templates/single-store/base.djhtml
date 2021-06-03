@@ -23,6 +23,7 @@
     <!-- font - fontawesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" type="text/css" href= "{{ url_for('static', filename='css/single-store/base.css') }}" }}>
+    <link rel="stylesheet" type="text/css" href= "{{ url_for('static', filename='css/general/user-account/user-dashboard.css') }}" }}>
 
     <!-- scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -41,30 +42,7 @@
 
     <main>
         {% block bodyHead %}
-            <div class="page-header-container container">
-                <div class="page-header-breadcrumb">
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item">
-                                <a href="/">Home</a>
-                                <svg class="breadcrumb-arrow" width="6px" height="9px">
-                                    <use xlink:href="/static/assets/icons/sprite.svg#arrow-rounded-right-6x9"></use>
-                                </svg>
-                            </li>
-                            <li class="breadcrumb-item">
-                                <a href="">{{parentPage}}</a>
-                                <svg class="breadcrumb-arrow" width="6px" height="9px">
-                                    <use xlink:href="/static/assets/icons/sprite.svg#arrow-rounded-right-6x9"></use>
-                                </svg>
-                            </li>
-                            <li class="breadcrumb-item active" aria-current="page">{{ pageTitle }}</li>
-                        </ol>
-                    </nav>
-                </div>
-                <div class="page-header-title">
-                    {# <h1>{{ pageTitle }}</h1> #}
-                </div>
-            </div>
+            {% include '/general/blocks/breadcrumb-block.djhtml' %}
         {% endblock %}
         {% block content %}{% endblock %}
         <div class="container">

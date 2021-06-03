@@ -1,31 +1,48 @@
-<!-- .block-brands -->
-<div class="block block-brands">
+<link rel="stylesheet" type="text/css" href= "{{ url_for('static', filename='css/general/blocks/brand-carousel-block.css') }}" }}>
+
+<div class="block brands-block">
     <div class="container">
-        <div class="block-brands-slider">
+        <div class="brands-block-slider">
             <div class="owl-carousel">
-                <div class="block-brands-item">
+                <div class="brands-block-item">
                     <a href=""><img src="static/assets/images/brand-carousel/logo-1.png" alt=""></a>
                 </div>
-                <div class="block-brands-item">
+                <div class="brands-block-item">
                     <a href=""><img src="static/assets/images/brand-carousel/logo-2.png" alt=""></a>
                 </div>
-                <div class="block-brands-item">
+                <div class="brands-block-item">
                     <a href=""><img src="static/assets/images/brand-carousel/logo-3.png" alt=""></a>
                 </div>
-                <div class="block-brands-item">
+                <div class="brands-block-item">
                     <a href=""><img src="static/assets/images/brand-carousel/logo-4.png" alt=""></a>
                 </div>
-                <div class="block-brands-item">
+                <div class="brands-block-item">
                     <a href=""><img src="static/assets/images/brand-carousel/logo-5.png" alt=""></a>
                 </div>
-                <div class="block-brands-item">
+                <div class="brands-block-item">
                     <a href=""><img src="static/assets/images/brand-carousel/logo-6.png" alt=""></a>
                 </div>
-                <div class="block-brands-item">
+                <div class="brands-block-item">
                     <a href=""><img src="static/assets/images/brand-carousel/logo-7.png" alt=""></a>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<!-- .block-brands / end -->
+
+<script type="text/javascript">
+    $(function() {
+        $('.brands-block-slider .owl-carousel').owlCarousel({
+            nav: false,
+            dots: false,
+            loop: false,
+            responsive: {
+                1200: {items: 6},
+                992: {items: 5},
+                768: {items: 4},
+                576: {items: 3},
+                0: {items: 2}
+            }
+        });
+    });
+</script>
