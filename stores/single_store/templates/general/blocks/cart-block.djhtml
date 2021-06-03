@@ -21,7 +21,7 @@
                     {% for rows in products if cart_row.product_id == rows.id %}
                     {% set imagename = rows['imageFile'] %}
 
-                    <tr class="cart-table-row">
+                    <tr id="main_cart{{cart_row.product_id}}" class="cart-table-row">
                         <td class="cart-table-column cart-table-column--image">
                             <div class="product-image">
                                 <a href="" class="product-image-body">
@@ -46,7 +46,7 @@
                         </td>
                         <td class="cart-table-column cart-table-column--total" data-title="Total">{{currency}} {{cart_row.quantity*rows['price']}}</td>
                         <td class="cart-table-column cart-table-column--remove">
-                            <button type="button" onclick="window.location.href='delete_cart/{{cart_row.product_id}}/cart2'" class="btn btn-light btn-sm btn-svg-icon">
+                            <button type="button" id="deleteCart" data-id="{{cart_row.product_id}}" class="btn btn-light btn-sm btn-svg-icon">
                                 <svg width="12px" height="12px">
                                     <use xlink:href="/static/assets/icons/sprite.svg#cross-12"></use>
                                 </svg>
@@ -56,65 +56,6 @@
 
                     {% endfor %}
                 {% endfor %}
-                    {# <tr class="cart-table-row">
-                        <td class="cart-table-column cart-table-column--image">
-                            <div class="product-image">
-                                <a href="" class="product-image-body">
-                                    <img class="product-image-img" src="images/products/product-2.jpg" alt="">
-                                </a>
-                            </div>
-                        </td>
-                        <td class="cart-table-column cart-table-column--product">
-                            <a href="" class="cart-table-product-name">Undefined Tool IRadix DPS3000SY 2700 watts</a>
-                        </td>
-                        <td class="cart-table-column cart-table-column--price" data-title="Price">$849.00</td>
-                        <td class="cart-table-column cart-table-column--quantity" data-title="Quantity">
-                            <div class="input-number">
-                                <input class="form-control input-number-input" type="number" min="1" value="1">
-                                <div class="input-number-add"></div>
-                                <div class="input-number-sub"></div>
-                            </div>
-                        </td>
-                        <td class="cart-table-column cart-table-column--total" data-title="Total">$849.00</td>
-                        <td class="cart-table-column cart-table-column--remove">
-                            <button type="button" class="btn btn-light btn-sm btn-svg-icon">
-                                <svg width="12px" height="12px">
-                                    <use xlink:href="/static/assets/icons/sprite.svg#cross-12"></use>
-                                </svg>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr class="cart-table-row">
-                        <td class="cart-table-column cart-table-column--image">
-                            <div class="product-image">
-                                <a href="" class="product-image-body">
-                                    <img class="product-image-img" src="images/products/product-5.jpg" alt="">
-                                </a>
-                            </div>
-                        </td>
-                        <td class="cart-table-column cart-table-column--product">
-                            <a href="" class="cart-table-product-name">Brandix Router Power Tool 2017ERXPK</a>
-                            <ul class="cart-table-options">
-                                <li>Color: True Red</li>
-                            </ul>
-                        </td>
-                        <td class="cart-table-column cart-table-column--price" data-title="Price">$1,210.00</td>
-                        <td class="cart-table-column cart-table-column--quantity" data-title="Quantity">
-                            <div class="input-number">
-                                <input class="form-control input-number-input" type="number" min="1" value="3">
-                                <div class="input-number-add"></div>
-                                <div class="input-number-sub"></div>
-                            </div>
-                        </td>
-                        <td class="cart-table-column cart-table-column--total" data-title="Total">$3,630.00</td>
-                        <td class="cart-table-column cart-table-column--remove">
-                            <button type="button" class="btn btn-light btn-sm btn-svg-icon">
-                                <svg width="12px" height="12px">
-                                    <use xlink:href="/static/assets/icons/sprite.svg#cross-12"></use>
-                                </svg>
-                            </button>
-                        </td>
-                    </tr> #}
                 </tbody>
             </table>
             <div class="cart-actions">
