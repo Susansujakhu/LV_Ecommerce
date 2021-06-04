@@ -1,4 +1,5 @@
 {% set pageTitle = "My Account" %}
+
 {% extends 'single-store/base.djhtml' %}
 
 {% block headCSS %}
