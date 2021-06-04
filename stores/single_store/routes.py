@@ -84,6 +84,7 @@ def global_attr():
 
 
 @app.route("/")
+@app.route('/home')
 def home():
     heroSlider = Hero.query.all()
     featuresService = Features.query.all()
