@@ -1,0 +1,13 @@
+{% extends 'single-store/user-account/base.djhtml' %}
+
+{% block head %}
+{% endblock %}
+
+{% block dashboard %}
+	{% include '/general/user-account/dashboard-block.djhtml' %}
+{% endblock %}
+
+{% block container %}{% endblock %}
+
+{% block tail %}
+{% endblock %}

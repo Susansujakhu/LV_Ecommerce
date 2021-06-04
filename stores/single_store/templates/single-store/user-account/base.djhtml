@@ -1,0 +1,57 @@
+{% set pageTitle = "My Account" %}
+{% extends 'single-store/base.djhtml' %}
+
+{% block headCSS %}
+	<link rel="stylesheet" type="text/css" href= "{{ url_for('static', filename='css/general/user-account/user-dashboard.css') }}" }}>
+{% endblock %}
+
+{% block head %}{% endblock %}
+
+{% block content %}
+	<div class="block">
+	    <div class="container">
+	        <div class="row">
+	            <div class="col-12 col-lg-3 d-flex">
+	                <div class="account-nav flex-grow-1">
+	                    <h4 class="account-nav-title">Navigation</h4>
+	                    <ul>
+	                        <li class="account-nav-item  account-nav-item--active ">
+	                            <a href="/dashboard">Dashboard</a>
+	                        </li>
+	                        <li class="account-nav-item ">
+	                            <a href="/dashboard/edit-profile">Edit Profile</a>
+	                        </li>
+	                        <li class="account-nav-item ">
+	                            <a href="/dashboard/order-history">Order History</a>
+	                        </li>
+	                        <li class="account-nav-item ">
+	                            <a href="/dashboard/order-details">Order Details</a>
+	                        </li>
+	                        <li class="account-nav-item ">
+	                            <a href="/dashboard/address-book">Address Book</a>
+	                        </li>
+	                        <li class="account-nav-item ">
+	                            <a href="/dashboard/edit-address">Edit Address</a>
+	                        </li>
+	                        <li class="account-nav-item ">
+	                            <a href="/dashboard/change-password">Password</a>
+	                        </li>
+	                        <li class="account-nav-item ">
+	                            <a href="/logout">Logout</a>
+	                        </li>
+	                    </ul>
+	                </div>
+	            </div>
+	            <div class="col-12 col-lg-9 mt-4 mt-lg-0">
+	                {% block dashboard %}
+	                {% endblock %}
+	            </div>
+	        </div>
+	    </div>
+	</div>
+{% endblock %}
+
+{% block container %}{% endblock %}
+
+{% block tail %}
+{% endblock %}

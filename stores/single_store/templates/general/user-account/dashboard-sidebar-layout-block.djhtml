@@ -1,0 +1,41 @@
+<div class="block">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-lg-3 d-flex">
+                <div class="account-nav flex-grow-1">
+                    <h4 class="account-nav-title">Navigation</h4>
+                    <ul>
+                        <li class="account-nav-item  account-nav-item--active ">
+                            <a href="account-dashboard.html">Dashboard</a>
+                        </li>
+                        <li class="account-nav-item ">
+                            <a href="account-profile.html">Edit Profile</a>
+                        </li>
+                        <li class="account-nav-item ">
+                            <a href="account-orders.html">Order History</a>
+                        </li>
+                        <li class="account-nav-item ">
+                            <a href="account-order-details.html">Order Details</a>
+                        </li>
+                        <li class="account-nav-item ">
+                            <a href="account-addresses.html">Addresses</a>
+                        </li>
+                        <li class="account-nav-item ">
+                            <a href="account-edit-address.html">Edit Address</a>
+                        </li>
+                        <li class="account-nav-item ">
+                            <a href="account-password.html">Password</a>
+                        </li>
+                        <li class="account-nav-item ">
+                            <a href="account-login.html">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-12 col-lg-9 mt-4 mt-lg-0">
+                {% block dashboard %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+</div>

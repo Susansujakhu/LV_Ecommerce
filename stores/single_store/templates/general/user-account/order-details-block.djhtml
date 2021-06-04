@@ -1,0 +1,59 @@
+<div class="card">
+    <div class="order-header">
+        <div class="order-header-actions">
+            <a href="account-orders.html" class="btn btn-xs btn-secondary">Back to list</a>
+        </div>
+        <h5 class="order-header-title">Order #3857</h5>
+        <div class="order-header-subtitle">
+            Was placed on <mark class="order-header-date">19 October, 2020</mark>
+            and is currently <mark class="order-header-status">On hold</mark>.
+        </div>
+    </div>
+    <div class="card-divider"></div>
+    <div class="card-table">
+        <div class="table-responsive-sm">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody class="card-table-body card-table-body--merge-rows">
+                    <tr>
+                        <td>Electric Planer Brandix KL370090G 300 Watts × 2</td>
+                        <td>$1,398.00</td>
+                    </tr>
+                    <tr>
+                        <td>Undefined Tool IRadix DPS3000SY 2700 watts × 1</td>
+                        <td>$849.00</td>
+                    </tr>
+                    <tr>
+                        <td>Brandix Router Power Tool 2017ERXPK × 3</td>
+                        <td>$3,630.00</td>
+                    </tr>
+                </tbody>
+                <tbody class="card-table-body card-table-body--merge-rows">
+                    <tr>
+                        <th>Subtotal</th>
+                        <td>$5,877.00</td>
+                    </tr>
+                    <tr>
+                        <th>Store Credit</th>
+                        <td>$-20.00</td>
+                    </tr>
+                    <tr>
+                        <th>Shipping</th>
+                        <td>$25.00</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>Total</th>
+                        <td>$5,882.00</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>

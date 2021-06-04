@@ -109,6 +109,7 @@ def quickview():
     render_template("single-store/quick-view-modal-block.html")
 
 @app.route("/single/<int:productId>")
+@login_required
 def single_product(productId):
     product = Product.query.get(productId)
     if product is None:
@@ -199,7 +200,7 @@ def user_account():
                 db.session.commit()
                 flash(f'Account created for {form2.username.data}! Please Login to continue', 'success')
             else:
-                flash('Failed to Cerate Account', 'danger')
+                flash('Failed to Create Account', 'danger')
 
     return render_template(
         'single-store/user-account/user-account.djhtml', form1=form1, form2 = form2
@@ -209,49 +210,50 @@ def user_account():
 @login_required
 def user_dashboard():
     return render_template(
-        'single-store/user-account/user-dashboard.djhtml'
+        'single-store/user-account/dashboard-page.djhtml'
         )
 
-@app.route("/address-book")
-@login_required
-def address_book():
-    return render_template(
-        'single-store/user-account/address-book.djhtml'
-        )
-
-@app.route("/edit-address")
-@login_required
-def edit_address():
-    return render_template(
-        'single-store/user-account/edit-address.djhtml'
-        )
-
-@app.route("/edit-profile")
+@app.route("/dashboard/edit-profile")
 @login_required
 def edit_profile():
     return render_template(
-        'single-store/user-account/edit-profile.djhtml'
+        'single-store/user-account/edit-profile-page.djhtml'
         )
 
-@app.route("/order-details")
-@login_required
-def order_details():
-    return render_template(
-        'single-store/user-account/order-details.djhtml'
-        )
-
-@app.route("/order-history")
+@app.route("/dashboard/order-history")
 @login_required
 def order_history():
     return render_template(
-        'single-store/user-account/order-history.djhtml'
+        'single-store/user-account/order-history-page.djhtml'
         )
 
-@app.route("/change-password")
+@app.route("/dashboard/order-details")
+@login_required
+def order_details():
+    return render_template(
+        'single-store/user-account/order-details-page.djhtml'
+        )
+
+@app.route("/dashboard/address-book")
+@login_required
+def address_book():
+    return render_template(
+        'single-store/user-account/address-book-page.djhtml'
+        )
+
+@app.route("/dashboard/edit-address")
+@login_required
+def edit_address():
+    return render_template(
+        'single-store/user-account/edit-address-page.djhtml'
+        )
+
+
+@app.route("/dashboard/change-password")
 @login_required
 def change_password():
     return render_template(
-        'single-store/user-account/password.djhtml'
+        'single-store/user-account/change-password-page.djhtml'
         )
 
 

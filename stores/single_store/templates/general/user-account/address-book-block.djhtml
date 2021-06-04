@@ -1,0 +1,54 @@
+<div class="addresses-list">
+    <a href="" class="addresses-list-item addresses-list-item--new">
+        <div class="addresses-list-plus"></div>
+        <div class="btn btn-secondary btn-sm">Add New</div>
+    </a>
+    <div class="addresses-list-divider"></div>
+    <div class="addresses-list-item card address-card">
+        <div class="address-card-badge">Default</div>
+        <div class="address-card-body">
+            <div class="address-card-name">Helena Garcia</div>
+            <div class="address-card-row">
+                Random Federation<br>
+                115302, Moscow<br>
+                ul. Varshavskaya, 15-2-178
+            </div>
+            <div class="address-card-row">
+                <div class="address-card-row-title">Phone Number</div>
+                <div class="address-card-row-content">38 972 588-42-36</div>
+            </div>
+            <div class="address-card-row">
+                <div class="address-card-row-title">Email Address</div>
+                <div class="address-card-row-content">stroyka@example.com</div>
+            </div>
+            <div class="address-card-footer">
+                <a href="account-edit-address.html">Edit</a>&nbsp;&nbsp;
+                <a href="">Remove</a>
+            </div>
+        </div>
+    </div>
+    <div class="addresses-list-divider"></div>
+    <div class="addresses-list-item card address-card">
+        <div class="address-card-body">
+            <div class="address-card-name">Jupiter Saturnov</div>
+            <div class="address-card-row">
+                RandomLand<br>
+                4b4f53, MarsGrad<br>
+                Sun Orbit, 43.3241-85.239
+            </div>
+            <div class="address-card-row">
+                <div class="address-card-row-title">Phone Number</div>
+                <div class="address-card-row-content">ZX 971 972-57-26</div>
+            </div>
+            <div class="address-card-row">
+                <div class="address-card-row-title">Email Address</div>
+                <div class="address-card-row-content">stroyka@example.com</div>
+            </div>
+            <div class="address-card-footer">
+                <a href="account-edit-address.html">Edit</a>&nbsp;&nbsp;
+                <a href="">Remove</a>
+            </div>
+        </div>
+    </div>
+    <div class="addresses-list-divider"></div>
+</div>

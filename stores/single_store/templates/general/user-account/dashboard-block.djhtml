@@ -1,0 +1,76 @@
+<div class="dashboard">
+    <div class="dashboard-profile card profile-card">
+        <div class="card-body profile-card-body">
+            <div class="profile-card-avatar">
+                <img src="images/avatars/avatar-3.jpg" alt="">
+            </div>
+            <div class="profile-card-name">Helena Garcia</div>
+            <div class="profile-card-email">stroyka@example.com</div>
+            <div class="profile-card-edit">
+                <a href="account-profile.html" class="btn btn-secondary btn-sm">Edit Profile</a>
+            </div>
+        </div>
+    </div>
+    <div class="dashboard-address card address-card address-card--featured">
+        <div class="address-card-badge">Default Address</div>
+        <div class="address-card-body">
+            <div class="address-card-name">Helena Garcia</div>
+            <div class="address-card-row">
+                Random Federation<br>
+                115302, Moscow<br>
+                ul. Varshavskaya, 15-2-178
+            </div>
+            <div class="address-card-row">
+                <div class="address-card-row-title">Phone Number</div>
+                <div class="address-card-row-content">38 972 588-42-36</div>
+            </div>
+            <div class="address-card-row">
+                <div class="address-card-row-title">Email Address</div>
+                <div class="address-card-row-content">stroyka@example.com</div>
+            </div>
+            <div class="address-card-footer">
+                <a href="account-edit-address.html">Edit Address</a>
+            </div>
+        </div>
+    </div>
+    <div class="dashboard-orders card">
+        <div class="card-header">
+            <h5>Recent Orders</h5>
+        </div>
+        <div class="card-divider"></div>
+        <div class="card-table">
+            <div class="table-responsive-sm">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Order</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><a href="">#8132</a></td>
+                            <td>02 April, 2019</td>
+                            <td>Pending</td>
+                            <td>$2,719.00 for 5 item(s)</td>
+                        </tr>
+                        <tr>
+                            <td><a href="">#7592</a></td>
+                            <td>28 March, 2019</td>
+                            <td>Pending</td>
+                            <td>$374.00 for 3 item(s)</td>
+                        </tr>
+                        <tr>
+                            <td><a href="">#7192</a></td>
+                            <td>15 March, 2019</td>
+                            <td>Shipped</td>
+                            <td>$791.00 for 4 item(s)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
