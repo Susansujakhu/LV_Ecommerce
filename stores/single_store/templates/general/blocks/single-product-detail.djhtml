@@ -1,5 +1,5 @@
 <link rel="stylesheet" type="text/css" href= "{{ url_for('static', filename='css/general/blocks/single-product-detail.css') }}" }}>
-
+{% set productId = product['id']  %}
 {% set productName = product['productName']  %}
 {% set productSlug = product['slug']  %}
 {% set productPrice = product['price']  %}
@@ -318,17 +318,17 @@
                                     </div>
                                 </div>
                                 <div class="product-actions-item product-actions-item--addtocart">
-                                    <button class="btn btn-primary btn-lg">Add to cart</button>
+                                    <button id="addCart" data-id="{{ productId }}" class="btn btn-primary btn-lg">Add to cart</button>
                                 </div>
                                 <div class="product-actions-item product-actions-item--wishlist">
-                                    <button type="button" class="btn btn-secondary btn-svg-icon btn-lg" data-toggle="tooltip" title="Wishlist">
+                                    <button id="addWishlist" data-id="{{ productId }}" type="button" class="btn btn-secondary btn-svg-icon btn-lg" data-toggle="tooltip" title="Wishlist">
                                         <svg width="16px" height="16px">
                                             <use xlink:href="/static/assets/icons/sprite.svg#wishlist-16"></use>
                                         </svg>
                                     </button>
                                 </div>
                                 <div class="product-actions-item product-actions-item--compare">
-                                    <button type="button" class="btn btn-secondary btn-svg-icon btn-lg" data-toggle="tooltip" title="Compare">
+                                    <button id="addCompare" data-id="{{ productId }}" type="button" class="btn btn-secondary btn-svg-icon btn-lg" data-toggle="tooltip" title="Compare">
                                         <svg width="16px" height="16px">
                                             <use xlink:href="/static/assets/icons/sprite.svg#compare-16"></use>
                                         </svg>
@@ -437,294 +437,45 @@
                             <h3 class="reviews-view-header">Customer Reviews</h3>
                             <div class="reviews-list">
                                 <ol class="reviews-list-content">
-                                    <li class="reviews-list-item">
+                                {% for rows in rating %}
+                                    {% for user in users %}
+                                        {% if user.userId == rows.userId %}
+
+                                    <li id="review-list" class="reviews-list-item">
                                         <div class="review">
                                             <div class="review-avatar"><img src="images/avatars/avatar-1.jpg" alt=""></div>
                                             <div class="review-content">
-                                                <div class="review-author">Samantha Smith</div>
+                                                <div class="review-author">{{user.userName}}</div>
                                                 <div class="review-rating">
                                                     <div class="rating">
                                                         <div class="rating-body">
-                                                            <svg class="rating-star rating-star--active" width="13px" height="12px">
-                                                                <g class="rating-fill">
-                                                                    <use xlink:href="/static/assets/icons/sprite.svg#star-normal"></use>
-                                                                </g>
-                                                                <g class="rating-stroke">
-                                                                    <use xlink:href="/static/assets/icons/sprite.svg#star-normal-stroke"></use>
-                                                                </g>
+                                                        {% for i in range(rows.rate) %}
+                                                            <svg width="13px" height="13px">
+                                                                <use xlink:href="/static/assets/icons/sprite.svg#star-normal"></use>
                                                             </svg>
-                                                            <div class="rating-star rating-star--only-edge rating-star--active">
-                                                                <div class="rating-fill">
-                                                                    <div class="fake-svg-icon"></div>
-                                                                </div>
-                                                                <div class="rating-stroke">
-                                                                    <div class="fake-svg-icon"></div>
-                                                                </div>
-                                                            </div>
-                                                            <svg class="rating-star rating-star--active" width="13px" height="12px">
-                                                                <g class="rating-fill">
-                                                                    <use xlink:href="/static/assets/icons/sprite.svg#star-normal"></use>
-                                                                </g>
-                                                                <g class="rating-stroke">
+                                                        {% endfor %}
+                                                        {% if rows.rate != '5' %}
+                                                            {% set count = 5 - rows.rate %} 
+                                                            {% for i in range(count) %}
+                                                                <svg width="13px" height="13px">
                                                                     <use xlink:href="/static/assets/icons/sprite.svg#star-normal-stroke"></use>
-                                                                </g>
-                                                            </svg>
-                                                            <div class="rating-star rating-star--only-edge rating-star--active">
-                                                                <div class="rating-fill">
-                                                                    <div class="fake-svg-icon"></div>
-                                                                </div>
-                                                                <div class="rating-stroke">
-                                                                    <div class="fake-svg-icon"></div>
-                                                                </div>
-                                                            </div>
-                                                            <svg class="rating-star rating-star--active" width="13px" height="12px">
-                                                                <g class="rating-fill">
-                                                                    <use xlink:href="/static/assets/icons/sprite.svg#star-normal"></use>
-                                                                </g>
-                                                                <g class="rating-stroke">
-                                                                    <use xlink:href="/static/assets/icons/sprite.svg#star-normal-stroke"></use>
-                                                                </g>
-                                                            </svg>
-                                                            <div class="rating-star rating-star--only-edge rating-star--active">
-                                                                <div class="rating-fill">
-                                                                    <div class="fake-svg-icon"></div>
-                                                                </div>
-                                                                <div class="rating-stroke">
-                                                                    <div class="fake-svg-icon"></div>
-                                                                </div>
-                                                            </div>
-                                                            <svg class="rating-star rating-star--active" width="13px" height="12px">
-                                                                <g class="rating-fill">
-                                                                    <use xlink:href="/static/assets/icons/sprite.svg#star-normal"></use>
-                                                                </g>
-                                                                <g class="rating-stroke">
-                                                                    <use xlink:href="/static/assets/icons/sprite.svg#star-normal-stroke"></use>
-                                                                </g>
-                                                            </svg>
-                                                            <div class="rating-star rating-star--only-edge rating-star--active">
-                                                                <div class="rating-fill">
-                                                                    <div class="fake-svg-icon"></div>
-                                                                </div>
-                                                                <div class="rating-stroke">
-                                                                    <div class="fake-svg-icon"></div>
-                                                                </div>
-                                                            </div>
-                                                            <svg class="rating-star " width="13px" height="12px">
-                                                                <g class="rating-fill">
-                                                                    <use xlink:href="/static/assets/icons/sprite.svg#star-normal"></use>
-                                                                </g>
-                                                                <g class="rating-stroke">
-                                                                    <use xlink:href="/static/assets/icons/sprite.svg#star-normal-stroke"></use>
-                                                                </g>
-                                                            </svg>
-                                                            <div class="rating-star rating-star--only-edge ">
-                                                                <div class="rating-fill">
-                                                                    <div class="fake-svg-icon"></div>
-                                                                </div>
-                                                                <div class="rating-stroke">
-                                                                    <div class="fake-svg-icon"></div>
-                                                                </div>
-                                                            </div>
+                                                                </svg>
+                                                            {% endfor %}
+                                                        {% endif %}
+                                                            
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="review-text">Phasellus id mattis nulla. Mauris velit nisi, imperdiet vitae sodales in, maximus ut lectus. Vivamus commodo scelerisque lacus, at porttitor dui iaculis id. Curabitur imperdiet ultrices fermentum.</div>
+                                                <div class="review-text">{{rows.comments}}</div>
                                                 <div class="review-date">27 May, 2018</div>
                                             </div>
                                         </div>
                                     </li>
-                                    <li class="reviews-list-item">
-                                        <div class="review">
-                                            <div class="review-avatar"><img src="images/avatars/avatar-2.jpg" alt=""></div>
-                                            <div class="review-content">
-                                                <div class="review-author">Adam Taylor</div>
-                                                <div class="review-rating">
-                                                    <div class="rating">
-                                                        <div class="rating-body">
-                                                            <svg class="rating-star rating-star--active" width="13px" height="12px">
-                                                                <g class="rating-fill">
-                                                                    <use xlink:href="/static/assets/icons/sprite.svg#star-normal"></use>
-                                                                </g>
-                                                                <g class="rating-stroke">
-                                                                    <use xlink:href="/static/assets/icons/sprite.svg#star-normal-stroke"></use>
-                                                                </g>
-                                                            </svg>
-                                                            <div class="rating-star rating-star--only-edge rating-star--active">
-                                                                <div class="rating-fill">
-                                                                    <div class="fake-svg-icon"></div>
-                                                                </div>
-                                                                <div class="rating-stroke">
-                                                                    <div class="fake-svg-icon"></div>
-                                                                </div>
-                                                            </div>
-                                                            <svg class="rating-star rating-star--active" width="13px" height="12px">
-                                                                <g class="rating-fill">
-                                                                    <use xlink:href="/static/assets/icons/sprite.svg#star-normal"></use>
-                                                                </g>
-                                                                <g class="rating-stroke">
-                                                                    <use xlink:href="/static/assets/icons/sprite.svg#star-normal-stroke"></use>
-                                                                </g>
-                                                            </svg>
-                                                            <div class="rating-star rating-star--only-edge rating-star--active">
-                                                                <div class="rating-fill">
-                                                                    <div class="fake-svg-icon"></div>
-                                                                </div>
-                                                                <div class="rating-stroke">
-                                                                    <div class="fake-svg-icon"></div>
-                                                                </div>
-                                                            </div>
-                                                            <svg class="rating-star rating-star--active" width="13px" height="12px">
-                                                                <g class="rating-fill">
-                                                                    <use xlink:href="/static/assets/icons/sprite.svg#star-normal"></use>
-                                                                </g>
-                                                                <g class="rating-stroke">
-                                                                    <use xlink:href="/static/assets/icons/sprite.svg#star-normal-stroke"></use>
-                                                                </g>
-                                                            </svg>
-                                                            <div class="rating-star rating-star--only-edge rating-star--active">
-                                                                <div class="rating-fill">
-                                                                    <div class="fake-svg-icon"></div>
-                                                                </div>
-                                                                <div class="rating-stroke">
-                                                                    <div class="fake-svg-icon"></div>
-                                                                </div>
-                                                            </div>
-                                                            <svg class="rating-star " width="13px" height="12px">
-                                                                <g class="rating-fill">
-                                                                    <use xlink:href="/static/assets/icons/sprite.svg#star-normal"></use>
-                                                                </g>
-                                                                <g class="rating-stroke">
-                                                                    <use xlink:href="/static/assets/icons/sprite.svg#star-normal-stroke"></use>
-                                                                </g>
-                                                            </svg>
-                                                            <div class="rating-star rating-star--only-edge ">
-                                                                <div class="rating-fill">
-                                                                    <div class="fake-svg-icon"></div>
-                                                                </div>
-                                                                <div class="rating-stroke">
-                                                                    <div class="fake-svg-icon"></div>
-                                                                </div>
-                                                            </div>
-                                                            <svg class="rating-star " width="13px" height="12px">
-                                                                <g class="rating-fill">
-                                                                    <use xlink:href="/static/assets/icons/sprite.svg#star-normal"></use>
-                                                                </g>
-                                                                <g class="rating-stroke">
-                                                                    <use xlink:href="/static/assets/icons/sprite.svg#star-normal-stroke"></use>
-                                                                </g>
-                                                            </svg>
-                                                            <div class="rating-star rating-star--only-edge ">
-                                                                <div class="rating-fill">
-                                                                    <div class="fake-svg-icon"></div>
-                                                                </div>
-                                                                <div class="rating-stroke">
-                                                                    <div class="fake-svg-icon"></div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="review-text">Aenean non lorem nisl. Duis tempor sollicitudin orci, eget tincidunt ex semper sit amet. Nullam neque justo, sodales congue feugiat ac, facilisis a augue. Donec tempor sapien et fringilla facilisis. Nam maximus consectetur diam. Nulla ut ex mollis, volutpat tellus vitae, accumsan ligula.</div>
-                                                <div class="review-date">12 April, 2018</div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="reviews-list-item">
-                                        <div class="review">
-                                            <div class="review-avatar"><img src="images/avatars/avatar-3.jpg" alt=""></div>
-                                            <div class="review-content">
-                                                <div class="review-author">Helena Garcia</div>
-                                                <div class="review-rating">
-                                                    <div class="rating">
-                                                        <div class="rating-body">
-                                                            <svg class="rating-star rating-star--active" width="13px" height="12px">
-                                                                <g class="rating-fill">
-                                                                    <use xlink:href="/static/assets/icons/sprite.svg#star-normal"></use>
-                                                                </g>
-                                                                <g class="rating-stroke">
-                                                                    <use xlink:href="/static/assets/icons/sprite.svg#star-normal-stroke"></use>
-                                                                </g>
-                                                            </svg>
-                                                            <div class="rating-star rating-star--only-edge rating-star--active">
-                                                                <div class="rating-fill">
-                                                                    <div class="fake-svg-icon"></div>
-                                                                </div>
-                                                                <div class="rating-stroke">
-                                                                    <div class="fake-svg-icon"></div>
-                                                                </div>
-                                                            </div>
-                                                            <svg class="rating-star rating-star--active" width="13px" height="12px">
-                                                                <g class="rating-fill">
-                                                                    <use xlink:href="/static/assets/icons/sprite.svg#star-normal"></use>
-                                                                </g>
-                                                                <g class="rating-stroke">
-                                                                    <use xlink:href="/static/assets/icons/sprite.svg#star-normal-stroke"></use>
-                                                                </g>
-                                                            </svg>
-                                                            <div class="rating-star rating-star--only-edge rating-star--active">
-                                                                <div class="rating-fill">
-                                                                    <div class="fake-svg-icon"></div>
-                                                                </div>
-                                                                <div class="rating-stroke">
-                                                                    <div class="fake-svg-icon"></div>
-                                                                </div>
-                                                            </div>
-                                                            <svg class="rating-star rating-star--active" width="13px" height="12px">
-                                                                <g class="rating-fill">
-                                                                    <use xlink:href="/static/assets/icons/sprite.svg#star-normal"></use>
-                                                                </g>
-                                                                <g class="rating-stroke">
-                                                                    <use xlink:href="/static/assets/icons/sprite.svg#star-normal-stroke"></use>
-                                                                </g>
-                                                            </svg>
-                                                            <div class="rating-star rating-star--only-edge rating-star--active">
-                                                                <div class="rating-fill">
-                                                                    <div class="fake-svg-icon"></div>
-                                                                </div>
-                                                                <div class="rating-stroke">
-                                                                    <div class="fake-svg-icon"></div>
-                                                                </div>
-                                                            </div>
-                                                            <svg class="rating-star rating-star--active" width="13px" height="12px">
-                                                                <g class="rating-fill">
-                                                                    <use xlink:href="/static/assets/icons/sprite.svg#star-normal"></use>
-                                                                </g>
-                                                                <g class="rating-stroke">
-                                                                    <use xlink:href="/static/assets/icons/sprite.svg#star-normal-stroke"></use>
-                                                                </g>
-                                                            </svg>
-                                                            <div class="rating-star rating-star--only-edge rating-star--active">
-                                                                <div class="rating-fill">
-                                                                    <div class="fake-svg-icon"></div>
-                                                                </div>
-                                                                <div class="rating-stroke">
-                                                                    <div class="fake-svg-icon"></div>
-                                                                </div>
-                                                            </div>
-                                                            <svg class="rating-star rating-star--active" width="13px" height="12px">
-                                                                <g class="rating-fill">
-                                                                    <use xlink:href="/static/assets/icons/sprite.svg#star-normal"></use>
-                                                                </g>
-                                                                <g class="rating-stroke">
-                                                                    <use xlink:href="/static/assets/icons/sprite.svg#star-normal-stroke"></use>
-                                                                </g>
-                                                            </svg>
-                                                            <div class="rating-star rating-star--only-edge rating-star--active">
-                                                                <div class="rating-fill">
-                                                                    <div class="fake-svg-icon"></div>
-                                                                </div>
-                                                                <div class="rating-stroke">
-                                                                    <div class="fake-svg-icon"></div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="review-text">Duis ac lectus scelerisque quam blandit egestas. Pellentesque hendrerit eros laoreet suscipit ultrices.</div>
-                                                <div class="review-date">2 January, 2018</div>
-                                            </div>
-                                        </div>
-                                    </li>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endfor %}
+                                    
+
                                 </ol>
                                 <div class="reviews-list-pagination">
                                     <ul class="pagination justify-content-center">
@@ -749,43 +500,117 @@
                                 </div>
                             </div>
                         </div>
-                        <form class="reviews-view-form">
+                        {% if current_user.is_authenticated %}
+                        <form id="reviewForm" class="reviews-view-form" method="POST" action="">
                             <h3 class="reviews-view-header">Write A Review</h3>
                             <div class="row">
                                 <div class="col-12 col-lg-9 col-xl-8">
                                     <div class="form-row">
                                         <div class="form-group col-md-4">
                                             <label for="review-stars">Review Stars</label>
-                                            <select id="review-stars" class="form-control">
-                                                <option>5 Stars Rating</option>
-                                                <option>4 Stars Rating</option>
-                                                <option>3 Stars Rating</option>
-                                                <option>2 Stars Rating</option>
-                                                <option>1 Stars Rating</option>
-                                            </select>
+                                            <div class="rate">
+                                                <input type="radio" id="star5" name="rate" value="5" />
+                                                <label for="star5" title="5 Stars">5 stars</label>
+                                                <input type="radio" id="star4" name="rate" value="4" />
+                                                <label for="star4" title="4 Stars">4 stars</label>
+                                                <input type="radio" id="star3" name="rate" value="3" />
+                                                <label for="star3" title="3 Stars">3 stars</label>
+                                                <input type="radio" id="star2" name="rate" value="2" />
+                                                <label for="star2" title="2 Stars">2 stars</label>
+                                                <input type="radio" id="star1" name="rate" value="1" />
+                                                <label for="star1" title="1 Star">1 star</label>
+                                            </div>
                                         </div>
-                                        <div class="form-group col-md-4">
-                                            <label for="review-author">Your Name</label>
-                                            <input type="text" class="form-control" id="review-author" placeholder="Your Name">
-                                        </div>
-                                        <div class="form-group col-md-4">
-                                            <label for="review-email">Email Address</label>
-                                            <input type="text" class="form-control" id="review-email" placeholder="Email Address">
-                                        </div>
+                                        
                                     </div>
                                     <div class="form-group">
                                         <label for="review-text">Your Review</label>
-                                        <textarea class="form-control" id="review-text" rows="6"></textarea>
+                                        <textarea class="form-control" id="review-text" name="comments" rows="6"></textarea>
                                     </div>
                                     <div class="form-group mb-0">
-                                        <button type="submit" class="btn btn-primary btn-lg">Post Your Review</button>
+                                        <input id="review_submit" type="submit" value="Submit">
+                                        
                                     </div>
                                 </div>
                             </div>
                         </form>
+
+                        {% endif %}
+                        
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<style>
+.rate {
+    float: left;
+    height: 46px;
+    padding: 0 10px;
+}
+.rate:not(:checked) > input {
+    position:absolute;
+    display:none;
+}
+.rate:not(:checked) > label {
+    float:right;
+    width:1em;
+    overflow:hidden;
+    white-space:nowrap;
+    cursor:pointer;
+    font-size:30px;
+    color:#ccc;
+}
+.rate:not(:checked) > label:before {
+    content: '★ ';
+}
+.rate > input:checked ~ label {
+    color: #ffc700;    
+}
+.rate:not(:checked) > label:hover,
+.rate:not(:checked) > label:hover ~ label {
+    color: #deb217;  
+}
+.rate > input:checked + label:hover,
+.rate > input:checked + label:hover ~ label,
+.rate > input:checked ~ label:hover,
+.rate > input:checked ~ label:hover ~ label,
+.rate > label:hover ~ input:checked ~ label {
+    color: #c59b08;
+}
+
+/* Modified from: https://github.com/mukulkant/Star-rating-using-pure-css */
+</style>
+
+<script>
+$(document).ready(function(){
+    $(document).on('submit','#reviewForm',function(e)
+        {
+      var urll = "/saveReview"
+      e.preventDefault();
+
+            var productId = '{{productId}}';
+            var radio_val = $('input[name="rate"]:checked').val();
+            var comments = $("#review-text").val();
+            $.ajax({
+                type:'POST',
+                url:urll,
+                data: {productId: productId,
+                    radio_val:radio_val,
+                    comments:comments
+                    },
+                success:function()
+                {
+                $('#review_submit').fadeOut(1000).fadeIn(1000);
+                $("#review-text").val('');
+                $('input[name="rate"]:checked').val('')
+                $("#review-list").load(" #review-list");
+                }
+            })
+
+      
+    });
+});
+</script>
