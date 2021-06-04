@@ -15,6 +15,7 @@ from werkzeug.utils import secure_filename
 from datetime import datetime, timezone, timedelta 
 from sqlalchemy.sql import table, column
 from sqlalchemy import func
+from sqlalchemy import exc
 
 admin = Admin(app, name='Dashboard', index_view = MyAdminIndexView())
 admin.add_view(AdminView(User, db.session))
@@ -802,8 +803,15 @@ def add_Cart():
                     cart_product_id=product,
                     )
         print(addCart)
-        db.session.add(addCart)
-        db.session.commit()
+        
+        try:
+            db.session.add(addCart)
+            db.session.commit()
+        except exc.IntegrityError as err:
+            db.session.rollback()
+            db.session.add(addCart)
+            db.session.commit()
+        
     else:
         quantityValue=cart.quantity
         quantityValue = quantityValue+1
