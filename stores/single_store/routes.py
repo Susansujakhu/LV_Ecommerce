@@ -5,7 +5,7 @@ from flask.globals import session
 from sqlalchemy.sql.expression import text
 from wtforms.fields.core import StringField
 from single_store import app, db, bcrypt
-from single_store.forms import DynamicForm, HorizontalPanelForm, EditHorizontalPanelForm, BrandForm, EditBrandForm, FeaturesForm, EditFeaturesForm, HeroForm, EditHeroForm, RegistrationForm, LoginForm, UpdateAccountForm, ProductForm, EditProductForm, CategoryForm,EditCategoryForm
+from single_store.forms import DynamicForm, HorizontalPanelForm, EditHorizontalPanelForm, BrandForm, EditBrandForm, FeaturesForm, EditFeaturesForm, HeroForm, EditHeroForm, RatingForm, RegistrationForm, LoginForm, UpdateAccountForm, ProductForm, EditProductForm, CategoryForm,EditCategoryForm
 from single_store.models import Attributes, Compare,HorizontalPanel, Brand, Cart, Category, Features, Hero, Order, Product, Rating, Shipping, User, MyAdminIndexView, AdminView, Wishlist
 from flask_login import login_user, current_user, logout_user, login_required
 import secrets, os, sys
@@ -111,15 +111,47 @@ def quickview():
     render_template("single-store/quick-view-modal-block.html")
 
 @app.route("/single/<int:productId>")
-@login_required
 def single_product(productId):
     product = Product.query.get(productId)
+    rating = Rating.query.filter_by(product_id = product.id).all()
+    users = User.query.all()
+    print(rating)
+    form = RatingForm()
     if product is None:
         return redirect(url_for('home'))
     
     return render_template(
-        'single-store/single-product-page.djhtml', title = product.productName, product = product)
-        
+        'single-store/single-product-page.djhtml', title = product.productName, product = product, form=form, rating=rating, users=users)
+
+
+@app.route("/saveReview", methods=["POST"])
+@login_required
+def saveReview():
+    if request.method == "POST":
+        rate = request.form.get("radio_val")
+        comments = request.form.get("comments")
+        productId = request.form.get("productId")
+        # productId= int(request.get_data())
+        product = Product.query.get(productId)
+        form = RatingForm()
+
+        if rate is None:
+            print("Please choose at least 1 Star")
+        else:
+            if form.validate_on_submit:
+                rate = Rating(
+                            rate = rate,
+                            comments = comments,
+                            rating_user_id = current_user,
+                            rating_product_id=product,
+                            )
+
+                db.session.add(rate)
+                db.session.commit()
+                print("Success Addding Review")
+    return jsonify({'result': 'success'})
+
+
 
 @app.route("/shop")
 def shop():
@@ -777,7 +809,7 @@ def delete(tables, id):
     table = str2Class(tables)
     table_name = tables.lower()
     if table.query.filter_by(id=id).delete():
-        db.session.execute("ALTER SEQUENCE "+ table_name +"_id_seq RESTART WITH 1")
+        db.session.execute("ALTER SEQUENCE "+ table_name +"_id_seq RESTART")
         db.session.commit()
         print("Success")
     else:
@@ -829,7 +861,7 @@ def deleteCart():
         productId= int(request.get_data())
         print(productId)
     if Cart.query.filter_by(product_id=productId).delete():
-        db.session.execute("ALTER SEQUENCE cart_id_seq RESTART WITH 1")
+        db.session.execute("ALTER SEQUENCE cart_id_seq RESTART")
         db.session.commit()
         print("Success")
     else:
