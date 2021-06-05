@@ -2,10 +2,11 @@ import json
 from functools import wraps
 from flask import render_template, url_for, flash, redirect, request, Response, jsonify
 from flask.globals import session
+from flask.helpers import make_response
 from sqlalchemy.sql.expression import text
 from wtforms.fields.core import StringField
 from single_store import app, db, bcrypt
-from single_store.forms import DynamicForm, HorizontalPanelForm, EditHorizontalPanelForm, BrandForm, EditBrandForm, FeaturesForm, EditFeaturesForm, HeroForm, EditHeroForm, RatingForm, RegistrationForm, LoginForm, UpdateAccountForm, ProductForm, EditProductForm, CategoryForm,EditCategoryForm
+from single_store.forms import DynamicForm, HorizontalPanelForm, EditHorizontalPanelForm, BrandForm, EditBrandForm, FeaturesForm, EditFeaturesForm, HeroForm, EditHeroForm, RatingForm, RegistrationForm, LoginForm, ProductForm, EditProductForm, CategoryForm,EditCategoryForm, AttributesForm
 from single_store.models import Attributes, Compare,HorizontalPanel, Brand, Cart, Category, Features, Hero, Order, Product, Rating, Shipping, User, MyAdminIndexView, AdminView, Wishlist
 from flask_login import login_user, current_user, logout_user, login_required
 import secrets, os, sys
@@ -153,11 +154,34 @@ def saveReview():
 
 
 
-@app.route("/shop")
+@app.route("/shop", methods=['GET', 'POST'])
 def shop():
+    if request.method == "POST":
+        print("POST")
+        rate = request.form.get("radio_val")
+        comments = request.form.get("comments")
+        productId = request.form.get("productId")
+        # productId= int(request.get_data())
+        products = Product.query.get(productId)
+
     return render_template(
         'single-store/shop-page.djhtml'
         )
+
+
+@app.route("/shopFilter", methods=["POST"])
+def shopFilter():
+    if request.method == "POST":
+        print("POST")
+        min = int(float(request.form.get("min")))
+        max = int(float(request.form.get("max")))
+
+        products = Product.query.filter(Product.price>=min, Product.price<=max).all()
+    else:
+        products = Product.query.all()
+
+    return jsonify({'htmlresponse':render_template('general/blocks/response.djhtml', products=products)})
+
 
 @app.route("/cart")
 @login_required
@@ -790,6 +814,9 @@ def str2Class(str):
 @restricted(access_level="Admin")
 def lists(tables):
     tables = tables.capitalize()
+    print(tables)
+    if tables == 'Horizontalpanel':
+        tables="HorizontalPanel"
     table = str2Class(tables)
 
     table_col = table.__table__.columns.keys()
@@ -806,6 +833,9 @@ def lists(tables):
 @restricted(access_level="Admin")
 def delete(tables, id):
     tables = tables.capitalize()
+    print(tables)
+    if tables == 'Horizontalpanel':
+        tables="HorizontalPanel"
     table = str2Class(tables)
     table_name = tables.lower()
     if table.query.filter_by(id=id).delete():
@@ -1036,6 +1066,9 @@ def add(tables):
                     galleryImages = ""
                     # file_list = request.files.getlist('imageGallery')
                     for f in form.imageGallery.data:
+                        print(f.filename)
+                        if f.filename == '':
+                            break
                         random_hex = secrets.token_hex(4)
                         split_name = f.filename.split(".")
                         images = save_picture(f, split_name[0]+random_hex+ split_name[1], 'gallery', 700, 700)
