@@ -604,8 +604,7 @@ $(document).ready(function(){
                 success:function()
                 {
                 $('#review_submit').fadeOut(1000).fadeIn(1000);
-                $("#review-text").val('');
-                $('input[name="rate"]:checked').val('')
+                $('#reviewForm')[0].reset();
                 $("#review-list").load(" #review-list");
                 }
             })
