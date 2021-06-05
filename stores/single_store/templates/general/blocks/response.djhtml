@@ -1,0 +1,148 @@
+{% for items in products %}
+<div class="products-list-item">
+    <div class="product-card product-card--hidden-actions ">
+        <button class="product-card-quickview" type="button">
+            <svg width="16px" height="16px">
+                <use xlink:href="/static/assets/icons/sprite.svg#quickview-16"></use>
+            </svg>
+            <span class="fake-svg-icon"></span>
+        </button>
+        <div class="product-card-badges-list">
+            <div class="product-card-badge product-card-badge--new">New</div>
+        </div>
+        <div class="product-card-image product-image">
+            <a href="single/{{ items['id'] }}" class="product-image-body">
+                <img class="product-image-img" src="{{url_for('static',filename='assets/images/products/'+items['imageFile'])}}" alt="">
+            </a>
+        </div>
+        <div class="product-card-info">
+            <div class="product-card-name">
+                <a href="single/{{ items['id'] }}">{{items['productName']}}</a>
+            </div>
+            <div class="product-card-rating">
+                <div class="product-card-rating-stars">
+                    <div class="rating">
+                        <div class="rating-body">
+                            <svg class="rating-star rating-star--active" width="13px" height="12px">
+                                <g class="rating-fill">
+                                    <use xlink:href="/static/assets/icons/sprite.svg#star-normal"></use>
+                                </g>
+                                <g class="rating-stroke">
+                                    <use xlink:href="/static/assets/icons/sprite.svg#star-normal-stroke"></use>
+                                </g>
+                            </svg>
+                            <div class="rating-star rating-star--only-edge rating-star--active">
+                                <div class="rating-fill">
+                                    <div class="fake-svg-icon"></div>
+                                </div>
+                                <div class="rating-stroke">
+                                    <div class="fake-svg-icon"></div>
+                                </div>
+                            </div>
+                            <svg class="rating-star rating-star--active" width="13px" height="12px">
+                                <g class="rating-fill">
+                                    <use xlink:href="/static/assets/icons/sprite.svg#star-normal"></use>
+                                </g>
+                                <g class="rating-stroke">
+                                    <use xlink:href="/static/assets/icons/sprite.svg#star-normal-stroke"></use>
+                                </g>
+                            </svg>
+                            <div class="rating-star rating-star--only-edge rating-star--active">
+                                <div class="rating-fill">
+                                    <div class="fake-svg-icon"></div>
+                                </div>
+                                <div class="rating-stroke">
+                                    <div class="fake-svg-icon"></div>
+                                </div>
+                            </div>
+                            <svg class="rating-star rating-star--active" width="13px" height="12px">
+                                <g class="rating-fill">
+                                    <use xlink:href="/static/assets/icons/sprite.svg#star-normal"></use>
+                                </g>
+                                <g class="rating-stroke">
+                                    <use xlink:href="/static/assets/icons/sprite.svg#star-normal-stroke"></use>
+                                </g>
+                            </svg>
+                            <div class="rating-star rating-star--only-edge rating-star--active">
+                                <div class="rating-fill">
+                                    <div class="fake-svg-icon"></div>
+                                </div>
+                                <div class="rating-stroke">
+                                    <div class="fake-svg-icon"></div>
+                                </div>
+                            </div>
+                            <svg class="rating-star rating-star--active" width="13px" height="12px">
+                                <g class="rating-fill">
+                                    <use xlink:href="/static/assets/icons/sprite.svg#star-normal"></use>
+                                </g>
+                                <g class="rating-stroke">
+                                    <use xlink:href="/static/assets/icons/sprite.svg#star-normal-stroke"></use>
+                                </g>
+                            </svg>
+                            <div class="rating-star rating-star--only-edge rating-star--active">
+                                <div class="rating-fill">
+                                    <div class="fake-svg-icon"></div>
+                                </div>
+                                <div class="rating-stroke">
+                                    <div class="fake-svg-icon"></div>
+                                </div>
+                            </div>
+                            <svg class="rating-star " width="13px" height="12px">
+                                <g class="rating-fill">
+                                    <use xlink:href="/static/assets/icons/sprite.svg#star-normal"></use>
+                                </g>
+                                <g class="rating-stroke">
+                                    <use xlink:href="/static/assets/icons/sprite.svg#star-normal-stroke"></use>
+                                </g>
+                            </svg>
+                            <div class="rating-star rating-star--only-edge ">
+                                <div class="rating-fill">
+                                    <div class="fake-svg-icon"></div>
+                                </div>
+                                <div class="rating-stroke">
+                                    <div class="fake-svg-icon"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card-rating-legend">9 Reviews</div>
+            </div>
+            <div class="product-card-features-list">
+                {{items['shortDescription']}}
+            </div>
+            {# <ul class="product-card-features-list">
+                <li>Speed: 750 RPM</li>
+                <li>Power Source: Cordless-Electric</li>
+                <li>Battery Cell Type: Lithium</li>
+                <li>Voltage: 20 Volts</li>
+                <li>Battery Capacity: 2 Ah</li>
+            </ul> #}
+        </div>
+        <div class="product-card-actions">
+            <div class="product-card-availability">
+                Availability: <span class="text-success">{{items['stock']}} In Stock</span>
+            </div>
+            <div class="product-card-prices">
+                {{ currency }} {{ items['price']}}
+            </div>
+            <div class="product-card-buttons">
+                <button class="btn btn-primary product-card-addtocart" type="button">Add To Cart</button>
+                <button class="btn btn-secondary product-card-addtocart product-card-addtocart--list" type="button">Add To Cart</button>
+                <button class="btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card-wishlist" type="button">
+                    <svg width="16px" height="16px">
+                        <use xlink:href="/static/assets/icons/sprite.svg#wishlist-16"></use>
+                    </svg>
+                    <span class="fake-svg-icon fake-svg-icon--wishlist-16"></span>
+                </button>
+                <button class="btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card-compare" type="button">
+                    <svg width="16px" height="16px">
+                        <use xlink:href="/static/assets/icons/sprite.svg#compare-16"></use>
+                    </svg>
+                    <span class="fake-svg-icon fake-svg-icon--compare-16"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
