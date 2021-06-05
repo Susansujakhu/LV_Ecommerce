@@ -254,7 +254,7 @@
                                         </button>
                                         <div class="filter-body" data-collapse-content>
                                             <div class="filter-container">
-                                                <div class="filter-price" data-min="0" data-max="200000" data-from="0" data-to="200000">
+                                                <div class="filter-price" data-min={{min}} data-max={{max}} data-from="0" data-to="200000">
                                                     <div id="filter-price-slider" class="filter-price-slider"></div>
                                                     <div class="filter-price-title">Price: Rs <span class="filter-price-min-value"></span> – Rs <span class="filter-price-max-value"></span></div>
                                                 </div>
