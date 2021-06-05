@@ -191,6 +191,13 @@ class RatingForm(FlaskForm):
     submit = SubmitField('Post Your Review')
 
 
+class AttributesForm(FlaskForm):
+    color = StringField('Add Color')
+    size = StringField('Add Size')
+    submit = SubmitField('Save Attributes')
+
+
+
 class DynamicForm(FlaskForm):
     form_type = HiddenField(default='FormType', render_kw={ 'type':'hidden' })
     # name = StringField() 
