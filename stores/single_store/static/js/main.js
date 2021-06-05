@@ -633,7 +633,6 @@
             noUiSlider.create(slider, {
                 start: [from, to],
                 connect: true,
-                direction: isRTL() ? 'rtl' : 'ltr',
                 range: {
                     'min': min,
                     'max': max
