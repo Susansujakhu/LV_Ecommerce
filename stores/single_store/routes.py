@@ -154,18 +154,13 @@ def saveReview():
 
 
 
-@app.route("/shop", methods=['GET', 'POST'])
+@app.route("/shop")
 def shop():
-    if request.method == "POST":
-        print("POST")
-        rate = request.form.get("radio_val")
-        comments = request.form.get("comments")
-        productId = request.form.get("productId")
-        # productId= int(request.get_data())
-        products = Product.query.get(productId)
+    max = db.session.query(func.max(Product.price)).scalar()
+    min = db.session.query(func.min(Product.price)).scalar()
 
     return render_template(
-        'single-store/shop-page.djhtml'
+        'single-store/shop-page.djhtml', max=max, min =min
         )
 
 
@@ -177,9 +172,7 @@ def shopFilter():
         max = int(float(request.form.get("max")))
 
         products = Product.query.filter(Product.price>=min, Product.price<=max).all()
-    else:
-        products = Product.query.all()
-
+        
     return jsonify({'htmlresponse':render_template('general/blocks/response.djhtml', products=products)})
 
 
