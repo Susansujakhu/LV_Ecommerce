@@ -134,12 +134,12 @@
                 <!-- .product-info -->
                 <div class="product-info">
                     <div class="product-wishlist-compare">
-                        <button type="button" class="btn btn-sm btn-light btn-svg-icon" data-toggle="tooltip" data-placement="right" title="Wishlist">
+                        <button  id="addWishlist" data-id="{{ productId }}" type="button" class="btn btn-sm btn-light btn-svg-icon" data-toggle="tooltip" data-placement="right" title="Wishlist">
                             <svg width="16px" height="16px">
                                 <use xlink:href="/static/assets/icons/sprite.svg#wishlist-16"></use>
                             </svg>
                         </button>
-                        <button type="button" class="btn btn-sm btn-light btn-svg-icon" data-toggle="tooltip" data-placement="right" title="Compare">
+                        <button id="addCompare" data-id="{{ productId }}" type="button" class="btn btn-sm btn-light btn-svg-icon" data-toggle="tooltip" data-placement="right" title="Compare">
                             <svg width="16px" height="16px">
                                 <use xlink:href="/static/assets/icons/sprite.svg#compare-16"></use>
                             </svg>
