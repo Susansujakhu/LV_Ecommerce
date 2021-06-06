@@ -8,6 +8,3 @@
 {% endblock %}
 
 {% block container %}{% endblock %}
-
-{% block tail %}
-{% endblock %}
