@@ -416,7 +416,7 @@
                                                         <label class="filter-list-item ">
                                                             <span class="filter-list-input input-check">
                                                                 <span class="input-check-body">
-                                                                    <input class="input-check-input" type="checkbox">
+                                                                    <input class="input-check-input" type="checkbox" name="brandCheckbox" value={{items.name}}>
                                                                     <span class="input-check-box"></span>
                                                                     <svg class="input-check-icon" width="9px" height="7px">
                                                                         <use xlink:href="images/sprite.svg#check-9x7"></use>
@@ -823,10 +823,13 @@
 
 <script>
 $(document).ready(function(){
+    var brands=[];
+    var min=0;
+    var max=0;
     $(function () {
         $('.filter-price').each(function (i, element) {
-            const min = $(element).data('min');
-            const max = $(element).data('max');
+            min = $(element).data('min');
+            max = $(element).data('max');
             const from = $(element).data('from');
             const to = $(element).data('to');
             const slider = element.querySelector('.filter-price-slider');
@@ -844,20 +847,37 @@ $(document).ready(function(){
                 $(element).find('.filter-price-min-value')[0],
                 $(element).find('.filter-price-max-value')[0]
             ];
-            var minimum = min;
-            var maximum = max;
             slider.noUiSlider.on('update', function (values, handle) {
                 
                 titleValues[handle].innerHTML = values[handle];
-                minimum = values[0];
-                maximum = values[1];
+                min = values[0];
+                max = values[1];
             });
 
             slider.noUiSlider.on('update', function () {
-            $.ajax({
+                call_ajax(brands, min, max);
+            });
+        });
+    });
+
+    $(document).on("click", "input[name='brandCheckbox']", function () {
+        if($(this).prop("checked") == true){
+            brands.push($(this).val());
+            call_ajax(brands, min, max);
+        }
+        else if($(this).prop("checked") == false){
+            var index = brands.indexOf($(this).val());
+            brands.splice(index, 1);
+            call_ajax(brands, min, max);
+        }
+    });
+
+    function call_ajax(brands, min, max){
+        console.log(brands, min, max)
+        $.ajax({
                 url: '/shopFilter',
                 type: 'post',
-                data: {'min':minimum,'max':maximum},
+                data: {'min':min,'max':max, 'brands':brands},
                 success: function(data){
                     $('#products-body').html(data);
                     $('#products-body').append(data.htmlresponse);
@@ -866,9 +886,7 @@ $(document).ready(function(){
                 //   $("#products-body").load(" #products-body");
                 } 
               });
-            });
-        });
-    });
+    }
 
 });
 </script>
