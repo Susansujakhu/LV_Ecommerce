@@ -159,14 +159,23 @@ class Rating(db.Model):
         return f"Post('{self.rate}', '{self.comments}')"
 
 
-class Attributes(db.Model):
+class Color(db.Model):
     __tablename__ = 'attributes'
     id = db.Column(db.Integer, primary_key = True)
-    color = db.Column(db.Text, nullable = True)
+    color = db.Column(db.String(50), nullable = True)
+    colorCode = db.Column(db.Text, nullable = True)
+
+    def __repr__(self):
+        return f"Post('{self.color}', '{self.colorCode}')"
+
+
+class Size(db.Model):
+    __tablename__ = 'attributes'
+    id = db.Column(db.Integer, primary_key = True)
     size = db.Column(db.Text, nullable = True)
 
     def __repr__(self):
-        return f"Post('{self.color}', '{self.size}')"
+        return f"Post('{self.size}')"
 
 
 class Category(db.Model):
