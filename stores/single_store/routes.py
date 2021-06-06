@@ -6,8 +6,8 @@ from flask.helpers import make_response
 from sqlalchemy.sql.expression import text
 from wtforms.fields.core import StringField
 from single_store import app, db, bcrypt
-from single_store.forms import DynamicForm, HorizontalPanelForm, EditHorizontalPanelForm, BrandForm, EditBrandForm, FeaturesForm, EditFeaturesForm, HeroForm, EditHeroForm, RatingForm, RegistrationForm, LoginForm, ProductForm, EditProductForm, CategoryForm,EditCategoryForm, AttributesForm
-from single_store.models import Attributes, Compare,HorizontalPanel, Brand, Cart, Category, Features, Hero, Order, Product, Rating, Shipping, User, MyAdminIndexView, AdminView, Wishlist
+from single_store.forms import DynamicForm, HorizontalPanelForm, EditHorizontalPanelForm, BrandForm, EditBrandForm, FeaturesForm, EditFeaturesForm, HeroForm, EditHeroForm, RatingForm, RegistrationForm, LoginForm, ProductForm, EditProductForm, CategoryForm,EditCategoryForm, ColorForm, SizeForm
+from single_store.models import Size, Color, Compare,HorizontalPanel, Brand, Cart, Category, Features, Hero, Order, Product, Rating, Shipping, User, MyAdminIndexView, AdminView, Wishlist
 from flask_login import login_user, current_user, logout_user, login_required
 import secrets, os, sys
 from PIL import Image
@@ -25,7 +25,6 @@ admin.add_view(AdminView(Product, db.session))
 admin.add_view(AdminView(Cart, db.session))
 admin.add_view(AdminView(Order, db.session))
 admin.add_view(AdminView(Rating, db.session))
-admin.add_view(AdminView(Attributes, db.session))
 admin.add_view(AdminView(Category, db.session))
 admin.add_view(AdminView(Brand, db.session))
 admin.add_view(AdminView(Hero, db.session))
