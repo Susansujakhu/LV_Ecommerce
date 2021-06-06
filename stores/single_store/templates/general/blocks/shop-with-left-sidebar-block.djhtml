@@ -380,6 +380,7 @@
                                             <div class="filter-container">
                                                 <div class="filter-list">
                                                     <div class="filter-list-list">
+                                                    {% for items in brand %}
                                                         <label class="filter-list-item ">
                                                             <span class="filter-list-input input-radio">
                                                                 <span class="input-radio-body">
@@ -388,68 +389,11 @@
                                                                 </span>
                                                             </span>
                                                             <span class="filter-list-title">
-                                                                Wakita
+                                                                {{items.name}}
                                                             </span>
-                                                            <span class="filter-list-counter">7</span>
+                                                            <span class="filter-list-counter">{{product_number[loop.index-1]}}</span>
                                                         </label>
-                                                        <label class="filter-list-item ">
-                                                            <span class="filter-list-input input-radio">
-                                                                <span class="input-radio-body">
-                                                                    <input class="input-radio-input" name="filter_radio" type="radio">
-                                                                    <span class="input-radio-circle"></span>
-                                                                </span>
-                                                            </span>
-                                                            <span class="filter-list-title">
-                                                                Zosch
-                                                            </span>
-                                                            <span class="filter-list-counter">42</span>
-                                                        </label>
-                                                        <label class="filter-list-item  filter-list-item--disabled ">
-                                                            <span class="filter-list-input input-radio">
-                                                                <span class="input-radio-body">
-                                                                    <input class="input-radio-input" name="filter_radio" type="radio" checked disabled>
-                                                                    <span class="input-radio-circle"></span>
-                                                                </span>
-                                                            </span>
-                                                            <span class="filter-list-title">
-                                                                WeVALT
-                                                            </span>
-                                                        </label>
-                                                        <label class="filter-list-item  filter-list-item--disabled ">
-                                                            <span class="filter-list-input input-radio">
-                                                                <span class="input-radio-body">
-                                                                    <input class="input-radio-input" name="filter_radio" type="radio" disabled>
-                                                                    <span class="input-radio-circle"></span>
-                                                                </span>
-                                                            </span>
-                                                            <span class="filter-list-title">
-                                                                Hammer
-                                                            </span>
-                                                        </label>
-                                                        <label class="filter-list-item ">
-                                                            <span class="filter-list-input input-radio">
-                                                                <span class="input-radio-body">
-                                                                    <input class="input-radio-input" name="filter_radio" type="radio">
-                                                                    <span class="input-radio-circle"></span>
-                                                                </span>
-                                                            </span>
-                                                            <span class="filter-list-title">
-                                                                Mitasia
-                                                            </span>
-                                                            <span class="filter-list-counter">1</span>
-                                                        </label>
-                                                        <label class="filter-list-item ">
-                                                            <span class="filter-list-input input-radio">
-                                                                <span class="input-radio-body">
-                                                                    <input class="input-radio-input" name="filter_radio" type="radio">
-                                                                    <span class="input-radio-circle"></span>
-                                                                </span>
-                                                            </span>
-                                                            <span class="filter-list-title">
-                                                                Metaggo
-                                                            </span>
-                                                            <span class="filter-list-counter">25</span>
-                                                        </label>
+                                                        {% endfor %}
                                                     </div>
                                                 </div>
                                             </div>
@@ -842,3 +786,54 @@
     </div>
 </div>
 
+<script>
+$(document).ready(function(){
+    $(function () {
+        $('.filter-price').each(function (i, element) {
+            const min = $(element).data('min');
+            const max = $(element).data('max');
+            const from = $(element).data('from');
+            const to = $(element).data('to');
+            const slider = element.querySelector('.filter-price-slider');
+
+            noUiSlider.create(slider, {
+                start: [from, to],
+                connect: true,
+                range: {
+                    'min': min,
+                    'max': max
+                }
+            });
+
+            const titleValues = [
+                $(element).find('.filter-price-min-value')[0],
+                $(element).find('.filter-price-max-value')[0]
+            ];
+            var minimum = min;
+            var maximum = max;
+            slider.noUiSlider.on('update', function (values, handle) {
+                
+                titleValues[handle].innerHTML = values[handle];
+                minimum = values[0];
+                maximum = values[1];
+            });
+
+            slider.noUiSlider.on('update', function () {
+            $.ajax({
+                url: '/shopFilter',
+                type: 'post',
+                data: {'min':minimum,'max':maximum},
+                success: function(data){
+                    $('#products-body').html(data);
+                    $('#products-body').append(data.htmlresponse);
+                    
+                  // Updating table data
+                //   $("#products-body").load(" #products-body");
+                } 
+              });
+            });
+        });
+    });
+
+});
+</script>
