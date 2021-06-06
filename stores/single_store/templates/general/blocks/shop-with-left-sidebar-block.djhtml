@@ -447,10 +447,11 @@
                                             <div class="filter-container">
                                                 <div class="filter-color">
                                                     <div class="filter-color-list">
+                                                    {% for items in color %}
                                                         <label class="filter-color-item">
-                                                            <span class="filter-color-check input-check-color  input-check-color--white  " style="color: #fff;">
+                                                            <span class="filter-color-check input-check-color  input-check-color--white  " style="color: {{items.colorCode}};">
                                                                 <label class="input-check-color-body">
-                                                                    <input class="input-check-color-input" type="checkbox">
+                                                                    <input class="input-check-color-input" type="checkbox" name="colorCheckbox" value={{items.color}}>
                                                                     <span class="input-check-color-box"></span>
                                                                     <svg class="input-check-color-icon" width="12px" height="9px">
                                                                         <use xlink:href="/static/assets/icons/sprite.svg#check-12x9"></use>
@@ -459,6 +460,7 @@
                                                                 </label>
                                                             </span>
                                                         </label>
+                                                        {% endfor %}
                                                         {# <label class="filter-color-item">
                                                             <span class="filter-color-check input-check-color   input-check-color--light " style="color: #d9d9d9;">
                                                                 <label class="input-check-color-body">
@@ -822,6 +824,7 @@ $(document).ready(function(){
     var brands=[];
     var min=0;
     var max=0;
+    var color=[];
     $(function () {
         $('.filter-price').each(function (i, element) {
             min = $(element).data('min');
@@ -851,7 +854,7 @@ $(document).ready(function(){
             });
 
             slider.noUiSlider.on('update', function () {
-                call_ajax(brands, min, max);
+                call_ajax(brands, min, max, color);
             });
         });
     });
@@ -859,21 +862,33 @@ $(document).ready(function(){
     $(document).on("click", "input[name='brandCheckbox']", function () {
         if($(this).prop("checked") == true){
             brands.push($(this).val());
-            call_ajax(brands, min, max);
+            call_ajax(brands, min, max, color);
         }
         else if($(this).prop("checked") == false){
             var index = brands.indexOf($(this).val());
             brands.splice(index, 1);
-            call_ajax(brands, min, max);
+            call_ajax(brands, min, max, color);
         }
     });
 
-    function call_ajax(brands, min, max){
-        console.log(brands, min, max)
+    $(document).on("click", "input[name='colorCheckbox']", function () {
+        if($(this).prop("checked") == true){
+            color.push($(this).val());
+            call_ajax(brands, min, max, color);
+        }
+        else if($(this).prop("checked") == false){
+            var index = color.indexOf($(this).val());
+            color.splice(index, 1);
+            call_ajax(brands, min, max, color);
+        }
+    });
+
+    function call_ajax(brands, min, max, color){
+        console.log(brands, min, max, color)
         $.ajax({
                 url: '/shopFilter',
                 type: 'post',
-                data: {'min':min,'max':max, 'brands':brands},
+                data: {'min':min,'max':max, 'brands':brands, 'color':color},
                 success: function(data){
                     $('#products-body').html(data);
                     $('#products-body').append(data.htmlresponse);
