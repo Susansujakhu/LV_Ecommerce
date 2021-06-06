@@ -170,11 +170,13 @@ def shop():
 @app.route("/shopFilter", methods=["POST"])
 def shopFilter():
     if request.method == "POST":
+        brands = request.form.getlist("brands[]")
         min = int(float(request.form.get("min")))
         max = int(float(request.form.get("max")))
-
-        products = Product.query.filter(Product.price>=min, Product.price<=max).all()
-        
+        if not brands:
+            products = Product.query.filter(Product.price>=min, Product.price<=max).all()
+        else:
+            products = Product.query.filter(Product.price>=min, Product.price<=max, Product.brand.in_(brands)).all()
     return jsonify({'htmlresponse':render_template('general/blocks/response.djhtml', products=products)})
 
 
