@@ -111,39 +111,26 @@
                                             <div class="filter-container">
                                                 <div class="filter-categories-alt">
                                                     <ul class="filter-categories-alt-list filter-categories-alt-list--level--1" data-collapse-opened-class="filter-categories-alt-item--open">
-                                                        <li class="filter-categories-alt-item" data-collapse-item>
-                                                            <a href="">Clothes & PPE</a>
-                                                        </li>
-                                                        <li class="filter-categories-alt-item" data-collapse-item>
+                                                        {% for items in category %}
+                                                        {% if items.parentCategory == 'None' %}
+                                                        <li class="filter-categories-alt-item filter-categories-alt-item--current" data-collapse-item>
                                                             <button class="filter-categories-alt-expander" data-collapse-trigger></button>
-                                                            <a href="">Power Tools</a>
+                                                            <a name="filterCategory" data-id="{{items.name}}">{{items.name}}</a>
                                                             <div class="filter-categories-alt-children" data-collapse-content>
                                                                 <ul class="filter-categories-alt-list filter-categories-alt-list--level--2">
+                                                                    {% for sub_items in category %}
+                                                                    {% if sub_items.parentCategory == items.name %}
                                                                     <li class="filter-categories-alt-item" data-collapse-item>
-                                                                        <a href="">Engravers</a>
+                                                                        <a name="filterCategory" data-id="{{sub_items.name}}">{{sub_items.name}}</a>
                                                                     </li>
-                                                                    <li class="filter-categories-alt-item" data-collapse-item>
-                                                                        <a href="">Drills</a>
-                                                                    </li>
-                                                                    <li class="filter-categories-alt-item" data-collapse-item>
-                                                                        <a href="">Wrenches</a>
-                                                                    </li>
-                                                                    <li class="filter-categories-alt-item" data-collapse-item>
-                                                                        <a href="">Plumbing</a>
-                                                                    </li>
-                                                                    <li class="filter-categories-alt-item" data-collapse-item>
-                                                                        <a href="">Wall Chaser</a>
-                                                                    </li>
-                                                                    <li class="filter-categories-alt-item" data-collapse-item>
-                                                                        <a href="">Pneumatic Tools</a>
-                                                                    </li>
-                                                                    <li class="filter-categories-alt-item" data-collapse-item>
-                                                                        <a href="">Milling Cutters</a>
-                                                                    </li>
+                                                                    {% endif %}
+                                                                    {% endfor %}
                                                                 </ul>
                                                             </div>
                                                         </li>
-                                                        <li class="filter-categories-alt-item filter-categories-alt-item--open filter-categories-alt-item--current" data-collapse-item>
+                                                        {% endif %}
+                                                        {% endfor %}
+                                                        {# <li class="filter-categories-alt-item filter-categories-alt-item--open filter-categories-alt-item--current" data-collapse-item>
                                                             <button class="filter-categories-alt-expander" data-collapse-trigger></button>
                                                             <a href="">Hand Tools</a>
                                                             <div class="filter-categories-alt-children" data-collapse-content>
@@ -237,7 +224,7 @@
                                                                     </li>
                                                                 </ul>
                                                             </div>
-                                                        </li>
+                                                        </li> #}
                                                     </ul>
                                                 </div>
                                             </div>
@@ -765,14 +752,14 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="view-options-legend">Showing 6 of 98 products</div>
+                            <div class="view-options-legend">Showing 6 of {{total_products}} products</div>
                             <div class="view-options-divider"></div>
                             <div class="view-options-control">
                                 <label for="">Sort By</label>
                                 <div>
-                                    <select class="form-control form-control-sm" name="" id="">
+                                    <select class="form-control form-control-sm" name="" id="sortProduct">
                                         <option value="">Default</option>
-                                        <option value="">Name (A-Z)</option>
+                                        <option value="name">Name (A-Z)</option>
                                     </select>
                                 </div>
                             </div>
@@ -825,6 +812,18 @@ $(document).ready(function(){
     var min=0;
     var max=0;
     var color=[];
+    var selectedCategory = '';
+    var sortProduct = '';
+    $(document).on("click", "a[name='filterCategory']", function () {
+        selectedCategory = $(this).attr('data-id');
+        call_ajax(brands, min, max, color, selectedCategory, sortProduct);  
+    });
+
+    $("#sortProduct").change(function () {
+        sortProduct = $(this).val();
+        call_ajax(brands, min, max, color, selectedCategory, sortProduct); 
+    });
+
     $(function () {
         $('.filter-price').each(function (i, element) {
             min = $(element).data('min');
@@ -854,7 +853,7 @@ $(document).ready(function(){
             });
 
             slider.noUiSlider.on('update', function () {
-                call_ajax(brands, min, max, color);
+                call_ajax(brands, min, max, color, selectedCategory, sortProduct); 
             });
         });
     });
@@ -862,33 +861,39 @@ $(document).ready(function(){
     $(document).on("click", "input[name='brandCheckbox']", function () {
         if($(this).prop("checked") == true){
             brands.push($(this).val());
-            call_ajax(brands, min, max, color);
+            call_ajax(brands, min, max, color, selectedCategory, sortProduct); 
         }
         else if($(this).prop("checked") == false){
             var index = brands.indexOf($(this).val());
             brands.splice(index, 1);
-            call_ajax(brands, min, max, color);
+            call_ajax(brands, min, max, color, selectedCategory, sortProduct); 
         }
     });
 
     $(document).on("click", "input[name='colorCheckbox']", function () {
         if($(this).prop("checked") == true){
             color.push($(this).val());
-            call_ajax(brands, min, max, color);
+            call_ajax(brands, min, max, color, selectedCategory, sortProduct); 
         }
         else if($(this).prop("checked") == false){
             var index = color.indexOf($(this).val());
             color.splice(index, 1);
-            call_ajax(brands, min, max, color);
+            call_ajax(brands, min, max, color, selectedCategory, sortProduct); 
         }
     });
 
-    function call_ajax(brands, min, max, color){
-        console.log(brands, min, max, color)
+    function call_ajax(brands, min, max, color, selectedCategory, sortProduct){
+        console.log(brands, min, max, color, selectedCategory, sortProduct)
         $.ajax({
                 url: '/shopFilter',
                 type: 'post',
-                data: {'min':min,'max':max, 'brands':brands, 'color':color},
+                data: {'min':min,
+                        'max':max, 
+                        'brands':brands, 
+                        'color':color, 
+                        'category':selectedCategory,
+                        'sort':sortProduct,    
+                    },
                 success: function(data){
                     $('#products-body').html(data);
                     $('#products-body').append(data.htmlresponse);
