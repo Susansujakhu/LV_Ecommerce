@@ -160,7 +160,7 @@ class Rating(db.Model):
 
 
 class Color(db.Model):
-    __tablename__ = 'attributes'
+    __tablename__ = 'color'
     id = db.Column(db.Integer, primary_key = True)
     color = db.Column(db.String(50), nullable = True)
     colorCode = db.Column(db.Text, nullable = True)
@@ -170,7 +170,7 @@ class Color(db.Model):
 
 
 class Size(db.Model):
-    __tablename__ = 'attributes'
+    __tablename__ = 'size'
     id = db.Column(db.Integer, primary_key = True)
     size = db.Column(db.Text, nullable = True)
 
