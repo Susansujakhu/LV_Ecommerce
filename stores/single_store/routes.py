@@ -159,12 +159,16 @@ def shop():
     min = db.session.query(func.min(Product.price)).scalar()
     brand = Brand.query.all()
     color = Color.query.all()
+    category = Category.query.all()
+    total_products = Product.query.count()
     product_number = []
     for items in brand:
         product_number.append(Product.query.filter(Product.brand == items.name).count())
 
     return render_template(
-        'single-store/shop-page.djhtml', max=max, min =min, brand=brand, product_number=product_number, color=color
+        'single-store/shop-page.djhtml', 
+        max=max, min =min, brand=brand, product_number=product_number, color=color, category=category,
+        total_products = total_products
         )
 
 
@@ -175,8 +179,15 @@ def shopFilter():
         brands = request.form.getlist("brands[]")
         min = int(float(request.form.get("min")))
         max = int(float(request.form.get("max")))
-        
+        selectedCategory = request.form.get("category")
+        sort = request.form.get("sort")
+        print(sort)
         filters =[]
+        
+        if selectedCategory:
+            filters.append(
+                Product.category == selectedCategory
+            )
         if brands:
             filters.append(
                 Product.brand.in_(brands)
@@ -186,7 +197,10 @@ def shopFilter():
                 Product.color.in_(colors)   
             )
             print(filters)
-        products = Product.query.filter(Product.price>=min, Product.price<=max, *filters).all()
+        # products = db.session.query(Product).filter(Product.price>=min, Product.price<=max, *filters).all()
+        products = db.session.query(Product).filter(Product.price>=min, Product.price<=max, *filters)
+        if sort:
+            products = products.order_by(Product.productName).all()
     return jsonify({'htmlresponse':render_template('general/blocks/response.djhtml', products=products)})
 
 
