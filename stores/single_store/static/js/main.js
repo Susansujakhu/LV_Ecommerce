@@ -622,53 +622,7 @@
     /*
     // price filter
     */
-    $(function () {
-        $('.filter-price').each(function (i, element) {
-            const min = $(element).data('min');
-            const max = $(element).data('max');
-            const from = $(element).data('from');
-            const to = $(element).data('to');
-            const slider = element.querySelector('.filter-price-slider');
-
-            noUiSlider.create(slider, {
-                start: [from, to],
-                connect: true,
-                range: {
-                    'min': min,
-                    'max': max
-                }
-            });
-
-            const titleValues = [
-                $(element).find('.filter-price-min-value')[0],
-                $(element).find('.filter-price-max-value')[0]
-            ];
-            var minimum = min;
-            var maximum = max;
-            slider.noUiSlider.on('update', function (values, handle) {
-                
-                titleValues[handle].innerHTML = values[handle];
-                minimum = values[0];
-                maximum = values[1];
-            });
-
-            slider.noUiSlider.on('update', function () {
-            $.ajax({
-                url: '/shopFilter',
-                type: 'post',
-                data: {'min':minimum,'max':maximum},
-                success: function(data){
-                    $('#products-body').html(data);
-                    $('#products-body').append(data.htmlresponse);
-                    
-                  // Updating table data
-                //   $("#products-body").load(" #products-body");
-                } 
-              });
-            });
-        });
-    });
-
+    
     /*
     // tooltips
     */
