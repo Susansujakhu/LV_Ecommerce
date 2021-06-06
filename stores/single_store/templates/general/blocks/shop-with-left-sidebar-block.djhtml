@@ -130,6 +130,7 @@
                                                         </li>
                                                         {% endif %}
                                                         {% endfor %}
+                                                        <a name="filterCategory" data-id="">Show All Products</a>
                                                         {# <li class="filter-categories-alt-item filter-categories-alt-item--open filter-categories-alt-item--current" data-collapse-item>
                                                             <button class="filter-categories-alt-expander" data-collapse-trigger></button>
                                                             <a href="">Hand Tools</a>
