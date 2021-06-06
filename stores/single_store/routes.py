@@ -116,7 +116,6 @@ def single_product(productId):
     product = Product.query.get(productId)
     rating = Rating.query.filter_by(product_id = product.id).all()
     users = User.query.all()
-    print(rating)
     form = RatingForm()
     if product is None:
         return redirect(url_for('home'))
@@ -158,16 +157,19 @@ def saveReview():
 def shop():
     max = db.session.query(func.max(Product.price)).scalar()
     min = db.session.query(func.min(Product.price)).scalar()
+    brand = Brand.query.all()
+    product_number = []
+    for items in brand:
+        product_number.append(Product.query.filter(Product.brand == items.name).count())
 
     return render_template(
-        'single-store/shop-page.djhtml', max=max, min =min
+        'single-store/shop-page.djhtml', max=max, min =min, brand=brand, product_number=product_number
         )
 
 
 @app.route("/shopFilter", methods=["POST"])
 def shopFilter():
     if request.method == "POST":
-        print("POST")
         min = int(float(request.form.get("min")))
         max = int(float(request.form.get("max")))
 
@@ -204,8 +206,6 @@ def wishlist():
 @login_required
 def compare():
     compare_products = Compare.query.filter(Compare.userId == current_user.userId).first()
-    print("******************")
-    print(compare_products)
     if compare_products is None:
         print("Add Some Products to compare first")
         product_lists = ""
