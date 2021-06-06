@@ -3,6 +3,7 @@ from functools import wraps
 from flask import render_template, url_for, flash, redirect, request, Response, jsonify
 from flask.globals import session
 from flask.helpers import make_response
+from sqlalchemy.sql.elements import Null
 from sqlalchemy.sql.expression import text
 from wtforms.fields.core import StringField
 from single_store import app, db, bcrypt
@@ -157,25 +158,35 @@ def shop():
     max = db.session.query(func.max(Product.price)).scalar()
     min = db.session.query(func.min(Product.price)).scalar()
     brand = Brand.query.all()
+    color = Color.query.all()
     product_number = []
     for items in brand:
         product_number.append(Product.query.filter(Product.brand == items.name).count())
 
     return render_template(
-        'single-store/shop-page.djhtml', max=max, min =min, brand=brand, product_number=product_number
+        'single-store/shop-page.djhtml', max=max, min =min, brand=brand, product_number=product_number, color=color
         )
 
 
 @app.route("/shopFilter", methods=["POST"])
 def shopFilter():
     if request.method == "POST":
+        colors = request.form.getlist("color[]")
         brands = request.form.getlist("brands[]")
         min = int(float(request.form.get("min")))
         max = int(float(request.form.get("max")))
-        if not brands:
-            products = Product.query.filter(Product.price>=min, Product.price<=max).all()
-        else:
-            products = Product.query.filter(Product.price>=min, Product.price<=max, Product.brand.in_(brands)).all()
+        
+        filters =[]
+        if brands:
+            filters.append(
+                Product.brand.in_(brands)
+            )
+        if colors:
+            filters.append(
+                Product.color.in_(colors)   
+            )
+            print(filters)
+        products = Product.query.filter(Product.price>=min, Product.price<=max, *filters).all()
     return jsonify({'htmlresponse':render_template('general/blocks/response.djhtml', products=products)})
 
 
