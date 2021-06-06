@@ -191,11 +191,14 @@ class RatingForm(FlaskForm):
     submit = SubmitField('Post Your Review')
 
 
-class AttributesForm(FlaskForm):
+class ColorForm(FlaskForm):
     color = StringField('Add Color')
-    size = StringField('Add Size')
-    submit = SubmitField('Save Attributes')
+    colorCode = StringField('Add Colorcode')
+    submit = SubmitField('Add Color')
 
+class SizeForm(FlaskForm):
+    size = StringField('Add Size')
+    submit = SubmitField('Add Size')
 
 
 class DynamicForm(FlaskForm):

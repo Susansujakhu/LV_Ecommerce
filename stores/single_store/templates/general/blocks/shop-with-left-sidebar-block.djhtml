@@ -459,7 +459,7 @@
                                                                 </label>
                                                             </span>
                                                         </label>
-                                                        <label class="filter-color-item">
+                                                        {# <label class="filter-color-item">
                                                             <span class="filter-color-check input-check-color   input-check-color--light " style="color: #d9d9d9;">
                                                                 <label class="input-check-color-body">
                                                                     <input class="input-check-color-input" type="checkbox">
@@ -686,17 +686,13 @@
                                                                     <span class="input-check-color-stick"></span>
                                                                 </label>
                                                             </span>
-                                                        </label>
+                                                        </label> #}
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="widget-filters-actions d-flex">
-                                <button class="btn btn-primary btn-sm">Filter</button>
-                                <button class="btn btn-secondary btn-sm">Reset</button>
                             </div>
                         </div>
                     </div>
