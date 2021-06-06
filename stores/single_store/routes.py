@@ -299,6 +299,43 @@ def edit_address():
         'single-store/user-account/edit-address-page.djhtml'
         )
 
+@app.route("/dashboardAddress", methods=["POST"])
+@login_required
+def dashboardAddress():
+    if request.method == "POST":
+        print(request.form,type(request.form),dict(request.form))
+        user =  request.form['firstName']
+        password = request.form['altPhoneNo']
+        print(user,password,type(user),type(password))
+        addShipping = Shipping(
+            firstName = request.form['firstName'],
+            lastName = request.form['lastName'],
+            companyName = request.form['companyName'],
+            country = request.form['country'],
+            street = request.form['street'],
+            houseCode = request.form['houseCode'],
+            city = request.form['city'],
+            state = request.form['state'],
+            postalCode = request.form['postalCode'],
+            phoneNo = request.form['phoneNo'],
+            altPhoneNo = request.form['altPhoneNo'],
+            userId = current_user.userId,
+            )
+        print(addShipping)
+        try:
+            db.session.add(addShipping)
+            db.session.commit()
+        except exc.IntegrityError as err:
+            db.session.rollback()
+            db.session.add(addShipping)
+            db.session.commit()
+        return jsonify({'status':'OK','firstName' : request.form['firstName']})
+    
+
+        # return jsonify({'result': 'success'})
+        # if registration == "success":
+        #     return json.dump({"abc":'successfuly registered'})
+
 
 @app.route("/dashboard/change-password")
 @login_required

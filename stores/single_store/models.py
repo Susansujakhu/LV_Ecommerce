@@ -58,18 +58,23 @@ class User(db.Model, UserMixin):
 class Shipping(db.Model):
     __tablename__ = 'shipping'
     id = db.Column(db.Integer, primary_key = True)
-    fullName = db.Column(db.Text, nullable = False)
-    contactNo = db.Column(db.Text, nullable = True)
-    phoneNo = db.Column(db.Text, nullable = False)
+    firstName = db.Column(db.Text, nullable = False)
+    lastName = db.Column(db.Text, nullable = False)
+    companyName = db.Column(db.Text,nullable = True)
+    country = db.Column(db.Text,nullable = False)
     street = db.Column(db.Text, nullable = False)
-    city = db.Column(db.Text, nullable = False)
-    country = db.Column(db.Text, nullable = False)
+    houseCode = db.Column(db.Text,nullable = False)
+    city = db.Column(db.Text,nullable = False)
+    state = db.Column(db.Text,nullable = False)
+    postalCode = db.Column(db.Text,nullable = False)
+    phoneNo = db.Column(db.Text, nullable = False)
+    altPhoneNo = db.Column(db.Text, nullable = True)  
 
     userId = db.Column(db.Integer, db.ForeignKey('user.userId'), nullable = False)
 
 
     def __repr__(self):
-        return f"Post('{self.fullName}', '{self.contactNo}', '{self.phoneNo}', '{self.street}', '{self.city}', '{self.country}')"
+        return f"Post('{self.firstName}','{self.lastName}', '{self.companyName}', '{self.country}', '{self.street}', '{self.houseCode}', '{self.city}', '{self.state}', '{self.postalCode}', '{self.phoneNo}', '{self.altPhoneNo}')"
 
 
 class Product(db.Model):

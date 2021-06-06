@@ -201,3 +201,17 @@ class AttributesForm(FlaskForm):
 class DynamicForm(FlaskForm):
     form_type = HiddenField(default='FormType', render_kw={ 'type':'hidden' })
     # name = StringField() 
+
+# class EditDashboardAddress(FlaskForm):
+#     firstName = StringField('First Name', validators=[DataRequired()])
+#     lastName = StringField('Last Name', validators=[DataRequired()])
+#     companyName = StringField('Company Name')
+#     country = SelectField('Country', choices=[] ,validators=[DataRequired()])
+#     street = StringField('Street Address')
+#     houseCode = StringField('Apartment, suite, unit etc.')
+#     city = StringField('Town / City')
+#     state = StringField('State / County')
+#     postalCode = IntegerField('Postcode / ZIP')
+#     phoneNo = IntegerField('Primary Mobile no.')
+#     altPhoneNo = IntegerField('Secondary Contact no.') 
+    

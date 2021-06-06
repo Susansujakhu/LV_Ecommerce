@@ -6,67 +6,119 @@
     <div class="card-body">
         <div class="row no-gutters">
             <div class="col-12 col-lg-10 col-xl-8">
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="checkout-first-name">First Name</label>
-                        <input type="text" class="form-control" id="checkout-first-name" placeholder="First Name">
+                <form id="sform" action="" method="post">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="checkout-first-name">First Name</label>
+                            <input type="text" class="form-control" id="checkout-first-name" name="checkout-first-name" placeholder="First Name" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="checkout-last-name">Last Name</label>
+                            <input type="text" class="form-control" id="checkout-last-name" name="checkout-last-name" placeholder="Last Name" required>
+                        </div>
                     </div>
-                    <div class="form-group col-md-6">
-                        <label for="checkout-last-name">Last Name</label>
-                        <input type="text" class="form-control" id="checkout-last-name" placeholder="Last Name">
+                    <div class="form-group">
+                        <label for="checkout-company-name">Company Name <span class="text-muted">(Optional)</span></label>
+                        <input type="text" class="form-control" id="checkout-company-name" name="checkout-company-name" placeholder="Company Name">
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="checkout-company-name">Company Name <span class="text-muted">(Optional)</span></label>
-                    <input type="text" class="form-control" id="checkout-company-name" placeholder="Company Name">
-                </div>
-                <div class="form-group">
-                    <label for="checkout-country">Country</label>
-                    <select id="checkout-country" class="form-control form-control-select2">
-                        <option>Select a country...</option>
-                        <option>United States</option>
-                        <option>Russia</option>
-                        <option>Italy</option>
-                        <option>France</option>
-                        <option>Ukraine</option>
-                        <option>Germany</option>
-                        <option>Australia</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="checkout-street-address">Street Address</label>
-                    <input type="text" class="form-control" id="checkout-street-address" placeholder="Street Address">
-                </div>
-                <div class="form-group">
-                    <label for="checkout-address">Apartment, suite, unit etc. <span class="text-muted">(Optional)</span></label>
-                    <input type="text" class="form-control" id="checkout-address">
-                </div>
-                <div class="form-group">
-                    <label for="checkout-city">Town / City</label>
-                    <input type="text" class="form-control" id="checkout-city">
-                </div>
-                <div class="form-group">
-                    <label for="checkout-state">State / County</label>
-                    <input type="text" class="form-control" id="checkout-state">
-                </div>
-                <div class="form-group">
-                    <label for="checkout-postcode">Postcode / ZIP</label>
-                    <input type="text" class="form-control" id="checkout-postcode">
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="checkout-email">Email address</label>
-                        <input type="email" class="form-control" id="checkout-email" placeholder="Email address">
+                    <div class="form-group">
+                        <label for="checkout-country">Country</label>
+                        <select id="checkout-country" name="checkout-country" class="form-control form-control-select2" required>
+                            <option>Select a country...</option>
+                            <option>Nepal</option>
+                            <option>United States</option>
+                            <option>Russia</option>
+                            <option>Italy</option>
+                            <option>France</option>
+                            <option>Ukraine</option>
+                            <option>Germany</option>
+                            <option>Australia</option>
+                        </select>
                     </div>
-                    <div class="form-group col-md-6">
-                        <label for="checkout-phone">Phone</label>
-                        <input type="text" class="form-control" id="checkout-phone" placeholder="Phone">
+                    <div class="form-group">
+                        <label for="checkout-street-address">Street Address</label>
+                        <input type="text" class="form-control" id="checkout-street-address" name="checkout-street-address" placeholder="Street Address" required>
                     </div>
-                </div>
-                <div class="form-group mt-3 mb-0">
-                    <button class="btn btn-primary">Save</button>
-                </div>
+                    <div class="form-group">
+                        <label for="checkout-address">Apartment, suite, unit etc. <span class="text-muted">(Optional)</span></label>
+                        <input type="text" class="form-control" id="checkout-address" name="checkout-address">
+                    </div>
+                    <div class="form-group">
+                        <label for="checkout-city">Town / City</label>
+                        <input type="text" class="form-control" id="checkout-city" name="checkout-city" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="checkout-state">State / County</label>
+                        <input type="text" class="form-control" id="checkout-state" name="checkout-state" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="checkout-postcode">Postcode / ZIP</label>
+                        <input type="number" class="form-control" id="checkout-postcode" name="checkout-postcode">
+                    </div>
+                    {# <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="checkout-email">Email address</label>
+                            <input type="email" class="form-control" id="checkout-email" placeholder="Email address">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="checkout-phone">Phone</label>
+                            <input type="text" class="form-control" id="checkout-phone" placeholder="Phone">
+                        </div>
+                    </div> #}
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="checkout-email">Primary Mobile no.</label>
+                            <input type="number" class="form-control" id="checkout-primary-number" name="checkout-primary-number" placeholder="Mobile number" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="checkout-phone">Secondary Contact no. <span class="text-muted">(Optional)</span></label>
+                            <input type="number" class="form-control" id="checkout-secondary-number" name="checkout-secondary-number"  placeholder="Phone number">
+                        </div>
+                    </div>
+                    <div class="form-group mt-3 mb-0">
+                        <button class="btn btn-primary">Save</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+$(document).ready(function () {
+  $("form").submit(function (event) {
+    var formData = {
+      firstName: $("#checkout-first-name").val(),
+      lastName: $("#checkout-last-name").val(),
+      companyName: $("#checkout-company-name").val(),
+      country: $("#checkout-country").val(),
+      street: $("#checkout-street-address").val(),
+      houseCode: $("#checkout-address").val(),
+      city: $("#checkout-city").val(),
+      state: $("#checkout-state").val(),
+      postalCode: $("#checkout-postcode").val(),
+      phoneNo: $("#checkout-primary-number").val(),
+      altPhoneNo: $("#checkout-secondary-number").val(),
+    };
+    console.log(formData)
+    for (var i in formData){
+    console.log(formData[i], i);
+    }
+    req = $.ajax({
+        type: "POST",
+        url: "/dashboardAddress",
+        data: formData,
+        dataType: "json",
+        encode: true,
+    })
+    req.done(function (data) {
+        let retDat = data;
+        console.log(retDat);
+        alert("Thank you!!! "+retDat.firstName+", you have successfully added new location");
+        document.getElementById("sform").reset();
+    });
+
+    event.preventDefault();
+  });
+});
+</script>
