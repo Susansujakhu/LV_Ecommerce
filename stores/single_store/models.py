@@ -118,8 +118,8 @@ class Cart(db.Model):
     __tablename__ = 'cart'
     id = db.Column(db.Integer, primary_key = True)
     quantity = db.Column(db.Integer, nullable = False)
-    color = db.Column(db.String(10), nullable = True)
-    size = db.Column(db.String(10), nullable = True)
+    color = db.Column(db.String(100), nullable = True)
+    size = db.Column(db.String(100), nullable = True)
 
     userId = db.Column(db.Integer, db.ForeignKey('user.userId'), nullable = False)
     product_id = db.Column(db.Integer, db.ForeignKey('product.id'), nullable = False)
