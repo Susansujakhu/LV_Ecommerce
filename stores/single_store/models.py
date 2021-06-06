@@ -162,8 +162,8 @@ class Rating(db.Model):
 class Attributes(db.Model):
     __tablename__ = 'attributes'
     id = db.Column(db.Integer, primary_key = True)
-    color = db.Column(db.String(10), nullable = True)
-    size = db.Column(db.String(10), nullable = True)
+    color = db.Column(db.Text, nullable = True)
+    size = db.Column(db.Text, nullable = True)
 
     def __repr__(self):
         return f"Post('{self.color}', '{self.size}')"
