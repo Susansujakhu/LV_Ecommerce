@@ -449,234 +449,6 @@
                                                             </span>
                                                         </label>
                                                         {% endfor %}
-                                                        {# <label class="filter-color-item">
-                                                            <span class="filter-color-check input-check-color   input-check-color--light " style="color: #d9d9d9;">
-                                                                <label class="input-check-color-body">
-                                                                    <input class="input-check-color-input" type="checkbox">
-                                                                    <span class="input-check-color-box"></span>
-                                                                    <svg class="input-check-color-icon" width="12px" height="9px">
-                                                                        <use xlink:href="/static/assets/icons/sprite.svg#check-12x9"></use>
-                                                                    </svg>
-                                                                    <span class="input-check-color-stick"></span>
-                                                                </label>
-                                                            </span>
-                                                        </label>
-                                                        <label class="filter-color-item">
-                                                            <span class="filter-color-check input-check-color  " style="color: #b3b3b3;">
-                                                                <label class="input-check-color-body">
-                                                                    <input class="input-check-color-input" type="checkbox">
-                                                                    <span class="input-check-color-box"></span>
-                                                                    <svg class="input-check-color-icon" width="12px" height="9px">
-                                                                        <use xlink:href="/static/assets/icons/sprite.svg#check-12x9"></use>
-                                                                    </svg>
-                                                                    <span class="input-check-color-stick"></span>
-                                                                </label>
-                                                            </span>
-                                                        </label>
-                                                        <label class="filter-color-item">
-                                                            <span class="filter-color-check input-check-color  " style="color: #808080;">
-                                                                <label class="input-check-color-body">
-                                                                    <input class="input-check-color-input" type="checkbox">
-                                                                    <span class="input-check-color-box"></span>
-                                                                    <svg class="input-check-color-icon" width="12px" height="9px">
-                                                                        <use xlink:href="/static/assets/icons/sprite.svg#check-12x9"></use>
-                                                                    </svg>
-                                                                    <span class="input-check-color-stick"></span>
-                                                                </label>
-                                                            </span>
-                                                        </label>
-                                                        <label class="filter-color-item">
-                                                            <span class="filter-color-check input-check-color  " style="color: #666;">
-                                                                <label class="input-check-color-body">
-                                                                    <input class="input-check-color-input" type="checkbox">
-                                                                    <span class="input-check-color-box"></span>
-                                                                    <svg class="input-check-color-icon" width="12px" height="9px">
-                                                                        <use xlink:href="/static/assets/icons/sprite.svg#check-12x9"></use>
-                                                                    </svg>
-                                                                    <span class="input-check-color-stick"></span>
-                                                                </label>
-                                                            </span>
-                                                        </label>
-                                                        <label class="filter-color-item">
-                                                            <span class="filter-color-check input-check-color  " style="color: #4d4d4d;">
-                                                                <label class="input-check-color-body">
-                                                                    <input class="input-check-color-input" type="checkbox">
-                                                                    <span class="input-check-color-box"></span>
-                                                                    <svg class="input-check-color-icon" width="12px" height="9px">
-                                                                        <use xlink:href="/static/assets/icons/sprite.svg#check-12x9"></use>
-                                                                    </svg>
-                                                                    <span class="input-check-color-stick"></span>
-                                                                </label>
-                                                            </span>
-                                                        </label>
-                                                        <label class="filter-color-item">
-                                                            <span class="filter-color-check input-check-color  " style="color: #262626;">
-                                                                <label class="input-check-color-body">
-                                                                    <input class="input-check-color-input" type="checkbox">
-                                                                    <span class="input-check-color-box"></span>
-                                                                    <svg class="input-check-color-icon" width="12px" height="9px">
-                                                                        <use xlink:href="/static/assets/icons/sprite.svg#check-12x9"></use>
-                                                                    </svg>
-                                                                    <span class="input-check-color-stick"></span>
-                                                                </label>
-                                                            </span>
-                                                        </label>
-                                                        <label class="filter-color-item">
-                                                            <span class="filter-color-check input-check-color  " style="color: #ff4040;">
-                                                                <label class="input-check-color-body">
-                                                                    <input class="input-check-color-input" type="checkbox" checked>
-                                                                    <span class="input-check-color-box"></span>
-                                                                    <svg class="input-check-color-icon" width="12px" height="9px">
-                                                                        <use xlink:href="/static/assets/icons/sprite.svg#check-12x9"></use>
-                                                                    </svg>
-                                                                    <span class="input-check-color-stick"></span>
-                                                                </label>
-                                                            </span>
-                                                        </label>
-                                                        <label class="filter-color-item">
-                                                            <span class="filter-color-check input-check-color  " style="color: #ff8126;">
-                                                                <label class="input-check-color-body">
-                                                                    <input class="input-check-color-input" type="checkbox">
-                                                                    <span class="input-check-color-box"></span>
-                                                                    <svg class="input-check-color-icon" width="12px" height="9px">
-                                                                        <use xlink:href="/static/assets/icons/sprite.svg#check-12x9"></use>
-                                                                    </svg>
-                                                                    <span class="input-check-color-stick"></span>
-                                                                </label>
-                                                            </span>
-                                                        </label>
-                                                        <label class="filter-color-item">
-                                                            <span class="filter-color-check input-check-color   input-check-color--light " style="color: #ffd440;">
-                                                                <label class="input-check-color-body">
-                                                                    <input class="input-check-color-input" type="checkbox">
-                                                                    <span class="input-check-color-box"></span>
-                                                                    <svg class="input-check-color-icon" width="12px" height="9px">
-                                                                        <use xlink:href="/static/assets/icons/sprite.svg#check-12x9"></use>
-                                                                    </svg>
-                                                                    <span class="input-check-color-stick"></span>
-                                                                </label>
-                                                            </span>
-                                                        </label>
-                                                        <label class="filter-color-item">
-                                                            <span class="filter-color-check input-check-color   input-check-color--light " style="color: #becc1f;">
-                                                                <label class="input-check-color-body">
-                                                                    <input class="input-check-color-input" type="checkbox">
-                                                                    <span class="input-check-color-box"></span>
-                                                                    <svg class="input-check-color-icon" width="12px" height="9px">
-                                                                        <use xlink:href="/static/assets/icons/sprite.svg#check-12x9"></use>
-                                                                    </svg>
-                                                                    <span class="input-check-color-stick"></span>
-                                                                </label>
-                                                            </span>
-                                                        </label>
-                                                        <label class="filter-color-item">
-                                                            <span class="filter-color-check input-check-color  " style="color: #8fcc14;">
-                                                                <label class="input-check-color-body">
-                                                                    <input class="input-check-color-input" type="checkbox" checked>
-                                                                    <span class="input-check-color-box"></span>
-                                                                    <svg class="input-check-color-icon" width="12px" height="9px">
-                                                                        <use xlink:href="/static/assets/icons/sprite.svg#check-12x9"></use>
-                                                                    </svg>
-                                                                    <span class="input-check-color-stick"></span>
-                                                                </label>
-                                                            </span>
-                                                        </label>
-                                                        <label class="filter-color-item">
-                                                            <span class="filter-color-check input-check-color  " style="color: #47cc5e;">
-                                                                <label class="input-check-color-body">
-                                                                    <input class="input-check-color-input" type="checkbox">
-                                                                    <span class="input-check-color-box"></span>
-                                                                    <svg class="input-check-color-icon" width="12px" height="9px">
-                                                                        <use xlink:href="/static/assets/icons/sprite.svg#check-12x9"></use>
-                                                                    </svg>
-                                                                    <span class="input-check-color-stick"></span>
-                                                                </label>
-                                                            </span>
-                                                        </label>
-                                                        <label class="filter-color-item">
-                                                            <span class="filter-color-check input-check-color  " style="color: #47cca0;">
-                                                                <label class="input-check-color-body">
-                                                                    <input class="input-check-color-input" type="checkbox">
-                                                                    <span class="input-check-color-box"></span>
-                                                                    <svg class="input-check-color-icon" width="12px" height="9px">
-                                                                        <use xlink:href="/static/assets/icons/sprite.svg#check-12x9"></use>
-                                                                    </svg>
-                                                                    <span class="input-check-color-stick"></span>
-                                                                </label>
-                                                            </span>
-                                                        </label>
-                                                        <label class="filter-color-item">
-                                                            <span class="filter-color-check input-check-color  " style="color: #47cccc;">
-                                                                <label class="input-check-color-body">
-                                                                    <input class="input-check-color-input" type="checkbox">
-                                                                    <span class="input-check-color-box"></span>
-                                                                    <svg class="input-check-color-icon" width="12px" height="9px">
-                                                                        <use xlink:href="/static/assets/icons/sprite.svg#check-12x9"></use>
-                                                                    </svg>
-                                                                    <span class="input-check-color-stick"></span>
-                                                                </label>
-                                                            </span>
-                                                        </label>
-                                                        <label class="filter-color-item">
-                                                            <span class="filter-color-check input-check-color  " style="color: #40bfff;">
-                                                                <label class="input-check-color-body">
-                                                                    <input class="input-check-color-input" type="checkbox" disabled>
-                                                                    <span class="input-check-color-box"></span>
-                                                                    <svg class="input-check-color-icon" width="12px" height="9px">
-                                                                        <use xlink:href="/static/assets/icons/sprite.svg#check-12x9"></use>
-                                                                    </svg>
-                                                                    <span class="input-check-color-stick"></span>
-                                                                </label>
-                                                            </span>
-                                                        </label>
-                                                        <label class="filter-color-item">
-                                                            <span class="filter-color-check input-check-color  " style="color: #3d6dcc;">
-                                                                <label class="input-check-color-body">
-                                                                    <input class="input-check-color-input" type="checkbox" checked>
-                                                                    <span class="input-check-color-box"></span>
-                                                                    <svg class="input-check-color-icon" width="12px" height="9px">
-                                                                        <use xlink:href="/static/assets/icons/sprite.svg#check-12x9"></use>
-                                                                    </svg>
-                                                                    <span class="input-check-color-stick"></span>
-                                                                </label>
-                                                            </span>
-                                                        </label>
-                                                        <label class="filter-color-item">
-                                                            <span class="filter-color-check input-check-color  " style="color: #7766cc;">
-                                                                <label class="input-check-color-body">
-                                                                    <input class="input-check-color-input" type="checkbox">
-                                                                    <span class="input-check-color-box"></span>
-                                                                    <svg class="input-check-color-icon" width="12px" height="9px">
-                                                                        <use xlink:href="/static/assets/icons/sprite.svg#check-12x9"></use>
-                                                                    </svg>
-                                                                    <span class="input-check-color-stick"></span>
-                                                                </label>
-                                                            </span>
-                                                        </label>
-                                                        <label class="filter-color-item">
-                                                            <span class="filter-color-check input-check-color  " style="color: #b852cc;">
-                                                                <label class="input-check-color-body">
-                                                                    <input class="input-check-color-input" type="checkbox">
-                                                                    <span class="input-check-color-box"></span>
-                                                                    <svg class="input-check-color-icon" width="12px" height="9px">
-                                                                        <use xlink:href="/static/assets/icons/sprite.svg#check-12x9"></use>
-                                                                    </svg>
-                                                                    <span class="input-check-color-stick"></span>
-                                                                </label>
-                                                            </span>
-                                                        </label>
-                                                        <label class="filter-color-item">
-                                                            <span class="filter-color-check input-check-color  " style="color: #e53981;">
-                                                                <label class="input-check-color-body">
-                                                                    <input class="input-check-color-input" type="checkbox">
-                                                                    <span class="input-check-color-box"></span>
-                                                                    <svg class="input-check-color-icon" width="12px" height="9px">
-                                                                        <use xlink:href="/static/assets/icons/sprite.svg#check-12x9"></use>
-                                                                    </svg>
-                                                                    <span class="input-check-color-stick"></span>
-                                                                </label>
-                                                            </span>
-                                                        </label> #}
                                                     </div>
                                                 </div>
                                             </div>
@@ -753,7 +525,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="view-options-legend">Showing 6 of {{total_products}} products</div>
+                            <div class="view-options-legend">Showing <span id="showingProducts"></span> of {{total_products}} products</div>
                             <div class="view-options-divider"></div>
                             <div class="view-options-control">
                                 <label for="">Sort By</label>
@@ -767,9 +539,10 @@
                             <div class="view-options-control">
                                 <label for="">Show</label>
                                 <div>
-                                    <select class="form-control form-control-sm" name="" id="">
-                                        <option value="">12</option>
-                                        <option value="">24</option>
+                                    <select class="form-control form-control-sm" name="" id="product_no_controller">
+                                        <option value="3">3</option>
+                                        <option value="6">6</option>
+                                        <option value="9">9</option>
                                     </select>
                                 </div>
                             </div>
@@ -780,6 +553,9 @@
                             {# Here is Response.html file #}
                         </div>
                     </div>
+                    {# Load More Button #}
+                    <input type="hidden" id="productShowing" value="{{show_products}}">
+                    <button id="load_more">Load More</button>
                     <div class="products-view-pagination">
                         <ul class="pagination justify-content-center">
                             <li class="page-item disabled">
@@ -815,14 +591,26 @@ $(document).ready(function(){
     var color=[];
     var selectedCategory = '';
     var sortProduct = '';
+    var limit= parseInt($("#productShowing").val()); 
+
+    $("#load_more").click(function(){
+        limit = limit + 3;
+        call_ajax(brands, min, max, color, selectedCategory, sortProduct, limit);  
+    });
+
+    $("#product_no_controller").click(function(){
+        limit = $(this).val();
+        call_ajax(brands, min, max, color, selectedCategory, sortProduct, limit);  
+    });
+
     $(document).on("click", "a[name='filterCategory']", function () {
         selectedCategory = $(this).attr('data-id');
-        call_ajax(brands, min, max, color, selectedCategory, sortProduct);  
+        call_ajax(brands, min, max, color, selectedCategory, sortProduct, limit);  
     });
 
     $("#sortProduct").change(function () {
         sortProduct = $(this).val();
-        call_ajax(brands, min, max, color, selectedCategory, sortProduct); 
+        call_ajax(brands, min, max, color, selectedCategory, sortProduct, limit); 
     });
 
     $(function () {
@@ -848,13 +636,13 @@ $(document).ready(function(){
             ];
             slider.noUiSlider.on('update', function (values, handle) {
                 
-                titleValues[handle].innerHTML = values[handle];
+                titleValues[handle].innerHTML = parseInt(values[handle]);
                 min = values[0];
                 max = values[1];
             });
 
             slider.noUiSlider.on('update', function () {
-                call_ajax(brands, min, max, color, selectedCategory, sortProduct); 
+                call_ajax(brands, min, max, color, selectedCategory, sortProduct, limit); 
             });
         });
     });
@@ -862,29 +650,29 @@ $(document).ready(function(){
     $(document).on("click", "input[name='brandCheckbox']", function () {
         if($(this).prop("checked") == true){
             brands.push($(this).val());
-            call_ajax(brands, min, max, color, selectedCategory, sortProduct); 
+            call_ajax(brands, min, max, color, selectedCategory, sortProduct, limit); 
         }
         else if($(this).prop("checked") == false){
             var index = brands.indexOf($(this).val());
             brands.splice(index, 1);
-            call_ajax(brands, min, max, color, selectedCategory, sortProduct); 
+            call_ajax(brands, min, max, color, selectedCategory, sortProduct, limit); 
         }
     });
 
     $(document).on("click", "input[name='colorCheckbox']", function () {
         if($(this).prop("checked") == true){
             color.push($(this).val());
-            call_ajax(brands, min, max, color, selectedCategory, sortProduct); 
+            call_ajax(brands, min, max, color, selectedCategory, sortProduct, limit); 
         }
         else if($(this).prop("checked") == false){
             var index = color.indexOf($(this).val());
             color.splice(index, 1);
-            call_ajax(brands, min, max, color, selectedCategory, sortProduct); 
+            call_ajax(brands, min, max, color, selectedCategory, sortProduct, limit); 
         }
     });
 
-    function call_ajax(brands, min, max, color, selectedCategory, sortProduct){
-        console.log(brands, min, max, color, selectedCategory, sortProduct)
+    function call_ajax(brands, min, max, color, selectedCategory, sortProduct, limit){
+        console.log(brands, min, max, color, selectedCategory, sortProduct, limit)
         $.ajax({
                 url: '/shopFilter',
                 type: 'post',
@@ -893,9 +681,19 @@ $(document).ready(function(){
                         'brands':brands, 
                         'color':color, 
                         'category':selectedCategory,
-                        'sort':sortProduct,    
+                        'sort':sortProduct,   
+                        'limit':limit, 
                     },
                 success: function(data){
+                    var data_limit = data.limit;
+                    $('#showingProducts').text(data_limit);
+                    $("#productShowing").val(data_limit);
+                    if ( data.max_data == "True"){
+                        $("#load_more").text("You've Reached End of Page. Goto Top");
+                        $("#load_more").click(function(){
+                            $('html, body').animate({ scrollTop: 0 }, 'smooth');
+                        });
+                    }
                     $('#products-body').html(data);
                     $('#products-body').append(data.htmlresponse);
                     
