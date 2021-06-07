@@ -219,6 +219,7 @@
     /*
     // quickview
     */
+    var id = 0;
     const quickview = {
         cancelPreviousModal: function() {},
         clickHandler: function() {
@@ -233,9 +234,11 @@
             }
 
             button.addClass('product-card-quickview--preload');
-       
+
             let xhr = $.ajax({
-                    url: 'quick-view-modal-block.html',
+                    url: '/quickviewProduct',
+                    type: 'POST',
+                    data: id,
                     success: function(data) {
                         quickview.cancelPreviousModal = function() {};
                         button.removeClass('product-card-quickview--preload');
@@ -245,6 +248,7 @@
                             modal.modal('hide');
                         });
                         modal.modal('show');
+                        modal.modal('handleUpdate')
                     }
                 });
 
@@ -274,7 +278,9 @@
         });
 
         $('.product-card-quickview').on('click', function() {
-            quickview.clickHandler.apply(this, arguments);
+            id = $(this).attr('data-id');
+            console.log(id)
+            quickview.clickHandler.apply(this, arguments, id);
         });
     });
 

@@ -107,9 +107,6 @@ def home():
     return render_template(
         'single-store/home.djhtml', heroSlider = heroSlider, featuresService = featuresService, horizontalPanel = horizontalPanel)
 
-@app.route("/quickview")
-def quickview():
-    render_template("single-store/quick-view-modal-block.html")
 
 @app.route("/single/<int:productId>")
 def single_product(productId):
@@ -253,10 +250,25 @@ def compare():
         'single-store/compare-page.djhtml', product_lists = product_lists
         )
 
+@app.route("/quickviewProduct", methods = ['POST'])
+def quickviewProduct():
+    if request.method == "POST":
+        id = int(request.get_data())
+        quickViewProductData = Product.query.get(id)
+    return render_template(
+        'general/blocks/quick-view-modal-block.djhtml', quickViewProductData = quickViewProductData
+        )
+
+@app.route("/searchSuggestion")
+def searchSuggestion():
+    return render_template(
+        'general/header/search-suggestion.djhtml'
+        )
+
 @app.route("/admin-dashboard")
 def admin_dashboard():
     return render_template(
-        'single-store/admin/dashboard.djhtml'
+        'single-store/admin/dashboard-page.djhtml'
         )
 
 @app.route("/account", methods=['GET', 'POST'])
