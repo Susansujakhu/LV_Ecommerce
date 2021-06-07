@@ -168,7 +168,7 @@ def shop():
     return render_template(
         'single-store/shop-page.djhtml', 
         max=max, min =min, brand=brand, product_number=product_number, color=color, category=category,
-        total_products = total_products
+        total_products = total_products, show_products = 3
         )
 
 
@@ -181,7 +181,8 @@ def shopFilter():
         max = int(float(request.form.get("max")))
         selectedCategory = request.form.get("category")
         sort = request.form.get("sort")
-        print(sort)
+        limit = int(request.form.get("limit"))
+
         filters =[]
         
         if selectedCategory:
@@ -196,12 +197,18 @@ def shopFilter():
             filters.append(
                 Product.color.in_(colors)   
             )
-            print(filters)
         # products = db.session.query(Product).filter(Product.price>=min, Product.price<=max, *filters).all()
         products = db.session.query(Product).filter(Product.price>=min, Product.price<=max, *filters)
         if sort:
-            products = products.order_by(Product.productName).all()
-    return jsonify({'htmlresponse':render_template('general/blocks/response.djhtml', products=products)})
+            products = products.order_by(Product.productName)
+        productCount = products.count()
+        max_data = "False"
+        if limit > productCount:
+            print("limit Crossed")
+            limit = productCount
+            max_data = "True"
+        products = products[:limit]
+    return jsonify({'htmlresponse':render_template('general/blocks/response.djhtml', products=products), 'limit':limit, 'max_data':max_data})
 
 
 @app.route("/cart")
