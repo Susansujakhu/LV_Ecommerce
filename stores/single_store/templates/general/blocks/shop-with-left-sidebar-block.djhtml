@@ -1,6 +1,27 @@
 <link rel="stylesheet" type="text/css" href= "{{ url_for('static', filename='css/general/blocks/shop-with-left-sidebar-block.css') }}" }}>
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+<style>
+.loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+}
 
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+</style>
 <div class="container">
     <div class="shop-layout shop-layout--sidebar--start">
         <div class="shop-layout-sidebar">
@@ -555,8 +576,14 @@
                     </div>
                     {# Load More Button #}
                     <input type="hidden" id="productShowing" value="{{show_products}}">
-                    <button id="load_more">Load More</button>
-                    <div class="products-view-pagination">
+                    <div class="loader"></div>
+                    <button id="load_more" style="display: none;">Load More</button>
+                    <button id="end_page" style="display: none;">You Have Reached End Of Page. Goto Top</button>
+                    <div id="no_result" style="display: none;">
+                        <h2>Sorry No Product Found</h2>
+                        <h3>We're sorry. We cannot find any matches for your search term.</h3>
+                    </div>
+                    {# <div class="products-view-pagination">
                         <ul class="pagination justify-content-center">
                             <li class="page-item disabled">
                                 <a class="page-link page-link--with-arrow" href="" aria-label="Previous">
@@ -576,12 +603,14 @@
                                 </a>
                             </li>
                         </ul>
-                    </div>
+                    </div> #}
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
 
 <script>
 $(document).ready(function(){
@@ -598,8 +627,12 @@ $(document).ready(function(){
         call_ajax(brands, min, max, color, selectedCategory, sortProduct, limit);  
     });
 
+    $("#end_page").click(function(){
+        $('html, body').animate({ scrollTop: 0 }, 'smooth');
+    });
+
     $("#product_no_controller").click(function(){
-        limit = $(this).val();
+        limit = parseInt($(this).val());
         call_ajax(brands, min, max, color, selectedCategory, sortProduct, limit);  
     });
 
@@ -673,6 +706,7 @@ $(document).ready(function(){
 
     function call_ajax(brands, min, max, color, selectedCategory, sortProduct, limit){
         console.log(brands, min, max, color, selectedCategory, sortProduct, limit)
+        $(".loader").show();
         $.ajax({
                 url: '/shopFilter',
                 type: 'post',
@@ -689,14 +723,25 @@ $(document).ready(function(){
                     $('#showingProducts').text(data_limit);
                     $("#productShowing").val(data_limit);
                     if ( data.max_data == "True"){
-                        $("#load_more").text("You've Reached End of Page. Goto Top");
-                        $("#load_more").click(function(){
-                            $('html, body').animate({ scrollTop: 0 }, 'smooth');
-                        });
+                        $("#load_more").hide();
+                        $("#end_page").show();
+                        $('#no_result').hide();
                     }
+                    else if (data.max_data == "False"){
+                        $("#load_more").show();
+                        $("#end_page").hide();
+                        $('#no_result').hide();
+                    }
+                    else{
+                        $("#load_more").hide();
+                        $("#end_page").hide();
+                        $('#no_result').show();
+
+                    }
+
                     $('#products-body').html(data);
                     $('#products-body').append(data.htmlresponse);
-                    
+                    $(".loader").hide();
                   // Updating table data
                 //   $("#products-body").load(" #products-body");
                 } 
