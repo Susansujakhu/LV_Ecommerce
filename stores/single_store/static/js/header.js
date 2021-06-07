@@ -165,7 +165,7 @@
                 if (input.val()) {
                     // YOUR AJAX REQUEST HERE.
                     xhr = $.ajax({
-                        url: 'suggestions.html',
+                        url: '/searchSuggestion',
                         success: function(data) {
                             xhr = null;
                             setSuggestion(data);

@@ -1,0 +1,29 @@
+{% set currency = 'Rs.' %}
+
+<ul class="suggestions-list">
+    {% for items in products %}
+    <li class="suggestions-item">
+        <div class="suggestions-item-image product-image">
+            <div class="product-image-body">
+                <img class="product-image-img" src="{{url_for('static',filename='assets/images/products/'+items['imageFile'])}}" alt="">
+            </div>
+        </div>
+        <div class="suggestions-item-info">
+            <a class="suggestions-item-name">
+                {{items['productName']}}
+            </a>
+            <div class="suggestions-item-meta">SKU: 83690/32</div>
+        </div>
+        <div class="suggestions-item-price">
+            {{ currency }} {{ items['price'] }}
+        </div>
+        <div class="suggestions-item-actions">
+            <button id="addCart" data-id="{{ items['id'] }}" type="button" title="Add to cart" class="btn btn-primary btn-sm btn-svg-icon">
+                <svg width="16px" height="16px">
+                    <use xlink:href="/static/assets/icons/sprite.svg#cart-16"></use>
+                </svg>
+            </button>
+        </div>
+    </li>
+    {% endfor %}
+</ul>
