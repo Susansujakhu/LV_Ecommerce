@@ -168,6 +168,15 @@ def shop():
         total_products = total_products, show_products = 3
         )
 
+def unique(list1):
+    # insert the list to the set
+    list_set = set(list1)
+    # convert the set to the list
+    unique_list = (list(list_set))
+    result_list = []
+    for x in unique_list:
+        result_list.append(x)
+    return result_list
 
 @app.route("/shopFilter", methods=["POST"])
 def shopFilter():
@@ -196,6 +205,22 @@ def shopFilter():
             )
         # products = db.session.query(Product).filter(Product.price>=min, Product.price<=max, *filters).all()
         products = db.session.query(Product).filter(Product.price>=min, Product.price<=max, *filters)
+        filterBrand = []
+        filterColor = []
+        for productRows in products:
+            filterBrand.append(productRows.brand)
+            
+        for productRows in db.session.query(Product.color).distinct():
+            filterColor.append(productRows.color)
+        
+        filterBrand = unique(filterBrand)
+        filterColor = unique(filterColor)
+
+        allBrands = db.session.query(Brand.name).all()
+        allColors = db.session.query(Color.color).all()
+        allBrand = [value for value, in allBrands]
+        allColor = [value for value, in allColors]
+        
         if sort:
             products = products.order_by(Product.productName)
         productCount = products.count()
@@ -207,8 +232,16 @@ def shopFilter():
             max_data = "True"
         elif productCount == 0:
             max_data = "no_data"
+        
         products = products[:limit]
-    return jsonify({'htmlresponse':render_template('general/blocks/response.djhtml', products=products), 'limit':limit, 'max_data':max_data})
+        
+    return jsonify({'htmlresponse':render_template('general/blocks/response.djhtml', products=products), 
+                    'limit':limit, 'max_data':max_data, 
+                    'filterColor':filterColor, 
+                    'filterBrand':filterBrand,
+                    'allBrands':allBrand,
+                    'allColors':allColor
+                })
 
 
 @app.route("/cart")
