@@ -203,10 +203,13 @@ def shopFilter():
             products = products.order_by(Product.productName)
         productCount = products.count()
         max_data = "False"
-        if limit > productCount:
+        if limit > productCount and productCount != 0:
+            print(limit)
             print("limit Crossed")
             limit = productCount
             max_data = "True"
+        elif productCount == 0:
+            max_data = "no_data"
         products = products[:limit]
     return jsonify({'htmlresponse':render_template('general/blocks/response.djhtml', products=products), 'limit':limit, 'max_data':max_data})
 
