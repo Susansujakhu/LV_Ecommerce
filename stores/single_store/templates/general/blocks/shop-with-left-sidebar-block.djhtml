@@ -738,10 +738,10 @@ $(document).ready(function(){
                         $('#no_result').show();
 
                     }
-
+                    $(".loader").hide();
                     $('#products-body').html(data);
                     $('#products-body').append(data.htmlresponse);
-                    $(".loader").hide();
+                    
                   // Updating table data
                 //   $("#products-body").load(" #products-body");
                 } 
