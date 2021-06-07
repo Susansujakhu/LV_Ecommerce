@@ -151,7 +151,7 @@
                                                         </li>
                                                         {% endif %}
                                                         {% endfor %}
-                                                        <a name="filterCategory" data-id="">Show All Products</a>
+                                                        <a name="filterCategory" data-id="">Select All</a>
                                                         {# <li class="filter-categories-alt-item filter-categories-alt-item--open filter-categories-alt-item--current" data-collapse-item>
                                                             <button class="filter-categories-alt-expander" data-collapse-trigger></button>
                                                             <a href="">Hand Tools</a>
@@ -425,7 +425,7 @@
                                                         <label class="filter-list-item ">
                                                             <span class="filter-list-input input-check">
                                                                 <span class="input-check-body">
-                                                                    <input class="input-check-input" type="checkbox" name="brandCheckbox" value={{items.name}}>
+                                                                    <input id="{{items.name}}" data-id={{items.name}} class="input-check-input" type="checkbox" name="brandCheckbox" value={{items.name}}>
                                                                     <span class="input-check-box"></span>
                                                                     <svg class="input-check-icon" width="9px" height="7px">
                                                                         <use xlink:href="images/sprite.svg#check-9x7"></use>
@@ -722,6 +722,25 @@ $(document).ready(function(){
                     var data_limit = data.limit;
                     $('#showingProducts').text(data_limit);
                     $("#productShowing").val(data_limit);
+                    var allBrands = data.allBrands;
+                    var filterBrand = data.filterBrand;
+                    console.log(allBrands);
+                    for (i=0; i< filterBrand.length; i++){  
+                        for(index in allBrands){
+                         
+                            if(allBrands[index] == filterBrand[i] ){
+                                
+                                $('#'+allBrands[index]).prop('disabled',true);
+                                console.log(allBrands[index]+"Disbaled")
+                            }
+                            else if(allBrands[index] != filterBrand[i] ){
+                                $('#'+allBrands[index]).prop('disabled',false);
+                            }
+                        }
+                        
+                        
+                        //
+                    }
                     if ( data.max_data == "True"){
                         $("#load_more").hide();
                         $("#end_page").show();
