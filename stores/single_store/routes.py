@@ -296,8 +296,9 @@ def user_account():
 @app.route("/dashboard")
 @login_required
 def user_dashboard():
+    userAddress = Shipping.query.filter_by(userId = current_user.userId,status=True).first()
     return render_template(
-        'single-store/user-account/dashboard-page.djhtml'
+        'single-store/user-account/dashboard-page.djhtml', userAddress=userAddress
         )
 
 @app.route("/dashboard/edit-profile")
@@ -306,6 +307,7 @@ def edit_profile():
     return render_template(
         'single-store/user-account/edit-profile-page.djhtml'
         )
+
 
 @app.route("/dashboard/order-history")
 @login_required
@@ -324,9 +326,23 @@ def order_details():
 @app.route("/dashboard/address-book")
 @login_required
 def address_book():
+    userAddress = Shipping.query.filter_by(userId = current_user.userId).all()
     return render_template(
-        'single-store/user-account/address-book-page.djhtml'
+        'single-store/user-account/address-book-page.djhtml', userAddress=userAddress
         )
+
+@app.route("/dashboard/address-book/ChangeStatus", methods=["POST"])
+@login_required
+def changeStatus():
+    if request.method == "POST":
+        shipId = int(request.get_data())
+        for rows in Shipping.query.filter_by(userId = current_user.userId).all():
+            rows.status = False
+            db.session.commit()
+        ship = Shipping.query.filter_by(id = shipId ,userId = current_user.userId).first()
+        ship.status = True
+        db.session.commit()
+    return jsonify({'status':'OK'})
 
 @app.route("/dashboard/edit-address")
 @login_required
@@ -335,9 +351,9 @@ def edit_address():
         'single-store/user-account/edit-address-page.djhtml'
         )
 
-@app.route("/dashboardAddress", methods=["POST"])
+@app.route("/dashboard/edit-address/address", methods=["POST"])
 @login_required
-def dashboardAddress():
+def editDashboardAddress():
     if request.method == "POST":
         print(request.form,type(request.form),dict(request.form))
         user =  request.form['firstName']

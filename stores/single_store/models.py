@@ -69,12 +69,13 @@ class Shipping(db.Model):
     postalCode = db.Column(db.Text,nullable = False)
     phoneNo = db.Column(db.Text, nullable = False)
     altPhoneNo = db.Column(db.Text, nullable = True)  
+    status = db.Column(db.Boolean, nullable = False, default = False)
 
     userId = db.Column(db.Integer, db.ForeignKey('user.userId'), nullable = False)
 
 
     def __repr__(self):
-        return f"Post('{self.firstName}','{self.lastName}', '{self.companyName}', '{self.country}', '{self.street}', '{self.houseCode}', '{self.city}', '{self.state}', '{self.postalCode}', '{self.phoneNo}', '{self.altPhoneNo}')"
+        return f"Post('{self.firstName}','{self.lastName}', '{self.companyName}', '{self.country}', '{self.street}', '{self.houseCode}', '{self.city}', '{self.state}', '{self.postalCode}', '{self.phoneNo}', '{self.altPhoneNo}', '{self.status}')"
 
 
 class Product(db.Model):

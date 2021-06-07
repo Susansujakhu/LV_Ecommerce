@@ -1,33 +1,57 @@
+
 <div class="addresses-list">
-    <a href="" class="addresses-list-item addresses-list-item--new">
+    <a href="/dashboard/edit-address" class="addresses-list-item addresses-list-item--new">
         <div class="addresses-list-plus"></div>
         <div class="btn btn-secondary btn-sm">Add New</div>
     </a>
-    <div class="addresses-list-divider"></div>
-    <div class="addresses-list-item card address-card">
-        <div class="address-card-badge">Default</div>
-        <div class="address-card-body">
-            <div class="address-card-name">Helena Garcia</div>
-            <div class="address-card-row">
-                Random Federation<br>
-                115302, Moscow<br>
-                ul. Varshavskaya, 15-2-178
-            </div>
-            <div class="address-card-row">
-                <div class="address-card-row-title">Phone Number</div>
-                <div class="address-card-row-content">38 972 588-42-36</div>
-            </div>
-            <div class="address-card-row">
-                <div class="address-card-row-title">Email Address</div>
-                <div class="address-card-row-content">stroyka@example.com</div>
-            </div>
-            <div class="address-card-footer">
-                <a href="account-edit-address.html">Edit</a>&nbsp;&nbsp;
-                <a href="">Remove</a>
+
+    {% for items in userAddress %}
+        <div class="addresses-list-divider"></div>
+        <div class="addresses-list-item card address-card">
+            {% if items.status == True %}
+                <div class="address-card-badge">Default</div>
+            {% endif %}
+            <div class="address-card-body">
+                <div class="address-card-name">{{items.firstName}} {{items. lastName}}</div>
+                <div class="address-card-row">
+                    {{items.street}}<br>
+                    {{items.city}} - {{items.postalCode}}<br>
+                     {{items.country}}
+                </div>
+                <div class="address-card-row">
+                    <div class="address-card-row-title">Province</div>
+                    <div class="address-card-row-content">{{items.state}}</div>
+                </div>
+                <div class="address-card-row">
+                    <div class="address-card-row-title">Apartment/House number</div>
+                    <div class="address-card-row-content">{{items.houseCode | default("N/A", True)}}</div>
+                </div>
+                
+                <div class="address-card-row">
+                    <div class="address-card-row-title">Company Name</div>
+                    <div class="address-card-row-content">{{items.companyName | default("N/A", True)}}</div>
+                </div>
+                <div class="address-card-row">
+                    <div class="address-card-row-title">Phone Number</div>
+                    <div class="address-card-row-content">{{items.phoneNo}}</div>
+                </div>
+                <div class="address-card-row">
+                    <div class="address-card-row-title">Secondary Phone Number</div>
+                    <div class="address-card-row-content">{{items.altPhoneNo | default("N/A", True)}}</div>
+                </div>
+                <div class="address-card-footer">
+                    <a href="account-edit-address.html">Edit</a>&nbsp;&nbsp;
+                    <a href="">Remove</a>&nbsp;&nbsp;
+                    {% if items.status == False %}
+                        <a id="makeDefault" data-id="{{ items.id }}" class="">Make Default</a>
+                    {% endif %}
+                </div>
             </div>
         </div>
-    </div>
-    <div class="addresses-list-divider"></div>
+
+    {% endfor %}
+
+   {#  <div class="addresses-list-divider"></div>
     <div class="addresses-list-item card address-card">
         <div class="address-card-body">
             <div class="address-card-name">Jupiter Saturnov</div>
@@ -49,6 +73,30 @@
                 <a href="">Remove</a>
             </div>
         </div>
-    </div>
+    </div> #}
     <div class="addresses-list-divider"></div>
 </div>
+
+
+
+<script>
+    
+$(document).ready(function(){
+    $(document).on('click', '#makeDefault', function(){
+        var shipping_id = $(this).attr('data-id');
+        req = $.ajax({
+                url: "/dashboard/address-book/ChangeStatus",
+                type: "POST",
+                data: shipping_id,
+        }); 
+        req.done(function(data){
+            console.log(data.status);
+            // document.location.href = $(".addresses-list").location.href;
+            $(".addresses-list").load(" .addresses-list");
+            alert('Default location has been changed');
+        });
+    });
+});
+
+</script>
+

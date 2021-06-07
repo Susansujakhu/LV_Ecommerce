@@ -14,28 +14,45 @@
             </div>
         </div>
     </div>
-    <div class="dashboard-address card address-card address-card--featured">
-        <div class="address-card-badge">Default Address</div>
-        <div class="address-card-body">
-            <div class="address-card-name">Helena Garcia</div>
-            <div class="address-card-row">
-                Random Federation<br>
-                115302, Moscow<br>
-                ul. Varshavskaya, 15-2-178
-            </div>
-            <div class="address-card-row">
-                <div class="address-card-row-title">Phone Number</div>
-                <div class="address-card-row-content">38 972 588-42-36</div>
-            </div>
-            <div class="address-card-row">
-                <div class="address-card-row-title">Email Address</div>
-                <div class="address-card-row-content">stroyka@example.com</div>
-            </div>
-            <div class="address-card-footer">
-                <a href="/dashboard/edit-address">Edit Address</a>
+
+
+        <div class="dashboard-address card address-card address-card--featured">
+            <div class="address-card-badge">Default Address</div>
+            <div class="address-card-body">
+                <div class="address-card-name">{{userAddress.firstName}} {{userAddress. lastName}}</div>
+                <div class="address-card-row">
+                    {{userAddress.street}}<br>
+                    {{userAddress.city}} - {{userAddress.postalCode}}<br>
+                     {{userAddress.country}}
+                </div>
+                <div class="address-card-row">
+                    <div class="address-card-row-title">Province</div>
+                    <div class="address-card-row-content">{{userAddress.state}}</div>
+                </div>
+                <div class="address-card-row">
+                    <div class="address-card-row-title">Apartment/House number</div>
+                    <div class="address-card-row-content">{{userAddress.houseCode | default("N/A", True)}}</div>
+                </div>
+                
+                <div class="address-card-row">
+                    <div class="address-card-row-title">Company Name</div>
+                    <div class="address-card-row-content">{{userAddress.companyName | default("N/A", True)}}</div>
+                </div>
+                <div class="address-card-row">
+                    <div class="address-card-row-title">Phone Number</div>
+                    <div class="address-card-row-content">{{userAddress.phoneNo}}</div>
+                </div>
+                <div class="address-card-row">
+                    <div class="address-card-row-title">Secondary Phone Number</div>
+                    <div class="address-card-row-content">{{userAddress.altPhoneNo | default("N/A", True)}}</div>
+                </div>
+                <div class="address-card-footer">
+                    <a href="/dashboard/edit-address">Edit Address</a>
+                </div>
             </div>
         </div>
-    </div>
+
+
     <div class="dashboard-orders card">
         <div class="card-header">
             <h5>Recent Orders</h5>

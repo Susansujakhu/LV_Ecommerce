@@ -24,7 +24,6 @@
                     <div class="form-group">
                         <label for="checkout-country">Country</label>
                         <select id="checkout-country" name="checkout-country" class="form-control form-control-select2" required>
-                            <option>Select a country...</option>
                             <option>Nepal</option>
                             <option>United States</option>
                             <option>Russia</option>
@@ -106,10 +105,11 @@ $(document).ready(function () {
     }
     req = $.ajax({
         type: "POST",
-        url: "/dashboardAddress",
+        url: "/dashboard/edit-address/address",
         data: formData,
         dataType: "json",
         encode: true,
+        cache: false,
     })
     req.done(function (data) {
         let retDat = data;
