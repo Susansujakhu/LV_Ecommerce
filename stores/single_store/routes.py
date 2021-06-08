@@ -51,6 +51,8 @@ def not_found(e):
 @app.context_processor
 def global_attr():
     currency = request.cookies.get('currency')
+    if currency is None:
+        currency = "NPR"
     totalCart = 0
     cartProductNumber=0
     badgeForNew=[]
@@ -90,6 +92,8 @@ def global_attr():
 def utility_processor():
     def format_price(amount, currency='Rs. '):
         currency = request.cookies.get('currency')
+        if currency is None:
+            currency = "NPR"
         c = CurrencyConverter()
         if currency == "USD" or currency == "EUR":
             amount = amount / 1.6
