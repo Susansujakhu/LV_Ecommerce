@@ -14,9 +14,10 @@
 {% set productShortDescription = product['shortDescription']  %}
 {% set productLongDescription = product['longDescription']  %}
 {% set productImageFile = product['imageFile']  %}
-{% set productImageGallery = product['imageGallery']  %}
 {% set productFeatured = product['featured']  %}
-{% set currency = "Rs." %}
+{% set productImageGallery = product['imageGallery']  %}
+{% set productImageGallery = productImageGallery.split(',') %}
+
 
 <div class="block">
     <div class="container">
@@ -45,87 +46,25 @@
                                         <img class="product-image-img" src="{{url_for('static',filename='assets/images/products/'+productImageFile)}}" alt="">
                                     </a>
                                 </div>
+                                {% for items in productImageGallery[1:] %}
                                 <div class="product-image product-image--location--gallery">
-                                    <!--
-                    The data-width and data-height attributes must contain the size of a larger version
-                    of the product image.
-
-                    If you do not know the image size, you can remove the data-width and data-height
-                    attribute, in which case the width and height will be obtained from the naturalWidth
-                    and naturalHeight property of img.product-image-img.
-                    -->
-                                    <a href="images/products/product-16-1.jpg" data-width="700" data-height="700" class="product-image-body" target="_blank">
-                                        <img class="product-image-img" src="images/products/product-16-1.jpg" alt="">
+                                    <a href="{{url_for('static',filename='assets/images/gallery/'+items)}}" data-width="700" data-height="700" class="product-image-body" target="_blank">
+                                        <img class="product-image-img" src="{{url_for('static',filename='assets/images/gallery/'+items)}}" alt="">
                                     </a>
                                 </div>
-                                <div class="product-image product-image--location--gallery">
-                                    <!--
-                    The data-width and data-height attributes must contain the size of a larger version
-                    of the product image.
-
-                    If you do not know the image size, you can remove the data-width and data-height
-                    attribute, in which case the width and height will be obtained from the naturalWidth
-                    and naturalHeight property of img.product-image-img.
-                    -->
-                                    <a href="images/products/product-16-2.jpg" data-width="700" data-height="700" class="product-image-body" target="_blank">
-                                        <img class="product-image-img" src="images/products/product-16-2.jpg" alt="">
-                                    </a>
-                                </div>
-                                <div class="product-image product-image--location--gallery">
-                                    <!--
-                    The data-width and data-height attributes must contain the size of a larger version
-                    of the product image.
-
-                    If you do not know the image size, you can remove the data-width and data-height
-                    attribute, in which case the width and height will be obtained from the naturalWidth
-                    and naturalHeight property of img.product-image-img.
-                    -->
-                                    <a href="images/products/product-16-3.jpg" data-width="700" data-height="700" class="product-image-body" target="_blank">
-                                        <img class="product-image-img" src="images/products/product-16-3.jpg" alt="">
-                                    </a>
-                                </div>
-                                <div class="product-image product-image--location--gallery">
-                                    <!--
-                    The data-width and data-height attributes must contain the size of a larger version
-                    of the product image.
-
-                    If you do not know the image size, you can remove the data-width and data-height
-                    attribute, in which case the width and height will be obtained from the naturalWidth
-                    and naturalHeight property of img.product-image-img.
-                    -->
-                                    <a href="images/products/product-16-4.jpg" data-width="700" data-height="700" class="product-image-body" target="_blank">
-                                        <img class="product-image-img" src="images/products/product-16-4.jpg" alt="">
-                                    </a>
-                                </div>
+                                {%endfor%}
                             </div>
                         </div>
                         <div class="product-gallery-carousel">
                             <div class="owl-carousel" id="product-carousel">
-                                <a href="images/products/product-16.jpg" class="product-image product-gallery-carousel-item">
+                                {% for items in productImageGallery %}
+                                <a href="{{url_for('static',filename='assets/images/gallery/'+items)}}" class="product-image product-gallery-carousel-item">
                                     <div class="product-image-body">
-                                        <img class="product-image-img product-gallery-carousel-image" src="images/products/product-16.jpg" alt="">
+                                        <img class="product-image-img product-gallery-carousel-image" src="{{url_for('static',filename='assets/images/gallery/'+items)}}" alt="">
                                     </div>
                                 </a>
-                                <a href="images/products/product-16-1.jpg" class="product-image product-gallery-carousel-item">
-                                    <div class="product-image-body">
-                                        <img class="product-image-img product-gallery-carousel-image" src="images/products/product-16-1.jpg" alt="">
-                                    </div>
-                                </a>
-                                <a href="images/products/product-16-2.jpg" class="product-image product-gallery-carousel-item">
-                                    <div class="product-image-body">
-                                        <img class="product-image-img product-gallery-carousel-image" src="images/products/product-16-2.jpg" alt="">
-                                    </div>
-                                </a>
-                                <a href="images/products/product-16-3.jpg" class="product-image product-gallery-carousel-item">
-                                    <div class="product-image-body">
-                                        <img class="product-image-img product-gallery-carousel-image" src="images/products/product-16-3.jpg" alt="">
-                                    </div>
-                                </a>
-                                <a href="images/products/product-16-4.jpg" class="product-image product-gallery-carousel-item">
-                                    <div class="product-image-body">
-                                        <img class="product-image-img product-gallery-carousel-image" src="images/products/product-16-4.jpg" alt="">
-                                    </div>
-                                </a>
+                                {% endfor %}
+                                
                             </div>
                         </div>
                     </div>
