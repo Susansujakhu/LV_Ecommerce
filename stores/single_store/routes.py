@@ -150,12 +150,22 @@ def single_product(productId):
     product = Product.query.get(productId)
     rating = Rating.query.filter_by(product_id = product.id).all()
     users = User.query.all()
+    sum = 0
+    avg_rating = 0
+    total_ratings = len(rating)
+    for rate in rating:
+        sum = sum+rate.rate
+    if total_ratings != 0:
+        avg_rating = int(sum/total_ratings)
+        
     form = RatingForm()
     if product is None:
         return redirect(url_for('home'))
     
     return render_template(
-        'single-store/single-product-page.djhtml', title = product.productName, product = product, form=form, rating=rating, users=users)
+        'single-store/single-product-page.djhtml', title = product.productName, 
+                product = product, form=form, rating=rating, users=users, 
+                avg_rating=avg_rating, total_ratings=total_ratings)
 
 
 @app.route("/saveReview", methods=["POST"])
