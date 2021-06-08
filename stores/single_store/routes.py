@@ -7,7 +7,7 @@ from sqlalchemy.sql.elements import Null
 from sqlalchemy.sql.expression import text
 from wtforms.fields.core import StringField
 from single_store import app, db, bcrypt
-from single_store.forms import DynamicForm, HorizontalPanelForm, EditHorizontalPanelForm, BrandForm, EditBrandForm, FeaturesForm, EditFeaturesForm, HeroForm, EditHeroForm, RatingForm, RegistrationForm, LoginForm, ProductForm, EditProductForm, CategoryForm,EditCategoryForm, ColorForm, SizeForm
+from single_store.forms import EditDashboardAddress, EditDashboardProfile,DynamicForm, HorizontalPanelForm, EditHorizontalPanelForm, BrandForm, EditBrandForm, FeaturesForm, EditFeaturesForm, HeroForm, EditHeroForm, RatingForm, RegistrationForm, LoginForm, ProductForm, EditProductForm, CategoryForm,EditCategoryForm, ColorForm, SizeForm
 from single_store.models import Size, Color, Compare,HorizontalPanel, Brand, Cart, Category, Features, Hero, Order, Product, Rating, Shipping, User, MyAdminIndexView, AdminView, Wishlist
 from flask_login import login_user, current_user, logout_user, login_required
 import secrets, os, sys
@@ -394,12 +394,27 @@ def user_dashboard():
         'single-store/user-account/dashboard-page.djhtml', userAddress=userAddress
         )
 
-@app.route("/dashboard/edit-profile")
+@app.route("/dashboard/edit-profile", methods=['POST','GET'])
 @login_required
 def edit_profile():
-    return render_template(
-        'single-store/user-account/edit-profile-page.djhtml'
-        )
+    user = User.query.get(current_user.userId)
+    if request.method == 'POST':
+        user.firstName = request.form['firstName']
+        user.lastName = request.form['lastName']
+        user.email = request.form['email']
+        print(request.form['firstName'],request.form['lastName'],request.form['email'])
+        db.session.commit()
+        return jsonify({'status':'OK','firstName' : request.form['firstName']})
+
+    else:
+        formSend=EditDashboardProfile()
+        if request.method == 'GET':
+            formSend.firstName.data = user.firstName
+            formSend.lastName.data = user.lastName
+            formSend.email.data = user.email
+        return render_template(
+            'single-store/user-account/edit-profile-page.djhtml', form = formSend
+            )
 
 
 @app.route("/dashboard/order-history")
@@ -437,21 +452,12 @@ def changeStatus():
         db.session.commit()
     return jsonify({'status':'OK'})
 
-@app.route("/dashboard/edit-address")
+@app.route("/dashboard/edit-address", methods=['POST','GET'])
 @login_required
-def edit_address():
-    return render_template(
-        'single-store/user-account/edit-address-page.djhtml'
-        )
-
-@app.route("/dashboard/edit-address/address", methods=["POST"])
-@login_required
-def editDashboardAddress():
+def addAddress():
+    formSend=EditDashboardAddress()
     if request.method == "POST":
         print(request.form,type(request.form),dict(request.form))
-        user =  request.form['firstName']
-        password = request.form['altPhoneNo']
-        print(user,password,type(user),type(password))
         addShipping = Shipping(
             firstName = request.form['firstName'],
             lastName = request.form['lastName'],
@@ -467,19 +473,62 @@ def editDashboardAddress():
             userId = current_user.userId,
             )
         print(addShipping)
-        try:
-            db.session.add(addShipping)
-            db.session.commit()
-        except exc.IntegrityError as err:
-            db.session.rollback()
-            db.session.add(addShipping)
-            db.session.commit()
-        return jsonify({'status':'OK','firstName' : request.form['firstName']})
-    
+        db.session.add(addShipping)
+        db.session.commit()
+        return jsonify({'status':'added','firstName' : request.form['firstName']})
+    else:
+        return render_template(
+            'single-store/user-account/edit-address-page.djhtml', form = formSend
+            )
 
-        # return jsonify({'result': 'success'})
-        # if registration == "success":
-        #     return json.dump({"abc":'successfuly registered'})
+@app.route("/dashboard/edit-address/<int:shipId>", methods=["POST","GET"])
+@login_required
+def editAddress(shipId):
+    ship = Shipping.query.filter_by(id=shipId,userId=current_user.userId).first()
+    if request.method == 'POST':
+        ship.firstName = request.form['firstName']
+        ship.lastName = request.form['lastName']
+        ship.companyName = request.form['companyName']
+        ship.country = request.form['country']
+        ship.street = request.form['street']
+        ship.houseCode = request.form['houseCode']
+        ship.city = request.form['city']
+        ship.state = request.form['state']
+        ship.postalCode = request.form['postalCode']
+        ship.phoneNo = request.form['phoneNo']
+        ship.altPhoneNo = request.form['altPhoneNo']
+
+        print(request.form['firstName'],request.form['lastName'],request.form['companyName'])
+        db.session.commit()
+        return jsonify({'status':'updated','firstName' : request.form['firstName']})
+
+    else:
+        formSend=EditDashboardAddress()
+        if request.method == 'GET':
+            formSend.firstName.data = ship.firstName
+            formSend.lastName.data = ship.lastName
+            formSend.companyName.data = ship.companyName
+            formSend.country.data = ship.country
+            formSend.street.data = ship.street
+            formSend.houseCode.data = ship.houseCode
+            formSend.city.data = ship.city
+            formSend.state.data = ship.state
+            formSend.postalCode.data = ship.postalCode
+            formSend.phoneNo.data = ship.phoneNo
+            formSend.altPhoneNo.data = ship.altPhoneNo
+        return render_template(
+            'single-store/user-account/edit-address-page.djhtml', form = formSend
+            )
+
+@app.route("/dashboard/edit-address/delete", methods=["POST","GET"])
+@login_required
+def delAddress():
+    if request.method == "POST":
+        shipId = int(request.get_data())
+        if Shipping.query.filter_by(id=shipId).delete():
+            db.session.execute("ALTER SEQUENCE shipping_id_seq RESTART")
+            db.session.commit()
+        return jsonify({'status':'OK'})
 
 
 @app.route("/dashboard/change-password")

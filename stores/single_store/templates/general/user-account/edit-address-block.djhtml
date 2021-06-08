@@ -7,71 +7,53 @@
         <div class="row no-gutters">
             <div class="col-12 col-lg-10 col-xl-8">
                 <form id="sform" action="" method="post">
+                    {{ form.csrf_token }}
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="checkout-first-name">First Name</label>
-                            <input type="text" class="form-control" id="checkout-first-name" name="checkout-first-name" placeholder="First Name" required>
+                            {{form.firstName.label()}}
+                            {{form.firstName(class = "form-control")}}
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="checkout-last-name">Last Name</label>
-                            <input type="text" class="form-control" id="checkout-last-name" name="checkout-last-name" placeholder="Last Name" required>
+                            {{form.lastName.label()}}
+                            {{form.lastName(class = "form-control")}}
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="checkout-company-name">Company Name <span class="text-muted">(Optional)</span></label>
-                        <input type="text" class="form-control" id="checkout-company-name" name="checkout-company-name" placeholder="Company Name">
+                        {{form.companyName.label()}}
+                        {{form.companyName(class = "form-control")}}
                     </div>
                     <div class="form-group">
-                        <label for="checkout-country">Country</label>
-                        <select id="checkout-country" name="checkout-country" class="form-control form-control-select2" required>
-                            <option>Nepal</option>
-                            <option>United States</option>
-                            <option>Russia</option>
-                            <option>Italy</option>
-                            <option>France</option>
-                            <option>Ukraine</option>
-                            <option>Germany</option>
-                            <option>Australia</option>
-                        </select>
+                        {{form.country.label()}}
+                        {{form.country(class = "form-control")}}
                     </div>
                     <div class="form-group">
-                        <label for="checkout-street-address">Street Address</label>
-                        <input type="text" class="form-control" id="checkout-street-address" name="checkout-street-address" placeholder="Street Address" required>
+                        {{form.street.label()}}
+                        {{form.street(class = "form-control")}}
                     </div>
                     <div class="form-group">
-                        <label for="checkout-address">Apartment, suite, unit etc. <span class="text-muted">(Optional)</span></label>
-                        <input type="text" class="form-control" id="checkout-address" name="checkout-address">
+                        {{form.houseCode.label()}}
+                        {{form.houseCode(class = "form-control")}}
                     </div>
                     <div class="form-group">
-                        <label for="checkout-city">Town / City</label>
-                        <input type="text" class="form-control" id="checkout-city" name="checkout-city" required>
+                        {{form.city.label()}}
+                        {{form.city(class = "form-control")}}
                     </div>
                     <div class="form-group">
-                        <label for="checkout-state">State / County</label>
-                        <input type="text" class="form-control" id="checkout-state" name="checkout-state" required>
+                        {{form.state.label()}}
+                        {{form.state(class = "form-control")}}
                     </div>
                     <div class="form-group">
-                        <label for="checkout-postcode">Postcode / ZIP</label>
-                        <input type="number" class="form-control" id="checkout-postcode" name="checkout-postcode">
+                        {{form.postalCode.label()}}
+                        {{form.postalCode(class = "form-control")}}
                     </div>
-                    {# <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="checkout-email">Email address</label>
-                            <input type="email" class="form-control" id="checkout-email" placeholder="Email address">
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="checkout-phone">Phone</label>
-                            <input type="text" class="form-control" id="checkout-phone" placeholder="Phone">
-                        </div>
-                    </div> #}
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="checkout-email">Primary Mobile no.</label>
-                            <input type="number" class="form-control" id="checkout-primary-number" name="checkout-primary-number" placeholder="Mobile number" required>
+                            {{form.phoneNo.label()}}
+                            {{form.phoneNo(class = "form-control")}}
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="checkout-phone">Secondary Contact no. <span class="text-muted">(Optional)</span></label>
-                            <input type="number" class="form-control" id="checkout-secondary-number" name="checkout-secondary-number"  placeholder="Phone number">
+                            {{form.altPhoneNo.label()}}
+                            {{form.altPhoneNo(class = "form-control")}}
                         </div>
                     </div>
                     <div class="form-group mt-3 mb-0">
@@ -85,40 +67,55 @@
 
 <script>
 $(document).ready(function () {
-  $("form").submit(function (event) {
-    var formData = {
-      firstName: $("#checkout-first-name").val(),
-      lastName: $("#checkout-last-name").val(),
-      companyName: $("#checkout-company-name").val(),
-      country: $("#checkout-country").val(),
-      street: $("#checkout-street-address").val(),
-      houseCode: $("#checkout-address").val(),
-      city: $("#checkout-city").val(),
-      state: $("#checkout-state").val(),
-      postalCode: $("#checkout-postcode").val(),
-      phoneNo: $("#checkout-primary-number").val(),
-      altPhoneNo: $("#checkout-secondary-number").val(),
-    };
-    console.log(formData)
-    for (var i in formData){
-    console.log(formData[i], i);
-    }
-    req = $.ajax({
-        type: "POST",
-        url: "/dashboard/edit-address/address",
-        data: formData,
-        dataType: "json",
-        encode: true,
-        cache: false,
-    })
-    req.done(function (data) {
-        let retDat = data;
-        console.log(retDat);
-        alert("Thank you!!! "+retDat.firstName+", you have successfully added new location");
-        document.getElementById("sform").reset();
-    });
+    $("form").submit(function (event) {
+        var formData = {
+          firstName: $("#firstName").val(),
+          lastName: $("#lastName").val(),
+          companyName: $("#companyName").val(),
+          country: $("#country").val(),
+          street: $("#street").val(),
+          houseCode: $("#houseCode").val(),
+          city: $("#city").val(),
+          state: $("#state").val(),
+          postalCode: $("#postalCode").val(),
+          phoneNo: $("#phoneNo").val(),
+          altPhoneNo: $("#altPhoneNo").val(),
+        };
+        console.log(formData)
+        for (var i in formData){
+            console.log(formData[i], i);
+        }
+        if (window.location.pathname != '/dashboard/edit-address'){
+          editUrl =window.location.pathname;
+        }
+        else{
+            editUrl='/dashboard/edit-address';
+        }
+        console.log(editUrl);
+        req = $.ajax({
+            type: "POST",
+            url: editUrl,
+            data: formData,
+            dataType: "json",
+            encode: true,
+            cache: false,
+        })
+        req.done(function (data) {
+            let retDat = data;
+            alert("Thank you!!! "+retDat.firstName+", you have successfully " +retDat.status+ " a location");
+            if (window.location.pathname != '/dashboard/edit-address'){
+              $(".cart").load(" .cart");
+            }
+            else{
+                // document.getElementById("sform").reset();
+                window.location.href='/dashboard/address-book';
+            }
+            
+             
+        });
 
-    event.preventDefault();
-  });
+        event.preventDefault();
+    });
 });
+
 </script>

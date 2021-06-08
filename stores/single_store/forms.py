@@ -205,16 +205,22 @@ class DynamicForm(FlaskForm):
     form_type = HiddenField(default='FormType', render_kw={ 'type':'hidden' })
     # name = StringField() 
 
-# class EditDashboardAddress(FlaskForm):
-#     firstName = StringField('First Name', validators=[DataRequired()])
-#     lastName = StringField('Last Name', validators=[DataRequired()])
-#     companyName = StringField('Company Name')
-#     country = SelectField('Country', choices=[] ,validators=[DataRequired()])
-#     street = StringField('Street Address')
-#     houseCode = StringField('Apartment, suite, unit etc.')
-#     city = StringField('Town / City')
-#     state = StringField('State / County')
-#     postalCode = IntegerField('Postcode / ZIP')
-#     phoneNo = IntegerField('Primary Mobile no.')
-#     altPhoneNo = IntegerField('Secondary Contact no.') 
+class EditDashboardProfile(FlaskForm):
+    firstName = StringField('First Name', validators=[DataRequired()], render_kw={"placeholder": "Enter First Name"})
+    lastName = StringField('Last Name', validators=[DataRequired()], render_kw={"placeholder": "Enter Last Name"})
+    email = StringField('Email Address',
+                        validators=[DataRequired(), Email()], render_kw={"placeholder": "Enter Email Address"})
+    
+class EditDashboardAddress(FlaskForm):
+    firstName = StringField('First Name', validators=[DataRequired()], render_kw={"placeholder": "Enter First Name"})
+    lastName = StringField('Last Name', validators=[DataRequired()], render_kw={"placeholder": "Enter Last Name"})
+    companyName = StringField('Company Name', render_kw={"placeholder": "Enter Company"})
+    country = SelectField('Country', choices=[(1,'Nepal'),(2,'United States'),(3,'Russia'),(4,'Italy'),(5,'France'),(6,'Ukraine'),(7,'Germany'),(8,'Australia')] ,validators=[DataRequired()])
+    street = StringField('Street Address', validators=[DataRequired()], render_kw={"placeholder": "Enter street"})
+    houseCode = StringField('Apartment, suite, unit etc.', render_kw={"placeholder": "Enter House number"})
+    city = StringField('Town / City', validators=[DataRequired()], render_kw={"placeholder": "Enter City"})
+    state = StringField('State/Province  ',  validators=[DataRequired()], render_kw={"placeholder": "Enter Province"})
+    postalCode = IntegerField('Postcode / ZIP', render_kw={"placeholder": "Enter Post code"})
+    phoneNo = IntegerField('Primary Mobile no.', validators=[DataRequired()], render_kw={"placeholder": "Enter Contact no."})
+    altPhoneNo = IntegerField('Secondary Contact no.', render_kw={"placeholder": "Enter Secondary contact no."}) 
     

@@ -47,7 +47,7 @@
                     <div class="address-card-row-content">{{userAddress.altPhoneNo | default("N/A", True)}}</div>
                 </div>
                 <div class="address-card-footer">
-                    <a href="/dashboard/edit-address">Edit Address</a>
+                    <a href="/dashboard/edit-address/{{userAddress.id}}">Edit Address</a>
                 </div>
             </div>
         </div>

@@ -34,6 +34,8 @@ class User(db.Model, UserMixin):
     userId = db.Column(db.Integer, primary_key = True)
     userName = db.Column(db.Text, unique = True, nullable = False)
     email = db.Column(db.Text, unique = True, nullable = False)
+    firstName = db.Column(db.Text, nullable = True)
+    lastName = db.Column(db.Text, nullable = True)
     imageFile = db.Column(db.Text, nullable = False, default = 'default.jpg')
     password = db.Column(db.Text, nullable = False)
     role = db.Column(db.Text, nullable = False, default = 'Customer')
