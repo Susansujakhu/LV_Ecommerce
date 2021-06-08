@@ -14,14 +14,28 @@
             </a>
             <div class="suggestions-item-meta">SKU: 83690/32</div>
         </div>
-        <div class="suggestions-item-price">
+        {# <div class="suggestions-item-price">
             {{ currency }} {{ items['price'] }}
-        </div>
+        </div> #}
         <div class="suggestions-item-actions">
-            <button id="addCart" data-id="{{ items['id'] }}" type="button" title="Add to cart" class="btn btn-primary btn-sm btn-svg-icon">
+            {# <button id="addCart" data-id="{{ items['id'] }}" type="button" title="Add to cart" class="btn btn-primary btn-sm btn-svg-icon">
                 <svg width="16px" height="16px">
                     <use xlink:href="/static/assets/icons/sprite.svg#cart-16"></use>
                 </svg>
+            </button> #}
+            <button id="addWishlist" data-id="{{ items['id'] }}" class="btn btn-primary btn-sm btn-svg-icon btn-svg-icon--fake-svg product-card-wishlist" type="button">
+            
+                <svg width="16px" height="16px">
+                    <use xlink:href="/static/assets/icons/sprite.svg#wishlist-16"></use>
+                </svg>
+                <span class="fake-svg-icon fake-svg-icon--wishlist-16"></span>
+            </button>
+            <button id="addCompare" data-id="{{ items['id'] }}" class="btn btn-primary btn-sm btn-svg-icon btn-svg-icon--fake-svg product-card-compare" type="button">
+            
+                <svg width="16px" height="16px">
+                    <use xlink:href="/static/assets/icons/sprite.svg#compare-16"></use>
+                </svg>
+                <span class="fake-svg-icon fake-svg-icon--compare-16"></span>
             </button>
         </div>
     </li>
