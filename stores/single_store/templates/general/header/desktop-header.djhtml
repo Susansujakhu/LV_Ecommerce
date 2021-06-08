@@ -18,7 +18,7 @@
                     <div class="topbar-item">
                         <div class="topbar-dropdown">
                             <button class="topbar-dropdown-btn" type="button">
-                                Currency: <span class="topbar-item-value">USD</span>
+                                Currency: <span class="topbar-item-value">{{currency|default("NPR")}}</span>
                                 <svg width="7px" height="5px">
                                     <use xlink:href="/static/assets/icons/sprite.svg#arrow-rounded-down-7x5"></use>
                                 </svg>
@@ -31,29 +31,22 @@
                                         <li class="menu-item">
                                             <!-- This is a synthetic element that allows to adjust the vertical offset of the submenu using CSS. -->
                                             <div class="menu-item-submenu-offset"></div>
-                                            <a class="menu-item-link" href="">
-                                                € Euro
+                                            <a name="currency" data-id="NPR " class="menu-item-link" href="#">
+                                                रु Rupee NPR
                                             </a>
                                         </li>
                                         <li class="menu-item">
                                             <!-- This is a synthetic element that allows to adjust the vertical offset of the submenu using CSS. -->
                                             <div class="menu-item-submenu-offset"></div>
-                                            <a class="menu-item-link" href="">
-                                                £ Pound Sterling
-                                            </a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <!-- This is a synthetic element that allows to adjust the vertical offset of the submenu using CSS. -->
-                                            <div class="menu-item-submenu-offset"></div>
-                                            <a class="menu-item-link" href="">
+                                            <a name="currency" data-id="USD " class="menu-item-link" href="#">
                                                 $ US Dollar
                                             </a>
                                         </li>
                                         <li class="menu-item">
                                             <!-- This is a synthetic element that allows to adjust the vertical offset of the submenu using CSS. -->
                                             <div class="menu-item-submenu-offset"></div>
-                                            <a class="menu-item-link" href="">
-                                                ₽ Russian Ruble
+                                            <a name="currency" data-id="EUR " class="menu-item-link" href="#">
+                                                € Euro
                                             </a>
                                         </li>
                                     </ul>
@@ -692,3 +685,15 @@
     </div>
 </header>
 <!-- desktop site-header / end -->
+<script>
+$(document).ready(function(){
+    $(document).on('click', "a[name='currency']", function (){
+        console.log("Clickedd");
+        let currency = $(this).attr("data-id");
+        document.cookie = "currency="+currency;
+        location.reload();
+    });
+    
+});
+
+</script>
