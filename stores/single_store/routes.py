@@ -18,6 +18,7 @@ from datetime import datetime, timezone, timedelta
 from sqlalchemy.sql import table, column
 from sqlalchemy import func
 from sqlalchemy import exc
+from currency_converter import CurrencyConverter
 
 admin = Admin(app, name='Dashboard', index_view = MyAdminIndexView())
 admin.add_view(AdminView(User, db.session))
@@ -49,6 +50,7 @@ def not_found(e):
 
 @app.context_processor
 def global_attr():
+    currency = request.cookies.get('currency')
     totalCart = 0
     cartProductNumber=0
     badgeForNew=[]
@@ -82,8 +84,36 @@ def global_attr():
     else:
         cart = Cart.query.filter_by(userId = 1233).all()
         wishlist_indicator = 0
-    return dict(products = products, form1=form1, cart=cart, totalCart=totalCart, cartProductNumber=cartProductNumber, wishlist_indicator=wishlist_indicator, badgeForNew = badgeForNew)
+    return dict(products = products, form1=form1, cart=cart, totalCart=totalCart, cartProductNumber=cartProductNumber, wishlist_indicator=wishlist_indicator, badgeForNew = badgeForNew, currency=currency)
 
+@app.context_processor
+def utility_processor():
+    def format_price(amount, currency='Rs. '):
+        currency = request.cookies.get('currency')
+        c = CurrencyConverter()
+        if currency == "USD" or currency == "EUR":
+            amount = amount / 1.6
+            if currency == "USD":
+                amount = c.convert(amount, 'INR', 'USD')
+            elif currency == "EUR":
+                amount = c.convert(amount, 'INR', 'EUR')
+            amount = "{:,.2f}".format(amount)
+        else:
+            amount_list = [int(d) for d in str(amount)]
+            amount_list.reverse()
+            list_length = len(amount_list)
+            for i in range(1, int(list_length/2)):
+                amount_list.insert(3*i,",")
+
+            amount_list.reverse()
+            amount = ''.join([str(elem) for elem in amount_list])
+            amount = amount+".00"
+
+        return '{1} {0}'.format(amount, currency)
+
+    return dict(format_price=format_price)
+
+    
 
 @app.route("/")
 @app.route("/home")
