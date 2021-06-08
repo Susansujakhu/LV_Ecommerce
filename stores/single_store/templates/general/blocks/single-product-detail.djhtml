@@ -95,6 +95,24 @@
                         <div class="product-rating-stars">
                             <div class="rating">
                                 <div class="rating-body">
+                                {# {% for i in range(rows.rate) %}
+                                    <svg width="13px" height="13px">
+                                    <g class="rating-star--active">
+                                        <use xlink:href="/static/assets/icons/sprite.svg#star-normal"></use>
+                                    </g>
+                                    </svg>
+                                {% endfor %}
+                                {% if rows.rate != '5' %}
+                                    {% set count = 5 - rows.rate %} 
+                                    {% for i in range(count) %}
+                                        <svg width="13px" height="13px">
+                                        <g>
+                                            <use xlink:href="/static/assets/icons/sprite.svg#star-normal-stroke"></use>
+                                        </g>
+                                        </svg>
+                                    {% endfor %}
+                                {% endif %} #}
+                                {% for i in range(avg_rating) %}
                                     <svg class="rating-star rating-star--active" width="13px" height="12px">
                                         <g class="rating-fill">
                                             <use xlink:href="/static/assets/icons/sprite.svg#star-normal"></use>
@@ -111,7 +129,11 @@
                                             <div class="fake-svg-icon"></div>
                                         </div>
                                     </div>
-                                    <svg class="rating-star rating-star--active" width="13px" height="12px">
+                                {% endfor %}
+                                {% if avg_rating != '5' %}
+                                    {% set count = 5 - avg_rating %} 
+                                    {% for i in range(count) %}
+                                        <svg class="rating-star" width="13px" height="12px">
                                         <g class="rating-fill">
                                             <use xlink:href="/static/assets/icons/sprite.svg#star-normal"></use>
                                         </g>
@@ -119,7 +141,7 @@
                                             <use xlink:href="/static/assets/icons/sprite.svg#star-normal-stroke"></use>
                                         </g>
                                     </svg>
-                                    <div class="rating-star rating-star--only-edge rating-star--active">
+                                    <div class="rating-star rating-star--only-edge">
                                         <div class="rating-fill">
                                             <div class="fake-svg-icon"></div>
                                         </div>
@@ -127,59 +149,14 @@
                                             <div class="fake-svg-icon"></div>
                                         </div>
                                     </div>
-                                    <svg class="rating-star rating-star--active" width="13px" height="12px">
-                                        <g class="rating-fill">
-                                            <use xlink:href="/static/assets/icons/sprite.svg#star-normal"></use>
-                                        </g>
-                                        <g class="rating-stroke">
-                                            <use xlink:href="/static/assets/icons/sprite.svg#star-normal-stroke"></use>
-                                        </g>
-                                    </svg>
-                                    <div class="rating-star rating-star--only-edge rating-star--active">
-                                        <div class="rating-fill">
-                                            <div class="fake-svg-icon"></div>
-                                        </div>
-                                        <div class="rating-stroke">
-                                            <div class="fake-svg-icon"></div>
-                                        </div>
-                                    </div>
-                                    <svg class="rating-star rating-star--active" width="13px" height="12px">
-                                        <g class="rating-fill">
-                                            <use xlink:href="/static/assets/icons/sprite.svg#star-normal"></use>
-                                        </g>
-                                        <g class="rating-stroke">
-                                            <use xlink:href="/static/assets/icons/sprite.svg#star-normal-stroke"></use>
-                                        </g>
-                                    </svg>
-                                    <div class="rating-star rating-star--only-edge rating-star--active">
-                                        <div class="rating-fill">
-                                            <div class="fake-svg-icon"></div>
-                                        </div>
-                                        <div class="rating-stroke">
-                                            <div class="fake-svg-icon"></div>
-                                        </div>
-                                    </div>
-                                    <svg class="rating-star rating-star--active" width="13px" height="12px">
-                                        <g class="rating-fill">
-                                            <use xlink:href="/static/assets/icons/sprite.svg#star-normal"></use>
-                                        </g>
-                                        <g class="rating-stroke">
-                                            <use xlink:href="/static/assets/icons/sprite.svg#star-normal-stroke"></use>
-                                        </g>
-                                    </svg>
-                                    <div class="rating-star rating-star--only-edge rating-star--active">
-                                        <div class="rating-fill">
-                                            <div class="fake-svg-icon"></div>
-                                        </div>
-                                        <div class="rating-stroke">
-                                            <div class="fake-svg-icon"></div>
-                                        </div>
-                                    </div>
+                                    {%endfor%}
+                                {%endif%}
+                                    
                                 </div>
                             </div>
                         </div>
                         <div class="product-rating-legend">
-                            <a href="">7 Reviews</a><span>/</span><a href="">Write A Review</a>
+                            <a href="">{{total_ratings}} Reviews</a><span>/</span><a href="">Write A Review</a>
                         </div>
                     </div>
                     <div class="product-description">
@@ -392,18 +369,44 @@
                                                 <div class="review-author">{{user.userName}}</div>
                                                 <div class="review-rating">
                                                     <div class="rating">
-                                                        <div class="rating-body">
+                                                        <div class="rating-body ">
                                                         {% for i in range(rows.rate) %}
-                                                            <svg width="13px" height="13px">
-                                                                <use xlink:href="/static/assets/icons/sprite.svg#star-normal"></use>
+                                                            <svg class="rating-star rating-star--active" width="13px" height="12px">
+                                                                <g class="rating-fill">
+                                                                    <use xlink:href="/static/assets/icons/sprite.svg#star-normal"></use>
+                                                                </g>
+                                                                <g class="rating-stroke">
+                                                                    <use xlink:href="/static/assets/icons/sprite.svg#star-normal-stroke"></use>
+                                                                </g>
                                                             </svg>
+                                                            <div class="rating-star rating-star--only-edge rating-star--active">
+                                                                <div class="rating-fill">
+                                                                    <div class="fake-svg-icon"></div>
+                                                                </div>
+                                                                <div class="rating-stroke">
+                                                                    <div class="fake-svg-icon"></div>
+                                                                </div>
+                                                            </div>
                                                         {% endfor %}
                                                         {% if rows.rate != '5' %}
                                                             {% set count = 5 - rows.rate %} 
                                                             {% for i in range(count) %}
-                                                                <svg width="13px" height="13px">
-                                                                    <use xlink:href="/static/assets/icons/sprite.svg#star-normal-stroke"></use>
+                                                                <svg class="rating-star" width="13px" height="12px">
+                                                                    <g class="rating-fill">
+                                                                        <use xlink:href="/static/assets/icons/sprite.svg#star-normal"></use>
+                                                                    </g>
+                                                                    <g class="rating-stroke">
+                                                                        <use xlink:href="/static/assets/icons/sprite.svg#star-normal-stroke"></use>
+                                                                    </g>
                                                                 </svg>
+                                                                <div class="rating-star rating-star--only-edge">
+                                                                    <div class="rating-fill">
+                                                                        <div class="fake-svg-icon"></div>
+                                                                    </div>
+                                                                    <div class="rating-stroke">
+                                                                        <div class="fake-svg-icon"></div>
+                                                                    </div>
+                                                                </div>
                                                             {% endfor %}
                                                         {% endif %}
                                                             
