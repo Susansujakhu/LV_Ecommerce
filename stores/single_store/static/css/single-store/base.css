@@ -14,6 +14,8 @@
   --badge-bg-color--new: #3377ff;
   --badge-bg-color--featured: #614ba6;
   --badge-bg-color--sale: #ff3333;
+  --star-rating-fill--active: #54ff05;
+  --star-rating-fill--inactive: #dddddd;
 }
 
 /* -Base- */
