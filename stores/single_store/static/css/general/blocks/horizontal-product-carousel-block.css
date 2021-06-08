@@ -186,7 +186,7 @@
   display: none;
 }
 
-.horizontal-product-carousel[data-layout="horizontal"] .product-card .product-card-buttons {
+/*.horizontal-product-carousel[data-layout="horizontal"] .product-card .product-card-buttons {
     display: block;
     margin-top: 20px;
 }
@@ -202,4 +202,4 @@
 .horizontal-product-carousel[data-layout="horizontal"] .product-card:hover {
     margin-bottom: -58px;
     z-index: 3;
-}
+}*/

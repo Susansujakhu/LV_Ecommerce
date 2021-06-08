@@ -279,8 +279,7 @@
 
         $('.product-card-quickview').on('click', function() {
             id = $(this).attr('data-id');
-            console.log(id)
-            quickview.clickHandler.apply(this, arguments, id);
+            quickview.clickHandler.apply(this, arguments);
         });
     });
 

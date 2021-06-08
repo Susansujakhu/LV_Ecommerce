@@ -1,3 +1,5 @@
+<link rel="stylesheet" type="text/css" href= "{{ url_for('static', filename='css/general/blocks/checkout-block.css') }}" }}>
+
 <div class="checkout block">
     <div class="container">
         <div class="row">

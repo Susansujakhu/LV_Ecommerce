@@ -137,27 +137,8 @@
                                     </div>
                                 </div>
                                 <div class="product-card-actions">
-                                    <div class="product-card-availability">
-                                        Availability: <span class="text-success">In Stock</span>
-                                    </div>
                                     <div class="product-card-prices">
                                         {{ currency }} {{ items['price']}}
-                                    </div>
-                                    <div class="product-card-buttons">
-                                        <button class="btn btn-primary product-card-addtocart" type="button">Add To Cart</button>
-                                        <button class="btn btn-secondary product-card-addtocart product-card-addtocart--list" type="button">Add To Cart</button>
-                                        <button class="btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card-wishlist" type="button">
-                                            <svg width="16px" height="16px">
-                                                <use xlink:href="/static/assets/icons/sprite.svg#wishlist-16"></use>
-                                            </svg>
-                                            <span class="fake-svg-icon fake-svg-icon--wishlist-16"></span>
-                                        </button>
-                                        <button class="btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card-compare" type="button">
-                                            <svg width="16px" height="16px">
-                                                <use xlink:href="/static/assets/icons/sprite.svg#compare-16"></use>
-                                            </svg>
-                                            <span class="fake-svg-icon fake-svg-icon--compare-16"></span>
-                                        </button>
                                     </div>
                                 </div>
                             </div>

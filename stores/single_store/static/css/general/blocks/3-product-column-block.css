@@ -3,7 +3,7 @@
 }
 
 .block-product-columns-item + .block-product-columns-item {
-  margin-top: -1px;
+  margin-top: 15px;
 }
 
 .block-product-columns-item:hover {
