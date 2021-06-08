@@ -38,6 +38,20 @@
     /*
     // product tabs
     */
+
+    $(document).on('click','.write-review-scroll', function(){
+        $('.product-tabs-item').removeClass('product-tabs-item--active');
+        $('#tab-reviews-scroll').addClass('product-tabs-item--active');
+
+        $('.product-tabs-pane').removeClass('product-tabs-pane--active');
+        $('#tab-reviews').addClass('product-tabs-pane--active');
+
+        $('html, body').animate({
+                scrollTop: $("#reviewForm").offset().top
+            }, 1000);
+        event.preventDefault();
+    });
+
     $(function () {
         $('.product-tabs').each(function (i, element) {
             const list = $('.product-tabs-list', element);
@@ -51,6 +65,8 @@
                 if ($(element).is('.product-tabs--stuck')) {
                     window.scrollTo(0, $(element).find('.product-tabs-content').offset().top - $(element).find('.product-tabs-list-body').outerHeight() + 2);
                 }
+
+                console.log(pane.length);
 
                 if (pane.length) {
                     $('.product-tabs-item').removeClass('product-tabs-item--active');
