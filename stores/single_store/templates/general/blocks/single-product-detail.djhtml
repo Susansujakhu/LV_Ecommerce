@@ -34,14 +34,6 @@
                             </button>
                             <div class="owl-carousel" id="product-image">
                                 <div class="product-image product-image--location--gallery">
-                                    <!--
-                    The data-width and data-height attributes must contain the size of a larger version
-                    of the product image.
-
-                    If you do not know the image size, you can remove the data-width and data-height
-                    attribute, in which case the width and height will be obtained from the naturalWidth
-                    and naturalHeight property of img.product-image-img.
-                    -->
                                     <a href="{{url_for('static',filename='assets/images/products/'+productImageFile)}}" data-width="700" data-height="700" class="product-image-body" target="_blank">
                                         <img class="product-image-img" src="{{url_for('static',filename='assets/images/products/'+productImageFile)}}" alt="">
                                     </a>
@@ -156,7 +148,7 @@
                             </div>
                         </div>
                         <div class="product-rating-legend">
-                            <a href="">{{total_ratings}} Reviews</a><span>/</span><a href="">Write A Review</a>
+                            <a href="">{{total_ratings}} Reviews</a><span>/</span><a class="write-review-scroll" href="#reviewForm">Write A Review</a>
                         </div>
                     </div>
                     <div class="product-description">
@@ -286,15 +278,14 @@
                     <div class="product-tabs-list-container container">
                         <a href="#tab-description" class="product-tabs-item product-tabs-item--active">Description</a>
                         <a href="#tab-specification" class="product-tabs-item">Specification</a>
-                        <a href="#tab-reviews" class="product-tabs-item">Reviews</a>
+                        <a id="tab-reviews-scroll" href="#tab-reviews" class="product-tabs-item">Reviews</a>
                     </div>
                 </div>
             </div>
             <div class="product-tabs-content">
                 <div class="product-tabs-pane product-tabs-pane--active" id="tab-description">
                     <div class="typography">
-                        <h3>Product Full Description</h3>
-                           {{productLongDescription}}
+                        {{productLongDescription}}
                     </div>
                 </div>
                 <div class="product-tabs-pane" id="tab-specification">
