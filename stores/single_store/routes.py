@@ -1238,7 +1238,7 @@ def add(tables):
 
             if formfield == 'imageGallery':
                 if form.imageGallery.data:
-                    galleryImages = ""
+                    galleryImages = featuredImage
                     # file_list = request.files.getlist('imageGallery')
                     for f in form.imageGallery.data:
                         print(f.filename)
@@ -1326,7 +1326,7 @@ def edit(tables, id):
 
             if formfield == 'imageGallery':
                 if form.imageGallery.data:
-                    galleryImages = ""
+                    galleryImages = featuredImage
                     # file_list = request.files.getlist('imageGallery')
                     for f in form.imageGallery.data:
                         random_hex = secrets.token_hex(4)
