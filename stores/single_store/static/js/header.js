@@ -121,6 +121,7 @@
         /*
         // search suggestions
         */
+        var selectedCategory 
         $('.search').each(function(index, element) {
             let xhr;
             const search = $(element);
@@ -164,8 +165,11 @@
 
                 if (input.val()) {
                     // YOUR AJAX REQUEST HERE.
+                    let keyword = input.val();
                     xhr = $.ajax({
                         url: '/searchSuggestion',
+                        type: 'POST',
+                        data: {'keyword':keyword, 'category':selectedCategory},
                         success: function(data) {
                             xhr = null;
                             setSuggestion(data);
@@ -181,6 +185,10 @@
             });
             categories.on('focus', function() {
                 search.removeClass('search--suggestions-open');
+            });
+            categories.on('change', function() {
+                selectedCategory = $(this).children("option:selected").val();
+                console.log(selectedCategory)
             });
 
             document.addEventListener('click', outsideClick, true);
