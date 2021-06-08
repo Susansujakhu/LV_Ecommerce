@@ -58,6 +58,7 @@ def global_attr():
     badgeForNew=[]
     form1 = LoginForm()
     products = Product.query.all()
+    category = Category.query.all()
     if current_user.is_authenticated:
         indicators = Wishlist.query.filter_by(userId = current_user.userId).first()
         if indicators is None:
@@ -86,7 +87,9 @@ def global_attr():
     else:
         cart = Cart.query.filter_by(userId = 1233).all()
         wishlist_indicator = 0
-    return dict(products = products, form1=form1, cart=cart, totalCart=totalCart, cartProductNumber=cartProductNumber, wishlist_indicator=wishlist_indicator, badgeForNew = badgeForNew, currency=currency)
+    return dict(products = products, form1=form1, cart=cart, totalCart=totalCart, 
+                cartProductNumber=cartProductNumber, wishlist_indicator=wishlist_indicator, 
+                badgeForNew = badgeForNew, currency=currency, category=category)
 
 @app.context_processor
 def utility_processor():
@@ -190,7 +193,7 @@ def shop():
     min = db.session.query(func.min(Product.price)).scalar()
     brand = Brand.query.all()
     color = Color.query.all()
-    category = Category.query.all()
+    
     total_products = Product.query.count()
     product_number = []
     for items in brand:
@@ -198,7 +201,7 @@ def shop():
 
     return render_template(
         'single-store/shop-page.djhtml', 
-        max=max, min =min, brand=brand, product_number=product_number, color=color, category=category,
+        max=max, min =min, brand=brand, product_number=product_number, color=color,
         total_products = total_products, show_products = 3
         )
 
@@ -326,10 +329,21 @@ def quickviewProduct():
         'general/blocks/quick-view-modal-block.djhtml', quickViewProductData = quickViewProductData
         )
 
-@app.route("/searchSuggestion")
+@app.route("/searchSuggestion", methods=['POST'])
 def searchSuggestion():
+    if request.method == "POST":
+        selectedCategory = request.form.get("category")
+        search_word = request.form.get("keyword")
+        print(search_word)
+        filters =[]
+        if selectedCategory:
+            filters.append(
+                Product.category == selectedCategory
+            )
+        search_product = Product.query.filter(*filters,Product.productName.ilike('%'+search_word+'%')).limit(6).all()
+
     return render_template(
-        'general/header/search-suggestion.djhtml'
+        'general/header/search-suggestion.djhtml', search_product=search_product
         )
 
 @app.route("/admin-dashboard")
