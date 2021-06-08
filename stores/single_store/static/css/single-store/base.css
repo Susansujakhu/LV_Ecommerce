@@ -2601,19 +2601,19 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-origin {
 .product-card:hover::before {
   -webkit-transition-duration: 0s;
           transition-duration: 0s;
-  -webkit-box-shadow: 0 0 0 2px #d9d9d9 inset;
-          box-shadow: 0 0 0 2px #d9d9d9 inset;
+  -webkit-box-shadow: 0 0 0 2px var(--primary-color) inset;
+          box-shadow: 0 0 0 2px var(--primary-color) inset;
   z-index: 2;
 }
 
 .product-card:hover .product-card-quickview {
   -webkit-transition-duration: 0s, 0s;
           transition-duration: 0s, 0s;
-  background: #d9d9d9;
+  background: var(--primary-color);
 }
 
 .product-card:hover .product-card-quickview:not(.product-card-quickview--preload) {
-  color: var(--primary-color);
+  color: #ffffff;
 }
 
 .product-card:hover .product-card-quickview:not(.product-card-quickview--preload):hover {
