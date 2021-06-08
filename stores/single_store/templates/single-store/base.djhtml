@@ -3,7 +3,7 @@
 {% set name_full  = "" %}
 {% set name_short = "LV Store" %}
 {% set logo  = "" %}
-{% set currency = 'Rs.' %}
+{# {% set currency = 'Rs.' %} #}
 <html lang="en">
 <head>
     <meta charset="utf-8">

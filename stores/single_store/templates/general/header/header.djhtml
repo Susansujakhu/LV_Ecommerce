@@ -54,7 +54,7 @@
                 <table>
                     <tr>
                         <th>Total</th>
-                        <td>{{currency}}<span id="total_cart"> {{totalCart}}</span></td>
+                        <td><span id="total_cart"> {{ format_price(totalCart) }}</span></td>
                     </tr>
                 </table>
             </div>

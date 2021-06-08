@@ -149,7 +149,7 @@
                                 Availability: <span class="text-success">{{ items['stock'] }} in Stock</span>
                             </div>
                             <div class="product-card-prices">
-                                {{ currency }} {{ items['price']}}
+                                {{ format_price(items['price']) }}
                             </div>
                             <div class="product-card-buttons">
                                
@@ -318,7 +318,8 @@
                                     Availability: <span class="text-success">In Stock</span>
                                 </div>
                                 <div class="product-card-prices">
-                                    {{ currency }} {{ items['price']}}
+                                    {{ format_price(items['price']) }}
+                                    {# {{ currency }} {{ items['price']}} #}
                                 </div>
                                 <div class="product-card-buttons">
                                     <button id="addCart" data-id="{{ items['id'] }}" class="btn btn-primary product-card-addtocart" type="button">Add To Cart</button>
