@@ -19,7 +19,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        {{form.companyName.label()}}
+                        {{form.companyName.label()}}<span class="text-muted">(Optional)</span>
                         {{form.companyName(class = "form-control")}}
                     </div>
                     <div class="form-group">
@@ -31,7 +31,7 @@
                         {{form.street(class = "form-control")}}
                     </div>
                     <div class="form-group">
-                        {{form.houseCode.label()}}
+                        {{form.houseCode.label()}}<span class="text-muted">(Optional)</span>
                         {{form.houseCode(class = "form-control")}}
                     </div>
                     <div class="form-group">
@@ -43,7 +43,7 @@
                         {{form.state(class = "form-control")}}
                     </div>
                     <div class="form-group">
-                        {{form.postalCode.label()}}
+                        {{form.postalCode.label()}}<span class="text-muted">(Optional)</span>
                         {{form.postalCode(class = "form-control")}}
                     </div>
                     <div class="form-row">
@@ -52,7 +52,7 @@
                             {{form.phoneNo(class = "form-control")}}
                         </div>
                         <div class="form-group col-md-6">
-                            {{form.altPhoneNo.label()}}
+                            {{form.altPhoneNo.label()}}<span class="text-muted">(Optional)</span>
                             {{form.altPhoneNo(class = "form-control")}}
                         </div>
                     </div>

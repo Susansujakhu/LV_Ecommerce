@@ -215,7 +215,7 @@ class EditDashboardAddress(FlaskForm):
     firstName = StringField('First Name', validators=[DataRequired()], render_kw={"placeholder": "Enter First Name"})
     lastName = StringField('Last Name', validators=[DataRequired()], render_kw={"placeholder": "Enter Last Name"})
     companyName = StringField('Company Name', render_kw={"placeholder": "Enter Company"})
-    country = SelectField('Country', choices=[(1,'Nepal'),(2,'United States'),(3,'Russia'),(4,'Italy'),(5,'France'),(6,'Ukraine'),(7,'Germany'),(8,'Australia')] ,validators=[DataRequired()])
+    country = SelectField('Country', choices=[('Nepal'),('United States'),('Russia'),('Italy'),('France'),('Ukraine'),('Germany'),('Australia')] ,validators=[DataRequired()])
     street = StringField('Street Address', validators=[DataRequired()], render_kw={"placeholder": "Enter street"})
     houseCode = StringField('Apartment, suite, unit etc.', render_kw={"placeholder": "Enter House number"})
     city = StringField('Town / City', validators=[DataRequired()], render_kw={"placeholder": "Enter City"})
