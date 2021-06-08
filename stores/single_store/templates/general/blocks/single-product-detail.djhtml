@@ -57,7 +57,12 @@
                         </div>
                         <div class="product-gallery-carousel">
                             <div class="owl-carousel" id="product-carousel">
-                                {% for items in productImageGallery %}
+                            <a href="{{url_for('static',filename='assets/images/products/'+productImageFile)}}" class="product-image product-gallery-carousel-item">
+                                    <div class="product-image-body">
+                                        <img class="product-image-img product-gallery-carousel-image" src="{{url_for('static',filename='assets/images/products/'+productImageFile)}}" alt="">
+                                    </div>
+                                </a>
+                                {% for items in productImageGallery[1:] %}
                                 <a href="{{url_for('static',filename='assets/images/gallery/'+items)}}" class="product-image product-gallery-carousel-item">
                                     <div class="product-image-body">
                                         <img class="product-image-img product-gallery-carousel-image" src="{{url_for('static',filename='assets/images/gallery/'+items)}}" alt="">
