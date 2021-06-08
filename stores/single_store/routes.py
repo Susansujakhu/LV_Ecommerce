@@ -431,13 +431,21 @@ def order_details():
         'single-store/user-account/order-details-page.djhtml'
         )
 
-@app.route("/dashboard/address-book")
+@app.route("/dashboard/address-book", methods=["POST","GET"])
 @login_required
 def address_book():
-    userAddress = Shipping.query.filter_by(userId = current_user.userId).all()
-    return render_template(
-        'single-store/user-account/address-book-page.djhtml', userAddress=userAddress
-        )
+    if request.method == "POST":    #to delete the addreess block
+        shipId = int(request.get_data())
+        if Shipping.query.filter_by(id=shipId).delete():
+            db.session.execute("ALTER SEQUENCE shipping_id_seq RESTART")
+            db.session.commit()
+        return jsonify({'status':'OK'})
+    else:
+        print("sunder")
+        userAddress = Shipping.query.filter_by(userId = current_user.userId).all()
+        return render_template(
+            'single-store/user-account/address-book-page.djhtml', userAddress=userAddress
+            )
 
 @app.route("/dashboard/address-book/ChangeStatus", methods=["POST"])
 @login_required
@@ -519,17 +527,6 @@ def editAddress(shipId):
         return render_template(
             'single-store/user-account/edit-address-page.djhtml', form = formSend
             )
-
-@app.route("/dashboard/edit-address/delete", methods=["POST","GET"])
-@login_required
-def delAddress():
-    if request.method == "POST":
-        shipId = int(request.get_data())
-        if Shipping.query.filter_by(id=shipId).delete():
-            db.session.execute("ALTER SEQUENCE shipping_id_seq RESTART")
-            db.session.commit()
-        return jsonify({'status':'OK'})
-
 
 @app.route("/dashboard/change-password")
 @login_required
