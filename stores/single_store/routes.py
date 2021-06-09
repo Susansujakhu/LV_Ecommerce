@@ -1338,8 +1338,9 @@ def add(tables):
                 if form.imageFile.data:
                     random_hex = secrets.token_hex(4)
                     f = form.imageFile.data
+                    file = f.filename.replace(" ", "_")
                     print(f)
-                    split_name = f.filename.split(".")
+                    split_name = file.split(".")
                     print(split_name)
                     if tables == "Category":
                         featuredImage = save_picture(f, split_name[0]+random_hex+ split_name[1], 'category', 700, 700)
@@ -1365,7 +1366,8 @@ def add(tables):
                         if f.filename == '':
                             break
                         random_hex = secrets.token_hex(4)
-                        split_name = f.filename.split(".")
+                        file = f.filename.replace(" ", "_")
+                        split_name = file.split(".")
                         images = save_picture(f, split_name[0]+random_hex+ split_name[1], 'gallery', 700, 700)
                         img = secure_filename(images)
                         galleryImages = galleryImages + "," + img
@@ -1428,7 +1430,8 @@ def edit(tables, id):
                 if form.imageFile.data:
                     random_hex = secrets.token_hex(4)
                     f = form.imageFile.data
-                    split_name = f.filename.split(".")
+                    file = f.filename.replace(" ", "_")
+                    split_name = file.split(".")
                     if tables == "Category":
                         featuredImage = save_picture(f, split_name[0]+random_hex+ split_name[1], 'category', 700, 700)
                     elif tables == "Hero":
@@ -1450,7 +1453,8 @@ def edit(tables, id):
                     # file_list = request.files.getlist('imageGallery')
                     for f in form.imageGallery.data:
                         random_hex = secrets.token_hex(4)
-                        split_name = f.filename.split(".")
+                        file = f.filename.replace(" ", "_")
+                        split_name = file.split(".")
                         images = save_picture(f, split_name[0]+random_hex+ split_name[1], 'gallery', 700, 700)
                         img = secure_filename(images)
                         galleryImages = galleryImages + "," + img
@@ -1459,8 +1463,8 @@ def edit(tables, id):
 
         actual_data = data
         dt = datetime.now(timezone.utc)
-        actual_data['dateCreated'] = dt
-        actual_data['userId'] = current_user.userId
+        # actual_data['dateCreated'] = dt
+        # actual_data['userId'] = current_user.userId
 
         db.session.query(table_name).filter(table_name.id == id).update(actual_data, synchronize_session=False)
         db.session.commit()
