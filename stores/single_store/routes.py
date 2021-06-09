@@ -163,6 +163,7 @@ def home():
 def single_product(productId):
     product = Product.query.get(productId)
     rating = Rating.query.filter_by(product_id = product.id).all()
+    colors = Color.query.all()
     users = User.query.all()
     sum = 0
     avg_rating = 0
@@ -179,7 +180,7 @@ def single_product(productId):
     return render_template(
         'single-store/single-product-page.djhtml', title = product.productName, 
                 product = product, form=form, rating=rating, users=users, 
-                avg_rating=avg_rating, total_ratings=total_ratings)
+                avg_rating=avg_rating, total_ratings=total_ratings, colors=colors)
 
 
 @app.route("/saveReview", methods=["POST"])
