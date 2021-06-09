@@ -3014,6 +3014,19 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-origin {
   }
 }
 
+.block-empty-body {
+  text-align: center;
+  padding: 18px 0 60px;
+}
+
+.block-empty-message {
+  font-size: 17px;
+}
+
+.block-empty-actions {
+  margin-top: 24px;
+}
+
 /*
 // .block-banner
 */
