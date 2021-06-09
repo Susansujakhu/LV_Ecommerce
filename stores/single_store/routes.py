@@ -135,7 +135,6 @@ def utility_processor():
 
     return dict(format_price=format_price)
 
-    
 
 @app.route("/")
 @app.route("/home")
@@ -1095,41 +1094,71 @@ def delete(tables, id):
     return redirect('/lists/'+tables)
 
 
+def format_price(amount, currency='Rs. '):
+    currency = request.cookies.get('currency')
+    if currency is None:
+        currency = "NPR"
+    c = CurrencyConverter()
+    if currency == "USD" or currency == "EUR":
+        amount = amount / 1.6
+        if currency == "USD":
+            amount = c.convert(amount, 'INR', 'USD')
+        elif currency == "EUR":
+            amount = c.convert(amount, 'INR', 'EUR')
+        amount = "{:,.2f}".format(amount)
+    else:
+        amount_list = [int(d) for d in str(amount)]
+        amount_list.reverse()
+        list_length = len(amount_list)
+        for i in range(1, int(list_length/2)):
+            amount_list.insert(3*i,",")
+
+        amount_list.reverse()
+        amount = ''.join([str(elem) for elem in amount_list])
+        amount = amount+".00"
+
+    return '{1} {0}'.format(amount, currency)
+
+
 @app.route("/add_cart", methods=["POST"])
 @login_required
 def add_Cart():
     if request.method == "POST":
         productId= int(request.get_data())
-    product= Product.query.get(productId)
-    cart=Cart.query.filter_by(product_id=productId).first()
-    print(cart)
-    if cart is None:
-        quantityValue = 1
-        addCart = Cart(
-                    quantity =quantityValue,
-                    color = product.color,
-                    size = product.size,
-                    cart_user_id = current_user,
-                    cart_product_id=product,
-                    )
-        print(addCart)
-        
-        try:
+        product= Product.query.get(productId)
+        cart=Cart.query.filter_by(product_id=productId).first()
+        print(cart)
+        if cart is None:
+            quantityValue = 1
+            addCart = Cart(
+                        quantity =quantityValue,
+                        color = product.color,
+                        size = product.size,
+                        cart_user_id = current_user,
+                        cart_product_id=product,
+                        )
+            print(addCart)
             db.session.add(addCart)
             db.session.commit()
-        except exc.IntegrityError as err:
-            db.session.rollback()
-            db.session.add(addCart)
+            
+        else:
+            quantityValue=cart.quantity
+            quantityValue = quantityValue+1
+            db.session.query(Cart).filter(Cart.product_id == productId).update({'quantity':quantityValue}, synchronize_session=False)
             db.session.commit()
-        
-    else:
-        quantityValue=cart.quantity
-        quantityValue = quantityValue+1
-        db.session.query(Cart).filter(Cart.product_id == productId).update({'quantity':quantityValue}, synchronize_session=False)
-        db.session.commit()
-    cart = Cart.query.filter_by(userId = current_user.userId).count()
-
-    return jsonify({'result': 'success', 'cartProductNumber': cart})
+        products = Product.query.all()
+        cart_data = Cart.query.filter_by(userId = current_user.userId).all()
+        cart_count = len(cart_data)
+        totalCart = 0
+        for cart_row in cart_data:
+            for rows in products:
+                if cart_row.product_id == rows.id:
+                    totalCart = (cart_row.quantity*rows.price)+totalCart
+        totalCart = format_price(totalCart)
+    return jsonify({'htmlresponse':render_template('single-store/sidebar-cart.djhtml', cart=cart_data), 
+                    'cart_count':cart_count,
+                    'totalCart' :totalCart
+                })
 
 
 @app.route("/delete_cart", methods=["POST"])
