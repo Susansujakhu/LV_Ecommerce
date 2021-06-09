@@ -1,241 +1,202 @@
-<link rel="stylesheet" type="text/css" href= "{{ url_for('static', filename='css/general/blocks/compare-block.css') }}" }}>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/general/blocks/compare-block.css') }}"  }}>
 
-<div class="block">
-    <div class="container">
-        <div class="table-responsive">
-            <table id="main_table" class="compare-table">
-                <tbody>
-                    
- 
-                    <tr>
-                        <th>Product</th>
-                        {% for product in products %}
-                        {% for compare_product in product_lists %}
-                            {% if compare_product|int == product.id %}
-                            <td class="row{{product.id}}">
-                                        <a class="compare-table-product-link" href="product.html">
-                                            <div class="compare-table-product-image product-image">
-                                                <div class="product-image-body">
-                                                    <img class="product-image-img" src="{{url_for('static',filename='assets/images/products/'+product.imageFile)}}" alt="">
-                                                </div>
-                                            </div>
-                                            <div class="compare-table-product-name">{{product.productName}}</div>
-                                        </a>
-                                    </td>
-                    {% endif %}
-                        {% endfor %}
-                    {% endfor %}
-                                    
-                                
-                    </tr>
+    <div class="block">
+        <div class="container">
+            <div class="table-responsive">
+                <table id="main_table" class="compare-table">
+                    <tbody>
+                        <tr>
+                            <th>Product</th>
+                            {% for product in products %}
+                                {% for compare_product in product_lists %}
+                                    {% if compare_product|int == product.id %}
+                                        <td class="row{{ product.id }}">
+                                            <a class="compare-table-product-link" href="product.html">
+                                                <div class="compare-table-product-image product-image">
+                                                    <div class="product-image-body">
+                                                        <img class="product-image-img" src="{{ url_for('static',filename='assets/images/products/'+product.imageFile) }}" alt=""></div>
+                                                    </div>
+                                                    <div class="compare-table-product-name">{{ product.productName }}</div>
+                                                </a>
+                                            </td>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endfor %}
+                            </tr>
+                            <tr>
+                                <th>Rating</th>
+                                {% for product in products %}
+                                    {% for compare_product in product_lists %}
+                                        {% if compare_product|int == product.id %}
+                                            <td class="row{{ product.id }}">
 
-                    <tr>
-                        <th>Rating</th>
-                        {% for product in products %}
-                        {% for compare_product in product_lists %}
-                            {% if compare_product|int == product.id %}
-                        <td class="row{{product.id}}">
-                            <div class="compare-table-product-rating">
-                                <div class="rating">
-                                    <div class="rating-body">
-                                        <svg class="rating-star rating-star--active" width="13px" height="12px">
-                                            <g class="rating-fill">
-                                                <use xlink:href="images/sprite.svg#star-normal"></use>
-                                            </g>
-                                            <g class="rating-stroke">
-                                                <use xlink:href="images/sprite.svg#star-normal-stroke"></use>
-                                            </g>
-                                        </svg>
-                                        <div class="rating-star rating-star--only-edge rating-star--active">
-                                            <div class="rating-fill">
-                                                <div class="fake-svg-icon"></div>
-                                            </div>
-                                            <div class="rating-stroke">
-                                                <div class="fake-svg-icon"></div>
-                                            </div>
-                                        </div>
-                                        <svg class="rating-star rating-star--active" width="13px" height="12px">
-                                            <g class="rating-fill">
-                                                <use xlink:href="images/sprite.svg#star-normal"></use>
-                                            </g>
-                                            <g class="rating-stroke">
-                                                <use xlink:href="images/sprite.svg#star-normal-stroke"></use>
-                                            </g>
-                                        </svg>
-                                        <div class="rating-star rating-star--only-edge rating-star--active">
-                                            <div class="rating-fill">
-                                                <div class="fake-svg-icon"></div>
-                                            </div>
-                                            <div class="rating-stroke">
-                                                <div class="fake-svg-icon"></div>
-                                            </div>
-                                        </div>
-                                        <svg class="rating-star rating-star--active" width="13px" height="12px">
-                                            <g class="rating-fill">
-                                                <use xlink:href="images/sprite.svg#star-normal"></use>
-                                            </g>
-                                            <g class="rating-stroke">
-                                                <use xlink:href="images/sprite.svg#star-normal-stroke"></use>
-                                            </g>
-                                        </svg>
-                                        <div class="rating-star rating-star--only-edge rating-star--active">
-                                            <div class="rating-fill">
-                                                <div class="fake-svg-icon"></div>
-                                            </div>
-                                            <div class="rating-stroke">
-                                                <div class="fake-svg-icon"></div>
-                                            </div>
-                                        </div>
-                                        <svg class="rating-star rating-star--active" width="13px" height="12px">
-                                            <g class="rating-fill">
-                                                <use xlink:href="images/sprite.svg#star-normal"></use>
-                                            </g>
-                                            <g class="rating-stroke">
-                                                <use xlink:href="images/sprite.svg#star-normal-stroke"></use>
-                                            </g>
-                                        </svg>
-                                        <div class="rating-star rating-star--only-edge rating-star--active">
-                                            <div class="rating-fill">
-                                                <div class="fake-svg-icon"></div>
-                                            </div>
-                                            <div class="rating-stroke">
-                                                <div class="fake-svg-icon"></div>
-                                            </div>
-                                        </div>
-                                        <svg class="rating-star " width="13px" height="12px">
-                                            <g class="rating-fill">
-                                                <use xlink:href="images/sprite.svg#star-normal"></use>
-                                            </g>
-                                            <g class="rating-stroke">
-                                                <use xlink:href="images/sprite.svg#star-normal-stroke"></use>
-                                            </g>
-                                        </svg>
-                                        <div class="rating-star rating-star--only-edge ">
-                                            <div class="rating-fill">
-                                                <div class="fake-svg-icon"></div>
-                                            </div>
-                                            <div class="rating-stroke">
-                                                <div class="fake-svg-icon"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="compare-table-product-rating-legend">
-                                7 Reviews
-                            </div>
-                        </td>
-                        {% endif %}
-                        {% endfor %}
-                    {% endfor %}
-                    </tr>
-                    <tr>
-                        <th>Availability</th>
-                        {% for product in products %}
-                        {% for compare_product in product_lists %}
-                            {% if compare_product|int == product.id %}
-                        <td class="row{{product.id}}"><span class="compare-table-product-badge badge badge-success">In Stock</span></td>
-                        {% endif %}
-                        {% endfor %}
-                    {% endfor %}
-                    </tr>
-                    <tr>
-                        <th>Price</th>
-                        {% for product in products %}
-                        {% for compare_product in product_lists %}
-                            {% if compare_product|int == product.id %}
-                        <td class="row{{product.id}}">{{product.price}}</td>
-                        {% endif %}
-                        {% endfor %}
-                    {% endfor %}
-                    </tr>
-                    <tr>
-                        <th>Add To Cart</th>
-                        {% for product in products %}
-                        {% for compare_product in product_lists %}
-                            {% if compare_product|int == product.id %}
-                        <td class="row{{product.id}}"><button class="btn btn-primary" onclick="window.location.href='/add_cart/{{ product.id }}'">Add To Cart</button></td>
-                    {% endif %}
-                        {% endfor %}
-                    {% endfor %}
-                    </tr>
-                    <tr>
-                        <th>SKU</th>
-                        {% for product in products %}
-                        {% for compare_product in product_lists %}
-                            {% if compare_product|int == product.id %}
-                        <td class="row{{product.id}}">83690/32</td>
-                    {% endif %}
-                        {% endfor %}
-                    {% endfor %}
-                    </tr>
-                    <tr>
-                    
-                        <th>Weight</th>
-                        {% for product in products %}
-                        {% for compare_product in product_lists %}
-                            {% if compare_product|int == product.id %}
-                        <td class="row{{product.id}}">{{product.weight}}</td>
-                        {% endif %}
-                        {% endfor %}
-                    {% endfor %}
-                    </tr>
-                    <tr>
-                    
-                        <th>Color</th>
-                        {% for product in products %}
-                        {% for compare_product in product_lists %}
-                            {% if compare_product|int == product.id %}
-                        <td class="row{{product.id}}">{{product.color}}</td>
-                    {% endif %}
-                        {% endfor %}
-                    {% endfor %}
-                    </tr>
-                    <tr>
-                        <th>Material</th>
-                        {% for product in products %}
-                        {% for compare_product in product_lists %}
-                            {% if compare_product|int == product.id %}
-                        <td class="row{{product.id}}">{{material}}</td>
-                    {% endif %}
-                        {% endfor %}
-                    {% endfor %}
-                    </tr>
-                    <tr>
-                        <th></th>
-                        {% for product in products %}
-                        {% for compare_product in product_lists %}
-                            {% if compare_product|int == product.id %}
-                        <td class="row{{product.id}}"><button id="deleteCompare" data-id="{{product.id}}" class="btn btn-secondary btn-sm">Remove</button></td>
-                        {% endif %}
-                        {% endfor %}
-                    {% endfor %}
-                    </tr>
-                    
-                </tbody>
-            </table>
+                                                {% for key, value in productRatings.items() %}
+                                                    {% if key == product.id %}
+                                                        <div class="compare-table-product-rating">
+                                                            <div class="rating">
+                                                                <div class="rating-body">
+                                                                    {% for i in range(value[1]) %}
+                                                                        <svg class="rating-star rating-star--active" width="13px" height="12px">
+                                                                            <g class="rating-fill">
+                                                                                <use xlink:href="/static/assets/icons/sprite.svg#star-normal"></use>
+                                                                            </g>
+                                                                            <g class="rating-stroke">
+                                                                                <use xlink:href="/static/assets/icons/sprite.svg#star-normal-stroke"></use>
+                                                                            </g>
+                                                                        </svg>
+                                                                        <div class="rating-star rating-star--only-edge rating-star--active">
+                                                                            <div class="rating-fill">
+                                                                                <div class="fake-svg-icon"></div>
+                                                                            </div>
+                                                                            <div class="rating-stroke">
+                                                                                <div class="fake-svg-icon"></div>
+                                                                            </div>
+                                                                        </div>
+                                                                    {% endfor %}
+                                                                    {% if value[1] != '5' %}
+                                                                        {% set count = 5 - value[1] %}
+                                                                        {% for i in range(count) %}
+                                                                            <svg class="rating-star" width="13px" height="12px">
+                                                                                <g class="rating-fill">
+                                                                                    <use xlink:href="/static/assets/icons/sprite.svg#star-normal"></use>
+                                                                                </g>
+                                                                                <g class="rating-stroke">
+                                                                                    <use xlink:href="/static/assets/icons/sprite.svg#star-normal-stroke"></use>
+                                                                                </g>
+                                                                            </svg>
+                                                                            <div class="rating-star rating-star--only-edge">
+                                                                                <div class="rating-fill">
+                                                                                    <div class="fake-svg-icon"></div>
+                                                                                </div>
+                                                                                <div class="rating-stroke">
+                                                                                    <div class="fake-svg-icon"></div>
+                                                                                </div>
+                                                                            </div>
+                                                                        {% endfor %}
+                                                                    {% endif %}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="compare-table-product-rating-legend">
+                                                            {{ value[0] }}
+                                                            Reviews
+                                                        </div>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endfor %}
+                            </tr>
+                            <tr>
+                                <th>Availability</th>
+                                {% for product in products %}
+                                    {% for compare_product in product_lists %}
+                                        {% if compare_product|int == product.id %}
+                                            <td class="row{{ product.id }}">
+                                                <span class="compare-table-product-badge badge badge-success">In Stock</span>
+                                            </td>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endfor %}
+                            </tr>
+                            <tr>
+                                <th>Price</th>
+                                {% for product in products %}
+                                    {% for compare_product in product_lists %}
+                                        {% if compare_product|int == product.id %}
+                                            <td class="row{{ product.id }}">{{ product.price }}</td>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endfor %}
+                            </tr>
+                            <tr>
+                                <th>Add To Cart</th>
+                                {% for product in products %}
+                                    {% for compare_product in product_lists %}
+                                        {% if compare_product|int == product.id %}
+                                            <td class="row{{ product.id }}">
+                                                <button class="btn btn-primary" onclick="window.location.href='/add_cart/{{ product.id }}'">Add To Cart</button>
+                                            </td>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endfor %}
+                            </tr>
+                            <tr>
+                                <th>SKU</th>
+                                {% for product in products %}
+                                    {% for compare_product in product_lists %}
+                                        {% if compare_product|int == product.id %}
+                                            <td class="row{{ product.id }}">83690/32</td>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endfor %}
+                            </tr>
+                            <tr>
+
+                                <th>Weight</th>
+                                {% for product in products %}
+                                    {% for compare_product in product_lists %}
+                                        {% if compare_product|int == product.id %}
+                                            <td class="row{{ product.id }}">{{ product.weight }}</td>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endfor %}
+                            </tr>
+                            <tr>
+
+                                <th>Color</th>
+                                {% for product in products %}
+                                    {% for compare_product in product_lists %}
+                                        {% if compare_product|int == product.id %}
+                                            <td class="row{{ product.id }}">{{ product.color }}</td>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endfor %}
+                            </tr>
+                            <tr>
+                                <th>Material</th>
+                                {% for product in products %}
+                                    {% for compare_product in product_lists %}
+                                        {% if compare_product|int == product.id %}
+                                            <td class="row{{ product.id }}">{{ material }}</td>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endfor %}
+                            </tr>
+                            <tr>
+                                <th></th>
+                                {% for product in products %}
+                                    {% for compare_product in product_lists %}
+                                        {% if compare_product|int == product.id %}
+                                            <td class="row{{ product.id }}">
+                                                <button id="deleteCompare" data-id="{{ product.id }}" class="btn btn-secondary btn-sm">Remove</button>
+                                            </td>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endfor %}
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
 
-<script>
-$(document).ready(function(){
+        <script>
+            $(document).ready(function () {
 
-    var compare_deleteButtons = document.querySelectorAll('#deleteCompare');
-    for (var i = 0; i < compare_deleteButtons.length; i++) {
-        compare_deleteButtons[i].onclick = function() {
-        var compare_deleteIndex = $(this).attr('data-id');
-        req = $.ajax({
-                url: "/users/compare",
-                type: "POST",
-                data: compare_deleteIndex,
-                }); 
-        req.done(function(data){
-            $('.row'+compare_deleteIndex).fadeOut('normal', function(){
-                document.location.href = this.location.href;
+                var compare_deleteButtons = document.querySelectorAll('#deleteCompare');
+                for (var i = 0; i < compare_deleteButtons.length; i++) {
+                    compare_deleteButtons[i].onclick = function () {
+                        var compare_deleteIndex = $(this).attr('data-id');
+                        req = $.ajax({url: "/users/compare", type: "POST", data: compare_deleteIndex});
+                        req.done(function (data) {
+                            $('.row' + compare_deleteIndex).fadeOut('normal', function () {
+                                document.location.href = this.location.href;
+                            });
+                        });
+                    };
+                }
             });
-        });
-    };
-    }
-});
-</script>
+        </script>

@@ -1,348 +1,269 @@
-<link rel="stylesheet" type="text/css" href= "{{ url_for('static', filename='css/general/blocks/quick-view-modal-block.css') }}" }}>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/general/blocks/quick-view-modal-block.css') }}"  }}>
 
-<div class="quickview">
-    <button class="quickview-close" type="button">
-        <svg width="20px" height="20px">
-            <use xlink:href="/static/assets/icons/sprite.svg#cross-20"></use>
-        </svg>
-    </button>
-    <div class="product product--layout--quickview" data-layout="quickview">
-        <div class="product-content">
-            <!-- .product-gallery -->
-            <div class="product-gallery">
+    <div class="quickview">
+        <button class="quickview-close" type="button">
+            <svg width="20px" height="20px">
+                <use xlink:href="/static/assets/icons/sprite.svg#cross-20"></use>
+            </svg>
+        </button>
+        <div class="product product--layout--quickview" data-layout="quickview">
+            <div
+                class="product-content">
+                <!-- .product-gallery -->
                 <div class="product-gallery">
-                    <div class="product-gallery-featured">
-                        <button class="product-gallery-zoom">
-                            <svg width="24px" height="24px">
-                                <use xlink:href="/static/assets/icons/sprite.svg#zoom-in-24"></use>
-                            </svg>
-                        </button>
-                        <div class="owl-carousel" id="product-image">
-                            <div class="product-image product-image--location--gallery">
-                                <!--
-                                The data-width and data-height attributes must contain the size of a larger version
-                                of the product image.
-
-                                If you do not know the image size, you can remove the data-width and data-height
-                                attribute, in which case the width and height will be obtained from the naturalWidth
-                                and naturalHeight property of img.product-image-img.
-                                -->
-                                <a href="images/products/product-16.jpg" data-width="700" data-height="700" class="product-image-body" target="_blank">
-                                    <img class="product-image-img" src="{{url_for('static',filename='assets/images/products/'+quickViewProductData.imageFile)}}" alt="">
-                                </a>
-                            </div>
-                            <div class="product-image product-image--location--gallery">
-                                <!--
-                                The data-width and data-height attributes must contain the size of a larger version
-                                of the product image.
-
-                                If you do not know the image size, you can remove the data-width and data-height
-                                attribute, in which case the width and height will be obtained from the naturalWidth
-                                and naturalHeight property of img.product-image-img.
-                                -->
-                                <a href="images/products/product-16-1.jpg" data-width="700" data-height="700" class="product-image-body" target="_blank">
-                                    <img class="product-image-img" src="images/products/product-16-1.jpg" alt="">
-                                </a>
-                            </div>
-                            <div class="product-image product-image--location--gallery">
-                                <!--
-                                The data-width and data-height attributes must contain the size of a larger version
-                                of the product image.
-
-                                If you do not know the image size, you can remove the data-width and data-height
-                                attribute, in which case the width and height will be obtained from the naturalWidth
-                                and naturalHeight property of img.product-image-img.
-                                -->
-                                <a href="images/products/product-16-2.jpg" data-width="700" data-height="700" class="product-image-body" target="_blank">
-                                    <img class="product-image-img" src="images/products/product-16-2.jpg" alt="">
-                                </a>
-                            </div>
-                            <div class="product-image product-image--location--gallery">
-                                <!--
-                                The data-width and data-height attributes must contain the size of a larger version
-                                of the product image.
-
-                                If you do not know the image size, you can remove the data-width and data-height
-                                attribute, in which case the width and height will be obtained from the naturalWidth
-                                and naturalHeight property of img.product-image-img.
-                                -->
-                                <a href="images/products/product-16-3.jpg" data-width="700" data-height="700" class="product-image-body" target="_blank">
-                                    <img class="product-image-img" src="images/products/product-16-3.jpg" alt="">
-                                </a>
-                            </div>
-                            <div class="product-image product-image--location--gallery">
-                                <!--
-                                The data-width and data-height attributes must contain the size of a larger version
-                                of the product image.
-
-                                If you do not know the image size, you can remove the data-width and data-height
-                                attribute, in which case the width and height will be obtained from the naturalWidth
-                                and naturalHeight property of img.product-image-img.
-                                -->
-                                <a href="images/products/product-16-4.jpg" data-width="700" data-height="700" class="product-image-body" target="_blank">
-                                    <img class="product-image-img" src="images/products/product-16-4.jpg" alt="">
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product-gallery-carousel">
-                        <div class="owl-carousel" id="product-carousel">
-                            <a href="images/products/product-16.jpg" class="product-image product-gallery-carousel-item">
-                                <div class="product-image-body">
-                                    <img class="product-image-img product-gallery-carousel-image" src="images/products/product-16.jpg" alt="">
-                                </div>
-                            </a>
-                            <a href="images/products/product-16-1.jpg" class="product-image product-gallery-carousel-item">
-                                <div class="product-image-body">
-                                    <img class="product-image-img product-gallery-carousel-image" src="images/products/product-16-1.jpg" alt="">
-                                </div>
-                            </a>
-                            <a href="images/products/product-16-2.jpg" class="product-image product-gallery-carousel-item">
-                                <div class="product-image-body">
-                                    <img class="product-image-img product-gallery-carousel-image" src="images/products/product-16-2.jpg" alt="">
-                                </div>
-                            </a>
-                            <a href="images/products/product-16-3.jpg" class="product-image product-gallery-carousel-item">
-                                <div class="product-image-body">
-                                    <img class="product-image-img product-gallery-carousel-image" src="images/products/product-16-3.jpg" alt="">
-                                </div>
-                            </a>
-                            <a href="images/products/product-16-4.jpg" class="product-image product-gallery-carousel-item">
-                                <div class="product-image-body">
-                                    <img class="product-image-img product-gallery-carousel-image" src="images/products/product-16-4.jpg" alt="">
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- .product-gallery / end -->
-            <!-- .product-info -->
-            <div class="product-info">
-                <div class="product-wishlist-compare">
-                    <button type="button" class="btn btn-sm btn-light btn-svg-icon" data-toggle="tooltip" data-placement="right" title="Wishlist">
-                        <svg width="16px" height="16px">
-                            <use xlink:href="images/sprite.svg#wishlist-16"></use>
-                        </svg>
-                    </button>
-                    <button type="button" class="btn btn-sm btn-light btn-svg-icon" data-toggle="tooltip" data-placement="right" title="Compare">
-                        <svg width="16px" height="16px">
-                            <use xlink:href="images/sprite.svg#compare-16"></use>
-                        </svg>
-                    </button>
-                </div>
-                <h1 class="product-name">{{ quickViewProductData.productName}}</h1>
-                <div class="product-rating">
-                    <div class="product-rating-stars">
-                        <div class="rating">
-                            <div class="rating-body">
-                                <svg class="rating-star rating-star--active" width="13px" height="12px">
-                                    <g class="rating-fill">
-                                        <use xlink:href="images/sprite.svg#star-normal"></use>
-                                    </g>
-                                    <g class="rating-stroke">
-                                        <use xlink:href="images/sprite.svg#star-normal-stroke"></use>
-                                    </g>
+                    <div class="product-gallery">
+                        <div class="product-gallery-featured">
+                            <button class="product-gallery-zoom">
+                                <svg width="24px" height="24px">
+                                    <use xlink:href="/static/assets/icons/sprite.svg#zoom-in-24"></use>
                                 </svg>
-                                <div class="rating-star rating-star--only-edge rating-star--active">
-                                    <div class="rating-fill">
-                                        <div class="fake-svg-icon"></div>
+                            </button>
+                            <div class="owl-carousel" id="product-image">
+                                <div
+                                    class="product-image product-image--location--gallery">
+                                    <!--
+                                                                    The data-width and data-height attributes must contain the size of a larger version
+                                                                    of the product image.
+                                    
+                                                                    If you do not know the image size, you can remove the data-width and data-height
+                                                                    attribute, in which case the width and height will be obtained from the naturalWidth
+                                                                    and naturalHeight property of img.product-image-img.
+                                                                    -->
+                                    <a href="images/products/product-16.jpg" data-width="700" data-height="700" class="product-image-body" target="_blank">
+                                        <img class="product-image-img" src="{{ url_for('static',filename='assets/images/products/'+quickViewProductData.imageFile) }}" alt=""></a>
                                     </div>
-                                    <div class="rating-stroke">
-                                        <div class="fake-svg-icon"></div>
-                                    </div>
-                                </div>
-                                <svg class="rating-star rating-star--active" width="13px" height="12px">
-                                    <g class="rating-fill">
-                                        <use xlink:href="images/sprite.svg#star-normal"></use>
-                                    </g>
-                                    <g class="rating-stroke">
-                                        <use xlink:href="images/sprite.svg#star-normal-stroke"></use>
-                                    </g>
-                                </svg>
-                                <div class="rating-star rating-star--only-edge rating-star--active">
-                                    <div class="rating-fill">
-                                        <div class="fake-svg-icon"></div>
-                                    </div>
-                                    <div class="rating-stroke">
-                                        <div class="fake-svg-icon"></div>
-                                    </div>
-                                </div>
-                                <svg class="rating-star rating-star--active" width="13px" height="12px">
-                                    <g class="rating-fill">
-                                        <use xlink:href="images/sprite.svg#star-normal"></use>
-                                    </g>
-                                    <g class="rating-stroke">
-                                        <use xlink:href="images/sprite.svg#star-normal-stroke"></use>
-                                    </g>
-                                </svg>
-                                <div class="rating-star rating-star--only-edge rating-star--active">
-                                    <div class="rating-fill">
-                                        <div class="fake-svg-icon"></div>
-                                    </div>
-                                    <div class="rating-stroke">
-                                        <div class="fake-svg-icon"></div>
-                                    </div>
-                                </div>
-                                <svg class="rating-star rating-star--active" width="13px" height="12px">
-                                    <g class="rating-fill">
-                                        <use xlink:href="images/sprite.svg#star-normal"></use>
-                                    </g>
-                                    <g class="rating-stroke">
-                                        <use xlink:href="images/sprite.svg#star-normal-stroke"></use>
-                                    </g>
-                                </svg>
-                                <div class="rating-star rating-star--only-edge rating-star--active">
-                                    <div class="rating-fill">
-                                        <div class="fake-svg-icon"></div>
-                                    </div>
-                                    <div class="rating-stroke">
-                                        <div class="fake-svg-icon"></div>
-                                    </div>
-                                </div>
-                                <svg class="rating-star rating-star--active" width="13px" height="12px">
-                                    <g class="rating-fill">
-                                        <use xlink:href="images/sprite.svg#star-normal"></use>
-                                    </g>
-                                    <g class="rating-stroke">
-                                        <use xlink:href="images/sprite.svg#star-normal-stroke"></use>
-                                    </g>
-                                </svg>
-                                <div class="rating-star rating-star--only-edge rating-star--active">
-                                    <div class="rating-fill">
-                                        <div class="fake-svg-icon"></div>
-                                    </div>
-                                    <div class="rating-stroke">
-                                        <div class="fake-svg-icon"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product-rating-legend">
-                        <a href="">7 Reviews</a><span>/</span><a href="">Write A Review</a>
-                    </div>
-                </div>
-                <div class="product-description">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ornare, mi in ornare elementum, libero nibh
-                    lacinia urna, quis convallis lorem erat at purus. Maecenas eu varius nisi.
-                </div>
-                <ul class="product-features">
-                    <li>Speed: 750 RPM</li>
-                    <li>Power Source: Cordless-Electric</li>
-                    <li>Battery Cell Type: Lithium</li>
-                    <li>Voltage: 20 Volts</li>
-                    <li>Battery Capacity: 2 Ah</li>
-                </ul>
-                <ul class="product-meta">
-                    <li class="product-meta-availability">Availability: <span class="text-success">In Stock</span></li>
-                    <li>Brand: <a href="">Wakita</a></li>
-                    <li>SKU: 83690/32</li>
-                </ul>
-            </div>
-            <!-- .product-info / end -->
-            <!-- .product-sidebar -->
-            <div class="product-sidebar">
-                <div class="product-availability">
-                    Availability: <span class="text-success">In Stock</span>
-                </div>
-                <div class="product-prices">
-                    $1,499.00
-                </div>
-                <!-- .product-options -->
-                <form class="product-options">
-                    <div class="form-group product-option">
-                        <label class="product-option-label">Color</label>
-                        <div class="input-radio-color">
-                            <div class="input-radio-color-list">
-                                <label class="input-radio-color-item input-radio-color-item--white" style="color: #fff;" data-toggle="tooltip" title="White">
-                                    <input type="radio" name="color">
-                                    <span></span>
-                                </label>
-                                <label class="input-radio-color-item" style="color: #ffd333;" data-toggle="tooltip" title="Yellow">
-                                    <input type="radio" name="color">
-                                    <span></span>
-                                </label>
-                                <label class="input-radio-color-item" style="color: #ff4040;" data-toggle="tooltip" title="Red">
-                                    <input type="radio" name="color">
-                                    <span></span>
-                                </label>
-                                <label class="input-radio-color-item input-radio-color-item--disabled" style="color: #4080ff;" data-toggle="tooltip" title="Blue">
-                                    <input type="radio" name="color" disabled>
-                                    <span></span>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group product-option">
-                        <label class="product-option-label">Material</label>
-                        <div class="input-radio-label">
-                            <div class="input-radio-label-list">
-                                <label>
-                                    <input type="radio" name="material">
-                                    <span>Metal</span>
-                                </label>
-                                <label>
-                                    <input type="radio" name="material">
-                                    <span>Wood</span>
-                                </label>
-                                <label>
-                                    <input type="radio" name="material" disabled>
-                                    <span>Plastic</span>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group product-option">
-                        <label class="product-option-label" for="product-quantity">Quantity</label>
-                        <div class="product-actions">
-                            <div class="product-actions-item">
-                                <div class="input-number product-quantity">
-                                    <input id="product-quantity" class="input-number-input form-control form-control-lg" type="number" min="1" value="1">
-                                    <div class="input-number-add"></div>
-                                    <div class="input-number-sub"></div>
-                                </div>
-                            </div>
-                            <div class="product-actions-item product-actions-item--addtocart">
-                                <button class="btn btn-primary btn-lg">Add to cart</button>
-                            </div>
-                            <div class="product-actions-item product-actions-item--wishlist">
-                                <button type="button" class="btn btn-secondary btn-svg-icon btn-lg" data-toggle="tooltip" title="Wishlist">
-                                    <svg width="16px" height="16px">
-                                        <use xlink:href="/static/assets/icons/sprite.svg#wishlist-16"></use>
-                                    </svg>
-                                </button>
-                            </div>
-                            <div class="product-actions-item product-actions-item--compare">
-                                <button type="button" class="btn btn-secondary btn-svg-icon btn-lg" data-toggle="tooltip" title="Compare">
-                                    <svg width="16px" height="16px">
-                                        <use xlink:href="/static/assets/icons/sprite.svg#compare-16"></use>
-                                    </svg>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-                <!-- .product-options / end -->
-            </div>
-            <!-- .product-end -->
-            <div class="product-footer">
-                <div class="product-tags tags">
-                    <div class="tags-list">
-                        <a href="">Mounts</a>
-                        <a href="">Electrodes</a>
-                        <a href="">Chainsaws</a>
-                    </div>
-                </div>
-                <div class="product-share-links share-links">
-                    <ul class="share-links-list">
-                        <li class="share-links-item share-links-item--type--like"><a href="">Like</a></li>
-                        <li class="share-links-item share-links-item--type--tweet"><a href="">Tweet</a></li>
-                        <li class="share-links-item share-links-item--type--pin"><a href="">Pin It</a></li>
-                        <li class="share-links-item share-links-item--type--counter"><a href="">4K</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+                                    <div
+                                        class="product-image product-image--location--gallery">
+                                        <!--
+                                                                        The data-width and data-height attributes must contain the size of a larger version
+                                                                        of the product image.
+                                        
+                                                                        If you do not know the image size, you can remove the data-width and data-height
+                                                                        attribute, in which case the width and height will be obtained from the naturalWidth
+                                                                        and naturalHeight property of img.product-image-img.
+                                                                        -->
+                                        <a href="images/products/product-16-1.jpg" data-width="700" data-height="700" class="product-image-body" target="_blank">
+                                            <img class="product-image-img" src="images/products/product-16-1.jpg" alt=""></a>
+                                        </div>
+                                        <div
+                                            class="product-image product-image--location--gallery">
+                                            <!--
+                                                                            The data-width and data-height attributes must contain the size of a larger version
+                                                                            of the product image.
+                                            
+                                                                            If you do not know the image size, you can remove the data-width and data-height
+                                                                            attribute, in which case the width and height will be obtained from the naturalWidth
+                                                                            and naturalHeight property of img.product-image-img.
+                                                                            -->
+                                            <a href="images/products/product-16-2.jpg" data-width="700" data-height="700" class="product-image-body" target="_blank">
+                                                <img class="product-image-img" src="images/products/product-16-2.jpg" alt=""></a>
+                                            </div>
+                                            <div
+                                                class="product-image product-image--location--gallery">
+                                                <!--
+                                                                                The data-width and data-height attributes must contain the size of a larger version
+                                                                                of the product image.
+                                                
+                                                                                If you do not know the image size, you can remove the data-width and data-height
+                                                                                attribute, in which case the width and height will be obtained from the naturalWidth
+                                                                                and naturalHeight property of img.product-image-img.
+                                                                                -->
+                                                <a href="images/products/product-16-3.jpg" data-width="700" data-height="700" class="product-image-body" target="_blank">
+                                                    <img class="product-image-img" src="images/products/product-16-3.jpg" alt=""></a>
+                                                </div>
+                                                <div
+                                                    class="product-image product-image--location--gallery">
+                                                    <!--
+                                                                                    The data-width and data-height attributes must contain the size of a larger version
+                                                                                    of the product image.
+                                                    
+                                                                                    If you do not know the image size, you can remove the data-width and data-height
+                                                                                    attribute, in which case the width and height will be obtained from the naturalWidth
+                                                                                    and naturalHeight property of img.product-image-img.
+                                                                                    -->
+                                                    <a href="images/products/product-16-4.jpg" data-width="700" data-height="700" class="product-image-body" target="_blank">
+                                                        <img class="product-image-img" src="images/products/product-16-4.jpg" alt=""></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="product-gallery-carousel">
+                                                <div class="owl-carousel" id="product-carousel">
+                                                    <a href="images/products/product-16.jpg" class="product-image product-gallery-carousel-item">
+                                                        <div class="product-image-body">
+                                                            <img class="product-image-img product-gallery-carousel-image" src="images/products/product-16.jpg" alt=""></div>
+                                                        </a>
+                                                        <a href="images/products/product-16-1.jpg" class="product-image product-gallery-carousel-item">
+                                                            <div class="product-image-body">
+                                                                <img class="product-image-img product-gallery-carousel-image" src="images/products/product-16-1.jpg" alt=""></div>
+                                                            </a>
+                                                            <a href="images/products/product-16-2.jpg" class="product-image product-gallery-carousel-item">
+                                                                <div class="product-image-body">
+                                                                    <img class="product-image-img product-gallery-carousel-image" src="images/products/product-16-2.jpg" alt=""></div>
+                                                                </a>
+                                                                <a href="images/products/product-16-3.jpg" class="product-image product-gallery-carousel-item">
+                                                                    <div class="product-image-body">
+                                                                        <img class="product-image-img product-gallery-carousel-image" src="images/products/product-16-3.jpg" alt=""></div>
+                                                                    </a>
+                                                                    <a href="images/products/product-16-4.jpg" class="product-image product-gallery-carousel-item">
+                                                                        <div class="product-image-body">
+                                                                            <img class="product-image-img product-gallery-carousel-image" src="images/products/product-16-4.jpg" alt=""></div>
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- .product-gallery / end -->
+                                                        <!-- .product-info -->
+                                                        <div class="product-info">
+                                                            <div class="product-wishlist-compare">
+                                                                <button type="button" class="btn btn-sm btn-light btn-svg-icon" data-toggle="tooltip" data-placement="right" title="Wishlist">
+                                                                    <svg width="16px" height="16px">
+                                                                        <use xlink:href="images/sprite.svg#wishlist-16"></use>
+                                                                    </svg>
+                                                                </button>
+                                                                <button type="button" class="btn btn-sm btn-light btn-svg-icon" data-toggle="tooltip" data-placement="right" title="Compare">
+                                                                    <svg width="16px" height="16px">
+                                                                        <use xlink:href="images/sprite.svg#compare-16"></use>
+                                                                    </svg>
+                                                                </button>
+                                                            </div>
+                                                            <h1 class="product-name">{{ quickViewProductData.productName }}</h1>
+                                                            {% set products_id = quickViewProductData.id %}
+                                                            {% include ('/general/blocks/ratings.djhtml') %}
+
+                                                            <div class="product-description">
+                                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ornare, mi in ornare elementum, libero nibh
+                                                                                    lacinia urna, quis convallis lorem erat at purus. Maecenas eu varius nisi.
+                                                            </div>
+                                                            <ul class="product-features">
+                                                                <li>Speed: 750 RPM</li>
+                                                                <li>Power Source: Cordless-Electric</li>
+                                                                <li>Battery Cell Type: Lithium</li>
+                                                                <li>Voltage: 20 Volts</li>
+                                                                <li>Battery Capacity: 2 Ah</li>
+                                                            </ul>
+                                                            <ul class="product-meta">
+                                                                <li class="product-meta-availability">Availability:
+                                                                    <span class="text-success">In Stock</span>
+                                                                </li>
+                                                                <li>Brand:
+                                                                    <a href="">Wakita</a>
+                                                                </li>
+                                                                <li>SKU: 83690/32</li>
+                                                            </ul>
+                                                        </div>
+                                                        <!-- .product-info / end -->
+                                                        <!-- .product-sidebar -->
+                                                        <div class="product-sidebar">
+                                                            <div class="product-availability">
+                                                                Availability:
+                                                                <span class="text-success">In Stock</span>
+                                                            </div>
+                                                            <div class="product-prices">
+                                                                $1,499.00
+                                                            </div>
+                                                            <!-- .product-options -->
+                                                            <form class="product-options">
+                                                                <div class="form-group product-option">
+                                                                    <label class="product-option-label">Color</label>
+                                                                    <div class="input-radio-color">
+                                                                        <div class="input-radio-color-list">
+                                                                            <label class="input-radio-color-item input-radio-color-item--white" style="color: #fff;" data-toggle="tooltip" title="White">
+                                                                                <input type="radio" name="color">
+                                                                                    <span></span>
+                                                                                </label>
+                                                                                <label class="input-radio-color-item" style="color: #ffd333;" data-toggle="tooltip" title="Yellow">
+                                                                                    <input type="radio" name="color">
+                                                                                        <span></span>
+                                                                                    </label>
+                                                                                    <label class="input-radio-color-item" style="color: #ff4040;" data-toggle="tooltip" title="Red">
+                                                                                        <input type="radio" name="color">
+                                                                                            <span></span>
+                                                                                        </label>
+                                                                                        <label class="input-radio-color-item input-radio-color-item--disabled" style="color: #4080ff;" data-toggle="tooltip" title="Blue">
+                                                                                            <input type="radio" name="color" disabled>
+                                                                                                <span></span>
+                                                                                            </label>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="form-group product-option">
+                                                                                    <label class="product-option-label">Material</label>
+                                                                                    <div class="input-radio-label">
+                                                                                        <div class="input-radio-label-list">
+                                                                                            <label>
+                                                                                                <input type="radio" name="material">
+                                                                                                    <span>Metal</span>
+                                                                                                </label>
+                                                                                                <label>
+                                                                                                    <input type="radio" name="material">
+                                                                                                        <span>Wood</span>
+                                                                                                    </label>
+                                                                                                    <label>
+                                                                                                        <input type="radio" name="material" disabled>
+                                                                                                            <span>Plastic</span>
+                                                                                                        </label>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="form-group product-option">
+                                                                                                <label class="product-option-label" for="product-quantity">Quantity</label>
+                                                                                                <div class="product-actions">
+                                                                                                    <div class="product-actions-item">
+                                                                                                        <div class="input-number product-quantity">
+                                                                                                            <input id="product-quantity" class="input-number-input form-control form-control-lg" type="number" min="1" value="1">
+                                                                                                                <div class="input-number-add"></div>
+                                                                                                                <div class="input-number-sub"></div>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                        <div class="product-actions-item product-actions-item--addtocart">
+                                                                                                            <button class="btn btn-primary btn-lg">Add to cart</button>
+                                                                                                        </div>
+                                                                                                        <div class="product-actions-item product-actions-item--wishlist">
+                                                                                                            <button type="button" class="btn btn-secondary btn-svg-icon btn-lg" data-toggle="tooltip" title="Wishlist">
+                                                                                                                <svg width="16px" height="16px">
+                                                                                                                    <use xlink:href="/static/assets/icons/sprite.svg#wishlist-16"></use>
+                                                                                                                </svg>
+                                                                                                            </button>
+                                                                                                        </div>
+                                                                                                        <div class="product-actions-item product-actions-item--compare">
+                                                                                                            <button type="button" class="btn btn-secondary btn-svg-icon btn-lg" data-toggle="tooltip" title="Compare">
+                                                                                                                <svg width="16px" height="16px">
+                                                                                                                    <use xlink:href="/static/assets/icons/sprite.svg#compare-16"></use>
+                                                                                                                </svg>
+                                                                                                            </button>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </form>
+                                                                                            <!-- .product-options / end -->
+                                                                                        </div>
+                                                                                        <!-- .product-end -->
+                                                                                        <div class="product-footer">
+                                                                                            <div class="product-tags tags">
+                                                                                                <div class="tags-list">
+                                                                                                    <a href="">Mounts</a>
+                                                                                                    <a href="">Electrodes</a>
+                                                                                                    <a href="">Chainsaws</a>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="product-share-links share-links">
+                                                                                                <ul class="share-links-list">
+                                                                                                    <li class="share-links-item share-links-item--type--like">
+                                                                                                        <a href="">Like</a>
+                                                                                                    </li>
+                                                                                                    <li class="share-links-item share-links-item--type--tweet">
+                                                                                                        <a href="">Tweet</a>
+                                                                                                    </li>
+                                                                                                    <li class="share-links-item share-links-item--type--pin">
+                                                                                                        <a href="">Pin It</a>
+                                                                                                    </li>
+                                                                                                    <li class="share-links-item share-links-item--type--counter">
+                                                                                                        <a href="">4K</a>
+                                                                                                    </li>
+                                                                                                </ul>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>

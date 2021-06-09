@@ -1,247 +1,198 @@
-<link rel="stylesheet" type="text/css" href= "{{ url_for('static', filename='css/general/blocks/product-carousel-block.css') }}" }}>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/general/blocks/product-carousel-block.css') }}"  }}>
 
-<div class="block block-products-carousel" data-layout="grid-5" data-mobile-grid-columns="2">
-    <div class="container">
-        <div class="block-header">
-            <h3 class="block-header-title">Featured Products</h3>
-            <div class="block-header-divider"></div>
-            <div class="block-header-arrows-list">
-                <button class="block-header-arrow block-header-arrow--left" type="button">
-                    <svg width="7px" height="11px">
-                        <use xlink:href="/static/assets/icons/sprite.svg#arrow-rounded-left-7x11"></use>
-                    </svg>
-                </button>
-                <button class="block-header-arrow block-header-arrow--right" type="button">
-                    <svg width="7px" height="11px">
-                        <use xlink:href="/static/assets/icons/sprite.svg#arrow-rounded-right-7x11"></use>
-                    </svg>
-                </button>
+    <div class="block block-products-carousel" data-layout="grid-5" data-mobile-grid-columns="2">
+        <div class="container">
+            <div class="block-header">
+                <h3 class="block-header-title">Featured Products</h3>
+                <div class="block-header-divider"></div>
+                <div class="block-header-arrows-list">
+                    <button class="block-header-arrow block-header-arrow--left" type="button">
+                        <svg width="7px" height="11px">
+                            <use xlink:href="/static/assets/icons/sprite.svg#arrow-rounded-left-7x11"></use>
+                        </svg>
+                    </button>
+                    <button class="block-header-arrow block-header-arrow--right" type="button">
+                        <svg width="7px" height="11px">
+                            <use xlink:href="/static/assets/icons/sprite.svg#arrow-rounded-right-7x11"></use>
+                        </svg>
+                    </button>
+                </div>
             </div>
-        </div>
-        <div class="block-products-carousel-slider">
-            <div class="block-products-carousel-preloader"></div>
-            <div class="owl-carousel">
-                {% for items in products %}
-                    <div class="block-products-carousel-column">
-                        <div class="block-products-carousel-cell">
-                            <div class="product-card product-card--hidden-actions ">
-                                <button class="product-card-quickview" type="button">
-                                    <svg width="16px" height="16px">
-                                        <use xlink:href="/static/assets/icons/sprite.svg#quickview-16"></use>
-                                    </svg>
-                                    <span class="fake-svg-icon"></span>
-                                </button>
-                                <div class="product-card-badges-list">
-                                    <div class="product-card-badge product-card-badge--new">New</div>
-                                </div>
-                                <div class="product-card-image product-image">
-                                    <a href="single/{{ items['id'] }}" class="product-image-body">
-                                        <img class="product-image-img" src="{{url_for('static',filename='assets/images/products/'+items['imageFile'])}}" alt="">
-                                    </a>
-                                </div>
-                                <div class="product-card-info">
-                                    <div class="product-card-name">
-                                        <a href="single/{{ items['id'] }}">{{items['productName']}}</a>
+            <div class="block-products-carousel-slider">
+                <div class="block-products-carousel-preloader"></div>
+                <div class="owl-carousel">
+                    {% for items in products %}
+                        <div class="block-products-carousel-column">
+                            <div class="block-products-carousel-cell">
+                                <div class="product-card product-card--hidden-actions ">
+                                    <button class="product-card-quickview" type="button">
+                                        <svg width="16px" height="16px">
+                                            <use xlink:href="/static/assets/icons/sprite.svg#quickview-16"></use>
+                                        </svg>
+                                        <span class="fake-svg-icon"></span>
+                                    </button>
+                                    <div class="product-card-badges-list">
+                                        <div class="product-card-badge product-card-badge--new">New</div>
                                     </div>
-                                    <div class="product-card-rating">
-                                        <div class="product-card-rating-stars">
-                                            <div class="rating">
-                                                <div class="rating-body">
-                                                    <svg class="rating-star rating-star--active" width="13px" height="12px">
-                                                        <g class="rating-fill">
-                                                            <use xlink:href="/static/assets/icons/sprite.svg#star-normal"></use>
-                                                        </g>
-                                                        <g class="rating-stroke">
-                                                            <use xlink:href="/static/assets/icons/sprite.svg#star-normal-stroke"></use>
-                                                        </g>
+                                    <div class="product-card-image product-image">
+                                        <a href="single/{{ items['id'] }}" class="product-image-body">
+                                            <img class="product-image-img" src="{{ url_for('static',filename='assets/images/products/'+items['imageFile']) }}" alt=""></a>
+                                        </div>
+                                        <div class="product-card-info">
+                                            <div class="product-card-name">
+                                                <a href="single/{{ items['id'] }}">{{ items['productName'] }}</a>
+                                            </div>
+                                            {% set products_id = items['id'] %}
+                                            {% include ('/general/blocks/ratings.djhtml') %}
+                                            <ul class="product-card-features-list">
+                                                <li>Speed: 750 RPM</li>
+                                                <li>Power Source: Cordless-Electric</li>
+                                                <li>Battery Cell Type: Lithium</li>
+                                                <li>Voltage: 20 Volts</li>
+                                                <li>Battery Capacity: 2 Ah</li>
+                                            </ul>
+                                        </div>
+                                        <div class="product-card-actions">
+                                            <div class="product-card-availability">
+                                                Availability:
+                                                <span class="text-success">In Stock</span>
+                                            </div>
+                                            <div class="product-card-prices">
+                                                {{ currency }}
+                                                {{ items['price'] }}
+                                            </div>
+                                            <div class="product-card-buttons">
+                                                <button id="addCart" data-id="{{ items['id'] }}" class="btn btn-primary product-card-addtocart" type="button">Add To Cart</button>
+                                                <button class="btn btn-secondary product-card-addtocart product-card-addtocart--list" type="button">Add To Cart</button>
+                                                <button id="addWishlist" data-id="{{ items['id'] }}" class="btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card-wishlist" type="button">
+                                                    <svg width="16px" height="16px">
+                                                        <use xlink:href="/static/assets/icons/sprite.svg#wishlist-16"></use>
                                                     </svg>
-                                                    <div class="rating-star rating-star--only-edge rating-star--active">
-                                                        <div class="rating-fill">
-                                                            <div class="fake-svg-icon"></div>
-                                                        </div>
-                                                        <div class="rating-stroke">
-                                                            <div class="fake-svg-icon"></div>
-                                                        </div>
-                                                    </div>
-                                                    <svg class="rating-star rating-star--active" width="13px" height="12px">
-                                                        <g class="rating-fill">
-                                                            <use xlink:href="/static/assets/icons/sprite.svg#star-normal"></use>
-                                                        </g>
-                                                        <g class="rating-stroke">
-                                                            <use xlink:href="/static/assets/icons/sprite.svg#star-normal-stroke"></use>
-                                                        </g>
+                                                    <span class="fake-svg-icon fake-svg-icon--wishlist-16"></span>
+                                                </button>
+                                                <button id="addCompare" data-id="{{ items['id'] }}" class="btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card-compare" type="button">
+                                                    <svg width="16px" height="16px">
+                                                        <use xlink:href="/static/assets/icons/sprite.svg#compare-16"></use>
                                                     </svg>
-                                                    <div class="rating-star rating-star--only-edge rating-star--active">
-                                                        <div class="rating-fill">
-                                                            <div class="fake-svg-icon"></div>
-                                                        </div>
-                                                        <div class="rating-stroke">
-                                                            <div class="fake-svg-icon"></div>
-                                                        </div>
-                                                    </div>
-                                                    <svg class="rating-star rating-star--active" width="13px" height="12px">
-                                                        <g class="rating-fill">
-                                                            <use xlink:href="/static/assets/icons/sprite.svg#star-normal"></use>
-                                                        </g>
-                                                        <g class="rating-stroke">
-                                                            <use xlink:href="/static/assets/icons/sprite.svg#star-normal-stroke"></use>
-                                                        </g>
-                                                    </svg>
-                                                    <div class="rating-star rating-star--only-edge rating-star--active">
-                                                        <div class="rating-fill">
-                                                            <div class="fake-svg-icon"></div>
-                                                        </div>
-                                                        <div class="rating-stroke">
-                                                            <div class="fake-svg-icon"></div>
-                                                        </div>
-                                                    </div>
-                                                    <svg class="rating-star rating-star--active" width="13px" height="12px">
-                                                        <g class="rating-fill">
-                                                            <use xlink:href="/static/assets/icons/sprite.svg#star-normal"></use>
-                                                        </g>
-                                                        <g class="rating-stroke">
-                                                            <use xlink:href="/static/assets/icons/sprite.svg#star-normal-stroke"></use>
-                                                        </g>
-                                                    </svg>
-                                                    <div class="rating-star rating-star--only-edge rating-star--active">
-                                                        <div class="rating-fill">
-                                                            <div class="fake-svg-icon"></div>
-                                                        </div>
-                                                        <div class="rating-stroke">
-                                                            <div class="fake-svg-icon"></div>
-                                                        </div>
-                                                    </div>
-                                                    <svg class="rating-star " width="13px" height="12px">
-                                                        <g class="rating-fill">
-                                                            <use xlink:href="/static/assets/icons/sprite.svg#star-normal"></use>
-                                                        </g>
-                                                        <g class="rating-stroke">
-                                                            <use xlink:href="/static/assets/icons/sprite.svg#star-normal-stroke"></use>
-                                                        </g>
-                                                    </svg>
-                                                    <div class="rating-star rating-star--only-edge ">
-                                                        <div class="rating-fill">
-                                                            <div class="fake-svg-icon"></div>
-                                                        </div>
-                                                        <div class="rating-stroke">
-                                                            <div class="fake-svg-icon"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                    <span class="fake-svg-icon fake-svg-icon--compare-16"></span>
+                                                </button>
                                             </div>
                                         </div>
-                                        <div class="product-card-rating-legend">9 Reviews</div>
-                                    </div>
-                                    <ul class="product-card-features-list">
-                                        <li>Speed: 750 RPM</li>
-                                        <li>Power Source: Cordless-Electric</li>
-                                        <li>Battery Cell Type: Lithium</li>
-                                        <li>Voltage: 20 Volts</li>
-                                        <li>Battery Capacity: 2 Ah</li>
-                                    </ul>
-                                </div>
-                                <div class="product-card-actions">
-                                    <div class="product-card-availability">
-                                        Availability: <span class="text-success">In Stock</span>
-                                    </div>
-                                    <div class="product-card-prices">
-                                       {{ currency }} {{ items['price']}}
-                                    </div>
-                                    <div class="product-card-buttons">
-                                        <button id="addCart" data-id="{{ items['id'] }}" class="btn btn-primary product-card-addtocart" type="button">Add To Cart</button>
-                                        <button class="btn btn-secondary product-card-addtocart product-card-addtocart--list" type="button">Add To Cart</button>
-                                        <button id="addWishlist" data-id="{{ items['id'] }}" class="btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card-wishlist" type="button">
-                                            <svg width="16px" height="16px">
-                                                <use xlink:href="/static/assets/icons/sprite.svg#wishlist-16"></use>
-                                            </svg>
-                                            <span class="fake-svg-icon fake-svg-icon--wishlist-16"></span>
-                                        </button>
-                                        <button id="addCompare" data-id="{{ items['id'] }}" class="btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card-compare" type="button">
-                                            <svg width="16px" height="16px">
-                                                <use xlink:href="/static/assets/icons/sprite.svg#compare-16"></use>
-                                            </svg>
-                                            <span class="fake-svg-icon fake-svg-icon--compare-16"></span>
-                                        </button>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        {% endfor %}
                     </div>
-                {% endfor %}
+                </div>
             </div>
         </div>
-    </div>
-</div>
-<!-- .block-products-carousel / end -->
+        <!-- .block-products-carousel / end -->
 
-<script type="text/javascript">
-    $(function() {
-        $('.block-products-carousel').each(function() {
-            const layout = $(this).data('layout');
-            const options = {
-                items: 4,
-                margin: 14,
-                nav: false,
-                dots: false,
-                loop: false,
-                stagePadding: 1,
-            };
-            const layoutOptions = {
-                'grid-4': {
-                    responsive: {
-                        1200: {items: 4, margin: 14},
-                        992:  {items: 4, margin: 10},
-                        768:  {items: 3, margin: 10},
-                    }
-                },
-                'grid-4-sm': {
-                    responsive: {
-                        1200: {items: 4, margin: 14},
-                        992:  {items: 3, margin: 10},
-                        768:  {items: 3, margin: 10},
-                    }
-                },
-                'grid-5': {
-                    responsive: {
-                        1200: {items: 5, margin: 12},
-                        992:  {items: 4, margin: 10},
-                        768:  {items: 3, margin: 10},
-                    }
-                },
-            };
-            const owl = $('.owl-carousel', this);
-            let cancelPreviousTabChange = function() {};
-
-            const owlOptions = $.extend({}, options, layoutOptions[layout]);
-
-            if (/^grid-/.test(layout)) {
-                let mobileResponsiveOptions;
-
-                if (parseFloat($(this).data('mobile-grid-columns')) === 2) {
-                    mobileResponsiveOptions = {
-                        420:  {items: 2, margin: 10},
-                        320:  {items: 2, margin: 0},
-                        0:    {items: 1},
+        <script type="text/javascript">
+            $(function () {
+                $('.block-products-carousel').each(function () {
+                    const layout = $(this).data('layout');
+                    const options = {
+                        items: 4,
+                        margin: 14,
+                        nav: false,
+                        dots: false,
+                        loop: false,
+                        stagePadding: 1
                     };
-                } else {
-                    mobileResponsiveOptions = {
-                        475:  {items: 2, margin: 10},
-                        0:    {items: 1},
+                    const layoutOptions = {
+                        'grid-4': {
+                            responsive: {
+                                1200: {
+                                    items: 4,
+                                    margin: 14
+                                },
+                                992: {
+                                    items: 4,
+                                    margin: 10
+                                },
+                                768: {
+                                    items: 3,
+                                    margin: 10
+                                }
+                            }
+                        },
+                        'grid-4-sm': {
+                            responsive: {
+                                1200: {
+                                    items: 4,
+                                    margin: 14
+                                },
+                                992: {
+                                    items: 3,
+                                    margin: 10
+                                },
+                                768: {
+                                    items: 3,
+                                    margin: 10
+                                }
+                            }
+                        },
+                        'grid-5': {
+                            responsive: {
+                                1200: {
+                                    items: 5,
+                                    margin: 12
+                                },
+                                992: {
+                                    items: 4,
+                                    margin: 10
+                                },
+                                768: {
+                                    items: 3,
+                                    margin: 10
+                                }
+                            }
+                        }
                     };
-                }
+                    const owl = $('.owl-carousel', this);
+                    let cancelPreviousTabChange = function () {};
 
-                owlOptions.responsive = $.extend({}, owlOptions.responsive, mobileResponsiveOptions);
-            }
+                    const owlOptions = $.extend({}, options, layoutOptions[layout]);
 
-            owl.owlCarousel(owlOptions);
+                    if (/^grid-/.test(layout)) {
+                        let mobileResponsiveOptions;
 
-            $(this).find('.block-header-arrow--left').on('click', function() {
-                owl.trigger('prev.owl.carousel', [500]);
+                        if (parseFloat($(this).data('mobile-grid-columns')) === 2) {
+                            mobileResponsiveOptions = {
+                                420: {
+                                    items: 2,
+                                    margin: 10
+                                },
+                                320: {
+                                    items: 2,
+                                    margin: 0
+                                },
+                                0: {
+                                    items: 1
+                                }
+                            };
+                        } else {
+                            mobileResponsiveOptions = {
+                                475: {
+                                    items: 2,
+                                    margin: 10
+                                },
+                                0: {
+                                    items: 1
+                                }
+                            };
+                        } owlOptions.responsive = $.extend({}, owlOptions.responsive, mobileResponsiveOptions);
+                    }
+
+                    owl.owlCarousel(owlOptions);
+
+                    $(this).find('.block-header-arrow--left').on('click', function () {
+                        owl.trigger('prev.owl.carousel', [500]);
+                    });
+                    $(this).find('.block-header-arrow--right').on('click', function () {
+                        owl.trigger('next.owl.carousel', [500]);
+                    });
+                });
             });
-            $(this).find('.block-header-arrow--right').on('click', function() {
-                owl.trigger('next.owl.carousel', [500]);
-            });
-        });
-    });
-</script>
-
+        </script>
