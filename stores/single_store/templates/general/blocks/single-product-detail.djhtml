@@ -15,6 +15,7 @@
     {% set productLongDescription = product['longDescription'] %}
     {% set productImageFile = product['imageFile'] %}
     {% set productFeatured = product['featured'] %}
+    {% set productTags = product['tags'] %}
     {% set productImageGallery = product['imageGallery'] %}
     {% set productImageGallery = productImageGallery.split(',') %}
 
@@ -118,12 +119,16 @@
                                     <div class="product-sidebar">
                                         <div class="product-availability">
                                             Availability:
-                                            <span class="text-success">{{ productStock }}
-                                                in Stock</span>
+                                            <span class="text-success">
+                                            {% if productStock == 0 %}
+                                                Out of Stock
+                                            {% else %}
+                                                {{ productStock }} in Stock</span>
+                                            {% endif %}
+                                            
                                         </div>
                                         <div class="product-prices">
-                                            {{ currency }}
-                                            {{ productPrice }}
+                                            {{ format_price(productPrice) }}
                                         </div>
                                         <!-- .product-options -->
                                         <form class="product-options">
@@ -131,85 +136,90 @@
                                                 <label class="product-option-label">Color</label>
                                                 <div class="input-radio-color">
                                                     <div class="input-radio-color-list">
-                                                        <label class="input-radio-color-item input-radio-color-item--white" style="color: #fff;" data-toggle="tooltip" title="White">
-                                                            <input type="radio" name="color">
-                                                                <span></span>
-                                                            </label>
-                                                            <label class="input-radio-color-item" style="color: #ffd333;" data-toggle="tooltip" title="Yellow">
-                                                                <input type="radio" name="color">
-                                                                    <span></span>
-                                                                </label>
-                                                                <label class="input-radio-color-item" style="color: #ff4040;" data-toggle="tooltip" title="Red">
+                                                    {% set product_color = productColor.split(',') %}
+                                                    {% if product_color == "" %}
+                                                        <label>N/A</label>
+                                                    {% else %}
+                                                    {% for items in product_color %}
+                                                        {% for color in colors %}
+                                                            {% if color.color == items %}
+                                                                <label class="input-radio-color-item input-radio-color-item--{{color.color}}" style="color:{{color.colorCode}};" data-toggle="tooltip" title="{{color.color}}">
                                                                     <input type="radio" name="color">
                                                                         <span></span>
-                                                                    </label>
-                                                                    <label class="input-radio-color-item input-radio-color-item--disabled" style="color: #4080ff;" data-toggle="tooltip" title="Blue">
-                                                                        <input type="radio" name="color" disabled>
-                                                                            <span></span>
-                                                                        </label>
-                                                                    </div>
+                                                                </label>
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                    {% endfor %}
+                                                    {%endif%}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group product-option">
+                                                <label class="product-option-label">Material</label>
+                                                    <div class="input-radio-label">
+                                                        <div class="input-radio-label-list">
+                                                        {% set material = productMaterial.split(',') %}
+                                                        {% if productMaterial == "" %}
+                                                            <label>N/A</label>
+                                                        {% else %}
+                                                        {% for items in material %}
+                                                            <label>
+                                                                <input type="radio" name="{{items}}">
+                                                                <span>{{items}}</span>
+                                                            </label>
+                                                        {% endfor %}
+                                                        {% endif %}
+                                                        
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group product-option">
+                                                    <label class="product-option-label" for="product-quantity">Quantity</label>
+                                                    <div class="product-actions">
+                                                        <div class="product-actions-item">
+                                                            <div class="input-number product-quantity">
+                                                                <input id="product-quantity" class="input-number-input form-control form-control-lg" type="number" min="1" value="1" max="{{productStock}}" onkeydown="return false">
+                                                                    <div class="input-number-add"></div>
+                                                                    <div class="input-number-sub"></div>
                                                                 </div>
                                                             </div>
-                                                            <div class="form-group product-option">
-                                                                <label class="product-option-label">Material</label>
-                                                                <div class="input-radio-label">
-                                                                    <div class="input-radio-label-list">
-                                                                        <label>
-                                                                            <input type="radio" name="material">
-                                                                                <span>Metal</span>
-                                                                            </label>
-                                                                            <label>
-                                                                                <input type="radio" name="material">
-                                                                                    <span>Wood</span>
-                                                                                </label>
-                                                                                <label>
-                                                                                    <input type="radio" name="material" disabled>
-                                                                                        <span>Plastic</span>
-                                                                                    </label>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="form-group product-option">
-                                                                            <label class="product-option-label" for="product-quantity">Quantity</label>
-                                                                            <div class="product-actions">
-                                                                                <div class="product-actions-item">
-                                                                                    <div class="input-number product-quantity">
-                                                                                        <input id="product-quantity" class="input-number-input form-control form-control-lg" type="number" min="1" value="1">
-                                                                                            <div class="input-number-add"></div>
-                                                                                            <div class="input-number-sub"></div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="product-actions-item product-actions-item--addtocart">
-                                                                                        <button id="addCart" data-id="{{ productId }}" class="btn btn-primary btn-lg">Add to cart</button>
-                                                                                    </div>
-                                                                                    <div class="product-actions-item product-actions-item--wishlist">
-                                                                                        <button id="addWishlist" data-id="{{ productId }}" type="button" class="btn btn-secondary btn-svg-icon btn-lg" data-toggle="tooltip" title="Wishlist">
-                                                                                            <svg width="16px" height="16px">
-                                                                                                <use xlink:href="/static/assets/icons/sprite.svg#wishlist-16"></use>
-                                                                                            </svg>
-                                                                                        </button>
-                                                                                    </div>
-                                                                                    <div class="product-actions-item product-actions-item--compare">
-                                                                                        <button id="addCompare" data-id="{{ productId }}" type="button" class="btn btn-secondary btn-svg-icon btn-lg" data-toggle="tooltip" title="Compare">
-                                                                                            <svg width="16px" height="16px">
-                                                                                                <use xlink:href="/static/assets/icons/sprite.svg#compare-16"></use>
-                                                                                            </svg>
-                                                                                        </button>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </form>
-                                                                        <!-- .product-options / end -->
+                                                            <div class="product-actions-item product-actions-item--addtocart">
+                                                            {# <button id="addCart" data-id="{{ items['id'] }}" class="btn btn-primary product-card-addtocart" type="button">Add To Cart</button> #}
+                                                                <button id="addCart" data-id="{{ productId }}" type='button' class="btn btn-primary btn-lg">Add to cart</button>
+                                                            </div>
+                                                            <div class="product-actions-item product-actions-item--wishlist">
+                                                                <button id="addWishlist" data-id="{{ productId }}" type="button" class="btn btn-secondary btn-svg-icon btn-lg" data-toggle="tooltip" title="Wishlist">
+                                                                    <svg width="16px" height="16px">
+                                                                        <use xlink:href="/static/assets/icons/sprite.svg#wishlist-16"></use>
+                                                                    </svg>
+                                                                </button>
+                                                            </div>
+                                                            <div class="product-actions-item product-actions-item--compare">
+                                                                <button id="addCompare" data-id="{{ productId }}" type="button" class="btn btn-secondary btn-svg-icon btn-lg" data-toggle="tooltip" title="Compare">
+                                                                    <svg width="16px" height="16px">
+                                                                        <use xlink:href="/static/assets/icons/sprite.svg#compare-16"></use>
+                                                                    </svg>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                                <!-- .product-options / end -->
                                                                     </div>
                                                                     <!-- .product-end -->
                                                                     <div class="product-footer">
+                                                                    {% if productTags != "" %}
                                                                         <div class="product-tags tags">
                                                                             <div class="tags-list">
-                                                                                <a href="">Mounts</a>
-                                                                                <a href="">Electrodes</a>
-                                                                                <a href="">Chainsaws</a>
+                                                                            {% set tags = productTags.split(',') %}
+                                                                            {% for items in tags %}
+                                                                                <a href="">{{items}}</a>
+                                                                            {% endfor %}
+                                                                                
                                                                             </div>
                                                                         </div>
+                                                                    {% endif %}
+                                                                        
                                                                         <div class="product-share-links share-links">
                                                                             <ul class="share-links-list">
                                                                                 <li class="share-links-item share-links-item--type--like">
@@ -304,12 +314,16 @@
                                                                         <div class="reviews-view">
                                                                             <div class="reviews-view-list">
                                                                                 <h3 class="reviews-view-header">Customer Reviews</h3>
+                                                                                
                                                                                 <div class="reviews-list">
                                                                                     <ol class="reviews-list-content">
+                                                                                    {% if rating|length ==0 %}
+                                                                                        <h4 id="empty-review">Be the first to review this product</h4>
+                                                                                    {% endif %}
                                                                                         {% for rows in rating %}
                                                                                             {% for user in users %}
                                                                                                 {% if user.userId == rows.userId %}
-
+                                                                                                    
                                                                                                     <li id="review-list" class="reviews-list-item">
                                                                                                         <div class="review">
                                                                                                             <div class="review-avatar">
@@ -373,7 +387,7 @@
 
 
                                                                                         </ol>
-                                                                                        <div class="reviews-list-pagination">
+                                                                                        {# <div class="reviews-list-pagination">
                                                                                             <ul class="pagination justify-content-center">
                                                                                                 <li class="page-item disabled">
                                                                                                     <a class="page-link page-link--with-arrow" href="" aria-label="Previous">
@@ -401,7 +415,7 @@
                                                                                                     </a>
                                                                                                 </li>
                                                                                             </ul>
-                                                                                        </div>
+                                                                                        </div> #}
                                                                                     </div>
                                                                                 </div>
                                                                                 {% if current_user.is_authenticated %}
@@ -506,6 +520,7 @@
                                                                             success: function () {
                                                                                 $('#review_submit').fadeOut(1000).fadeIn(1000);
                                                                                 $('#reviewForm')[0].reset();
+                                                                                $("#empty-review").hide();
                                                                                 $("#review-list").load(" #review-list");
                                                                             }
                                                                         })
