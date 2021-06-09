@@ -1,0 +1,150 @@
+/*
+// .checkout
+*/
+.checkout-totals {
+  font-size: 15px;
+  line-height: 19px;
+  width: 100%;
+  margin-bottom: 40px;
+}
+
+.checkout-totals th, .checkout-totals td {
+  padding: 4px 0;
+}
+
+.checkout-totals th {
+  font-weight: 700;
+}
+
+.checkout-totals tr > :first-child {
+  padding-right: 20px;
+}
+
+[dir=rtl] .checkout-totals tr > :first-child {
+  padding-left: 20px;
+}
+
+.checkout-totals tr > :last-child {
+  white-space: nowrap;
+}
+
+.checkout-totals tr > :last-child {
+  text-align: right;
+}
+
+[dir=rtl] .checkout-totals tr > :last-child {
+  text-align: left;
+}
+
+.checkout-totals-header tr:last-child > * {
+  padding-bottom: 10px;
+}
+
+.checkout-totals-products tr:first-child > * {
+  padding-top: 20px;
+  border-top: 1px solid #ebebeb;
+}
+
+.checkout-totals-products tr:last-child > * {
+  padding-bottom: 20px;
+  border-bottom: 1px solid #ebebeb;
+}
+
+.checkout-totals-subtotals tr:first-child > * {
+  padding-top: 20px;
+}
+
+.checkout-totals-subtotals tr:last-child > * {
+  padding-bottom: 20px;
+  border-bottom: 1px solid #ebebeb;
+}
+
+.checkout-totals-footer {
+  font-size: 24px;
+}
+
+.checkout-totals-footer th {
+  font-weight: 500;
+}
+
+.checkout-totals-footer tr:first-child > * {
+  padding-top: 20px;
+}
+
+.payment-methods {
+  margin-bottom: 30px;
+}
+
+.payment-methods-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.payment-methods-item {
+  border-radius: 2px;
+  background: transparent;
+  border: 1px solid #e5e5e5;
+}
+
+.payment-methods-item:hover {
+  background: #f7f7f7;
+  border: 1px solid #e5e5e5;
+}
+
+.payment-methods-item + .payment-methods-item {
+  margin-top: 6px;
+}
+
+.payment-methods-item-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 8px 14px;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: .01em;
+  cursor: pointer;
+  margin-bottom: 0;
+}
+
+.payment-methods-item-radio {
+  margin-right: 10px;
+}
+
+[dir=rtl] .payment-methods-item-radio {
+  margin-left: 10px;
+}
+
+.payment-methods-item-container {
+  overflow: hidden;
+  height: 0;
+  -webkit-transition: height .2s;
+  transition: height .2s;
+}
+
+.payment-methods-item-description {
+  font-size: 15px;
+  line-height: 20px;
+  padding: 2px 16px 13px 16px;
+}
+
+.payment-methods-item--active, .payment-methods-item--active:hover {
+  background: #f7f7f7;
+  border: 1px solid #e5e5e5;
+}
+
+.payment-methods-item--active .payment-methods-item-container {
+  height: auto;
+}
+
+.checkout-agree {
+  margin-bottom: 36px;
+}
+
+.checkout-agree a:hover {
+  text-decoration: underline;
+}
