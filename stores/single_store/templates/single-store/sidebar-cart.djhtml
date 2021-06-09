@@ -1,0 +1,39 @@
+{% if cart|length %}
+{% for cart_row in cart %}
+    {% for rows in products if cart_row.product_id == rows.id %}
+    {% set imagename = rows['imageFile'] %}
+
+    <div id="sidebar_cart{{cart_row.product_id}}" class="dropcart-product">
+        <div class="product-image dropcart-product-image">
+            <a href="product.html" class="product-image-body">
+                <img class="product-image-img" src="{{url_for('static', filename='assets/images/products/'+ imagename )}}" alt="">
+            </a>
+        </div>
+        <div class="dropcart-product-info">
+            <div class="dropcart-product-name"><a href="product.html">{{rows['productName']}}</a></div>
+            <ul class="dropcart-product-options">
+                <li>Color: {{cart_row.color}}</li>
+                <li>Material: {{rows['material']}} </li>
+            </ul>
+            <div class="dropcart-product-meta">
+                <span class="dropcart-product-quantity">{{cart_row.quantity}}</span> ×
+                <span class="dropcart-product-price">{{currency}} {{rows['price']}}</span>
+            </div>
+        </div>
+        <button id="deleteCart" data-id="{{cart_row.product_id}}" type="button" class="dropcart-product-remove btn btn-light btn-sm btn-svg-icon">
+        <svg width="10px" height="10px">
+            <use xlink:href="/static/assets/icons/sprite.svg#cross-10"></use>
+        </svg>
+        </button>
+    </div>
+    {% endfor %}
+{% endfor %}
+
+{% else %}
+            <div class="block-empty-body">
+                <div class="block-empty-message">Your shopping cart is empty!</div>
+                <div class="block-empty-actions">
+                    <a class="btn btn-primary btn-sm" href="/shop">Continue Shopping</a>
+                </div>
+            </div>
+        {% endif %}
