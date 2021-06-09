@@ -25,7 +25,7 @@
                         <div class="block-products-carousel-column">
                             <div class="block-products-carousel-cell">
                                 <div class="product-card product-card--hidden-actions ">
-                                    <button class="product-card-quickview" type="button">
+                                    <button data-id="{{ items['id'] }}" class="product-card-quickview" type="button">
                                         <svg width="16px" height="16px">
                                             <use xlink:href="/static/assets/icons/sprite.svg#quickview-16"></use>
                                         </svg>

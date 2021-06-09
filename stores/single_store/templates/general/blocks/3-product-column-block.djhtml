@@ -13,7 +13,7 @@
                     {% for items in products %}
                         <div class="block-product-columns-item">
                         <div class="product-card product-card--hidden-actions product-card--layout--horizontal">
-                            <button class="product-card-quickview" type="button">
+                            <button data-id="{{ items['id'] }}" class="product-card-quickview" type="button">
                                 <svg width="16px" height="16px">
                                     <use xlink:href="/static/assets/icons/sprite.svg#quickview-16"></use>
                                 </svg>
@@ -82,7 +82,7 @@
                     {% for items in products %}
                         <div class="block-product-columns-item">
                         <div class="product-card product-card--hidden-actions product-card--layout--horizontal">
-                            <button class="product-card-quickview" type="button">
+                            <button data-id="{{ items['id'] }}" class="product-card-quickview" type="button">
                                 <svg width="16px" height="16px">
                                     <use xlink:href="/static/assets/icons/sprite.svg#quickview-16"></use>
                                 </svg>
@@ -151,7 +151,7 @@
                     {% for items in products %}
                         <div class="block-product-columns-item">
                         <div class="product-card product-card--hidden-actions product-card--layout--horizontal">
-                            <button class="product-card-quickview" type="button">
+                            <button data-id="{{ items['id'] }}" class="product-card-quickview" type="button">
                                 <svg width="16px" height="16px">
                                     <use xlink:href="/static/assets/icons/sprite.svg#quickview-16"></use>
                                 </svg>
