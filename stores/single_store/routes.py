@@ -59,6 +59,21 @@ def global_attr():
     form1 = LoginForm()
     products = Product.query.all()
     category = Category.query.all()
+
+
+    productRatings = {}
+    for productItem in products:
+        rating = Rating.query.filter_by(product_id = productItem.id).all()
+        sum = 0
+        avg_rating = 0
+        total_ratings = len(rating)
+        for rate in rating:
+            sum = sum+rate.rate
+        if total_ratings != 0:
+            avg_rating = int(sum/total_ratings)
+        productRatings[productItem.id] = [total_ratings, avg_rating]
+    print(productRatings)
+
     if current_user.is_authenticated:
         indicators = Wishlist.query.filter_by(userId = current_user.userId).first()
         if indicators is None:
@@ -89,7 +104,7 @@ def global_attr():
         wishlist_indicator = 0
     return dict(products = products, form1=form1, cart=cart, totalCart=totalCart, 
                 cartProductNumber=cartProductNumber, wishlist_indicator=wishlist_indicator, 
-                badgeForNew = badgeForNew, currency=currency, category=category)
+                badgeForNew = badgeForNew, currency=currency, category=category, productRatings=productRatings)
 
 @app.context_processor
 def utility_processor():
