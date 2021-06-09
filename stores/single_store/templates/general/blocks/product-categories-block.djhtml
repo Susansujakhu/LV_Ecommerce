@@ -8,32 +8,47 @@
             <div class="block-header-divider"></div>
         </div>
         <div class="block-categories-list">
-            <div class="block-categories-item category-card category-card--layout--classic">
-                <div class="category-card-body">
-                    <div class="category-card-image">
-                        <a href=""><img src="images/categories/category-1.jpg" alt=""></a>
-                    </div>
-                    <div class="category-card-content">
-                        <div class="category-card-name">
-                            <a href="">Power Tools</a>
+        {% for items in category %}
+            {% if items.parentCategory == 'None' %}
+                <div class="block-categories-item category-card category-card--layout--classic">
+                    <div class="category-card-body">
+                        <div class="category-card-image">
+                        {% if items.imageFile is defined %}
+                        <a href=""><img src="{{ url_for('static', filename='/assets/images/category/'+items.imageFile) }}" alt=""></a>
+                        
+                        {% else %}
+                            No Image    
+                        {% endif %}
+                            
                         </div>
-                        <ul class="category-card-links">
-                            <li><a href="">Screwdrivers</a></li>
-                            <li><a href="">Milling Cutters</a></li>
-                            <li><a href="">Sanding Machines</a></li>
-                            <li><a href="">Wrenches</a></li>
-                            <li><a href="">Drills</a></li>
-                        </ul>
-                        <div class="category-card-all">
-                            <a href="">Show All</a>
-                        </div>
-                        <div class="category-card-products">
-                            572 Products
+                        <div class="category-card-content">
+                            <div class="category-card-name">
+                                <a href="">{{items.name}}</a>
+                            </div>
+                            <ul class="category-card-links">
+                            {# <option value="{{items.name}}">{{items.name}}</option> #}
+                            {% for sub_items in category %}
+                                {% if sub_items.parentCategory == items.name %}
+                                        <li><a href="">{{sub_items.name}}</a></li>
+                                    {# <option value="{{sub_items.name}}">&nbsp;&nbsp;&nbsp;&nbsp;{{sub_items.name}}</option> #}
+                                {% endif %}
+                            {% endfor %}
+                            </ul>
+                            <div class="category-card-all">
+                                <a href="">Show All</a>
+                            </div>
+                            <div class="category-card-products">
+                                572 Products
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="block-categories-item category-card category-card--layout--classic">
+            {% endif %}
+        {% endfor %}
+            
+                            
+                        
+            {# <div class="block-categories-item category-card category-card--layout--classic">
                 <div class="category-card-body">
                     <div class="category-card-image">
                         <a href=""><img src="images/categories/category-2.jpg" alt=""></a>
@@ -157,7 +172,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> #}
         </div>
     </div>
 </div>
