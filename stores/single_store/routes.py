@@ -7,7 +7,7 @@ from sqlalchemy.sql.elements import Null
 from sqlalchemy.sql.expression import text
 from wtforms.fields.core import StringField
 from single_store import app, db, bcrypt
-from single_store.forms import EditDashboardAddress, EditDashboardProfile,DynamicForm, HorizontalPanelForm, EditHorizontalPanelForm, BrandForm, EditBrandForm, FeaturesForm, EditFeaturesForm, HeroForm, EditHeroForm, RatingForm, RegistrationForm, LoginForm, ProductForm, EditProductForm, CategoryForm,EditCategoryForm, ColorForm, SizeForm
+from single_store.forms import DashboardPwForm, EditDashboardAddressForm, EditDashboardProfileForm,DynamicForm, HorizontalPanelForm, EditHorizontalPanelForm, BrandForm, EditBrandForm, FeaturesForm, EditFeaturesForm, HeroForm, EditHeroForm, RatingForm, RegistrationForm, LoginForm, ProductForm, EditProductForm, CategoryForm,EditCategoryForm, ColorForm, SizeForm
 from single_store.models import Size, Color, Compare,HorizontalPanel, Brand, Cart, Category, Features, Hero, Order, Product, Rating, Shipping, User, MyAdminIndexView, AdminView, Wishlist
 from flask_login import login_user, current_user, logout_user, login_required
 import secrets, os, sys
@@ -427,12 +427,11 @@ def edit_profile():
         user.firstName = request.form['firstName']
         user.lastName = request.form['lastName']
         user.email = request.form['email']
-        print(request.form['firstName'],request.form['lastName'],request.form['email'])
         db.session.commit()
         return jsonify({'status':'OK','firstName' : request.form['firstName']})
 
     else:
-        formSend=EditDashboardProfile()
+        formSend=EditDashboardProfileForm()
         if request.method == 'GET':
             formSend.firstName.data = user.firstName
             formSend.lastName.data = user.lastName
@@ -487,7 +486,7 @@ def changeStatus():
 @app.route("/dashboard/edit-address", methods=['POST','GET'])
 @login_required
 def addAddress():
-    formSend=EditDashboardAddress()
+    formSend=EditDashboardAddressForm()
     if request.method == "POST":
         print(request.form,type(request.form),dict(request.form))
         statusVal=False
@@ -538,7 +537,7 @@ def editAddress(shipId):
         return jsonify({'status':'updated','firstName' : request.form['firstName']})
 
     else:
-        formSend=EditDashboardAddress()
+        formSend=EditDashboardAddressForm()
         if request.method == 'GET':
             formSend.firstName.data = ship.firstName
             formSend.lastName.data = ship.lastName
@@ -555,11 +554,29 @@ def editAddress(shipId):
             'single-store/user-account/edit-address-page.djhtml', form = formSend
             )
 
-@app.route("/dashboard/change-password")
+@app.route("/dashboard/change-password", methods=["POST","GET"])
 @login_required
 def change_password():
+    form = DashboardPwForm()
+    result=''   #declared to pass empty string
+    if request.method == 'POST' and form.validate():
+        formOldPassword = form.oldPw.data
+        formNewPassword = form.newPw.data
+        userAc = User.query.get(current_user.userId)
+        dbPassword = userAc.password
+        print(formOldPassword,'-->',dbPassword,'<<>>>',formNewPassword)
+        if bcrypt.check_password_hash(dbPassword, formOldPassword) == True:
+            hashed_newFormPassword = bcrypt.generate_password_hash(formNewPassword).decode('utf-8')
+            userAc.password = hashed_newFormPassword
+            print('True')
+            db.session.commit()
+            flash('Thanks for registering')
+            return redirect(url_for('user_dashboard'))
+        else:
+            print('wrong password entered')
+            result ='you entered wrong old password'
     return render_template(
-        'single-store/user-account/change-password-page.djhtml'
+        'single-store/user-account/change-password-page.djhtml', form= form, result = result
         )
 
 

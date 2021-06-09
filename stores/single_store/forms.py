@@ -205,13 +205,13 @@ class DynamicForm(FlaskForm):
     form_type = HiddenField(default='FormType', render_kw={ 'type':'hidden' })
     # name = StringField() 
 
-class EditDashboardProfile(FlaskForm):
+class EditDashboardProfileForm(FlaskForm):
     firstName = StringField('First Name', validators=[DataRequired()], render_kw={"placeholder": "Enter First Name"})
     lastName = StringField('Last Name', validators=[DataRequired()], render_kw={"placeholder": "Enter Last Name"})
     email = StringField('Email Address',
                         validators=[DataRequired(), Email()], render_kw={"placeholder": "Enter Email Address"})
     
-class EditDashboardAddress(FlaskForm):
+class EditDashboardAddressForm(FlaskForm):
     firstName = StringField('First Name', validators=[DataRequired()], render_kw={"placeholder": "Enter First Name"})
     lastName = StringField('Last Name', validators=[DataRequired()], render_kw={"placeholder": "Enter Last Name"})
     companyName = StringField('Company Name', render_kw={"placeholder": "Enter Company"})
@@ -221,6 +221,14 @@ class EditDashboardAddress(FlaskForm):
     city = StringField('Town / City', validators=[DataRequired()], render_kw={"placeholder": "Enter City"})
     state = StringField('State/Province  ',  validators=[DataRequired()], render_kw={"placeholder": "Enter Province"})
     postalCode = IntegerField('Postcode / ZIP', render_kw={"placeholder": "Enter Post code"})
-    phoneNo = IntegerField('Primary Mobile no.', validators=[DataRequired()], render_kw={"placeholder": "Enter Contact no."})
+    phoneNo = IntegerField('Primary Mobile no.',
+                        validators=[DataRequired(),Length(min=10)],
+                        render_kw={"placeholder": "Enter Contact no."})
     altPhoneNo = IntegerField('Secondary Contact no.', render_kw={"placeholder": "Enter Secondary contact no."}) 
     
+class DashboardPwForm(FlaskForm):
+    oldPw = PasswordField(label='Current Password', validators=[DataRequired()], render_kw={"placeholder": "Enter Current Password"})
+    newPw = PasswordField('Password', validators=[DataRequired()], render_kw={"placeholder": "Password"})
+    rePw = PasswordField('Confirm Password',
+                                     validators=[DataRequired(), EqualTo('newPw', message='Passwords must match')], render_kw={"placeholder": "Re-Password"})
+    submit = SubmitField('Save')
