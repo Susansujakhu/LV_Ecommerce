@@ -22,47 +22,9 @@
     <div class="block">
         <div class="container">
             <div class="product product--layout--columnar" data-layout="columnar">
-                <div
-                    class="product-content">
+                <div class="product-content">
                     <!-- .product-gallery -->
-                    <div class="product-gallery">
-                        <div class="product-gallery">
-                            <div class="product-gallery-featured">
-                                <button class="product-gallery-zoom">
-                                    <svg width="24px" height="24px">
-                                        <use xlink:href="/static/assets/icons/sprite.svg#zoom-in-24"></use>
-                                    </svg>
-                                </button>
-                                <div class="owl-carousel" id="product-image">
-                                    <div class="product-image product-image--location--gallery">
-                                        <a href="{{ url_for('static',filename='assets/images/products/'+productImageFile) }}" data-width="700" data-height="700" class="product-image-body" target="_blank">
-                                            <img class="product-image-img" src="{{ url_for('static',filename='assets/images/products/'+productImageFile) }}" alt=""></a>
-                                        </div>
-                                        {% for items in productImageGallery[1:] %}
-                                            <div class="product-image product-image--location--gallery">
-                                                <a href="{{ url_for('static',filename='assets/images/gallery/'+items) }}" data-width="700" data-height="700" class="product-image-body" target="_blank">
-                                                    <img class="product-image-img" src="{{ url_for('static',filename='assets/images/gallery/'+items) }}" alt=""></a>
-                                                </div>
-                                            {% endfor %}
-                                        </div>
-                                    </div>
-                                    <div class="product-gallery-carousel">
-                                        <div class="owl-carousel" id="product-carousel">
-                                            <a href="{{ url_for('static',filename='assets/images/products/'+productImageFile) }}" class="product-image product-gallery-carousel-item">
-                                                <div class="product-image-body">
-                                                    <img class="product-image-img product-gallery-carousel-image" src="{{ url_for('static',filename='assets/images/products/'+productImageFile) }}" alt=""></div>
-                                                </a>
-                                                {% for items in productImageGallery[1:] %}
-                                                    <a href="{{ url_for('static',filename='assets/images/gallery/'+items) }}" class="product-image product-gallery-carousel-item">
-                                                        <div class="product-image-body">
-                                                            <img class="product-image-img product-gallery-carousel-image" src="{{ url_for('static',filename='assets/images/gallery/'+items) }}" alt=""></div>
-                                                        </a>
-                                                    {% endfor %}
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                    {% include('/general/blocks/gallery-model.djhtml') %}
                                     <!-- .product-gallery / end -->
                                     <!-- .product-info -->
                                     <div class="product-info">
@@ -135,10 +97,6 @@
                                                 <a class="write-review-scroll" href="#reviewForm">Write A Review</a>
                                             </div>
                                         </div>
-                                        <a href="">{{ total_ratings }}
-                                            Reviews</a>
-                                        <span>/</span>
-                                        <a class="write-review-scroll" href="#reviewForm">Write A Review</a>
                                         <div class="product-description">
                                             {{ productShortDescription }}
                                         </div>
