@@ -466,7 +466,6 @@ def address_book():
             db.session.commit()
         return jsonify({'status':'OK'})
     else:
-        print("sunder")
         userAddress = Shipping.query.filter_by(userId = current_user.userId).all()
         return render_template(
             'single-store/user-account/address-book-page.djhtml', userAddress=userAddress
@@ -491,6 +490,9 @@ def addAddress():
     formSend=EditDashboardAddress()
     if request.method == "POST":
         print(request.form,type(request.form),dict(request.form))
+        statusVal=False
+        if (Shipping.query.filter_by(userId = current_user.userId).count() == 0):
+                statusVal=True
         addShipping = Shipping(
             firstName = request.form['firstName'],
             lastName = request.form['lastName'],
@@ -504,8 +506,8 @@ def addAddress():
             phoneNo = request.form['phoneNo'],
             altPhoneNo = request.form['altPhoneNo'],
             userId = current_user.userId,
+            status=statusVal,
             )
-        print(addShipping)
         db.session.add(addShipping)
         db.session.commit()
         return jsonify({'status':'added','firstName' : request.form['firstName']})

@@ -5,7 +5,7 @@
         <div class="btn btn-secondary btn-sm">Add New</div>
     </a>
 
-    {% for items in userAddress %}
+    {% for items in userAddress|reverse %}
         <div class="addresses-list-divider"></div>
         <div class="addresses-list-item card address-card">
             {% if items.status == True %}
@@ -41,8 +41,8 @@
                 </div>
                 <div class="address-card-footer">
                     <a href="/dashboard/edit-address/{{items.id}}">Edit</a>&nbsp;&nbsp;
-                    <a id="delAddress" data-id="{{ items.id }}" class="">Remove</a>&nbsp;&nbsp;
                     {% if items.status == False %}
+                        <a id="delAddress" data-id="{{ items.id }}" class="">Remove</a>&nbsp;&nbsp;
                         <a id="makeDefault" data-id="{{ items.id }}" class="">Make Default</a>
                     {% endif %}
                 </div>
