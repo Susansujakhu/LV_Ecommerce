@@ -5,12 +5,55 @@
         <div class="btn btn-secondary btn-sm">Add New</div>
     </a>
 
-    {% for items in userAddress|reverse %}
+    {% for items in userAddress if items.status == True %}
         <div class="addresses-list-divider"></div>
         <div class="addresses-list-item card address-card">
             {% if items.status == True %}
                 <div class="address-card-badge">Default</div>
             {% endif %}
+            <div class="address-card-body">
+                <div class="address-card-name">{{items.firstName}} {{items. lastName}}</div>
+                <div class="address-card-row">
+                    {{items.street}}<br>
+                    {{items.city}} - {{items.postalCode}}<br>
+                     {{items.country}}
+                </div>
+                <div class="address-card-row">
+                    <div class="address-card-row-title">Province</div>
+                    <div class="address-card-row-content">{{items.state}}</div>
+                </div>
+                <div class="address-card-row">
+                    <div class="address-card-row-title">Apartment/House number</div>
+                    <div class="address-card-row-content">{{items.houseCode | default("N/A", True)}}</div>
+                </div>
+                
+                <div class="address-card-row">
+                    <div class="address-card-row-title">Company Name</div>
+                    <div class="address-card-row-content">{{items.companyName | default("N/A", True)}}</div>
+                </div>
+                <div class="address-card-row">
+                    <div class="address-card-row-title">Phone Number</div>
+                    <div class="address-card-row-content">{{items.phoneNo}}</div>
+                </div>
+                <div class="address-card-row">
+                    <div class="address-card-row-title">Secondary Phone Number</div>
+                    <div class="address-card-row-content">{{items.altPhoneNo | default("N/A", True)}}</div>
+                </div>
+                <div class="address-card-footer">
+                    <a href="/dashboard/edit-address/{{items.id}}">Edit</a>&nbsp;&nbsp;
+                    {% if items.status == False %}
+                        <a id="delAddress" data-id="{{ items.id }}" class="">Remove</a>&nbsp;&nbsp;
+                        <a id="makeDefault" data-id="{{ items.id }}" class="">Make Default</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+    {% endfor %}
+
+    {% for items in userAddress if items.status == False%}
+        <div class="addresses-list-divider"></div>
+        <div class="addresses-list-item card address-card">
             <div class="address-card-body">
                 <div class="address-card-name">{{items.firstName}} {{items. lastName}}</div>
                 <div class="address-card-row">
