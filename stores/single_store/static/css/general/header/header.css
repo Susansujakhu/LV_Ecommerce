@@ -381,7 +381,7 @@
 
 .dropcart-products-list {
   padding: 20px 16px;
-  height: 50%;
+  /*height: 50%;*/
   overflow-y: auto;
 
 }

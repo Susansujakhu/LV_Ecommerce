@@ -1,4 +1,4 @@
-<link rel="stylesheet" type="text/css" href= "{{ url_for('static', filename='css/general/blocks/3-product-column-block.css') }}" }}>
+{# <link rel="stylesheet" type="text/css" href= "{{ url_for('static', filename='css/general/blocks/3-product-column-block.css') }}" }}> #}
 
 <!-- .block-product-columns -->
 <div class="block block-product-columns">

@@ -1,4 +1,4 @@
-<link rel="stylesheet" type="text/css" href= "{{ url_for('static', filename='css/general/blocks/shop-with-left-sidebar-block.css') }}" }}>
+<link rel="stylesheet" type="text/css" href= "{{ url_for('static', filename='css/general/blocks/shop.css') }}" }}>
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 <style>
 .loader {
