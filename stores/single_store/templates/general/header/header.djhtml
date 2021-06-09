@@ -16,10 +16,10 @@
                 </svg>
             </button>
         </div>
-        <div id="sidebarCart" cartLength="{{cart|length}}">
+
         {% set cartProductNumber = cart|length %}
         {% if cart|length %}
-            <div class="dropcart-products-list">
+            <div id="sidebarCart" class="dropcart-products-list">
                 {% for cart_row in cart %}
                     {% for rows in products if cart_row.product_id == rows.id %}
                     {% set imagename = rows['imageFile'] %}
@@ -50,11 +50,11 @@
                     {% endfor %}
                 {% endfor %}
             </div>
-            <div class="dropcart-totals">
+            <div id="total_cart" class="dropcart-totals">
                 <table>
                     <tr>
                         <th>Total</th>
-                        <td><span id="total_cart"> {{ format_price(totalCart) }}</span></td>
+                        <td><span> {{ format_price(totalCart) }}</span></td>
                     </tr>
                 </table>
             </div>
@@ -70,7 +70,7 @@
                 </div>
             </div>
         {% endif %}
-        </div>
+  
     </div>
 </div>
 <!-- .dropcart / end -->
