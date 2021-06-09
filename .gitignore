@@ -143,3 +143,9 @@ stores/config.py
 
 # assets
 stores/single_store/static/assets/images
+
+# admin-files
+stores/single_store/static/css/admin/
+stores/single_store/static/js/admin/
+stores/single_store/templates/general/admin/
+stores/single_store/templates/single-store/admin/
