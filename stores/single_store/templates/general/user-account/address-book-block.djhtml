@@ -62,6 +62,7 @@
 $(document).ready(function(){
     $(document).on('click', '#makeDefault', function(){
         var shipping_id = $(this).attr('data-id');
+        event.preventDefault()
         req = $.ajax({
                 url: "/dashboard/address-book/ChangeStatus",
                 type: "POST",
@@ -69,13 +70,14 @@ $(document).ready(function(){
         }); 
         req.done(function(data){
             console.log(data.status);
-            $(".addresses-list").load(" .addresses-list");
+            $(".addresses-list").load(" .addresses-list > *");
             alert('Default location has been changed');
         });
     });
 
     $(document).on('click', '#delAddress', function(){
         var shipping_id = $(this).attr('data-id');
+        event.preventDefault()
         req = $.ajax({
                 url: "/dashboard/address-book",
                 type: "POST",
@@ -83,7 +85,7 @@ $(document).ready(function(){
         }); 
         req.done(function(data){
             console.log(data.status);
-            $(".addresses-list").load(" .addresses-list");
+            $(".addresses-list").load(" .addresses-list > *");
             alert('location has been deleted');
         });
     });
