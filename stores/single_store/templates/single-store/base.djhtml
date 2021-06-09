@@ -114,7 +114,8 @@ $(document).ready(function(){
                 }); 
         req.done(function(data){
             $('#cart_indicator').text(data.cartProductNumber);
-            $("#sidebarCart").load(" #sidebarCart");
+            $("#sidebarCart").load(" #sidebarCart > *");
+            $("#total_cart").load(" #total_cart > *");
         });
         $(this).fadeOut(1000).fadeIn(1000);
         $(this).css('fill', '#000000');
