@@ -1,0 +1,84 @@
+<link rel="stylesheet" type="text/css" href= "{{ url_for('static', filename='css/general/blocks/shop-with-left-sidebar-block.css') }}" }}>
+
+<div class="block products-view-list products-list" data-layout="grid-5-full" data-with-features="false" data-mobile-grid-columns="2">
+    <div class="container">
+        <div class="block-header">
+            <h3 class="block-header-title">New Arrivals</h3>
+            <div class="block-header-divider"></div>
+            <div class="block-header-title-button">
+                <button class="btn btn-sm btn-primary" type="button">
+                    <a href="/shop">View More</a>
+                </button>
+            </div>
+        </div>
+        <div class="products-list-body">
+            {% for items in products %}
+                <div class="products-list-item">
+                    <div class="product-card product-card--hidden-actions ">
+                        <button class="product-card-quickview" type="button">
+                            <svg width="16px" height="16px">
+                                <use xlink:href="/static/assets/icons/sprite.svg#quickview-16"></use>
+                            </svg>
+                            <span class="fake-svg-icon"></span>
+                        </button>
+                        <div class="product-card-badges-list">
+                            {% if items['excludeBadge']==False %}
+                                {% if items['featured']==True %}
+                                    {% set badge='Hot' %}
+                                    {% set badgeColor='hot' %}
+                                {% elif items['discount']>0 %}
+                                    {% set badge='Sale' %}
+                                    {% set badgeColor='sale' %}
+                                {% elif items['id'] in badgeForNew %}
+                                    {% set badge='New'%}
+                                    {% set badgeColor='new' %}
+                                {% endif %}
+                                <div class="product-card-badge product-card-badge--{{badgeColor}}">{{badge}}</div>
+                            {% endif %}
+                        </div>
+                        <div class="product-card-image product-image">
+                            <a href="single/{{ items['id'] }}" class="product-image-body">
+                                <img class="product-image-img" src="{{url_for('static',filename='assets/images/products/'+items['imageFile'])}}" alt="{{items['productName']}}">
+                            </a>
+                        </div>
+                        <div class="product-card-info">
+                            <div class="product-card-name">
+                                <a href="single/{{ items['id'] }}">{{items['productName']}}</a>
+                            </div>
+                            {% set products_id = items['id'] %}
+                            {% include ('/general/blocks/ratings.djhtml') %}
+                        </div>
+                        <div class="product-card-actions">
+                            <div class="product-card-prices">
+                                {% if items['discount']>0 %}
+                                    <span class="product-card-new-price">{{ format_price(items['price']) }}</span>
+                                    <span class="product-card-old-price">{{ format_price(items['price']) }}</span>
+                                {% else %}
+                                    {{ format_price(items['price']) }}
+                                {% endif %}
+                            </div>
+                            <div class="product-card-buttons">
+                                <button id="addCart" data-id="{{ items['id'] }}" class="btn btn-primary product-card-addtocart" type="button">Add To Cart</button>
+                                <button id="addWishlist" data-id="{{ items['id'] }}" class="btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card-wishlist" type="button">
+                                    <svg width="16px" height="16px">
+                                        <use xlink:href="/static/assets/icons/sprite.svg#wishlist-16"></use>
+                                    </svg>
+                                    <span class="fake-svg-icon fake-svg-icon--wishlist-16"></span>
+                                </button>
+                                <button id="addCompare" data-id="{{ items['id'] }}" class="btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card-compare" type="button">
+                                    <svg width="16px" height="16px">
+                                        <use xlink:href="/static/assets/icons/sprite.svg#compare-16"></use>
+                                    </svg>
+                                    <span class="fake-svg-icon fake-svg-icon--compare-16"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% if loop.index == 15 %}
+                    {% break %}
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
