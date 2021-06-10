@@ -1,12 +1,6 @@
 .site-header {
   -ms-flex-negative: 0;
       flex-shrink: 0;
-}
-
-/*
-// .site-header
-*/
-.site-header {
   position: relative;
   z-index: 100;
   background: transparent;
@@ -43,10 +37,6 @@
   margin-right: 30px;
 }
 
-[dir=rtl] .site-header-logo {
-  margin-left: 30px;
-}
-
 .site-header-logo a {
   color: inherit;
 }
@@ -70,11 +60,6 @@
 .site-header-phone {
   text-align: right;
   margin-left: 80px;
-}
-
-[dir=rtl] .site-header-phone {
-  text-align: left;
-  margin-right: 80px;
 }
 
 .site-header-phone-title {
@@ -2377,6 +2362,16 @@
 
 .search--location--header .search-categories:focus {
   outline: none;
+}
+
+.search-sub-categories::before {
+  content: '';
+  display: block;
+  width: 5px;
+  height: 5px;
+  border-radius: 2.5px;
+  border: 1px solid #000;
+  background-color: #000;
 }
 
 .search--location--header .search-input {

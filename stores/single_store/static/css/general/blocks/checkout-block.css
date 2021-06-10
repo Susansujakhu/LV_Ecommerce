@@ -1,6 +1,3 @@
-/*
-// .checkout
-*/
 .checkout-totals {
   font-size: 15px;
   line-height: 19px;
@@ -20,20 +17,12 @@
   padding-right: 20px;
 }
 
-[dir=rtl] .checkout-totals tr > :first-child {
-  padding-left: 20px;
-}
-
 .checkout-totals tr > :last-child {
   white-space: nowrap;
 }
 
 .checkout-totals tr > :last-child {
   text-align: right;
-}
-
-[dir=rtl] .checkout-totals tr > :last-child {
-  text-align: left;
 }
 
 .checkout-totals-header tr:last-child > * {
@@ -113,10 +102,6 @@
 
 .payment-methods-item-radio {
   margin-right: 10px;
-}
-
-[dir=rtl] .payment-methods-item-radio {
-  margin-left: 10px;
 }
 
 .payment-methods-item-container {
