@@ -1,0 +1,513 @@
+<link rel="stylesheet" type="text/css" href= "{{ url_for('static', filename='css/general/blocks/shop.css') }}" }}>
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+<style>
+.loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+</style>
+<div class="container">
+    <div class="shop-layout shop-layout--sidebar--start">
+        <div class="shop-layout-sidebar">
+            <div class="block block-sidebar block-sidebar--offcanvas--mobile">
+                <div class="block-sidebar-backdrop"></div>
+                <div class="block-sidebar-body">
+                    <div class="block-sidebar-header">
+                        <div class="block-sidebar-title">Filters</div>
+                        <button class="block-sidebar-close" type="button">
+                            <svg width="20px" height="20px">
+                                <use xlink:href="/static/assets/icons/sprite.svg#cross-20"></use>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="block-sidebar-item">
+                        <div class="widget-filters widget widget-filters--offcanvas--mobile" data-collapse data-collapse-opened-class="filter--opened">
+                            <h4 class="widget-filters-title widget-title">Filters</h4>
+                            <div class="widget-filters-list">
+                                {# <div class="widget-filters-item">
+                                    <div class="filter filter--opened" data-collapse-item>
+                                        <button type="button" class="filter-title" data-collapse-trigger>
+                                            Categories
+                                            <svg class="filter-arrow" width="12px" height="7px">
+                                                <use xlink:href="/static/assets/icons/sprite.svg#arrow-rounded-down-12x7"></use>
+                                            </svg>
+                                        </button>
+                                        <div class="filter-body" data-collapse-content>
+                                            <div class="filter-container">
+                                                <div class="filter-categories">
+                                                    <ul class="filter-categories-list">
+                                                        <li class="filter-categories-item filter-categories-item--parent">
+                                                            <svg class="filter-categories-arrow" width="6px" height="9px">
+                                                                <use xlink:href="/static/assets/icons/sprite.svg#arrow-rounded-left-6x9"></use>
+                                                            </svg>
+                                                            <a href="">Construction & Repair</a>
+                                                            <div class="filter-categories-counter">254</div>
+                                                        </li>
+                                                        <li class="filter-categories-item filter-categories-item--parent">
+                                                            <svg class="filter-categories-arrow" width="6px" height="9px">
+                                                                <use xlink:href="/static/assets/icons/sprite.svg#arrow-rounded-left-6x9"></use>
+                                                            </svg>
+                                                            <a href="">Instruments</a>
+                                                            <div class="filter-categories-counter">75</div>
+                                                        </li>
+                                                        <li class="filter-categories-item filter-categories-item--current">
+                                                            <a href="">Power Tools</a>
+                                                            <div class="filter-categories-counter">21</div>
+                                                        </li>
+                                                        <li class="filter-categories-item filter-categories-item--child">
+                                                            <a href="">Drills & Mixers</a>
+                                                            <div class="filter-categories-counter">15</div>
+                                                        </li>
+                                                        <li class="filter-categories-item filter-categories-item--child">
+                                                            <a href="">Cordless Screwdrivers</a>
+                                                            <div class="filter-categories-counter">2</div>
+                                                        </li>
+                                                        <li class="filter-categories-item filter-categories-item--child">
+                                                            <a href="">Screwdrivers</a>
+                                                            <div class="filter-categories-counter">30</div>
+                                                        </li>
+                                                        <li class="filter-categories-item filter-categories-item--child">
+                                                            <a href="">Wrenches</a>
+                                                            <div class="filter-categories-counter">7</div>
+                                                        </li>
+                                                        <li class="filter-categories-item filter-categories-item--child">
+                                                            <a href="">Grinding Machines</a>
+                                                            <div class="filter-categories-counter">5</div>
+                                                        </li>
+                                                        <li class="filter-categories-item filter-categories-item--child">
+                                                            <a href="">Milling Cutters</a>
+                                                            <div class="filter-categories-counter">2</div>
+                                                        </li>
+                                                        <li class="filter-categories-item filter-categories-item--child">
+                                                            <a href="">Electric Spray Guns</a>
+                                                            <div class="filter-categories-counter">9</div>
+                                                        </li>
+                                                        <li class="filter-categories-item filter-categories-item--child">
+                                                            <a href="">Jigsaws</a>
+                                                            <div class="filter-categories-counter">4</div>
+                                                        </li>
+                                                        <li class="filter-categories-item filter-categories-item--child">
+                                                            <a href="">Jackhammers</a>
+                                                            <div class="filter-categories-counter">0</div>
+                                                        </li>
+                                                        <li class="filter-categories-item filter-categories-item--child">
+                                                            <a href="">Planers</a>
+                                                            <div class="filter-categories-counter">12</div>
+                                                        </li>
+                                                        <li class="filter-categories-item filter-categories-item--child">
+                                                            <a href="">Glue Guns</a>
+                                                            <div class="filter-categories-counter">7</div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> #}
+                                <div class="widget-filters-item">
+                                    <div class="filter filter--opened" data-collapse-item>
+                                        <button type="button" class="filter-title" data-collapse-trigger>
+                                            Categories Alt
+                                            <svg class="filter-arrow" width="12px" height="7px">
+                                                <use xlink:href="/static/assets/icons/sprite.svg#arrow-rounded-down-12x7"></use>
+                                            </svg>
+                                        </button>
+                                        <div class="filter-body" data-collapse-content>
+                                            <div class="filter-container">
+                                                <div class="filter-categories-alt">
+                                                    <ul class="filter-categories-alt-list filter-categories-alt-list--level--1" data-collapse-opened-class="filter-categories-alt-item--open">
+                                                        {% for items in category %}
+                                                        {% if items.parentCategory == 'None' %}
+                                                        <li class="filter-categories-alt-item filter-categories-alt-item--current" data-collapse-item>
+                                                            <button class="filter-categories-alt-expander" data-collapse-trigger></button>
+                                                            <a name="filterCategory" data-id="{{items.name}}">{{items.name}}</a>
+                                                            <div class="filter-categories-alt-children" data-collapse-content>
+                                                                <ul class="filter-categories-alt-list filter-categories-alt-list--level--2">
+                                                                    {% for sub_items in category %}
+                                                                    {% if sub_items.parentCategory == items.name %}
+                                                                    <li class="filter-categories-alt-item" data-collapse-item>
+                                                                        <a name="filterCategory" data-id="{{sub_items.name}}">{{sub_items.name}}</a>
+                                                                    </li>
+                                                                    {% endif %}
+                                                                    {% endfor %}
+                                                                </ul>
+                                                            </div>
+                                                        </li>
+                                                        {% endif %}
+                                                        {% endfor %}
+                                                        <a name="filterCategory" data-id="">Select All</a>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="widget-filters-item">
+                                    <div class="filter filter--opened" data-collapse-item>
+                                        <button type="button" class="filter-title" data-collapse-trigger>
+                                            Price
+                                            <svg class="filter-arrow" width="12px" height="7px">
+                                                <use xlink:href="/static/assets/icons/sprite.svg#arrow-rounded-down-12x7"></use>
+                                            </svg>
+                                        </button>
+                                        <div class="filter-body" data-collapse-content>
+                                            <div class="filter-container">
+                                                <div class="filter-price" data-min={{min}} data-max={{max}} data-from="0" data-to="200000">
+                                                    <div id="filter-price-slider" class="filter-price-slider"></div>
+                                                    <div class="filter-price-title">Price: Rs <span class="filter-price-min-value"></span> – Rs <span class="filter-price-max-value"></span></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="widget-filters-item">
+                                    <div class="filter filter--opened" data-collapse-item>
+                                        <button type="button" class="filter-title" data-collapse-trigger>
+                                            Brand
+                                            <svg class="filter-arrow" width="12px" height="7px">
+                                                <use xlink:href="images/sprite.svg#arrow-rounded-down-12x7"></use>
+                                            </svg>
+                                        </button>
+                                        <div class="filter-body" data-collapse-content>
+                                            <div class="filter-container">
+                                                <div class="filter-list">
+                                                    <div class="filter-list-list">
+                                                    {% for items in brand %}
+                                                        <label class="filter-list-item ">
+                                                            <span class="filter-list-input input-check">
+                                                                <span class="input-check-body">
+                                                                    <input id="{{items.name}}" data-id={{items.name}} class="input-check-input" type="checkbox" name="brandCheckbox" value={{items.name}}>
+                                                                    <span class="input-check-box"></span>
+                                                                    <svg class="input-check-icon" width="9px" height="7px">
+                                                                        <use xlink:href="images/sprite.svg#check-9x7"></use>
+                                                                    </svg>
+                                                                </span>
+                                                            </span>
+                                                            <span class="filter-list-title">
+                                                                {{items.name}}
+                                                            </span>
+                                                            <span class="filter-list-counter">{{product_number[loop.index-1]}}</span>
+                                                        </label>
+                                                    {% endfor %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="widget-filters-item">
+                                    <div class="filter filter--opened" data-collapse-item>
+                                        <button type="button" class="filter-title" data-collapse-trigger>
+                                            Color
+                                            <svg class="filter-arrow" width="12px" height="7px">
+                                                <use xlink:href="/static/assets/icons/sprite.svg#arrow-rounded-down-12x7"></use>
+                                            </svg>
+                                        </button>
+                                        <div class="filter-body" data-collapse-content>
+                                            <div class="filter-container">
+                                                <div class="filter-color">
+                                                    <div class="filter-color-list">
+                                                    {% for items in color %}
+                                                        <label class="filter-color-item">
+                                                            <span class="filter-color-check input-check-color  input-check-color--white  " style="color: {{items.colorCode}};">
+                                                                <label class="input-check-color-body">
+                                                                    <input class="input-check-color-input" type="checkbox" name="colorCheckbox" value={{items.color}}>
+                                                                    <span class="input-check-color-box"></span>
+                                                                    <svg class="input-check-color-icon" width="12px" height="9px">
+                                                                        <use xlink:href="/static/assets/icons/sprite.svg#check-12x9"></use>
+                                                                    </svg>
+                                                                    <span class="input-check-color-stick"></span>
+                                                                </label>
+                                                            </span>
+                                                        </label>
+                                                        {% endfor %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="block-sidebar-item d-none d-lg-block">
+                        <div class="widget-products widget">
+                            <h4 class="widget-title">Latest Products</h4>
+                            <div class="widget-products-list">
+                                {% for items in products %}
+                                <div class="widget-products-item">
+                                    <div class="widget-products-image">
+                                        <div class="product-image">
+                                            <a href="single/{{ items['id'] }}" class="product-image-body">
+                                                <img class="product-image-img" src="{{url_for('static',filename='assets/images/products/'+items['imageFile'])}}" alt="">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="widget-products-info">
+                                        <div class="widget-products-name">
+                                            <a href="single/{{ items['id'] }}">{{items['productName']}}</a>
+                                        </div>
+                                        <div class="widget-products-prices">
+                                            {{ currency }} {{ items['price']}}
+                                        </div>
+                                    </div>
+                                </div>
+                                {% if loop.index == 4 %}
+                                    {% break %}
+                                {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="shop-layout-content">
+            <div class="block">
+                <div class="products-view">
+                    <div class="products-view-options">
+                        <div class="view-options view-options--offcanvas--mobile">
+                            <div class="view-options-filters-button">
+                                <button type="button" class="filters-button">
+                                    <svg class="filters-button-icon" width="16px" height="16px">
+                                        <use xlink:href="/static/assets/icons/sprite.svg#filters-16"></use>
+                                    </svg>
+                                    <span class="filters-button-title">Filters</span>
+                                    <span class="filters-button-counter">3</span>
+                                </button>
+                            </div>
+                            <div class="view-options-layout">
+                                <div class="layout-switcher">
+                                    <div class="layout-switcher-list">
+                                        <button data-layout="grid-3-sidebar" data-with-features="false" title="Grid" type="button" class="layout-switcher-button  layout-switcher-button--active ">
+                                            <svg width="16px" height="16px">
+                                                <use xlink:href="/static/assets/icons/sprite.svg#layout-grid-16x16"></use>
+                                            </svg>
+                                        </button>
+                                        <button data-layout="grid-3-sidebar" data-with-features="true" title="Grid With Features" type="button" class="layout-switcher-button ">
+                                            <svg width="16px" height="16px">
+                                                <use xlink:href="/static/assets/icons/sprite.svg#layout-grid-with-details-16x16"></use>
+                                            </svg>
+                                        </button>
+                                        <button data-layout="list" data-with-features="false" title="List" type="button" class="layout-switcher-button ">
+                                            <svg width="16px" height="16px">
+                                                <use xlink:href="/static/assets/icons/sprite.svg#layout-list-16x16"></use>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="view-options-legend">Showing <span id="showingProducts"></span> of {{total_products}} products</div>
+                            <div class="view-options-divider"></div>
+                            <div class="view-options-control">
+                                <label for="">Sort By</label>
+                                <div>
+                                    <select class="form-control form-control-sm" name="" id="sortProduct">
+                                        <option value="">Default</option>
+                                        <option value="name">Name (A-Z)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="view-options-control">
+                                <label for="">Show</label>
+                                <div>
+                                    <select class="form-control form-control-sm" name="" id="product_no_controller">
+                                        <option value="3">3</option>
+                                        <option value="6">6</option>
+                                        <option value="9">9</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="products-view-list products-list" data-layout="grid-3-sidebar" data-with-features="false" data-mobile-grid-columns="2">
+                        <div id="products-body" class="products-list-body">
+                            {# Here is Response.html file #}
+                        </div>
+                    </div>
+                    {# Load More Button #}
+                    <input type="hidden" id="productShowing" value="{{show_products}}">
+                    <div class="loader"></div>
+                    <button id="load_more" style="display: none;">Load More</button>
+                    <button id="end_page" style="display: none;">You Have Reached End Of Page. Goto Top</button>
+                    <div id="no_result" style="display: none;">
+                        <h2>Sorry No Product Found</h2>
+                        <h3>We're sorry. We cannot find any matches for your search term.</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+$(document).ready(function(){
+    var brands=[];
+    var min=0;
+    var max=0;
+    var color=[];
+    var selectedCategory = '';
+    var sortProduct = '';
+    var limit= parseInt($("#productShowing").val()); 
+    var keyword = '';
+    
+
+    $("#load_more").click(function(){
+        limit = limit + 3;
+        call_ajax(brands, min, max, color, selectedCategory, sortProduct, limit, keyword);  
+    });
+
+    $("#end_page").click(function(){
+        $('html, body').animate({ scrollTop: 0 }, 'smooth');
+    });
+
+    $("#product_no_controller").click(function(){
+        limit = parseInt($(this).val());
+        call_ajax(brands, min, max, color, selectedCategory, sortProduct, limit, keyword);  
+    });
+
+    $(document).on("click", "a[name='filterCategory']", function () {
+        selectedCategory = $(this).attr('data-id');
+        call_ajax(brands, min, max, color, selectedCategory, sortProduct, limit, keyword);  
+    });
+
+    $("#sortProduct").change(function () {
+        sortProduct = $(this).val();
+        call_ajax(brands, min, max, color, selectedCategory, sortProduct, limit, keyword); 
+    });
+
+    $(function () {
+        $('.filter-price').each(function (i, element) {
+            min = $(element).data('min');
+            max = $(element).data('max');
+            const from = $(element).data('from');
+            const to = $(element).data('to');
+            const slider = element.querySelector('.filter-price-slider');
+
+            noUiSlider.create(slider, {
+                start: [from, to],
+                connect: true,
+                range: {
+                    'min': min,
+                    'max': max
+                }
+            });
+
+            const titleValues = [
+                $(element).find('.filter-price-min-value')[0],
+                $(element).find('.filter-price-max-value')[0]
+            ];
+            slider.noUiSlider.on('update', function (values, handle) {
+                
+                titleValues[handle].innerHTML = parseInt(values[handle]);
+                min = values[0];
+                max = values[1];
+            });
+
+            slider.noUiSlider.on('update', function () {
+                var url_path = window.location.pathname;
+                var url_values = url_path.split("/");
+                if(url_values[1] == 'category'){
+                    selectedCategory = url_values[2]
+                }
+                else if(url_values[1] == 'search-results'){
+                    var selectedCategory = "{{cata}}"
+                    var keyword = '{{keyword}}'
+
+                }
+
+                call_ajax(brands, min, max, color, selectedCategory, sortProduct, limit, keyword); 
+            });
+        });
+    });
+
+    $(document).on("click", "input[name='brandCheckbox']", function () {
+        if($(this).prop("checked") == true){
+            brands.push($(this).val());
+            call_ajax(brands, min, max, color, selectedCategory, sortProduct, limit, keyword); 
+        }
+        else if($(this).prop("checked") == false){
+            var index = brands.indexOf($(this).val());
+            brands.splice(index, 1);
+            call_ajax(brands, min, max, color, selectedCategory, sortProduct, limit, keyword); 
+        }
+    });
+
+    $(document).on("click", "input[name='colorCheckbox']", function () {
+        if($(this).prop("checked") == true){
+            color.push($(this).val());
+            call_ajax(brands, min, max, color, selectedCategory, sortProduct, limit, keyword); 
+        }
+        else if($(this).prop("checked") == false){
+            var index = color.indexOf($(this).val());
+            color.splice(index, 1);
+            call_ajax(brands, min, max, color, selectedCategory, sortProduct, limit, keyword); 
+        }
+    });
+
+    function call_ajax(brands, min, max, color, selectedCategory, sortProduct, limit, keyword){
+        console.log(brands, min, max, color, selectedCategory, sortProduct, limit, keyword)
+        $(".loader").show();
+        $.ajax({
+                url: '/shopFilter',
+                type: 'post',
+                data: {'min':min,
+                        'max':max, 
+                        'brands':brands, 
+                        'color':color, 
+                        'category':selectedCategory,
+                        'sort':sortProduct,   
+                        'limit':limit,
+                        'keyword': keyword,
+                    },
+                success: function(data){
+                    var data_limit = data.limit;
+                    $('#showingProducts').text(data_limit);
+                    $("#productShowing").val(data_limit);
+                    
+                    if ( data.max_data == "True"){
+                        $("#load_more").hide();
+                        $("#end_page").show();
+                        $('#no_result').hide();
+                    }
+                    else if (data.max_data == "False"){
+                        $("#load_more").show();
+                        $("#end_page").hide();
+                        $('#no_result').hide();
+                    }
+                    else{
+                        $("#load_more").hide();
+                        $("#end_page").hide();
+                        $('#no_result').show();
+
+                    }
+                    $(".loader").hide();
+                    $('#products-body').html(data);
+                    $('#products-body').append(data.htmlresponse);
+                    
+                  // Updating table data
+                //   $("#products-body").load(" #products-body");
+                } 
+              });
+    }
+
+});
+</script>
