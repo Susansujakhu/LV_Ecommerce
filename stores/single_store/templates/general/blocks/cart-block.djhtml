@@ -2,9 +2,8 @@
 
 {% set currency = 'Rs.'%}
 {# cartProductNumber is used for checking user cart is empty or not #}
-{% if cartProductNumber >= 1 %}
 
-    <div class="cart block">
+    <div id="cart-block" class="cart block">
         <div class="container">
             <table class="cart-table cart-table">
                 <thead class="cart-table-head">
@@ -112,11 +111,10 @@
             </div>
         </div>
     </div>
-{% else %}
+
     <div class="block-empty-body">
         <div class="block-empty-message">Your shopping cart is empty!</div>
         <div class="block-empty-actions">
             <a class="btn btn-primary btn-sm" href="/shop">Continue Shopping</a>
         </div>
     </div>
-{% endif %}
