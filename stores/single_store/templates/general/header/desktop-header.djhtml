@@ -130,8 +130,8 @@
             <div class="site-header-search">
                 <div class="search search--location--header ">
                     <div class="search-body">
-                        <form class="search-form" action="">
-                            <select class="search-categories" aria-label="Category">
+                        <form class="search-form" action="/search-results" method="post">
+                            <select id="search-categories" class="search-categories" name="categories" aria-label="Category">
                                 <option value="">All Categories</option>
                                 {% for items in category %}
                                     {% if items.parentCategory == 'None' %}
@@ -144,7 +144,7 @@
                                     {% endif %}
                                 {% endfor %}
                             </select>
-                            <input class="search-input" name="search" placeholder="Search over 10,000 products" aria-label="Site search" type="text" autocomplete="off">
+                            <input id="search-input" class="search-input" name="search" placeholder="Search over 10,000 products" aria-label="Site search" type="text" autocomplete="off">
                             <button class="search-button search-button--type--submit" type="submit">
                                 <svg width="20px" height="20px">
                                     <use xlink:href="/static/assets/icons/sprite.svg#search-20"></use>
@@ -602,7 +602,8 @@ $(document).ready(function(){
         document.cookie = "currency="+currency;
         location.reload();
     });
-    
+
+
 });
 
 </script>
