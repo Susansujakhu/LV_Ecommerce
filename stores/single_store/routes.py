@@ -1294,14 +1294,14 @@ def delete_wishlist(tables):
     listToStr = ','.join([str(elem) for elem in list_product])
     db.session.query(table_name).filter(table_name.userId == current_user.userId).update({'product_list':listToStr}, synchronize_session=False)
     db.session.commit()
-    indicators = Wishlist.query.filter_by(userId = current_user.userId).first()
+    indicators = table_name.query.filter_by(userId = current_user.userId).first()
     list_product = indicators.product_list.split(",")
     if list_product[0] == '':
-            wishlist_indicator = 0
+            indicator = 0
     else:
-        wishlist_indicator = len(list_product)
+        indicator = len(list_product)
 
-    return jsonify({'result': 'success', 'wishlist_indicator': wishlist_indicator})
+    return jsonify({'result': 'success', 'indicator': indicator})
 
 
 @app.route("/compare_add", methods=["POST"])
@@ -1423,9 +1423,9 @@ def add(tables):
         db.session.commit()
 
         flash('Feature Added Successful!', 'success')
-        for key, value in form_data.items():
-            setattr(DynamicForm, key, StringField(value))
-            form = DynamicForm()
+        # for key, value in form_data.items():
+        #     setattr(DynamicForm, key, StringField(value))
+        #     form = DynamicForm()
         
     return render_template('add.html', title=tables, form=form, slug=slug)
 
