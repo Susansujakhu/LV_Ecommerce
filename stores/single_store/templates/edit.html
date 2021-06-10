@@ -16,16 +16,32 @@
           {% if loop.index ==1 %}
             {% set id = field.name %}
             <script>
-              window.addEventListener('DOMContentLoaded', (event) => {
-                console.log('DOM fully loaded and parsed');
-                let name = document.getElementById('{{id}}');
-                slug = document.getElementById('slug');
-                slug.onfocus = function () {
-                  product_name = name.value;
-                  product_name = product_name.toLowerCase();
-                  product_name = product_name.replace(/ /g, "-");
-                  slug.value = product_name;
+              var id = '{{id}}';
+              var values = '';
+              $(document).on('input', '#{{id}}', function(){
+                var values = $(this).val();
+                values = values.toLowerCase();
+                values = values.replace(/&/g, "");
+                values = values.replace(/"/g, "");
+                values = values.replace(/'/g, "");
+                values = values.replace(/ /g, "-");
+                $("#slug").val(values);
+              });
+              
+              $(document).on('focusout', '#{{id}}', function(){
+                var slugs = JSON.parse('{{slug|safe|tojson}}');
+                slugs = slugs.replace(/'/g, "");
+                slugs = slugs.replace(/[\[\]']+/g, "");
+                slugs = slugs.replace(/ /g, "");
+                var slug_list = slugs.split(",");
+                for (i=0; i<slug_list.length; i++){
+                  if(slug_list[i] == $("#slug").val()){
+                    var random_number = Math.floor(Math.random() * 100);
+                    final_slug = slug_list[i] + '-' + random_number
+                    $("#slug").val(final_slug);
+                  }
                 }
+
               });
             </script>
           {% endif %}
