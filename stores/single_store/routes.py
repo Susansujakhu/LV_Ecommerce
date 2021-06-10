@@ -60,7 +60,6 @@ def global_attr():
     products = Product.query.all()
     category = Category.query.all()
 
-
     productRatings = {}
     for productItem in products:
         rating = Rating.query.filter_by(product_id = productItem.id).all()
@@ -72,7 +71,6 @@ def global_attr():
         if total_ratings != 0:
             avg_rating = int(sum/total_ratings)
         productRatings[productItem.id] = [total_ratings, avg_rating]
-    print(productRatings)
 
     if current_user.is_authenticated:
         indicators = Wishlist.query.filter_by(userId = current_user.userId).first()
@@ -211,6 +209,49 @@ def saveReview():
     return jsonify({'result': 'success'})
 
 
+@app.route("/category/<int:id>")
+def categoryPage(id):
+    max = db.session.query(func.max(Product.price)).scalar()
+    min = db.session.query(func.min(Product.price)).scalar()
+    brand = Brand.query.all()
+    color = Color.query.all()
+    category = Category.query.get(id)
+
+    selectedProducts = Product.query.filter(Product.category == category.name).all()
+    total_products = len(selectedProducts)
+    product_number = []
+    for items in brand:
+        product_number.append(Product.query.filter(Product.brand == items.name).count())
+
+    return render_template(
+        'single-store/products-archive-page.djhtml', 
+        max=max, min =min, brand=brand, product_number=product_number, color=color,
+        total_products = total_products, show_products = 3
+        )
+
+@app.route("/search-results", methods=['GET', 'POST'])
+def searchPage():
+
+    cata = request.form.get('categories')
+    keyword = request.form.get('search')
+
+    max = db.session.query(func.max(Product.price)).scalar()
+    min = db.session.query(func.min(Product.price)).scalar()
+    brand = Brand.query.all()
+    color = Color.query.all()
+
+    selectedProducts = Product.query.filter(Product.category == cata).all()
+    total_products = len(selectedProducts)
+    product_number = []
+    for items in brand:
+        product_number.append(Product.query.filter(Product.brand == items.name).count())
+
+    return render_template(
+        'single-store/products-archive-page.djhtml', 
+        max=max, min =min, brand=brand, product_number=product_number, color=color,
+        total_products = total_products, show_products = 3, cata=cata, keyword=keyword
+        )
+
 
 @app.route("/shop")
 def shop():
@@ -225,20 +266,10 @@ def shop():
         product_number.append(Product.query.filter(Product.brand == items.name).count())
 
     return render_template(
-        'single-store/shop-page.djhtml', 
+        'single-store/products-archive-page.djhtml', 
         max=max, min =min, brand=brand, product_number=product_number, color=color,
         total_products = total_products, show_products = 3
         )
-
-def unique(list1):
-    # insert the list to the set
-    list_set = set(list1)
-    # convert the set to the list
-    unique_list = (list(list_set))
-    result_list = []
-    for x in unique_list:
-        result_list.append(x)
-    return result_list
 
 @app.route("/shopFilter", methods=["POST"])
 def shopFilter():
@@ -250,13 +281,25 @@ def shopFilter():
         selectedCategory = request.form.get("category")
         sort = request.form.get("sort")
         limit = int(request.form.get("limit"))
-
+        keyword = request.form.get("keyword")
         filters =[]
-        
+
+        if keyword:
+            print("keyword xa")
+            filters.append(
+                Product.productName.ilike('%'+keyword+'%')
+            )
+
         if selectedCategory:
+            print(selectedCategory)
+            if selectedCategory.isnumeric():
+                category = Category.query.get(int(selectedCategory))
+                selectedCategory = category.name
+
             filters.append(
                 Product.category == selectedCategory
             )
+
         if brands:
             filters.append(
                 Product.brand.in_(brands)
@@ -274,15 +317,7 @@ def shopFilter():
             
         for productRows in db.session.query(Product.color).distinct():
             filterColor.append(productRows.color)
-        
-        filterBrand = unique(filterBrand)
-        filterColor = unique(filterColor)
 
-        allBrands = db.session.query(Brand.name).all()
-        allColors = db.session.query(Color.color).all()
-        allBrand = [value for value, in allBrands]
-        allColor = [value for value, in allColors]
-        
         if sort:
             products = products.order_by(Product.productName)
         productCount = products.count()
@@ -301,8 +336,7 @@ def shopFilter():
                     'limit':limit, 'max_data':max_data, 
                     'filterColor':filterColor, 
                     'filterBrand':filterBrand,
-                    'allBrands':allBrand,
-                    'allColors':allColor
+
                 })
 
 
@@ -359,7 +393,6 @@ def searchSuggestion():
     if request.method == "POST":
         selectedCategory = request.form.get("category")
         search_word = request.form.get("keyword")
-        print(search_word)
         filters =[]
         if selectedCategory:
             filters.append(
