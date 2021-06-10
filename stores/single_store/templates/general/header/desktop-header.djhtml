@@ -120,12 +120,18 @@
                                         {% for items in category %}
                                             {% if items.parentCategory == 'None' %}
                                             <li class="departments-item">
-                                                <a class="departments-item-link" href="">
+                                                <a class="departments-item-link" href="category/{{items.slug}}">
                                                     {{items.name}}
-                                                    <svg class="departments-item-arrow" width="6px" height="9px">
-                                                        <use xlink:href="/static/assets/icons/sprite.svg#arrow-rounded-right-6x9"></use>
-                                                    </svg>
+                                                    {% for item in category %}
+                                                        {% if item.parentCategory == items.name %}
+                                                            <svg class="departments-item-arrow" width="6px" height="9px">
+                                                                <use xlink:href="/static/assets/icons/sprite.svg#arrow-rounded-right-6x9"></use>
+                                                            </svg>
+                                                        {%endif%}
+                                                    {%endfor%}        
                                                 </a>
+                                                {% for item in category %}
+                                                {% if item.parentCategory == items.name %}
                                                 <div class="departments-submenu departments-submenu--type--menu">
                                                     <!-- .menu -->
                                                     <div class="menu menu--layout--classic ">
@@ -135,16 +141,18 @@
                                                             {% if sub_items.parentCategory == items.name %}
                                                             <li class="menu-item">
                                                                 <div class="menu-item-submenu-offset"></div>
-                                                                <a class="menu-item-link" href="">
+                                                                <a class="menu-item-link" href="category/{{sub_items.slug}}">
                                                                     {{sub_items.name}}
                                                                 </a>
                                                             </li>
                                                             {% endif %}
-                                                            {% endfor %}
+                                                        {% endfor %}
                                                         </ul>
                                                     </div>
                                                     <!-- .menu / end -->
                                                 </div>
+                                                {% endif %}
+                                                {% endfor %}
                                             </li>
                                             {% endif %}
                                         {% endfor %}
