@@ -1,6 +1,9 @@
-
 <div class="addresses-list">
+{% if userAddress|length < 5 %}
     <a href="/dashboard/edit-address" class="addresses-list-item addresses-list-item--new">
+{% else %}
+    <a id="stopNewAddres" onClick="myFunc(this.id);" class="addresses-list-item addresses-list-item--new">
+{% endif %}
         <div class="addresses-list-plus"></div>
         <div class="btn btn-secondary btn-sm">Add New</div>
     </a>
@@ -101,6 +104,10 @@
 
 
 <script>
+
+function myFunc(id){
+        alert("You have added maximum number of address");
+}
     
 $(document).ready(function(){
     $(document).on('click', '#makeDefault', function(){
