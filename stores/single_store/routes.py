@@ -157,9 +157,9 @@ def home():
         'single-store/home.djhtml', heroSlider = heroSlider, featuresService = featuresService, horizontalPanel = horizontalPanel)
 
 
-@app.route("/single/<int:productId>")
-def single_product(productId):
-    product = Product.query.get(productId)
+@app.route("/product/<slug>")
+def single_product(slug):
+    product = Product.query.filter_by(slug = slug).first()
     rating = Rating.query.filter_by(product_id = product.id).all()
     colors = Color.query.all()
     users = User.query.all()
@@ -1349,6 +1349,9 @@ def add(tables):
     table_name = str2Class(tables)
     table_head = table_name.__table__.columns.keys()
 
+    slug = db.session.query(table_name.slug).all()
+    slug = [value for value, in slug]
+
     form_name = tables+"Form"
     formName = str2Class(form_name)
     form = formName()
@@ -1424,7 +1427,7 @@ def add(tables):
             setattr(DynamicForm, key, StringField(value))
             form = DynamicForm()
         
-    return render_template('add.html', title=tables, form=form, table_head=table_head)
+    return render_template('add.html', title=tables, form=form, slug=slug)
 
 
 
@@ -1440,6 +1443,10 @@ def edit(tables, id):
     tables = tables.capitalize()
     table_name = str2Class(tables)
     table_head = table_name.__table__.columns.keys()
+
+    slug = db.session.query(table_name.slug).all()
+    slug = [value for value, in slug]
+
 
     form_name = tables+"Form"
     formName = str2Class(form_name)
@@ -1512,6 +1519,6 @@ def edit(tables, id):
     for items, value in table_object.__dict__.items():
         a[items] = value
 
-    return render_template('edit.html', title=tables, form=form, table_head=table_head, product_dict=a)
+    return render_template('edit.html', title=tables, form=form, table_head=table_head, product_dict=a, slug = slug)
 
  
