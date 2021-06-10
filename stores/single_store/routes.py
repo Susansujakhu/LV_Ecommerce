@@ -209,14 +209,14 @@ def saveReview():
     return jsonify({'result': 'success'})
 
 
-@app.route("/category/<int:id>")
-def categoryPage(id):
+@app.route("/category/<slug>")
+def categoryPage(slug):
     max = db.session.query(func.max(Product.price)).scalar()
     min = db.session.query(func.min(Product.price)).scalar()
     brand = Brand.query.all()
     color = Color.query.all()
-    category = Category.query.get(id)
-
+    category = Category.query.filter_by(slug = slug).first()
+    print(category.name)
     selectedProducts = Product.query.filter(Product.category == category.name).all()
     total_products = len(selectedProducts)
     product_number = []
@@ -292,8 +292,8 @@ def shopFilter():
 
         if selectedCategory:
             print(selectedCategory)
-            if selectedCategory.isnumeric():
-                category = Category.query.get(int(selectedCategory))
+            if selectedCategory.islower():
+                category = Category.query.filter_by(slug = selectedCategory).first()
                 selectedCategory = category.name
 
             filters.append(
