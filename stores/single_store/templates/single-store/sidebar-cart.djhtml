@@ -5,12 +5,12 @@
 
     <div id="sidebar_cart{{cart_row.product_id}}" class="dropcart-product">
         <div class="product-image dropcart-product-image">
-            <a href="product.html" class="product-image-body">
+            <a href="single/{{ items['id'] }}" class="product-image-body">
                 <img class="product-image-img" src="{{url_for('static', filename='assets/images/products/'+ imagename )}}" alt="">
             </a>
         </div>
         <div class="dropcart-product-info">
-            <div class="dropcart-product-name"><a href="product.html">{{rows['productName']}}</a></div>
+            <div class="dropcart-product-name"><a href="single/{{ items['id'] }}">{{rows['productName']}}</a></div>
             <ul class="dropcart-product-options">
                 <li>Color: {{cart_row.color}}</li>
                 <li>Material: {{rows['material']}} </li>
