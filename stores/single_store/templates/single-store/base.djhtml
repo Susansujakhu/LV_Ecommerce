@@ -103,17 +103,21 @@ $(document).ready(function(){
                 data: cart_deleteIndex,
                 }); 
         req.done(function(data){
-            if(data.cartProductNumber == ""){
+            if(data.cartProductNumber == 0){
+                console.log(data.cartProductNumber)
+                $('#sidebar_cart'+cart_deleteIndex).remove();
+                $('#cart_indicator').text(data.cartProductNumber);
                 $("#cart-block").hide();
                 $(".block-empty-body").show();
             }
             else{
                 $('#sidebar_cart'+cart_deleteIndex).fadeOut('normal', function(){
                     $('#sidebar_cart'+cart_deleteIndex).remove();
+                    $('#total_cart').text(data.totalCart);
                     $('#cart_indicator').text(data.cartProductNumber);
                     $('#main_cart'+cart_deleteIndex).fadeOut(1000);
                     $('#main_cart'+cart_deleteIndex).remove();
-                    $('#total_cart').text(data.totalCart);
+                    
                     $(".block-empty-body").hide();
                 });
             }
