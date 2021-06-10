@@ -51,11 +51,20 @@
             {% endfor %}
             </tbody>
         </table>
+        <div class="emptyMessage"><h3>OOPS!! You have't added any product to Wishlist</h3>
+        </div>
     </div>
 </div>
 <script>
 $(document).ready(function(){
-
+    var emptyTable = {{product_lists}};
+    if(emptyTable == ""){
+        console.log("Empty");
+        $(".wishlist").hide();
+    }
+    else{
+        $(".emptyMessage").hide();
+    }
     var buttons = document.querySelectorAll('#deleteWishlist');
     for (var i = 0; i < buttons.length; i++) {
         buttons[i].onclick = function() {
@@ -66,10 +75,26 @@ $(document).ready(function(){
                 data: index,
                 }); 
         req.done(function(data){
-            $('#row'+index).fadeOut('normal', function(){
-                document.location.href = this.location.href;
-            });
-            $('#wishlist_indicator').text(data.wishlist_indicator);
+        
+            if (data.indicator == ""){
+                console.log("zero")
+                $('#wishlist_indicator').text(data.indicator);
+                $(".wishlist").fadeOut('normal',function(){
+                    $(".wishlist").hide();
+                    $(".emptyMessage").show();
+                });
+                
+            }
+            else{
+                console.log("not zero")
+                $('#row'+index).fadeOut('normal',function(){
+                    $('#row'+index).remove();
+                });
+                $('#wishlist_indicator').text(data.indicator);
+                $(".emptyMessage").hide();
+
+            }
+            
 
         });
     };
