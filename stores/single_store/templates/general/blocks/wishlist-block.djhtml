@@ -35,7 +35,7 @@
                             </td>
                             <td class="wishlist-column wishlist-column--price">{{product.price}}</td>
                             <td class="wishlist-column wishlist-column--tocart">
-                                <button type="button" class="btn btn-primary btn-sm" onclick="window.location.href='/add_cart/{{ product.id }}'" >Add To Cart</button>
+                                <button id="addCart" data-id={{product.id}} type="button" class="btn btn-primary btn-sm">Add To Cart</button>
                             </td>
                             <td class="wishlist-column wishlist-column--remove">
                                 <button type="button" id="deleteWishlist" data-id="{{ product.id }}" class="btn btn-light btn-sm btn-svg-icon">
