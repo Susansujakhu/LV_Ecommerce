@@ -23,13 +23,13 @@
                                 <div class="product-card-badge product-card-badge--new">New</div>
                             </div>
                             <div class="product-card-image product-image">
-                                <a href="single/{{ items['id'] }}" class="product-image-body">
+                                <a href="product/{{ items['slug'] }}" class="product-image-body">
                                     <img class="product-image-img" src="{{url_for('static',filename='assets/images/products/'+items['imageFile'])}}" alt="">
                                 </a>
                             </div>
                             <div class="product-card-info">
                                 <div class="product-card-name">
-                                    <a href="single/{{ items['id'] }}">{{items['productName']}}</a>
+                                    <a href="product/{{ items['slug'] }}">{{items['productName']}}</a>
                                 </div>
                                 {% set products_id = items['id'] %}
                                 {% include ('/general/blocks/ratings.djhtml') %}
@@ -92,13 +92,13 @@
                                 <div class="product-card-badge product-card-badge--new">New</div>
                             </div>
                             <div class="product-card-image product-image">
-                                <a href="single/{{ items['id'] }}" class="product-image-body">
+                                <a href="product/{{ items['slug'] }}" class="product-image-body">
                                     <img class="product-image-img" src="{{url_for('static',filename='assets/images/products/'+items['imageFile'])}}" alt="">
                                 </a>
                             </div>
                             <div class="product-card-info">
                                 <div class="product-card-name">
-                                    <a href="single/{{ items['id'] }}">{{items['productName']}}</a>
+                                    <a href="product/{{ items['slug'] }}">{{items['productName']}}</a>
                                 </div>
                                 {% set products_id = items['id'] %}
                                 {% include ('/general/blocks/ratings.djhtml') %}
@@ -161,13 +161,13 @@
                                 <div class="product-card-badge product-card-badge--new">New</div>
                             </div>
                             <div class="product-card-image product-image">
-                                <a href="single/{{ items['id'] }}" class="product-image-body">
+                                <a href="product/{{ items['slug'] }}" class="product-image-body">
                                     <img class="product-image-img" src="{{url_for('static',filename='assets/images/products/'+items['imageFile'])}}" alt="">
                                 </a>
                             </div>
                             <div class="product-card-info">
                                 <div class="product-card-name">
-                                    <a href="single/{{ items['id'] }}">{{items['productName']}}</a>
+                                    <a href="product/{{ items['slug'] }}">{{items['productName']}}</a>
                                 </div>
                                 {% set products_id = items['id'] %}
                                 {% include ('/general/blocks/ratings.djhtml') %}
