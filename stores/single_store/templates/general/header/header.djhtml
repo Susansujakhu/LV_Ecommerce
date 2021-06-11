@@ -52,7 +52,6 @@
         </div>
         <div class="account-menu">
             {% if current_user.is_authenticated %}
-                <div class="account-menu-divider"></div>
                 <a href="account-dashboard.html" class="account-menu-user">
                     <div class="account-menu-user-avatar">
                         <img src="images/avatars/avatar-3.jpg" alt="">
