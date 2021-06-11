@@ -49,13 +49,15 @@
         {% block content %}{% endblock %}
         <div class="container">
             {% block container %}{% endblock %}
+            {% if message is defined %}
             <div class="block-empty-body">
                 <div class="block-empty-message">{{message}}</div>
                 <div class="block-empty-actions">
                     <a class="btn btn-primary btn-sm" href="/shop">Continue Shopping</a>
                 </div>
             </div>
-
+            {% endif %}
+            
         </div>
         
     </main>
