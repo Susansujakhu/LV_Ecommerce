@@ -112,9 +112,4 @@
         </div>
     </div>
 
-    <div class="block-empty-body">
-        <div class="block-empty-message">Your shopping cart is empty!</div>
-        <div class="block-empty-actions">
-            <a class="btn btn-primary btn-sm" href="/shop">Continue Shopping</a>
-        </div>
-    </div>
+

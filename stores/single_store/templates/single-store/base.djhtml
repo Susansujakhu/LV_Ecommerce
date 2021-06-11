@@ -49,7 +49,15 @@
         {% block content %}{% endblock %}
         <div class="container">
             {% block container %}{% endblock %}
+            <div class="block-empty-body">
+                <div class="block-empty-message">{{message}}</div>
+                <div class="block-empty-actions">
+                    <a class="btn btn-primary btn-sm" href="/shop">Continue Shopping</a>
+                </div>
+            </div>
+
         </div>
+        
     </main>
 
     <footer>
@@ -91,6 +99,7 @@ $(document).ready(function(){
     var cart_product_no = {{cartProductNumber}}
     if(cart_product_no == ""){
         $("#cart-block").hide();
+        $('#sidebar-cart').show();
     }
     else{
         $(".block-empty-body").hide();
@@ -104,72 +113,80 @@ $(document).ready(function(){
                 }); 
         req.done(function(data){
             if(data.cartProductNumber == 0){
-                console.log(data.cartProductNumber)
-                $('#sidebar_cart'+cart_deleteIndex).remove();
-                $('#cart_indicator').text(data.cartProductNumber);
                 $("#cart-block").hide();
                 $(".block-empty-body").show();
             }
             else{
                 $('#sidebar_cart'+cart_deleteIndex).fadeOut('normal', function(){
-                    $('#sidebar_cart'+cart_deleteIndex).remove();
-                    $('#total_cart').text(data.totalCart);
-                    $('#cart_indicator').text(data.cartProductNumber);
                     $('#main_cart'+cart_deleteIndex).fadeOut(1000);
                     $('#main_cart'+cart_deleteIndex).remove();
-                    
                     $(".block-empty-body").hide();
                 });
             }
-            
+            $('#total_cart').text(data.totalCart);
+                $('#cart_indicator').text(data.cartProductNumber);
+                $('#sidebar_cart'+cart_deleteIndex).remove();
             
         });
     });
 
     $(document).on('click', '#addCart', function(){
+        var selector = $(this);
         var cart_index = $(this).attr('data-id');
+        
         req = $.ajax({
                 url: "/add_cart",
                 type: "POST",
                 data: cart_index,
                 }); 
         req.done(function(data){
+            if(data.cart_count != 0){
+                $(".block-empty-body").hide();
+            }
+
             $('#cart_indicator').text(data.cart_count);
             $('.dropcart-products-list').html(data);
             $('.dropcart-products-list').append(data.htmlresponse);
             $('#total_cart').text(data.totalCart);
-       
+            $(selector).fadeOut(1000).fadeIn(1000);
+            $(selector).css('fill', '#000000');
+            
         });
-        $(this).fadeOut(1000).fadeIn(1000);
-        $(this).css('fill', '#000000');
     });
 
     $(document).on('click', '#addWishlist', function(){
+        var selector = $(this);
         var wishlist_index = $(this).attr('data-id');
-        req = $.ajax({
+        $.ajax({
                 url: "/wishlistAdd",
                 type: "POST",
                 data: wishlist_index,
-                }); 
-        req.done(function(data){
-            $('#wishlist_indicator').text(data.wishlist_indicator);
-        });
-        $(this).fadeOut(1000).fadeIn(1000);
-        $(this).css('fill', '#000000');
+                success: function(data,statusText, xhr){
+                    console.log(xhr.status);
+                    console.log(data.wishlist_indicator)
+                    $('#wishlist_indicator').text(data.wishlist_indicator);
+                    $(selector).fadeOut(1000).fadeIn(1000);
+                    $(selector).css('fill', '#000000');
+                    
+                }
+            }); 
+
+        
     });
  
     $(document).on('click', '#addCompare', function(){
-       var compare_index = $(this).attr('data-id');
+        var selector = $(this);
+        var compare_index = $(this).attr('data-id');
         req = $.ajax({
                 url: "/compare_add",
                 type: "POST",
                 data: compare_index,
                 }); 
         req.done(function(data){
-
+            $(selector).fadeOut(1000).fadeIn(1000);
+            $(selector).css('fill', '#000000');
         });
-        $(this).fadeOut(1000).fadeIn(1000);
-        $(this).css('fill', '#000000');
+        
     });
 
 });
