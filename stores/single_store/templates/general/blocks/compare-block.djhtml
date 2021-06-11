@@ -190,11 +190,12 @@
 
                 if(emptyTable == ""){
                     console.log("Empty");
-                    $(".compare-table").hide();
+                    $(".showTable").hide();
 
                     $(".block-empty-body").show();
                 }
                 else{
+                    $(".showTable").show();
                     $(".block-empty-body").hide();
                 }
                 var compare_deleteButtons = document.querySelectorAll('#deleteCompare');
@@ -204,8 +205,8 @@
                         req = $.ajax({url: "/users/compare", type: "POST", data: compare_deleteIndex});
                         req.done(function (data) {
                             if(data.indicator == ""){
-                                $(".compare-table").fadeOut('normal', function(){
-                                    $(".compare-table").hide();
+                                $(".showTable").fadeOut('normal', function(){
+                                    $(".showTable").hide();
                                     $(".block-empty-body").fadeIn('normal');
 
                                 });
