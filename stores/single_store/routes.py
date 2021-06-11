@@ -382,6 +382,20 @@ def compare():
         'single-store/compare-page.djhtml', product_lists = product_lists, message=message
         )
 
+@app.route("/category")
+@login_required
+def products_archive():
+    return render_template(
+        'single-store/products-archive-page.djhtml'
+        )
+
+@app.route("/order-success")
+@login_required
+def order_success():
+    return render_template(
+        'single-store/order-success-page.djhtml'
+        )
+
 @app.route("/quickviewProduct", methods = ['POST'])
 def quickviewProduct():
     if request.method == "POST":
@@ -411,6 +425,12 @@ def searchSuggestion():
 def admin_dashboard():
     return render_template(
         'single-store/admin/dashboard-page.djhtml'
+        )
+
+@app.route("/add-products")
+def admin_add_products():
+    return render_template(
+        'single-store/admin/add-products-page.djhtml'
         )
 
 @app.route("/account", methods=['GET', 'POST'])
