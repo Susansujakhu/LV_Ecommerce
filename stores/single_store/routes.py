@@ -402,7 +402,7 @@ def quickviewProduct():
         id = int(request.get_data())
         quickViewProductData = Product.query.get(id)
     return render_template(
-        'general/blocks/quick-view-modal-block.djhtml', product = quickViewProductData, message=message
+        'general/blocks/quick-view-modal-block.djhtml', product = quickViewProductData,
         )
 
 @app.route("/searchSuggestion", methods=['POST'])
