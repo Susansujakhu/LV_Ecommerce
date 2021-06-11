@@ -1,12 +1,12 @@
 <link rel="stylesheet" type="text/css" href= "{{ url_for('static', filename='css/general/blocks/shop.css') }}" }}>
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 <style>
-.loader {
-  border: 16px solid #f3f3f3;
+.products-archive-loader {
+  border: 10px solid #f3f3f3;
   border-radius: 50%;
-  border-top: 16px solid #3498db;
-  width: 120px;
-  height: 120px;
+  border-top: 10px solid var(--primary-color);
+  width: 50px;
+  height: 50px;
   -webkit-animation: spin 2s linear infinite; /* Safari */
   animation: spin 2s linear infinite;
 }
@@ -20,6 +20,10 @@
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+.products-archive-loadmore-btn {
+    margin-top: 60px;
 }
 </style>
 <div class="container">
@@ -264,9 +268,11 @@
                     </div>
                     {# Load More Button #}
                     <input type="hidden" id="productShowing" value="{{show_products}}">
-                    <div class="loader"></div>
-                    <button id="load_more" style="display: none;">Load More</button>
-                    <button id="end_page" style="display: none;">You Have Reached End Of Page. Goto Top</button>
+                    <div class="products-archive-loadmore-btn d-flex justify-content-center">
+                        <div class="products-archive-loader"></div>
+                        <button id="load_more" class="btn btn-sm btn-primary" style="display: none;">Load More</button>
+                        <button id="end_page" class="btn btn-sm btn-primary" style="display: none;">You Have Reached End Of Page. Goto Top</button>
+                    </div>
                     <div id="no_result" style="display: none;">
                         <h2>Sorry No Product Found</h2>
                         <h3>We're sorry. We cannot find any matches for your search term.</h3>
@@ -386,7 +392,8 @@ $(document).ready(function(){
 
     function call_ajax(brands, min, max, color, selectedCategory, sortProduct, limit, keyword){
         console.log(brands, min, max, color, selectedCategory, sortProduct, limit, keyword)
-        $(".loader").show();
+        $("#load_more").hide();
+        $(".products-archive-loader").show();
         $.ajax({
                 url: '/shopFilter',
                 type: 'post',
@@ -420,7 +427,7 @@ $(document).ready(function(){
                         $('#no_result').show();
 
                     }
-                    $(".loader").hide();
+                    $(".products-archive-loader").hide();
                     $('#products-body').html(data);
                     $('#products-body').append(data.htmlresponse);
                     
