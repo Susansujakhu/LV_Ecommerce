@@ -186,6 +186,7 @@
         <script>
             $(document).ready(function () {
                 var emptyTable = {{product_lists}};
+                console.log(emptyTable);
 
                 if(emptyTable == ""){
                     console.log("Empty");
