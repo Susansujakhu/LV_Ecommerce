@@ -182,21 +182,27 @@
                 </div>
             </div>
         </div>
-
-        <script>
+    </div>
+ <div id="compare-empty-block" class="block-empty-body" style="display:none">
+    <div class="block-empty-message">{{message}}</div>
+    <div class="block-empty-actions">
+        <a class="btn btn-primary btn-sm" href="/shop">Continue Shopping</a>
+    </div>
+</div>
+<script>
             $(document).ready(function () {
                 var emptyTable = {{product_lists}};
                 console.log(emptyTable);
 
                 if(emptyTable == ""){
+                    $("#compare-empty-block").show();
                     console.log("Empty");
-                    $(".showTable").hide();
-
-                    $(".block-empty-body").show();
+                    $(".showCompareTable").hide();
+                    
                 }
                 else{
-                    $(".showTable").show();
-                    $(".block-empty-body").hide();
+                    $(".showCompareTable").show();
+                    $("#compare-empty-block").hide();
                 }
                 var compare_deleteButtons = document.querySelectorAll('#deleteCompare');
                 for (var i = 0; i < compare_deleteButtons.length; i++) {
@@ -205,9 +211,9 @@
                         req = $.ajax({url: "/users/compare", type: "POST", data: compare_deleteIndex});
                         req.done(function (data) {
                             if(data.indicator == ""){
-                                $(".showTable").fadeOut('normal', function(){
-                                    $(".showTable").hide();
-                                    $(".block-empty-body").fadeIn('normal');
+                                $(".showCompareTable").fadeOut('normal', function(){
+                                    $(".showCompareTable").hide();
+                                    $("#compare-empty-block").fadeIn('normal');
 
                                 });
                                 

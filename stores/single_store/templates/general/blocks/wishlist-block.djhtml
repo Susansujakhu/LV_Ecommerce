@@ -53,6 +53,13 @@
         </table>
     </div>
 </div>
+ <div id="wishlist-empty-block" class="block-empty-body" style="display:none">
+    <div class="block-empty-message">{{message}}</div>
+    <div class="block-empty-actions">
+        <a class="btn btn-primary btn-sm" href="/shop">Continue Shopping</a>
+    </div>
+</div>
+
 <script>
 $(document).ready(function(){
 
@@ -60,12 +67,12 @@ $(document).ready(function(){
     if(emptyTable == ""){
         console.log("Empty");
         $(".showTable").hide();
-        $(".block-empty-body").show();
+        $("#wishlist-empty-block").show();
 
     }
     else{
         $(".showTable").show();
-        $(".block-empty-body").hide();
+        $("#wishlist-empty-block").hide();
     }
     var buttons = document.querySelectorAll('#deleteWishlist');
     for (var i = 0; i < buttons.length; i++) {
@@ -83,7 +90,7 @@ $(document).ready(function(){
                 $('#wishlist_indicator').text(data.indicator);
                 $(".showTable").fadeOut('normal',function(){
                     $(".showTable").hide();
-                    $(".block-empty-body").show();
+                    $("#wishlist-empty-block").show();
 
                 });
                 
@@ -94,7 +101,7 @@ $(document).ready(function(){
                     $('#row'+index).remove();
                 });
                 $('#wishlist_indicator').text(data.indicator);
-                $(".block-empty-body").hide();
+                $("#wishlist-empty-block").hide();
 
             }
             

@@ -48,16 +48,6 @@
             {% include '/general/blocks/breadcrumb-block.djhtml' %}
         {% endblock %}
         {% block content %}{% endblock %}
-        <div class="checkTableStatus">
-            {% if message is defined %}
-            <div class="block-empty-body">
-                <div class="block-empty-message">{{message}}</div>
-                <div class="block-empty-actions">
-                    <a class="btn btn-primary btn-sm" href="/shop">Continue Shopping</a>
-                </div>
-            </div>
-            {% endif %}
-        </div>
     </main>
 
     <footer>
@@ -84,13 +74,13 @@
     $(document).ready(function(){
         var cart_product_no = {{cartProductNumber}}
         if(cart_product_no == ""){
-            $(".showTable").hide();
             $('#sidebar-cart').show();
+            $("#cart-empty-block").show();
         }
         else{
-            $(".showTable").show();
+            $(".showCartTable").show();
             $('#sidebar-cart').hide();
-            $(".block-empty-body").hide();
+            $("#cart-empty-block").hide();
         }
         $(document).on('click', '#deleteCart', function(){
             var cart_deleteIndex = $(this).attr('data-id');
@@ -101,15 +91,15 @@
                     }); 
             req.done(function(data){
                 if(data.cartProductNumber == 0){
-                    $(".showTable").hide();
-                    $(".block-empty-body").show();
+                    $(".showCartTable").hide();
+                    $("#cart-empty-block").show();
                 }
                 else{
                     $('#sidebar_cart'+cart_deleteIndex).fadeOut('normal', function(){
                         $('#main_cart'+cart_deleteIndex).fadeOut(1000);
                         $('#main_cart'+cart_deleteIndex).remove();
-                        $(".block-empty-body").hide();
-                        $(".showTable").show();
+                        $("#cart-empty-block").hide();
+                        $(".showCartTable").show();
                     });
                 }
                 $('#total_cart').text(data.totalCart);
@@ -130,7 +120,7 @@
                     }); 
             req.done(function(data){
                 if(data.cart_count != 0){
-                    $(".block-empty-body").hide();
+                    $("#cart-empty-block").hide();
                 }
 
                 $('#cart_indicator').text(data.cart_count);
