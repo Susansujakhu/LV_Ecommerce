@@ -59,11 +59,12 @@ $(document).ready(function(){
     var emptyTable = {{product_lists}};
     if(emptyTable == ""){
         console.log("Empty");
-        $(".wishlist").hide();
+        $(".showTable").hide();
         $(".block-empty-body").show();
 
     }
     else{
+        $(".showTable").show();
         $(".block-empty-body").hide();
     }
     var buttons = document.querySelectorAll('#deleteWishlist');
@@ -80,8 +81,8 @@ $(document).ready(function(){
             if (data.indicator == ""){
                 console.log("zero")
                 $('#wishlist_indicator').text(data.indicator);
-                $(".wishlist").fadeOut('normal',function(){
-                    $(".wishlist").hide();
+                $(".showTable").fadeOut('normal',function(){
+                    $(".showTable").hide();
                     $(".block-empty-body").show();
 
                 });

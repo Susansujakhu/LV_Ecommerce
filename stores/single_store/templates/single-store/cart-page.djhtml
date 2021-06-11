@@ -7,7 +7,9 @@
 {# {% block bodyHead %}{% endblock %} #}
 
 {% block content %}
-	{% include '/general/blocks/cart-block.djhtml' %}
+	<div class="showTable" style="display:none;">
+		{% include '/general/blocks/cart-block.djhtml' %}
+	</div>
 {% endblock %}
 
 {% block container %}{% endblock %}

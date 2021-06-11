@@ -84,10 +84,12 @@
     $(document).ready(function(){
         var cart_product_no = {{cartProductNumber}}
         if(cart_product_no == ""){
-            $("#cart-block").hide();
+            $(".showTable").hide();
             $('#sidebar-cart').show();
         }
         else{
+            $(".showTable").show();
+            $('#sidebar-cart').hide();
             $(".block-empty-body").hide();
         }
         $(document).on('click', '#deleteCart', function(){
@@ -99,7 +101,7 @@
                     }); 
             req.done(function(data){
                 if(data.cartProductNumber == 0){
-                    $("#cart-block").hide();
+                    $(".showTable").hide();
                     $(".block-empty-body").show();
                 }
                 else{
@@ -107,6 +109,7 @@
                         $('#main_cart'+cart_deleteIndex).fadeOut(1000);
                         $('#main_cart'+cart_deleteIndex).remove();
                         $(".block-empty-body").hide();
+                        $(".showTable").show();
                     });
                 }
                 $('#total_cart').text(data.totalCart);
