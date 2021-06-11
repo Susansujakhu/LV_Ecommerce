@@ -343,8 +343,9 @@ def shopFilter():
 @app.route("/cart")
 @login_required
 def cart():
+    message = "Your cart is empty"
     return render_template(
-        'single-store/cart-page.djhtml'
+        'single-store/cart-page.djhtml', message=message
         )
 
 @app.route("/checkout")
@@ -357,17 +358,19 @@ def checkout():
 @app.route("/wishlist")
 @login_required
 def wishlist():
+    message = "Your wishlist is empty"
     wishlist_products = Wishlist.query.filter(Wishlist.userId == current_user.userId).first()
     product_lists = wishlist_products.product_list
     product_lists = product_lists.split(",")
     return render_template(
-        'single-store/wishlist-page.djhtml', product_lists = product_lists
+        'single-store/wishlist-page.djhtml', product_lists = product_lists, message= message
         )
 
 @app.route("/compare")
 @login_required
 def compare():
     compare_products = Compare.query.filter(Compare.userId == current_user.userId).first()
+    message = "There's no product to compare"
     if compare_products is None:
         print("Add Some Products to compare first")
         product_lists = ""
@@ -376,7 +379,7 @@ def compare():
         product_lists = product_lists.split(",")
 
     return render_template(
-        'single-store/compare-page.djhtml', product_lists = product_lists
+        'single-store/compare-page.djhtml', product_lists = product_lists, message=message
         )
 
 @app.route("/quickviewProduct", methods = ['POST'])
@@ -385,7 +388,7 @@ def quickviewProduct():
         id = int(request.get_data())
         quickViewProductData = Product.query.get(id)
     return render_template(
-        'general/blocks/quick-view-modal-block.djhtml', product = quickViewProductData
+        'general/blocks/quick-view-modal-block.djhtml', product = quickViewProductData, message=message
         )
 
 @app.route("/searchSuggestion", methods=['POST'])
@@ -1172,9 +1175,9 @@ def format_price(amount, currency='Rs. '):
 
 
 @app.route("/add_cart", methods=["POST"])
-@login_required
+
 def add_Cart():
-    if request.method == "POST":
+    if request.method == "POST" and current_user.is_authenticated:
         productId= int(request.get_data())
         product= Product.query.get(productId)
         cart=Cart.query.filter_by(product_id=productId).first()
@@ -1206,11 +1209,14 @@ def add_Cart():
                 if cart_row.product_id == rows.id:
                     totalCart = (cart_row.quantity*rows.price)+totalCart
         totalCart = format_price(totalCart)
-    return jsonify({'htmlresponse':render_template('single-store/sidebar-cart.djhtml', cart=cart_data), 
+
+        return jsonify({'htmlresponse':render_template('single-store/sidebar-cart.djhtml', cart=cart_data), 
                     'cart_count':cart_count,
                     'totalCart' :totalCart
                 })
-
+    else:
+        print("Please Login To Continue")
+        return ('', 204)
 
 @app.route("/delete_cart", methods=["POST"])
 @login_required
@@ -1237,48 +1243,49 @@ def deleteCart():
     return jsonify({'result': 'success', 'cartProductNumber':cartProductNumber, 'totalCart':totalCart})
 
 
-@app.route("/wishlistAdd", methods=['POST'])
-@login_required
+@app.route("/wishlistAdd", methods=['POST', 'GET'])
 def addWishlist():
-    updated = False
-    if request.method == "POST":
+
+    if request.method == "POST" and current_user.is_authenticated:
         productId= int(request.get_data())
 
-    wishlist_list = Wishlist.query.filter_by(userId = current_user.userId).first()
-
-    if wishlist_list is None:
-        add_wishlist = Wishlist(
-                            product_list = productId,
-                            wishlist_user_id = current_user,
-                            )
-        db.session.add(add_wishlist)
-        db.session.commit()
-
-    else:
-        product_l = wishlist_list.product_list
-        if product_l == "":
-            actual_data = {'product_list':productId}
-            db.session.query(Wishlist).filter(Wishlist.userId == current_user.userId).update(actual_data, synchronize_session=False)
+        wishlist_list = Wishlist.query.filter_by(userId = current_user.userId).first()
+        if wishlist_list is None:
+            add_wishlist = Wishlist(
+                                product_list = productId,
+                                wishlist_user_id = current_user,
+                                )
+            db.session.add(add_wishlist)
             db.session.commit()
 
         else:
-            list_product = wishlist_list.product_list.split(",")
-            count = len(list_product)
-            for i in range(count):
-                if int(list_product[i]) == productId:
-                    print("Already In Wishlist")
-                    break
-                elif i+1 == count:
-                    data = wishlist_list.product_list + "," +str(productId)
-                    actual_data = {'product_list':data}
-                    db.session.query(Wishlist).filter(Wishlist.userId == current_user.userId).update(actual_data, synchronize_session=False)
-                    db.session.commit()
+            product_l = wishlist_list.product_list
+            if product_l == "":
+                actual_data = {'product_list':productId}
+                db.session.query(Wishlist).filter(Wishlist.userId == current_user.userId).update(actual_data, synchronize_session=False)
+                db.session.commit()
 
-    indicators = Wishlist.query.filter_by(userId = current_user.userId).first()
-    list_product = indicators.product_list.split(",")
-    wishlist_indicator = len(list_product)
-    print(wishlist_indicator)
-    return jsonify({'result': 'success', 'wishlist_indicator': wishlist_indicator})
+            else:
+                list_product = wishlist_list.product_list.split(",")
+                count = len(list_product)
+                for i in range(count):
+                    if int(list_product[i]) == productId:
+                        print("Already In Wishlist")
+                        break
+                    elif i+1 == count:
+                        data = wishlist_list.product_list + "," +str(productId)
+                        actual_data = {'product_list':data}
+                        db.session.query(Wishlist).filter(Wishlist.userId == current_user.userId).update(actual_data, synchronize_session=False)
+                        db.session.commit()
+
+        indicators = Wishlist.query.filter_by(userId = current_user.userId).first()
+        list_product = indicators.product_list.split(",")
+        wishlist_indicator = len(list_product)
+        print(wishlist_indicator)
+        return jsonify({'result': 'success', 'wishlist_indicator': wishlist_indicator})
+    else:
+        print("Please Login To Continue")
+        return redirect("/")
 
 @app.route("/users/<tables>", methods = ['POST'])
 @login_required
@@ -1305,41 +1312,43 @@ def delete_wishlist(tables):
 
 
 @app.route("/compare_add", methods=["POST"])
-@login_required
+
 def addCompare():
-    if request.method == "POST":
+    if request.method == "POST" and current_user.is_authenticated:
         productId = int(request.get_data())
-    compare_list = Compare.query.filter(Compare.userId == current_user.userId).first()
+        compare_list = Compare.query.filter(Compare.userId == current_user.userId).first()
 
-    if compare_list is None:
-        add_compare = Compare(
-                            product_list = productId,
-                            compare_user_id = current_user,
-                            )
-        db.session.add(add_compare)
-        db.session.commit()
-
-    else:
-        product_l = compare_list.product_list
-        if product_l == "":
-            actual_data = {'product_list':productId}
-            db.session.query(Compare).filter(Compare.userId == current_user.userId).update(actual_data, synchronize_session=False)
+        if compare_list is None:
+            add_compare = Compare(
+                                product_list = productId,
+                                compare_user_id = current_user,
+                                )
+            db.session.add(add_compare)
             db.session.commit()
-        else:
-            list_product = compare_list.product_list.split(",")
-            count = len(list_product)
-            for i in range(count):
-                if int(list_product[i]) == productId:
-                    print("Already in Compare List")
-                    break
-                elif i+1 == count:
-                    data = compare_list.product_list + "," +str(productId)
-                    actual_data = {'product_list':data}
-                    db.session.query(Compare).filter(Compare.userId == current_user.userId).update(actual_data, synchronize_session=False)
-                    db.session.commit()
-    # return ('', 204)
-    return jsonify({'result': 'success'})
 
+        else:
+            product_l = compare_list.product_list
+            if product_l == "":
+                actual_data = {'product_list':productId}
+                db.session.query(Compare).filter(Compare.userId == current_user.userId).update(actual_data, synchronize_session=False)
+                db.session.commit()
+            else:
+                list_product = compare_list.product_list.split(",")
+                count = len(list_product)
+                for i in range(count):
+                    if int(list_product[i]) == productId:
+                        print("Already in Compare List")
+                        break
+                    elif i+1 == count:
+                        data = compare_list.product_list + "," +str(productId)
+                        actual_data = {'product_list':data}
+                        db.session.query(Compare).filter(Compare.userId == current_user.userId).update(actual_data, synchronize_session=False)
+                        db.session.commit()
+        # return ('', 204)
+        return jsonify({'result': 'success'})
+    else:
+        print("Please Login To Continue")
+        return redirect("/")
 
 @app.route("/add/<tables>", methods=['GET', 'POST'])
 @login_required
