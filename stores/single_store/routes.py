@@ -53,18 +53,18 @@ def global_attr():
     currency = request.cookies.get('currency')
     if currency is None:
         currency = "NPR"
-    totalCart = 0
-    cartProductNumber=0
-    badgeForNew=[]
-    form1 = LoginForm()
-    products = Product.query.all()
-    category = Category.query.all()
+    totalCart         = 0
+    cartProductNumber = 0
+    badgeForNew       = []
+    form1             = LoginForm()
+    products          = Product.query.all()
+    category          = Category.query.all()
 
     productRatings = {}
     for productItem in products:
-        rating = Rating.query.filter_by(product_id = productItem.id).all()
-        sum = 0
-        avg_rating = 0
+        rating        = Rating.query.filter_by(product_id = productItem.id).all()
+        sum           = 0
+        avg_rating    = 0
         total_ratings = len(rating)
         for rate in rating:
             sum = sum+rate.rate
@@ -274,15 +274,15 @@ def shop():
 @app.route("/shopFilter", methods=["POST"])
 def shopFilter():
     if request.method == "POST":
-        colors = request.form.getlist("color[]")
-        brands = request.form.getlist("brands[]")
-        min = int(float(request.form.get("min")))
-        max = int(float(request.form.get("max")))
+        colors           = request.form.getlist("color[]")
+        brands           = request.form.getlist("brands[]")
+        min              = int(float(request.form.get("min")))
+        max              = int(float(request.form.get("max")))
         selectedCategory = request.form.get("category")
-        sort = request.form.get("sort")
-        limit = int(request.form.get("limit"))
-        keyword = request.form.get("keyword")
-        filters =[]
+        sort             = request.form.get("sort")
+        limit            = int(request.form.get("limit"))
+        keyword          = request.form.get("keyword")
+        filters          = []
 
         if keyword:
             print("keyword xa")
@@ -1259,7 +1259,7 @@ def deleteCart():
             if cart_row.product_id == rows.id:
                 totalCart = (cart_row.quantity*rows.price)+totalCart
                 cartProductNumber=cartProductNumber+1
-
+    totalCart = format_price(totalCart)
     return jsonify({'result': 'success', 'cartProductNumber':cartProductNumber, 'totalCart':totalCart})
 
 
