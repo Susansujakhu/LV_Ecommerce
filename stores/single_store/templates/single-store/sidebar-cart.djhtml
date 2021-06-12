@@ -5,19 +5,19 @@
 
     <div id="sidebar_cart{{cart_row.product_id}}" class="dropcart-product">
         <div class="product-image dropcart-product-image">
-            <a href="single/{{ rows.id }}" class="product-image-body">
+            <a href="{{ url_for('single_product',slug=rows.slug) }}" class="product-image-body">
                 <img class="product-image-img" src="{{url_for('static', filename='assets/images/products/'+ imagename )}}" alt="">
             </a>
         </div>
         <div class="dropcart-product-info">
-            <div class="dropcart-product-name"><a href="single/{{ rows.id }}">{{rows['productName']}}</a></div>
+            <div class="dropcart-product-name"><a href="{{ url_for('single_product',slug=rows.slug) }}">{{rows['productName']}}</a></div>
             <ul class="dropcart-product-options">
                 <li>Color: {{cart_row.color}}</li>
                 <li>Material: {{rows['material']}} </li>
             </ul>
             <div class="dropcart-product-meta">
                 <span class="dropcart-product-quantity">{{cart_row.quantity}}</span> ×
-                <span class="dropcart-product-price">{{currency}} {{rows['price']}}</span>
+                <span class="dropcart-product-price">{{ format_price(rows['price'])}}</span>
             </div>
         </div>
         <button id="deleteCart" data-id="{{cart_row.product_id}}" type="button" class="dropcart-product-remove btn btn-light btn-sm btn-svg-icon">
