@@ -120,7 +120,7 @@
                                         {% for items in category %}
                                             {% if items.parentCategory == 'None' %}
                                             <li class="departments-item">
-                                                <a class="departments-item-link" href="category/{{items.slug}}">
+                                                <a class="departments-item-link" href="{{url_for('categoryPage', slug=items.slug)}}">
                                                     {{items.name}}
                                                     {% for item in category %}
                                                         {% if item.parentCategory == items.name %}
@@ -141,7 +141,7 @@
                                                             {% if sub_items.parentCategory == items.name %}
                                                             <li class="menu-item">
                                                                 <div class="menu-item-submenu-offset"></div>
-                                                                <a class="menu-item-link" href="category/{{sub_items.slug}}">
+                                                                <a class="menu-item-link" href="{{url_for('categoryPage', slug=sub_items.slug)}}">
                                                                     {{sub_items.name}}
                                                                 </a>
                                                             </li>
