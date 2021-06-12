@@ -20,7 +20,7 @@
                 
             {% include ('single-store/sidebar-cart.djhtml')%}
             </div>
-            <div class="dropcart-totals">
+            <div class="dropcart-totals" style="display:none">
                 <table>
                     <tr>
                         <th>Total</th>
@@ -28,7 +28,7 @@
                     </tr>
                 </table>
             </div>
-            <div class="dropcart-buttons">
+            <div class="dropcart-buttons" style="display:none">
                 <a class="btn btn-secondary" href="/cart">View Cart</a>
                 <a class="btn btn-primary" href="/checkout">Checkout</a>
             </div>
