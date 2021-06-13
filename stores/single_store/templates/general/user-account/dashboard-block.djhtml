@@ -27,7 +27,7 @@
                 </div>
                 <div class="address-card-row">
                     <div class="address-card-row-title">Province</div>
-                    <div class="address-card-row-content">{{userAddress.state}}</div>
+                    <div class="address-card-row-content">{{userAddress.state | default("N/A", True)}}</div>
                 </div>
                 <div class="address-card-row">
                     <div class="address-card-row-title">Apartment/House number</div>
@@ -40,14 +40,18 @@
                 </div>
                 <div class="address-card-row">
                     <div class="address-card-row-title">Phone Number</div>
-                    <div class="address-card-row-content">{{userAddress.phoneNo}}</div>
+                    <div class="address-card-row-content">{{userAddress.phoneNo | default("N/A", True)}}</div>
                 </div>
                 <div class="address-card-row">
                     <div class="address-card-row-title">Secondary Phone Number</div>
                     <div class="address-card-row-content">{{userAddress.altPhoneNo | default("N/A", True)}}</div>
                 </div>
-                <div class="address-card-footer">
-                    <a href="/dashboard/edit-address/{{userAddress.id}}">Edit Address</a>
+                <div class="address-card-footer">      
+                    {% if userAddress.firstName|length %}
+                        <a href="/dashboard/edit-address/{{userAddress.id}}">Edit Address</a>
+                    {% else %}
+                        <a href="/dashboard/edit-address">Edit Address</a>
+                    {% endif %}
                 </div>
             </div>
         </div>
