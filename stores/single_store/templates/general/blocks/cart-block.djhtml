@@ -129,7 +129,6 @@ $(document).ready(function(){
     $(document).on('click', '#subAdd', function(){
         var prodId = $(this).attr('data-id');
         var quantityVal= $("#prodQuantity"+prodId).val();
-        console.log(prodId+"sunder-->"+quantityVal);
         event.preventDefault();
         req = $.ajax({
                 url: "/cart",
