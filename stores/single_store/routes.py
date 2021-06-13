@@ -1252,6 +1252,7 @@ def add_Cart():
                 })
     else:
         print("Please Login To Continue")
+        flash("Please Login To Add To Cart", "danger")
         return ('', 204)
 
 @app.route("/delete_cart", methods=["POST"])
@@ -1569,7 +1570,10 @@ def edit(tables, id):
  
 @app.route('/forget-password')
 def forget():
-    return render_template('single-store/forget-password.html')
+    if current_user.is_authenticated:
+        return redirect('/account')
+    else:
+        return render_template('single-store/forget-password.html')
 
 
 @app.route('/send-otp', methods = ['POST'])
