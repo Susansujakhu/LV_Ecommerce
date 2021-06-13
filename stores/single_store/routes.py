@@ -6,14 +6,14 @@ from flask.helpers import make_response
 from sqlalchemy.sql.elements import Null
 from sqlalchemy.sql.expression import text
 from wtforms.fields.core import StringField
-from single_store import app, db, bcrypt
-from single_store.forms import DashboardPwForm, EditDashboardAddressForm, EditDashboardProfileForm,DynamicForm, HorizontalPanelForm, EditHorizontalPanelForm, BrandForm, EditBrandForm, FeaturesForm, EditFeaturesForm, HeroForm, EditHeroForm, RatingForm, RegistrationForm, LoginForm, ProductForm, EditProductForm, CategoryForm,EditCategoryForm, ColorForm, SizeForm
+from single_store import app, db, bcrypt, mail, Message
+from single_store.forms import DashboardPwForm, EditDashboardAddressForm, EditDashboardProfileForm,DynamicForm, ForgetPassword, HorizontalPanelForm, EditHorizontalPanelForm, BrandForm, EditBrandForm, FeaturesForm, EditFeaturesForm, HeroForm, EditHeroForm, RatingForm, RegistrationForm, LoginForm, ProductForm, EditProductForm, CategoryForm,EditCategoryForm, ColorForm, SizeForm
 from single_store.models import Size, Color, Compare,HorizontalPanel, Brand, Cart, Category, Features, Hero, Order, Product, Rating, Shipping, User, MyAdminIndexView, AdminView, Wishlist
 from flask_login import login_user, current_user, logout_user, login_required
 import secrets, os, sys
 from PIL import Image
 from flask_admin import Admin
-from werkzeug.utils import secure_filename
+from werkzeug.utils import secure_filename, validate_arguments
 from datetime import datetime, timezone, timedelta 
 from sqlalchemy.sql import table, column
 from sqlalchemy import func
@@ -1551,3 +1551,45 @@ def edit(tables, id):
     return render_template('edit.html', title=tables, form=form, table_head=table_head, product_dict=a, slug = slug)
 
  
+@app.route('/forget-password')
+def forget():
+    return render_template('single-store/forget-password.html')
+
+
+@app.route('/send-otp', methods = ['POST'])
+def send_otp():
+    if request.method == "POST":
+        email = request.form.get('email')
+        otp = request.form.get('otp')
+        registered_email = User.query.filter(User.email == email).first()
+        if registered_email is None:
+            error = True
+            
+        else:
+            error = False
+            msg = Message(subject="Hello",
+                        sender=app.config.get("MAIL_USERNAME"),
+                        recipients=[email], # replace with your email for testing
+                        body="Use this OTP to change your password"+str(otp)+"This OTP will be valid for 60 Seconds")
+            mail.send(msg)
+        
+    return jsonify({"otp": otp, "error": error, "reg_email":email, "userId":registered_email.userId})
+
+@app.route('/change-password/<int:access_code>', methods=['POST', 'GET'])
+def forgetPassword(access_code):
+    cookie_access_code = request.cookies.get('access_code')
+    if access_code == int(cookie_access_code):
+        form = ForgetPassword()
+        if form.validate_on_submit():
+            selectedId = request.cookies.get('id')
+            user = User.query.get(selectedId)
+            hashed_password = bcrypt.generate_password_hash(form.newPw.data).decode('utf-8')
+            user.password = hashed_password
+            db.session.commit()
+            flash('Password Change Successful. Please Login to continue', 'success')
+            return redirect('/account')
+        else:
+            flash('Failed to change Password', 'success')
+        return render_template('single-store/change-password.html', form=form)
+    else:
+        return redirect('/account')
