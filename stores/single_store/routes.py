@@ -339,14 +339,30 @@ def shopFilter():
 
                 })
 
-
-@app.route("/cart")
+@app.route("/cart", methods=["POST","GET"])
 @login_required
 def cart():
     message = "Your cart is empty"
-    return render_template(
-        'single-store/cart-page.djhtml', message=message
-        )
+    if request.method == "POST":    #to increase/decrease the quantity of cart 
+        quantityNum = request.form['quantityVal']
+        prodId = request.form['prodId']
+        productPrice = Product.query.get(prodId)
+        money = productPrice.price
+        totalPrice = money*int(quantityNum)
+        cartQuan=Cart.query.filter_by(userId=current_user.userId,product_id=prodId).first()
+        cartQuan.quantity = quantityNum
+        db.session.commit()
+        overallPrice=0
+        for cart_row in Cart.query.filter_by(userId = current_user.userId).all():
+                for rows in Product.query.all():
+                    if cart_row.product_id == rows.id:
+                        overallPrice = (cart_row.quantity*rows.price)+overallPrice
+        return jsonify({'status':'OK','totalPrice': format_price(totalPrice), 'overallPrice':format_price(overallPrice)})
+    else:
+        return render_template(
+            'single-store/cart-page.djhtml', message=message
+            )
+
 
 @app.route("/checkout")
 @login_required
