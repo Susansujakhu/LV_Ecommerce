@@ -36,7 +36,7 @@
                                     {{ form1.password(class="form-control") }}
                                 {% endif %}
                                 <small class="form-text text-muted">
-                                    <a href="">Forgot Password</a>
+                                    <a href="{{url_for('forget')}}">Forgot Password</a>
                                 </small>
                             </div>
                             <div class="form-group">
