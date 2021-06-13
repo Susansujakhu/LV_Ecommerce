@@ -232,3 +232,9 @@ class DashboardPwForm(FlaskForm):
     rePw = PasswordField('Confirm Password',
                                      validators=[DataRequired(), EqualTo('newPw', message='Passwords must match')], render_kw={"placeholder": "Re-Password"})
     submit = SubmitField('Save')
+
+class ForgetPassword(FlaskForm):
+    newPw = PasswordField('New Password', validators=[DataRequired()], render_kw={"placeholder": "New Password"})
+    rePw = PasswordField('Confirm Password',
+                                     validators=[DataRequired(), EqualTo('newPw', message='Passwords must match')], render_kw={"placeholder": "Re-Password"})
+    submit = SubmitField('Save')
