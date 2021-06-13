@@ -40,12 +40,14 @@
                         <td class="cart-table-column cart-table-column--price" data-title="Price">{{currency}} {{rows['price']}}</td>
                         <td class="cart-table-column cart-table-column--quantity" data-title="Quantity">
                             <div class="input-number">
-                                <input class="form-control input-number-input" type="number" min="1" value="{{cart_row.quantity}}">
-                                <div class="input-number-add"></div>
-                                <div class="input-number-sub"></div>
+                                <input id="prodQuantity{{ cart_row.product_id }}"  class="form-control input-number-input" type="number" min="1" max="{{rows['stock']}}" value="{{cart_row.quantity}}">
+                                <div id="subAdd" data-id="{{ cart_row.product_id }}" class="input-number-add"></div>
+                                <div id="subAdd" data-id="{{ cart_row.product_id }}" class="input-number-sub"></div>
                             </div>
                         </td>
-                        <td class="cart-table-column cart-table-column--total" data-title="Total">{{currency}} {{cart_row.quantity*rows['price']}}</td>
+                        <td id="total{{rows['id']}}" class="cart-table-column cart-table-column--total" data-title="Total">{{currency}} 
+                            {{cart_row.quantity*rows['price']}}
+                        </td>
                         <td class="cart-table-column cart-table-column--remove">
                             <button type="button" id="deleteCart" data-id="{{cart_row.product_id}}" class="btn btn-light btn-sm btn-svg-icon">
                                 <svg width="12px" height="12px">
@@ -100,7 +102,7 @@
                                 <tfoot class="cart-totals-footer">
                                     <tr>
                                         <th>Total</th>
-                                        <td>{{currency}} {{totalCart}}</td>
+                                        <td id="overall">{{currency}} {{totalCart}}</td>
                                     </tr>
                                 </tfoot>
                             </table>
@@ -111,11 +113,41 @@
             </div>
         </div>
     </div>
-</div>
 
- <div id="cart-empty-block" class="block-empty-body" style="display:none">
+
+<div id="cart-empty-block" class="block-empty-body" style="display:none">
     <div class="block-empty-message">{{message}}</div>
     <div class="block-empty-actions">
         <a class="btn btn-primary btn-sm" href="/shop">Continue Shopping</a>
     </div>
 </div>
+
+
+<script>
+    
+$(document).ready(function(){
+    $(document).on('click', '#subAdd', function(){
+        var prodId = $(this).attr('data-id');
+        var quantityVal= $("#prodQuantity"+prodId).val();
+        console.log(prodId+"sunder-->"+quantityVal);
+        event.preventDefault();
+        req = $.ajax({
+                url: "/cart",
+                type: "POST",
+                dataType: "json",
+                encode: true,
+                cache: false,
+                data: { "prodId":prodId, 
+                        "quantityVal":quantityVal,
+                }
+        }); 
+        req.done(function(data){
+            console.log(data.status);
+            $('#total'+prodId).html(data.totalPrice)
+            $('#overall').html(data.overallPrice)
+        });
+    });
+
+});
+
+</script>
