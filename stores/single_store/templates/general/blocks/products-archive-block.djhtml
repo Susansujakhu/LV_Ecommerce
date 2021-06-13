@@ -356,8 +356,8 @@ $(document).ready(function(){
                     selectedCategory = url_values[2]
                 }
                 else if(url_values[1] == 'search-results'){
-                    var selectedCategory = "{{cata}}"
-                    var keyword = '{{keyword}}'
+                    selectedCategory = "{{cata}}"
+                    keyword = '{{keyword}}'
 
                 }
 
