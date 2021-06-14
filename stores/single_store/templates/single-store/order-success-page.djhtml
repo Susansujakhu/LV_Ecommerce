@@ -1,0 +1,14 @@
+{% set pageTitle = "Great!" %}
+{% extends 'single-store/base.djhtml' %}
+
+{% block head %}
+{% endblock %}
+
+{% block content %}
+	{% include '/general/blocks/order-success-block.djhtml' %}
+{% endblock %}
+
+{% block container %}{% endblock %}
+
+{% block tail %}
+{% endblock %}
