@@ -108,13 +108,10 @@ def utility_processor():
         currency = request.cookies.get('currency')
         if currency is None:
             currency = "NPR"
-        if currency == "USD" or currency == "EUR":
+        if currency != "NPR":
             amount = amount / 1.6
             c = CurrencyConverter()
-            if currency == "USD":
-                amount = c.convert(amount, 'INR', 'USD')
-            elif currency == "EUR":
-                amount = c.convert(amount, 'INR', 'EUR')
+            amount = c.convert(amount, 'INR', currency)
             amount = "{:,.2f}".format(amount)
         else:
             amount_list = [int(d) for d in str(amount)]
