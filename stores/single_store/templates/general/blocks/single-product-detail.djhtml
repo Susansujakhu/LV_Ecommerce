@@ -185,7 +185,7 @@
                             <div class="product-actions">
                                 <div class="product-actions-item">
                                     <div class="input-number product-quantity">
-                                        <input id="product-quantity" class="input-number-input form-control form-control-lg" type="number" min="1" value="1" max="{{productStock}}" onkeydown="return false">
+                                        <input id="product-quantity"  class="input-number-input form-control form-control-lg {{productId}}" type="number" min="1" value="1" max="{{productStock}}" onkeydown="return false">
                                         <div class="input-number-add">
                                         </div>
                                         <div class="input-number-sub">

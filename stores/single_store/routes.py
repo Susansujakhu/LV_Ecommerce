@@ -1196,14 +1196,14 @@ def add_Cart():
                 db.session.add(addCart)
                 db.session.commit()
             else:
-                print(product.productName," -> quantity selected more than the stock")
+                print("quantity selected more than the stock-> ",product.productName)
         else:
             if (product.stock>=cart.quantity+quantityValue):
                 quantityValue = cart.quantity+quantityValue
                 db.session.query(Cart).filter(Cart.product_id == productId).update({'quantity':quantityValue}, synchronize_session=False)
                 db.session.commit()
             else:
-                print(product.productName," -> quantity selected more than the stock")
+                print(" quantity selected more than the stock -> ",product.productName)
         products = Product.query.all()
         cart_data = Cart.query.filter_by(userId = current_user.userId).all()
         cart_count = len(cart_data)
