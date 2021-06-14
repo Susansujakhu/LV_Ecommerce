@@ -393,6 +393,7 @@ $(document).ready(function(){
     function call_ajax(brands, min, max, color, selectedCategory, sortProduct, limit, keyword){
         console.log(brands, min, max, color, selectedCategory, sortProduct, limit, keyword)
         $("#load_more").hide();
+        $("#end_page").hide();
         $(".products-archive-loader").show();
         $.ajax({
                 url: '/shopFilter',
