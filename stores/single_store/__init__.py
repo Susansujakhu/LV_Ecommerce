@@ -10,6 +10,7 @@ app = Flask(__name__,
 app.config.from_object("config.DevelopmentConfig")
 app.jinja_env.add_extension('jinja2.ext.do')
 app.jinja_env.add_extension('jinja2.ext.loopcontrols')
+app.jinja_env.cache = {}
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:sushansujakhu14@localhost/ecommerce'
 # app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 # # POSTGRES = {
