@@ -45,7 +45,7 @@
                                 <div id="subAdd" data-id="{{ cart_row.product_id }}" class="input-number-sub"></div>
                             </div>
                         </td>
-                        <td id="total{{rows['id']}}" class="cart-table-column cart-table-column--total" data-title="Total">{{currency}} 
+                        <td id="totalPrice{{rows['id']}}" class="cart-table-column cart-table-column--total" data-title="Total">{{currency}} 
                             {{cart_row.quantity*rows['price']}}
                         </td>
                         <td class="cart-table-column cart-table-column--remove">
@@ -102,7 +102,7 @@
                                 <tfoot class="cart-totals-footer">
                                     <tr>
                                         <th>Total</th>
-                                        <td id="overall">{{currency}} {{totalCart}}</td>
+                                        <td id="overallPrice">{{currency}} {{totalCart}}</td>
                                     </tr>
                                 </tfoot>
                             </table>
@@ -142,8 +142,8 @@ $(document).ready(function(){
         }); 
         req.done(function(data){
             console.log(data.status);
-            $('#total'+prodId).html(data.totalPrice)
-            $('#overall').html(data.overallPrice)
+            $('#totalPrice'+prodId).html(data.totalPrice)
+            $('#overallPrice').html(data.overallPrice)
         });
     });
 
