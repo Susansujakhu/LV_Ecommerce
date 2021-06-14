@@ -27,158 +27,162 @@
             <div class="product-content">
                 <!-- .product-gallery -->
                 {% include('/general/blocks/gallery-model.djhtml') %}
-            <!-- .product-gallery / end -->
-            <!-- .product-info -->
-            <div class="product-info">
-                <div class="product-wishlist-compare">
-                    <button type="button" class="btn btn-sm btn-light btn-svg-icon" data-toggle="tooltip" data-placement="right" title="Wishlist">
-                        <svg width="16px" height="16px">
-                            <use xlink:href="images/sprite.svg#wishlist-16"></use>
-                        </svg>
-                    </button>
-                    <button type="button" class="btn btn-sm btn-light btn-svg-icon" data-toggle="tooltip" data-placement="right" title="Compare">
-                        <svg width="16px" height="16px">
-                            <use xlink:href="images/sprite.svg#compare-16"></use>
-                        </svg>
-                    </button>
-                </div>
-                <h1 class="product-name">{{ productName }}</h1>
-                {% set products_id = productId %}
-                {% include ('/general/blocks/ratings.djhtml') %}
+                <!-- .product-gallery / end -->
+                <!-- .product-info -->
+                <div class="product-info">
+                    <div class="product-wishlist-compare">
+                        <button type="button" class="btn btn-sm btn-light btn-svg-icon" data-toggle="tooltip" data-placement="right" title="Wishlist">
+                            <svg width="16px" height="16px">
+                                <use xlink:href="images/sprite.svg#wishlist-16"></use>
+                            </svg>
+                        </button>
+                        <button type="button" class="btn btn-sm btn-light btn-svg-icon" data-toggle="tooltip" data-placement="right" title="Compare">
+                            <svg width="16px" height="16px">
+                                <use xlink:href="images/sprite.svg#compare-16"></use>
+                            </svg>
+                        </button>
+                    </div>
+                    <h1 class="product-name">{{ productName }}</h1>
+                    {% set products_id = productId %}
+                    {% include ('/general/blocks/ratings.djhtml') %}
 
-                <div class="product-description">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ornare, mi in ornare elementum, libero nibh
-                                        lacinia urna, quis convallis lorem erat at purus. Maecenas eu varius nisi.
+                    <div class="product-description">
+                        {{productShortDescription}}
+                    </div>
+                    <ul class="product-features">
+                        <li>Speed: 750 RPM</li>
+                        <li>Power Source: Cordless-Electric</li>
+                        <li>Battery Cell Type: Lithium</li>
+                        <li>Voltage: 20 Volts</li>
+                        <li>Battery Capacity: 2 Ah</li>
+                    </ul>
+                    <ul class="product-meta">
+                        <li class="product-meta-availability">Availability:
+                            <span class="text-success">
+                                {% if productStock == 0 %}
+                                    Out of Stock
+                                {% else %}
+                                    {{ productStock }} in Stock
+                                {% endif %}
+                            </span>
+                        </li>
+                        <li>Brand:
+                            <a href="">{{productBrand}}</a>
+                        </li>
+                        <li>SKU: 83690/32</li>
+                    </ul>
                 </div>
-                <ul class="product-features">
-                    <li>Speed: 750 RPM</li>
-                    <li>Power Source: Cordless-Electric</li>
-                    <li>Battery Cell Type: Lithium</li>
-                    <li>Voltage: 20 Volts</li>
-                    <li>Battery Capacity: 2 Ah</li>
-                </ul>
-                <ul class="product-meta">
-                    <li class="product-meta-availability">Availability:
+                <!-- .product-info / end -->
+                <!-- .product-sidebar -->
+                <div class="product-sidebar">
+                    <div class="product-availability">
+                        Availability:
                         <span class="text-success">In Stock</span>
-                    </li>
-                    <li>Brand:
-                        <a href="">Wakita</a>
-                    </li>
-                    <li>SKU: 83690/32</li>
-                </ul>
-            </div>
-            <!-- .product-info / end -->
-            <!-- .product-sidebar -->
-            <div class="product-sidebar">
-                <div class="product-availability">
-                    Availability:
-                    <span class="text-success">In Stock</span>
-                </div>
-                <div class="product-prices">
-                    $1,499.00
-                </div>
-                <!-- .product-options -->
-                <form class="product-options">
-                    <div class="form-group product-option">
-                        <label class="product-option-label">Color</label>
-                        <div class="input-radio-color">
-                            <div class="input-radio-color-list">
-                                <label class="input-radio-color-item input-radio-color-item--white" style="color: #fff;" data-toggle="tooltip" title="White">
-                                    <input type="radio" name="color">
-                                        <span></span>
-                                    </label>
-                                    <label class="input-radio-color-item" style="color: #ffd333;" data-toggle="tooltip" title="Yellow">
-                                        <input type="radio" name="color">
-                                            <span></span>
-                                        </label>
-                                        <label class="input-radio-color-item" style="color: #ff4040;" data-toggle="tooltip" title="Red">
-                                            <input type="radio" name="color">
-                                                <span></span>
-                                            </label>
-                                            <label class="input-radio-color-item input-radio-color-item--disabled" style="color: #4080ff;" data-toggle="tooltip" title="Blue">
-                                                <input type="radio" name="color" disabled>
-                                                    <span></span>
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group product-option">
-                                        <label class="product-option-label">Material</label>
-                                        <div class="input-radio-label">
-                                            <div class="input-radio-label-list">
-                                                <label>
-                                                    <input type="radio" name="material">
-                                                        <span>Metal</span>
+                    </div>
+                    <div class="product-prices">
+                       {{ format_price(productPrice) }}
+                    </div>
+                    <!-- .product-options -->
+                    <form class="product-options">
+                        <div class="form-group product-option">
+                            <label class="product-option-label">Color</label>
+                            <div class="input-radio-color">
+                                <div class="input-radio-color-list">
+                                    {% set product_color = productColor.split(',') %}
+                                    {% if product_color == "" %}
+                                        <label>N/A</label>
+                                    {% else %}
+                                        {% for items in product_color %}
+                                            {% for color in colors %}
+                                                {% if color.color == items %}
+                                                    <label class="input-radio-color-item input-radio-color-item--{{color.color}}" style="color:{{color.colorCode}};" data-toggle="tooltip" title="{{color.color}}">
+                                                        <input type="radio" name="color">
+                                                        <span></span>
                                                     </label>
-                                                    <label>
-                                                        <input type="radio" name="material">
-                                                            <span>Wood</span>
-                                                        </label>
-                                                        <label>
-                                                            <input type="radio" name="material" disabled>
-                                                                <span>Plastic</span>
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% endfor %}
+                                     {%endif%}
+                                </div>
+                            </div>
+                        </div>
+                                        <div class="form-group product-option">
+                                            <label class="product-option-label">Material</label>
+                                            <div class="input-radio-label">
+                                                <div class="input-radio-label-list">
+                                                    {% set material = productMaterial.split(',') %}
+                                                    {% if productMaterial == "" %}
+                                                            <label>N/A</label>
+                                                    {% else %}
+                                                        {% for items in material %}
+                                                            <label>
+                                                                <input type="radio" name="{{items}}">
+                                                                <span>{{items}}</span>
                                                             </label>
-                                                        </div>
-                                                    </div>
+                                                        {% endfor %}
+                                                    {% endif %}   
                                                 </div>
-                                                <div class="form-group product-option">
-                                                    <label class="product-option-label" for="product-quantity">Quantity</label>
-                                                    <div class="product-actions">
-                                                        <div class="product-actions-item">
-                                                            <div class="input-number product-quantity">
-                                                                <input id="product-quantity" class="input-number-input form-control form-control-lg" type="number" min="1" value="1">
-                                                                    <div class="input-number-add"></div>
-                                                                    <div class="input-number-sub"></div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="product-actions-item product-actions-item--addtocart">
-                                                                <button class="btn btn-primary btn-lg">Add to cart</button>
-                                                            </div>
-                                                            <div class="product-actions-item product-actions-item--wishlist">
-                                                                <button type="button" class="btn btn-secondary btn-svg-icon btn-lg" data-toggle="tooltip" title="Wishlist">
-                                                                    <svg width="16px" height="16px">
-                                                                        <use xlink:href="/static/assets/icons/sprite.svg#wishlist-16"></use>
-                                                                    </svg>
-                                                                </button>
-                                                            </div>
-                                                            <div class="product-actions-item product-actions-item--compare">
-                                                                <button type="button" class="btn btn-secondary btn-svg-icon btn-lg" data-toggle="tooltip" title="Compare">
-                                                                    <svg width="16px" height="16px">
-                                                                        <use xlink:href="/static/assets/icons/sprite.svg#compare-16"></use>
-                                                                    </svg>
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                                <!-- .product-options / end -->
+                                                
                                             </div>
-                                            <!-- .product-end -->
-                                            <div class="product-footer">
-                                                <div class="product-tags tags">
-                                                    <div class="tags-list">
-                                                        <a href="">Mounts</a>
-                                                        <a href="">Electrodes</a>
-                                                        <a href="">Chainsaws</a>
+                                        </div>
+                                        <div class="form-group product-option">
+                                            <label class="product-option-label" for="product-quantity">Quantity</label>
+                                            <div class="product-actions">
+                                                <div class="product-actions-item">
+                                                    <div class="input-number product-quantity">
+                                                        <input id="product-quantity" class="input-number-input form-control form-control-lg {{productId}}" type="number" min="1" max="{{productStock}}" value="1">
+                                                        <div class="input-number-add"></div>
+                                                        <div class="input-number-sub"></div>
                                                     </div>
                                                 </div>
-                                                <div class="product-share-links share-links">
-                                                    <ul class="share-links-list">
-                                                        <li class="share-links-item share-links-item--type--like">
-                                                            <a href="">Like</a>
-                                                        </li>
-                                                        <li class="share-links-item share-links-item--type--tweet">
-                                                            <a href="">Tweet</a>
-                                                        </li>
-                                                        <li class="share-links-item share-links-item--type--pin">
-                                                            <a href="">Pin It</a>
-                                                        </li>
-                                                        <li class="share-links-item share-links-item--type--counter">
-                                                            <a href="">4K</a>
-                                                        </li>
-                                                    </ul>
+                                                <div class="product-actions-item product-actions-item--addtocart">
+                                                    <button id="addCart" data-id="{{ productId }}" class="btn btn-primary btn-lg">Add to cart</button>
+                                                </div>
+                                                <div class="product-actions-item product-actions-item--wishlist">
+                                                    <button id="addWishlist" data-id="{{ productId }}" type="button" class="btn btn-secondary btn-svg-icon btn-lg" data-toggle="tooltip" title="Wishlist">
+                                                        <svg width="16px" height="16px">
+                                                            <use xlink:href="/static/assets/icons/sprite.svg#wishlist-16"></use>
+                                                        </svg>
+                                                    </button>
+                                                </div>
+                                                <div class="product-actions-item product-actions-item--compare">
+                                                    <button id="addCompare" data-id="{{ productId }}" type="button" class="btn btn-secondary btn-svg-icon btn-lg" data-toggle="tooltip" title="Compare">
+                                                        <svg width="16px" height="16px">
+                                                            <use xlink:href="/static/assets/icons/sprite.svg#compare-16"></use>
+                                                        </svg>
+                                                    </button>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
+                    </form>
+                <!-- .product-options / end -->
+                </div>
+                <!-- .product-end -->
+                <div class="product-footer">
+                    <div class="product-tags tags">
+                        <div class="tags-list">
+                            <a href="">Mounts</a>
+                            <a href="">Electrodes</a>
+                            <a href="">Chainsaws</a>
+                        </div>
+                    </div>
+                    <div class="product-share-links share-links">
+                        <ul class="share-links-list">
+                            <li class="share-links-item share-links-item--type--like">
+                                <a href="">Like</a>
+                            </li>
+                            <li class="share-links-item share-links-item--type--tweet">
+                                <a href="">Tweet</a>
+                            </li>
+                            <li class="share-links-item share-links-item--type--pin">
+                                <a href="">Pin It</a>
+                            </li>
+                            <li class="share-links-item share-links-item--type--counter">
+                                <a href="">4K</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

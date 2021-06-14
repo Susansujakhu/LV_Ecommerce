@@ -117,12 +117,21 @@
         $(document).on('click', '#addCart', function(){
             var selector = $(this);
             var cart_index = $(this).attr('data-id');
-            
+            var quantityVal= "1"
+            if (typeof $("."+cart_index).val() === 'undefined'){
+                quantityVal = "1";
+            }
+            else{
+                quantityVal= $("."+cart_index).val();
+            }
+            console.log(quantityVal)
             req = $.ajax({
                     url: "/add_cart",
                     type: "POST",
-                    data: cart_index,
-                    }); 
+                    data: {'cart_index':cart_index,
+                            'quantityVal':quantityVal,
+                    }
+            }); 
             req.done(function(data){
                 if(data.cart_count != 0){
                     $("#cart-empty-block").hide();

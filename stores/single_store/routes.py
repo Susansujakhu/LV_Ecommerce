@@ -339,6 +339,7 @@ def shopFilter():
 
                 })
 
+
 @app.route("/cart", methods=["POST","GET"])
 @login_required
 def cart():
@@ -362,7 +363,7 @@ def cart():
         return render_template(
             'single-store/cart-page.djhtml', message=message
             )
-
+        
 
 @app.route("/checkout")
 @login_required
@@ -1179,26 +1180,30 @@ def format_price(amount, currency='Rs. '):
 
 def add_Cart():
     if request.method == "POST" and current_user.is_authenticated:
-        productId= int(request.get_data())
+        productId = request.form['cart_index']
+        quantityValue = int(request.form['quantityVal'])
         product= Product.query.get(productId)
         cart=Cart.query.filter_by(product_id=productId).first()
         if cart is None:
-            quantityValue = 1
-            addCart = Cart(
-                        quantity =quantityValue,
-                        color = product.color,
-                        size = product.size,
-                        cart_user_id = current_user,
-                        cart_product_id=product,
-                        )
-            db.session.add(addCart)
-            db.session.commit()
-            
+            if product.stock>=quantityValue:
+                addCart = Cart(
+                            quantity =quantityValue,
+                            color = product.color,
+                            size = product.size,
+                            cart_user_id = current_user,
+                            cart_product_id=product,
+                            )
+                db.session.add(addCart)
+                db.session.commit()
+            else:
+                print(product.productName," -> quantity selected more than the stock")
         else:
-            quantityValue=cart.quantity
-            quantityValue = quantityValue+1
-            db.session.query(Cart).filter(Cart.product_id == productId).update({'quantity':quantityValue}, synchronize_session=False)
-            db.session.commit()
+            if (product.stock>=cart.quantity+quantityValue):
+                quantityValue = cart.quantity+quantityValue
+                db.session.query(Cart).filter(Cart.product_id == productId).update({'quantity':quantityValue}, synchronize_session=False)
+                db.session.commit()
+            else:
+                print(product.productName," -> quantity selected more than the stock")
         products = Product.query.all()
         cart_data = Cart.query.filter_by(userId = current_user.userId).all()
         cart_count = len(cart_data)
