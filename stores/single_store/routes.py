@@ -401,6 +401,13 @@ def compare():
         'single-store/compare-page.djhtml', product_lists = product_lists, message=message
         )
 
+@app.route("/track-order")
+@login_required
+def track_order():
+    return render_template(
+        'single-store/track-order-page.djhtml'
+        )
+
 @app.route("/category")
 @login_required
 def products_archive():
