@@ -448,13 +448,19 @@ def searchSuggestion():
 @app.route("/admin-dashboard")
 def admin_dashboard():
     return render_template(
-        'single-store/admin/dashboard-page.djhtml'
+        'admin/dashboard-page.djhtml'
         )
 
 @app.route("/add-products")
 def admin_add_products():
     return render_template(
-        'single-store/admin/add-products-page.djhtml'
+        'admin/add-products-page.djhtml'
+        )
+
+@app.route("/view-products")
+def admin_products_listing():
+    return render_template(
+        'admin/product-listing-page.djhtml'
         )
 
 @app.route("/account", methods=['GET', 'POST'])

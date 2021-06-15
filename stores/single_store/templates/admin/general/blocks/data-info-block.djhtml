@@ -1,0 +1,53 @@
+<!-- Row -->
+<div class="row row-sm">
+	<div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
+		<div class="card custom-card">
+			<div class="card-body">
+				<div class="card-order ">
+					<label class="main-content-label mb-3 pt-1">New Users</label>
+					<h2 class="text-right card-item-icon card-icon">
+					<i class="mdi mdi-account-multiple icon-size float-left text-primary"></i><span class="font-weight-bold">3,672</span></h2>
+					<p class="mb-0 mt-4 text-muted">Monthly users<span class="float-right">50%</span></p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- COL END -->
+	<div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
+		<div class="card custom-card">
+			<div class="card-body">
+				<div class="card-order">
+					<label class="main-content-label mb-3 pt-1">Total tax</label>
+					<h2 class="text-right"><i class="mdi mdi-cube icon-size float-left text-primary"></i><span class="font-weight-bold">$89,265</span></h2>
+					<p class="mb-0 mt-4 text-muted">Monthly Income<span class="float-right">$7,893</span></p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- COL END -->
+	<div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
+		<div class="card custom-card">
+			<div class="card-body">
+				<div class="card-order">
+					<label class="main-content-label mb-3 pt-1">Total Profit</label>
+					<h2 class="text-right"><i class="icon-size mdi mdi-poll-box   float-left text-primary"></i><span class="font-weight-bold">$23,987</span></h2>
+					<p class="mb-0 mt-4 text-muted">Monthly Profit<span class="float-right">$4,678</span></p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- COL END -->
+	<div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
+		<div class="card custom-card">
+			<div class="card-body">
+				<div class="card-order">
+					<label class="main-content-label mb-3 pt-1">Total Sales</label>
+					<h2 class="text-right"><i class="mdi mdi-cart icon-size float-left text-primary"></i><span class="font-weight-bold">46,486</span></h2>
+					<p class="mb-0 mt-4 text-muted">Monthly Sales<span class="float-right">3,756</span></p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- COL END -->
+</div>
+<!-- End Row -->

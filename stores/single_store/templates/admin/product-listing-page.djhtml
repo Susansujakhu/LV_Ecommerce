@@ -1,0 +1,12 @@
+{% set pageTitle = "My Dashboard" %}
+{% extends 'admin/base.djhtml' %}
+
+{% block head %}{% endblock %}
+
+{% block bodyHead %}{% endblock %}
+
+{% block content %}
+	{% include '/admin/general/blocks/product-listing-block.djhtml' %}
+{% endblock %}
+
+{% block tail %}{% endblock %}
