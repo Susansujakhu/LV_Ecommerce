@@ -15,11 +15,11 @@
 					<table class="table" id="example1">
 						<thead>
 							<tr>
-								<th class="wd-20p">Name</th>
-								<th class="wd-25p">Position</th>
-								<th class="wd-20p">Office</th>
-								<th class="wd-15p">Age</th>
-								<th class="wd-20p">Salary</th>
+								<th class="wd-20p">Product Name</th>
+								<th class="wd-25p">SKU</th>
+								<th class="wd-20p">Stock</th>
+								<th class="wd-15p">Price</th>
+								<th class="wd-20p">Actions</th>
 							</tr>
 						</thead>
 						<tbody>

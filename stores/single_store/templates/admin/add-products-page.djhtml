@@ -1,0 +1,107 @@
+{% set pageTitle = "Add Products" %}
+{% extends 'admin/base.djhtml' %}
+
+{% block headCSS %}
+<!-- InternalFileupload css-->
+<link rel="stylesheet" type="text/css" href= "{{ url_for('static', filename='css/admin/fileuploads/fileupload.css') }}">
+
+<!-- InternalFancy uploader css-->
+<link rel="stylesheet" type="text/css" href= "{{ url_for('static', filename='css/admin/fancyuploader/fancy_fileupload.css') }}">
+{% endblock %}
+{% block head %}{% endblock %}
+
+{% block bodyHead %}{% endblock %}
+
+{% block content %}
+	<!-- Row -->
+	<div class="row row-sm">
+		<div class="col-xl-8 col-lg-12">
+			<div class="card custom-card" id="set">
+				<div class="card-header custom-card-header border-bottom-0">
+					<h6 class="main-content-label mb-0">Enter Product Name</h6>
+				</div>
+				<div class="card-body">
+					<div class="form-group mb-0">
+						<input type="text" class="form-control" name="example-text-input" placeholder="Default Input">
+					</div>
+				</div>
+			</div>
+
+			<div class="card custom-card" id="set">
+				<div class="card-body">
+					<div>
+						<h6 class="main-content-label mb-3">Enter Long Description</h6>
+					</div>
+					<div class="form-group mb-0">
+						<input type="text" class="form-control" name="example-text-input" placeholder="Default Input">
+					</div>
+				</div>
+				<div class="card-body">
+					<div>
+						<h6 class="main-content-label mb-3">Enter Short Description</h6>
+					</div>
+					<div class="form-group mb-0">
+						<input type="text" class="form-control" name="example-text-input" placeholder="Default Input">
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-xl-4 col-lg-12 d-xl-block custom-leftnav">
+			<div class="main-content-left-components">
+
+				<div class="card custom-card">
+					<div class="card-header custom-card-header border-bottom-0">
+						<h6 class="main-content-label mb-0">Select Category</h6>
+					</div>
+					<div class="card-body">
+						<select class="form-control select2" multiple="multiple">
+							<option value="Firefox">
+								Firefox
+							</option>
+							<option value="Chrome">
+								Chrome
+							</option>
+							<option value="Safari">
+								Safari
+							</option>
+							<option value="Opera">
+								Opera
+							</option>
+							<option value="Internet Explorer">
+								Internet Explorer
+							</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="card custom-card">
+					<div class="card-header custom-card-header border-bottom-0">
+						<h6 class="main-content-label mb-0">Featured Image</h6>
+					</div>
+					<div class="card-body">
+						<input type="file" class="dropify" data-height="200" />
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End Row -->
+{% endblock %}
+
+{% block tail %}
+<!-- Internal Fileuploads js-->
+<script src="{{ url_for('static', filename='js/admin/fileuploads/fileupload.js') }}" type="text/javascript"></script>
+<script src="{{ url_for('static', filename='js/admin/fileuploads/file-upload.js') }}" type="text/javascript"></script>
+
+<!-- InternalFancy uploader js-->
+<script src="{{ url_for('static', filename='js/admin/fancyuploader/jquery.ui.widget.js') }}" type="text/javascript"></script>
+<script src="{{ url_for('static', filename='js/admin/fancyuploader/jquery.fileupload.js') }}" type="text/javascript"></script>
+<script src="{{ url_for('static', filename='js/admin/fancyuploader/jquery.iframe-transport.js') }}" type="text/javascript"></script>
+<script src="{{ url_for('static', filename='js/admin/fancyuploader/jquery.fancy-fileupload.js') }}" type="text/javascript"></script>
+<script src="{{ url_for('static', filename='js/admin/fancyuploader/fancy-uploader.js') }}" type="text/javascript"></script>
+
+<!-- Internal Form-elements js-->
+<script src="{{ url_for('static', filename='js/admin/advanced-form-elements.js') }}" type="text/javascript"></script>
+<script src="{{ url_for('static', filename='js/admin/select2.js') }}" type="text/javascript"></script>
+
+{% endblock %}

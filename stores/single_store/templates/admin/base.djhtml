@@ -427,10 +427,10 @@
                         </li>
                         <li class="nav-header"><span class="nav-label">Products</span></li>
                         <li class="nav-item">
-                            <a class="nav-link" href="widgets.html"><span class="shape1"></span><span class="shape2"></span><i class="ti-server sidemenu-icon"></i><span class="sidemenu-label">All Products</span></a>
+                            <a class="nav-link" href="/view-products"><span class="shape1"></span><span class="shape2"></span><i class="ti-server sidemenu-icon"></i><span class="sidemenu-label">All Products</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="widgets.html"><span class="shape1"></span><span class="shape2"></span><i class="ti-server sidemenu-icon"></i><span class="sidemenu-label">Add Products</span></a>
+                            <a class="nav-link" href="/add-products"><span class="shape1"></span><span class="shape2"></span><i class="ti-server sidemenu-icon"></i><span class="sidemenu-label">Add Products</span></a>
                         </li>
                     </ul>
                 </div>
