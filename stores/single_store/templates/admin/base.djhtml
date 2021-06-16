@@ -7,13 +7,10 @@
 
     <!-- css -->
     <!-- Bootstrap css-->
-    <link rel="stylesheet" type="text/css" href= "{{ url_for('static', filename='css/admin/bootstrap/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 
     <!-- Style css--> 
     <link rel="stylesheet" type="text/css" href= "{{ url_for('static', filename='css/admin/style.css') }}">
-    <link rel="stylesheet" type="text/css" href= "{{ url_for('static', filename='css/admin/skins.css') }}">
-    <link rel="stylesheet" type="text/css" href= "{{ url_for('static', filename='css/admin/dark-style.css') }}">
-    <link rel="stylesheet" type="text/css" href= "{{ url_for('static', filename='css/admin/colors/default.css') }}">
 
     <!-- Color css-->
     <link id="theme" rel="stylesheet" type="text/css" media="all" href= "{{ url_for('static', filename='css/admin/colors/color.css') }}">
@@ -27,7 +24,8 @@
     {% block headCSS %}{% endblock %}
 
     <!-- Jquery js-->
-    <script src="{{ url_for('static', filename='js/admin/jquery/jquery.min.js') }}" type="text/javascript"></script>
+    {# <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" type="text/javascript"></script> #}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" type="text/javascript"></script>
 
     {% block head %}{% endblock %}
 
@@ -59,31 +57,6 @@
                             <a href="index.html"><img src="../../assets/img/brand/logo.png" class="mobile-logo" alt="logo"></a>
                             <a href="index.html"><img src="../../assets/img/brand/logo-light.png" class="mobile-logo-dark" alt="logo"></a>
                         </div>
-                        {# <div class="input-group">
-                            <div class="input-group-btn search-panel">
-                                <select class="form-control select2-no-search">
-                                    <option label="All categories">
-                                    </option>
-                                    <option value="IT Projects">
-                                        IT Projects
-                                    </option>
-                                    <option value="Business Case">
-                                        Business Case
-                                    </option>
-                                    <option value="Microsoft Project">
-                                        Microsoft Project
-                                    </option>
-                                    <option value="Risk Management">
-                                        Risk Management
-                                    </option>
-                                    <option value="Team Building">
-                                        Team Building
-                                    </option>
-                                </select>
-                            </div>
-                            <input type="search" class="form-control rounded-0" placeholder="Search for anything...">
-                            <button class="btn search-btn"><i class="fe fe-search"></i></button>
-                        </div> #}
                     </div>
                     <div class="main-header-right">
                         <div class="dropdown header-search">
@@ -487,18 +460,6 @@
 
                         {% block content %}{% endblock %}
 
-                        <!-- Row -->
-                        {# <div class="row sidemenu-height">
-                            <div class="col-lg-12">
-                                <div class="card custom-card">
-                                    <div class="card-body">
-                                        Typing Some text here....
-                                    </div>
-                                </div>
-                            </div>
-                        </div> #}
-                        <!-- End Row -->
-
                     </div>
                 </div>
             </div>
@@ -638,11 +599,11 @@
     <a href="#top" id="back-to-top"><i class="fe fe-arrow-up"></i></a>
 
     <!-- Bootstrap js-->
-    <script src="{{ url_for('static', filename='js/admin/bootstrap/popper.min.js') }}" type="text/javascript"></script>
-    <script src="{{ url_for('static', filename='js/admin/bootstrap/bootstrap.min.js') }}" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
 
     <!-- Perfect-scrollbar js -->
-    <script src="{{ url_for('static', filename='js/admin/perfect-scrollbar/perfect-scrollbar.min.js') }}" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/1.5.1/perfect-scrollbar.min.js" type="text/javascript"></script>
 
     <!-- Sidemenu js -->
     <script src="{{ url_for('static', filename='js/admin/sidemenu.js') }}" type="text/javascript"></script>
