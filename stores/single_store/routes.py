@@ -1144,7 +1144,7 @@ def lists(tables):
     return render_template(
         'lists.html', tables = tables, table_row = table_row, table_col = table_col)
 
-@app.route("/delete/<tables>/<int:id>")
+@app.route("/delete/<tables>/<int:id>", methods=["POST","GET"])
 @login_required
 @restricted(access_level="Admin")
 def delete(tables, id):
@@ -1159,7 +1159,8 @@ def delete(tables, id):
         print("Success")
     else:
         print("Failed")
-    return redirect('/lists/'+tables)
+    return jsonify({'result': 'success'})
+    # return redirect('/lists/'+tables)
 
 
 def format_price(amount, currency='Rs. '):

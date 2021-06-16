@@ -23,15 +23,17 @@
 							</tr>
 						</thead>
 						<tbody>
+
 							{% for rows in products %}
 							<tr>
 								<td>{{rows.productName}}</td>
 								<td>123sample</td>
 								<td>{{rows.stock}}</td>
 								<td>{{format_price(rows.price)}}</td>
-								<td><a href="#">Edit</a>/<a href="#">Delete</a></td>
+								<td><a href="#">Edit</a>/<a id="delProduct" data-id="{{rows.id}}">Delete</a></td>
 							</tr>
 							{% endfor %}
+							
 						</tbody>
 					</table>
 				</div>
@@ -53,3 +55,25 @@
 <script src="{{ url_for('static', filename='js/admin/datatable/fileexport/buttons.print.min.js') }}" type="text/javascript"></script>
 <script src="{{ url_for('static', filename='js/admin/datatable/fileexport/buttons.colVis.min.js') }}" type="text/javascript"></script>
 <script src="{{ url_for('static', filename='js/admin/table-data.js') }}" type="text/javascript"></script>
+
+
+
+<script>   
+$(document).ready(function(){
+    $(document).on('click', '#delProduct', function(){
+        var productId = $(this).attr('data-id');
+        event.preventDefault()
+        req = $.ajax({
+                url: "delete/product/"+productId,
+                type: "POST",
+                data: productId,
+        }); 
+        req.done(function(data){
+            console.log(data.status);
+            $(".table").load(" .table > *");
+        });
+    });
+
+});
+
+</script>
