@@ -24,10 +24,10 @@
     <!-- Sidemenu css-->
     <link rel="stylesheet" type="text/css" href= "{{ url_for('static', filename='css/admin/sidemenu.css') }}">
 
+    {% block headCSS %}{% endblock %}
+
     <!-- Jquery js-->
     <script src="{{ url_for('static', filename='js/admin/jquery/jquery.min.js') }}" type="text/javascript"></script>
-
-    {% block headCSS %}{% endblock %}
 
     {% block head %}{% endblock %}
 
@@ -59,7 +59,7 @@
                             <a href="index.html"><img src="../../assets/img/brand/logo.png" class="mobile-logo" alt="logo"></a>
                             <a href="index.html"><img src="../../assets/img/brand/logo-light.png" class="mobile-logo-dark" alt="logo"></a>
                         </div>
-                        <div class="input-group">
+                        {# <div class="input-group">
                             <div class="input-group-btn search-panel">
                                 <select class="form-control select2-no-search">
                                     <option label="All categories">
@@ -83,7 +83,7 @@
                             </div>
                             <input type="search" class="form-control rounded-0" placeholder="Search for anything...">
                             <button class="btn search-btn"><i class="fe fe-search"></i></button>
-                        </div>
+                        </div> #}
                     </div>
                     <div class="main-header-right">
                         <div class="dropdown header-search">
@@ -412,11 +412,12 @@
         <sidemenu>
             <div class="main-sidebar main-sidebar-sticky side-menu">
                 <div class="sidemenu-logo">
-                    <a class="main-logo" href="index.html">
-                        <img src="../../assets/img/brand/logo-light.png" class="header-brand-img desktop-logo" alt="logo">
+                    <a class="main-logo" href="/admin-dashboard">
+                        {# <img src="../../assets/img/brand/logo-light.png" class="header-brand-img desktop-logo" alt="logo">
                         <img src="../../assets/img/brand/icon-light.png" class="header-brand-img icon-logo" alt="logo">
                         <img src="../../assets/img/brand/logo.png" class="header-brand-img desktop-logo theme-logo" alt="logo">
-                        <img src="../../assets/img/brand/icon.png" class="header-brand-img icon-logo theme-logo" alt="logo">
+                        <img src="../../assets/img/brand/icon.png" class="header-brand-img icon-logo theme-logo" alt="logo"> #}
+                        <h2>Admin</h2>
                     </a>
                 </div>
                 <div class="main-sidebar-body">
@@ -431,6 +432,20 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/add-products"><span class="shape1"></span><span class="shape2"></span><i class="ti-server sidemenu-icon"></i><span class="sidemenu-label">Add Products</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/add-categories"><span class="shape1"></span><span class="shape2"></span><i class="ti-server sidemenu-icon"></i><span class="sidemenu-label">Categories</span></a>
+                        </li>
+                        <li class="nav-header"><span class="nav-label">Brands</span></li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><span class="shape1"></span><span class="shape2"></span><i class="ti-home sidemenu-icon"></i><span class="sidemenu-label">Product Brands</span></a>
+                        </li>
+                        <li class="nav-header"><span class="nav-label">Banners</span></li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><span class="shape1"></span><span class="shape2"></span><i class="ti-home sidemenu-icon"></i><span class="sidemenu-label">Hero Banners</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><span class="shape1"></span><span class="shape2"></span><i class="ti-home sidemenu-icon"></i><span class="sidemenu-label">Horizontal Ad Banners</span></a>
                         </li>
                     </ul>
                 </div>
@@ -462,9 +477,9 @@
                                     <button type="button" class="btn btn-white btn-icon-text my-2 mr-2">
                                       <i class="fe fe-filter mr-2"></i> Filter
                                     </button>
-                                    <button type="button" class="btn btn-primary my-2 btn-icon-text">
-                                      <i class="fe fe-download-cloud mr-2"></i> Download Report
-                                    </button>
+                                    <a type="button" class="btn btn-primary my-2 btn-icon-text" href="/add-products">
+                                      <i class="fe fe-download-cloud mr-2"></i> Add New Products
+                                    </a>
                                 </div>
                             </div>
                         </div>

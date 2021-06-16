@@ -457,6 +457,12 @@ def admin_add_products():
         'admin/add-products-page.djhtml'
         )
 
+@app.route("/add-categories")
+def admin_add_categories():
+    return render_template(
+        'admin/add-category-page.djhtml'
+        )
+
 @app.route("/view-products")
 def admin_products_listing():
     return render_template(
