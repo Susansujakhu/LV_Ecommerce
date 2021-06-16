@@ -1,95 +1,3 @@
-/*------------------------------------------------------------------
-[Master Stylesheet]
-
-Project        :   SPRUHA - HTML5 Bootstrap Admin Template
-Version        :   V.1
-Create Date    :   03/10/20
-Copyright      :   Spruko Technologies Private Limited 
-Author         :   SprukoSoft
-Author URL     :   https://themeforest.net/user/sprukosoft
-Support	       :   support@spruko.com
-License        :   Licensed under ThemeForest License
-
--------------------------------------------------------------------*/
-/*
-1.	Bootstrap-custom
-2.	Accordions
-3.	Alerts
-4.	Badges
-5.	Breadcrumbs
-6.	Buttons
-7.	Cards
-8.	Carousel
-9.	Dropdown
-10.	Forms
-11.	Grid
-12.	Input-group
-13.	Modals
-14.	Navigation
-15.	Pagination
-16.	Popover
-17.	Progress
-18.	Tables
-19.	Datatable
-20.	Toast
-21.	Tooltip
-22.	Color
-23.	Main-content
-24.	Header
-25.	Footer
-26.	Sidebar
-27.	Right-sidebar
-28.	Profile
-29.	Iconbar
-30.	Datepicker
-31.	Datetimepicker
-32.	Jqvmap
-33.	Chart
-34.	Parsely
-35.	Quill
-36.	Rangeslider
-37.	Select2
-38.	Spectrum
-39.	Calendar
-40.	Chat
-41.	Contacts
-42.	Error
-43.	Invoice
-44.	Mail
-45.	Profile
-46.	Account-setting
-47.	Pricing
-48.	Scrumboard
-49.	Todotask
-50.	Product-list
-51.	Whishlist
-52.	Border
-53.	Height
-54.	Margin
-55.	Opacity
-56.	Padding
-57.	Position
-58.	Typography
-59.	Width
-60.	Tags
-61.	Tabs
-62.	Navbar
-63.	Wizard
-64.	P-scroll
-65.	Radio
-66.	Rating
-67.	Timeline
-68.	Countdown
-69.	Image
-70.	List
-71.	Checkbox
-72.	Toggle
-73.	Listgroup
-74.	Jumborton
-75.	Custom-control
-76.	Element-sizes
-77.	Custom-styles
-*/
 /* ############### FONTS IMPORT ############### */
 @import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900");
 @import url("https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,800");
@@ -5182,7 +5090,7 @@ select.form-control.select-sm {
 
 /* ###### Form-elements ###### */
 /* ###### Grid ###### */
-.row-sm {
+/*.row-sm {
     margin-left: -10px;
     margin-right: -10px;
 }
@@ -5328,7 +5236,7 @@ select.form-control.select-sm {
         padding-left: 15px;
         padding-right: 15px;
     }
-}
+}*/
 
 /* ###### Grid ###### */
 /* ###### Input-group ###### */
@@ -7113,7 +7021,7 @@ div.dtr-modal div.dtr-modal-content {
 
 /* ###### Progress ###### */
 /* ###### Table  ###### */
-.table {
+/*.table {
     width: 100%;
     margin-bottom: 1rem;
     color: #1d212f;
@@ -7514,11 +7422,11 @@ div.dtr-modal div.dtr-modal-content {
     display: flex;
     align-items: flex-start;
     padding: 0.75rem;
-}
+}*/
 
 /* ###### Table  ###### */
 /* ###### Datatables ###### */
-table.dataTable {
+/*table.dataTable {
     border: 1px solid #e8e8f7;
 }
 
@@ -7571,7 +7479,7 @@ table.dataTable thead td {
 
 div.dataTables_wrapper div.dataTables_length select {
     margin-right: 10px;
-}
+}*/
 
 /* ######  Datatables ###### */
 /* ###### Toast ###### */
@@ -19224,7 +19132,7 @@ button.bg-dark:focus {
 
 /* ###### Flex  ###### */
 /* ######  Border   ###### */
-.border {
+/*.border {
     border: 1px solid #ededf9 !important;
 }
 
@@ -19792,11 +19700,11 @@ button.bg-dark:focus {
 
 .radius {
     border-radius: 5px !important;
-}
+}*/
 
 /* ###### Border ###### */
 /* ###### Height ###### */
-.ht-5 {
+/*.ht-5 {
     height: 5px;
 }
 
@@ -24688,11 +24596,11 @@ button.bg-dark:focus {
 
 .h-300 {
     height: 300px !important;
-}
+}*/
 
 /* ###### Height ###### */
 /* ###### Margin ###### */
-.mg-0 {
+/*.mg-0 {
     margin: 0px;
 }
 
@@ -37693,11 +37601,11 @@ button.bg-dark:focus {
     .mx-xl-auto {
         margin-left: auto !important;
     }
-}
+}*/
 
 /* ###### Margin ###### */
 /* ###### Opacity  ###### */
-.op-0 {
+/*.op-0 {
     opacity: 0;
 }
 
@@ -38221,11 +38129,11 @@ button.bg-dark:focus {
     .op-xl-9-f {
         opacity: 0.9 !important;
     }
-}
+}*/
 
 /* ###### Opacity  ###### */
 /* ###### Padding  ###### */
-.pd-0 {
+/*.pd-0 {
     padding: 0px;
 }
 
@@ -52393,11 +52301,11 @@ button.bg-dark:focus {
 
 .pd-l-13-f {
     padding-left: 13px !important;
-}
+}*/
 
 /* ###### Padding  ###### */
 /* ###### Position  ###### */
-.pos-absolute {
+/*.pos-absolute {
     position: absolute;
 }
 
@@ -53606,11 +53514,11 @@ button.bg-dark:focus {
     .l-xl-auto {
         left: auto;
     }
-}
+}*/
 
 /* ###### Position  ###### */
 /* ###### Typography  ###### */
-.tx-black {
+/*.tx-black {
     font-weight: 900;
     color: #8f9cc0;
 }
@@ -58329,11 +58237,11 @@ a.text-dark:focus {
 
 .fs-50 {
     font-size: 50px;
-}
+}*/
 
 /* ###### Typography  ###### */
 /* ###### Width  ###### */
-.wd-1 {
+/*.wd-1 {
     width: 1px;
 }
 
@@ -65330,12 +65238,12 @@ a.text-dark:focus {
 
 .vw-100 {
     width: 100vw !important;
-}
+}*/
 
 /* ###### Width  ###### */
 /* ############### CUSTOM ELEMENT STYLES ############### */
 /* ###### Component-cols ###### */
-.col-1,
+/*.col-1,
 .col-2,
 .col-3,
 .col-4,
@@ -66495,7 +66403,7 @@ a.text-dark:focus {
     .offset-xxl-11 {
         margin-left: 91.66667%;
     }
-}
+}*/
 
 /* ###### Component-cols ###### */
 /* ###### Tags  ###### */
@@ -73016,6 +72924,3 @@ body.horizontalmenu {
     display: flex;
     flex-direction: column;
 }
-
-/* ###### ie css ###### */
-/*# sourceMappingURL=style.css.map */

@@ -22,8 +22,7 @@
 {% block bodyHead %}{% endblock %}
 
 {% block content %}
-	<!-- Row -->
-	<div class="row row-sm">
+	<div class="row">
 		<div class="col-xl-8 col-lg-12">
 			<div class="card custom-card">
 				<div class="card-header custom-card-header border-bottom-0">
@@ -116,7 +115,6 @@
 			</div>
 		</div>
 	</div>
-	<!-- End Row -->
 {% endblock %}
 
 {% block tail %}
