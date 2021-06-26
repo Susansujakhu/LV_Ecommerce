@@ -457,11 +457,163 @@ def admin_add_products():
         'admin/add-products-page.djhtml'
         )
 
-@app.route("/add-categories")
-def admin_add_categories():
-    return render_template(
-        'admin/add-category-page.djhtml'
-        )
+# @app.route("/add-categories")
+# def admin_add_categories():
+#     return render_template(
+#         'admin/add-category-page.djhtml'
+#         )
+
+
+@app.route("/lists/<tables>", methods=['GET', 'POST'])
+@login_required
+@restricted(access_level="Admin")
+def adds(tables):
+    lower = tables
+    tables = tables.capitalize()
+    if tables == 'Horizontalpanel':
+        tables="HorizontalPanel"
+    table_name = str2Class(tables)
+    print(table_name)
+    if table_name == 0:
+        return redirect('single-store/404-page.djhtml')
+    table_head = table_name.__table__.columns.keys()
+
+    table_col = table_name.__table__.columns.keys()
+    table_row = table_name.query.all()
+
+    # if table_row is None:
+    #     return redirect(url_for('home'))
+    if 'slug' in table_col:
+        slug = db.session.query(table_name.slug).all()
+        slug = [value for value, in slug]
+    else:
+        slug = ''
+
+    form_name = tables+"Form"
+    formName = str2Class(form_name)
+    form = formName()
+
+    form_data = {formfield : value for formfield, value in form.data.items()}
+    
+    for formfield, value in form.data.items():
+        if formfield == 'category':
+            form.category.choices = [(category.name) for category in Category.query.with_entities(Category.name).all()] #db.session.query(Category.name)
+        if formfield == 'brand':
+            form.brand.choices = [(brand.name) for brand in Brand.query.with_entities(Brand.name).all()]
+        if formfield == 'parentCategory':
+            form.parentCategory.choices = ['None']+[(category.name) for category in Category.query.with_entities(Category.name).all()]
+    if request.method == 'POST':
+        if form.validate_on_submit():
+            data = {formfield : value for formfield, value in form.data.items()}
+            data.popitem()
+            data.popitem()
+
+            for formfield, value in form.data.items():
+                if formfield == 'imageFile':
+                    if form.imageFile.data:
+                        random_hex = secrets.token_hex(4)
+                        f = form.imageFile.data
+                        file = f.filename.replace(" ", "_")
+                        split_name = file.split(".")
+                        if tables == "Category":
+                            featuredImage = save_picture(f, split_name[0]+random_hex+ split_name[1], 'category', 700, 700)
+                        elif tables == "Hero":
+                            featuredImage = save_picture(f, split_name[0]+random_hex+ split_name[1], 'hero/desktop', 840, 395)
+                            featuredImage = save_picture(f, split_name[0]+random_hex+ split_name[1], 'hero/mobile', 510, 395)
+                        elif tables == "Brand":
+                            featuredImage = save_picture(f, split_name[0]+random_hex+ split_name[1], 'brand', 700, 700)
+                        elif tables == "HorizontalPanel":
+                            featuredImage = save_picture(f, split_name[0]+random_hex+ split_name[1], 'horizontalpanel/desktop', 1110, 170)
+                            featuredImage = save_picture(f, split_name[0]+random_hex+ split_name[1], 'horizontalpanel/mobile', 510, 390)
+                        else:
+                            featuredImage = save_picture(f, split_name[0]+random_hex+ split_name[1], 'products', 700, 700)
+                        featuredImage = secure_filename(featuredImage)
+                        data['imageFile'] = featuredImage
+
+                if formfield == 'imageGallery':
+                    if form.imageGallery.data:
+                        galleryImages = featuredImage
+                        # file_list = request.files.getlist('imageGallery')
+                        for f in form.imageGallery.data:
+                            if f.filename == '':
+                                break
+                            random_hex = secrets.token_hex(4)
+                            file = f.filename.replace(" ", "_")
+                            split_name = file.split(".")
+                            images = save_picture(f, split_name[0]+random_hex+ split_name[1], 'gallery', 700, 700)
+                            img = secure_filename(images)
+                            galleryImages = galleryImages + "," + img
+
+                        data['imageGallery'] = galleryImages
+
+            actual_data = data
+            dt = datetime.now(timezone.utc)
+            edit_data = False
+            if edit_data == False:
+                actual_data['dateCreated'] = dt
+                actual_data['userId'] = current_user.userId
+                table_db = tables.lower()
+                
+                insert_table = table(table_db,
+                                *[column(field) for field in table_head[1:]])
+                insert_dict = [actual_data]
+                db.session.execute(insert_table.insert(), insert_dict)
+                db.session.commit()
+
+                flash('Feature Added Successful!', 'success')
+            else:
+                id = request.args.get('id')
+                db.session.query(table_name).filter(table_name.id == id).update(actual_data, synchronize_session=False)
+                db.session.commit()
+
+                flash('Feature Edited Successful!', 'success')
+            a = ''
+    else:
+        a = ''
+        id = request.args.get('id')
+        if id is not None:
+            table_object = table_name.query.get_or_404(id)
+            a = {}
+            for items, value in table_object.__dict__.items():
+                a[items] = value
+    print(lower)
+    print(a)    
+    if tables != 'Product':
+        return render_template('admin/add-category-page.djhtml',lower_table = lower, table_values=a, tables = tables, table_row = table_row, table_col = table_col, title=tables, form=form, slug=slug)
+    else:
+        return render_template('admin/add-products-page.djhtml',lower_table = lower, table_values=a, title=tables, form=form, slug=slug)
+
+
+#@app.route("/add_category", methods=['GET', 'POST'])
+# @login_required
+# @restricted(access_level="Admin")
+# def add_category():
+
+#     category_table = Category()
+#     form = CategoryForm()
+#     form.parentCategory.choices = ['None']+[(category.name) for category in Category.query.with_entities(Category.name).all()] #db.session.query(Category.name)
+    
+#     if form.validate_on_submit():
+#         if form.imageFile.data:
+#             random_hex = secrets.token_hex(4)
+#             image = save_picture(form.imageFile.data, random_hex + form.name.data, 'category', 700, 700)
+
+#         if request.form.get('submit'):
+#             category = Category(name = form.name.data, 
+#                             slug = form.slug.data,
+#                             parentCategory = form.parentCategory.data,
+#                             description = form.description.data,
+#                             imageFile = image,
+#                             )
+#             db.session.add(category)
+#             db.session.commit()
+#             flash('Category Added Successful!', 'success')
+        
+#         # return redirect(url_for('home'))
+
+#     # image_file = url_for('static', filename = 'profile_pics/' + current_user.image_file)
+#     return render_template('add_category.html', title='New Category', form=form)
+
 
 @app.route("/view-products")
 def admin_products_listing():
@@ -1124,25 +1276,28 @@ def save_picture(form_picture, name, path, width, height):
 
 
 def str2Class(str):
-    return getattr(sys.modules[__name__], str)
+    try:
+        return getattr(sys.modules[__name__], str)
+    except Exception as e:
+	    return 0
 
-@app.route("/lists/<tables>")
-@login_required
-@restricted(access_level="Admin")
-def lists(tables):
-    tables = tables.capitalize()
-    if tables == 'Horizontalpanel':
-        tables="HorizontalPanel"
-    table = str2Class(tables)
+# @app.route("/lists/<tables>")
+# @login_required
+# @restricted(access_level="Admin")
+# def lists(tables):
+#     tables = tables.capitalize()
+#     if tables == 'Horizontalpanel':
+#         tables="HorizontalPanel"
+#     table = str2Class(tables)
 
-    table_col = table.__table__.columns.keys()
-    table_row = table.query.all()
+#     table_col = table.__table__.columns.keys()
+#     table_row = table.query.all()
 
-    if table_row is None:
-        return redirect(url_for('home'))
+#     if table_row is None:
+#         return redirect(url_for('home'))
     
-    return render_template(
-        'lists.html', tables = tables, table_row = table_row, table_col = table_col)
+#     return render_template(
+#         'lists.html', tables = tables, table_row = table_row, table_col = table_col)
 
 @app.route("/delete/<tables>/<int:id>", methods=["POST","GET"])
 @login_required
