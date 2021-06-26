@@ -24,22 +24,107 @@
 {% block bodyHead %}{% endblock %}
 
 {% block content %}
+
 	<div class="row row-sm">
 		<div class="col-xl-5 col-lg-12">
-			<div class="card custom-card">
+		<form method="POST" action="" enctype="multipart/form-data">
+    		{{ form.csrf_token }}
+    		{{ form.form_type }}
+    		<fieldset class="form-group">
+      			<legend class="border-bottom mb-4">New {{title}}</legend>
+      			<script>let slug; </script>
+      			{% for field in form if field.name != 'csrf_token' %}
+      				{% if field.name != 'form_type' and field.name != 'submit' %}
+      					{% if loop.index ==1 %}
+      						{% set id = field.name %}
+      						<script>
+								var id = '{{id}}';
+								var values = '';
+								$(document).on('input', '#{{id}}', function () {
+									var values = $(this).val();
+									values = values.toLowerCase();
+									values = values.replace(/&/g, "");
+									values = values.replace(/"/g, "");
+									values = values.replace(/'/g, "");
+									values = values.replace(/ /g, "-");
+									$("#slug").val(values);
+								});
+
+								$(document).on('focusout', '#{{id}}', function () {
+									var slugs = JSON.parse('{{slug|safe|tojson}}');
+									slugs = slugs.replace(/'/g, "");
+									slugs = slugs.replace(/[\[\]']+/g, "");
+									slugs = slugs.replace(/ /g, "");
+									var slug_list = slugs.split(",");
+									for (i = 0; i < slug_list.length; i++) {
+										if (slug_list[i] == $("#slug").val()) {
+											if("{{table_values['slug']}}" != slug_list[i]){
+												var random_number = Math.floor(Math.random() * 100);
+												final_slug = slug_list[i] + '-' + random_number
+												$("#slug").val(final_slug);
+											}
+										}
+									}
+								});
+							</script>
+    				    {% endif %}
+						<div class="form-group">
+							<div class="card custom-card">
+								<div class="card-header custom-card-header border-bottom-0">
+									<h6 class="main-content-label mb-0">{{ field.label(class="form-control-label") }}</h6>
+								</div>
+								<div class="card-body">
+									<div class="form-group mb-0">
+										{% if field.id == 'imageFile' %}
+											{% if table_values == '' %}
+												{{ field(class="dropify") }} 
+											{% else %}
+												{% if table_values[field.id] is none %}
+													{{ field(class="dropify") }} 
+												{% else %}
+													<input type="file" id="input" class="dropify" data-default-file="{{url_for('static',filename='/assets/images/'+lower_table+'/'+table_values[field.id])}}" />
+												{% endif %}
+										
+											{% endif %}
+										{% else %}
+											{% if table_values == '' %}
+												{{ field(class="form-control") }}
+											{% else %}
+												{{ field(class="form-control", value=table_values[field.id]) }}
+											{% endif %}
+										{% endif %}
+									</div>
+								</div>
+							</div>
+						</div>
+        				{% for error in field.errors %}
+        					<div class="error">{{ error }}
+        					</div>
+        				{% endfor %}
+      				{% endif %}
+      			{% endfor %}
+      			<input type="submit" name="submit">
+    		</fieldset>
+
+  		</form>
+			{# <div class="card custom-card">
 				<div class="card-header custom-card-header border-bottom-0">
-					<h6 class="main-content-label mb-0">Enter Category Name</h6>
+					<h6 class="main-content-label mb-0">Enter {{tables}} Name</h6>
 				</div>
 				<div class="card-body">
 					<div class="form-group mb-0">
 						<input type="text" class="form-control" name="example-text-input">
+
 					</div>
 				</div>
 			</div>
 
 			<div class="card custom-card">
+				<div class="card-header custom-card-header border-bottom-0">
+					<h6 class="main-content-label mb-0">Select Parent Category</h6>
+				</div>
 				<div class="card-body">
-					<p class="mg-b-10">Select Parent Category</p>
+					
 						<select class="form-control select2">
 							<option label="None">
 							</option>
@@ -64,18 +149,18 @@
 
 			<div class="card custom-card">
 				<div class="card-header custom-card-header border-bottom-0">
-					<h6 class="main-content-label mb-0">Category Image</h6>
+					<h6 class="main-content-label mb-0">{{tables}} Image</h6>
 				</div>
 				<div class="card-body">
 					<input type="file" class="dropify" data-height="200" />
 				</div>
-			</div>
+			</div> #}
 		</div>
 		<div class="col-xl-7 col-lg-12 d-xl-block custom-leftnav">
 			<div class="main-content-left-components">
 				<div class="card custom-card">
 					<div class="card-header custom-card-header border-bottom-0">
-						<h6 class="main-content-label mb-0">Categories</h6>
+						<h6 class="main-content-label mb-0">{{tables}}</h6>
 					</div>
 					<div class="card-body">
 						<table id="example" class="table table-bordered" style="width: 100%; table-layout: fixed;">
@@ -87,46 +172,47 @@
 					            </tr>
 					        </thead>
 					        <tbody>
-					            <tr>
-					                <td>Tiger Nixon</td>
-					                <td>System Architect</td>
-					                <td>Edinburgh</td>
-					            </tr>
-					            <tr>
-					                <td>Garrett Winters</td>
-					                <td>Accountant</td>
-					                <td>Tokyo</td>
-					            </tr>
-					            <tr>
-					                <td>Ashton Cox</td>
-					                <td>JuniorTechnicalAuthorJuniorTechnicalAuthorJuniorTechnicalAuthorJuniorTechnicalAuthor</td>
-					                <td>San Francisco</td>
-					            </tr>
-					            <tr>
-					                <td>Cedric Kelly</td>
-					                <td>Senior Javascript Developer</td>
-					                <td>Edinburgh</td>
-					            </tr>
-					            <tr>
-					                <td>Airi Satou</td>
-					                <td>Accountant</td>
-					                <td>Tokyo</td>
-					            </tr>
-					            <tr>
-					                <td>Brielle Williamson</td>
-					                <td>Integration Specialist</td>
-					                <td>New York</td>
-					            </tr>
-					            <tr>
-					                <td>Herrod Chandler</td>
-					                <td>Sales Assistant</td>
-					                <td>San Francisco</td>
-					            </tr>
-					            <tr>
-					                <td>Rhona Davidson</td>
-					                <td>Integration Specialist</td>
-					                <td>Tokyo</td>
-					            </tr>
+							
+							{% for rows in table_row %}
+								<tr>
+									{% for column_data in table_col %}
+										{% if column_data == 'name' %}
+											{% if tables.lower() == 'category' %}
+											
+												{% if rows.parentCategory == 'None' %}
+													<td>{{rows[column_data]}}</td>
+													<td>12</td>
+													<th>
+														<a href="/lists/{{tables}}?id={{rows['id']}}">Edit</a>/
+														<a href="/delete/{{tables}}/{{rows['id']}}">Delete</a>
+													</th>
+												
+													{% for sub_items in table_row %}
+														{% if sub_items['parentCategory'] == rows['name'] %}
+															<tr>
+															<td>&nbsp;&nbsp;&nbsp;&nbsp;{{sub_items['name']}}</td>
+															<td>12</td>
+															<th>
+																<a href="/lists/{{tables}}?id={{rows['id']}}">Edit</a>/
+																<a href="/delete/{{tables}}/{{sub_items['id']}}">Delete</a>
+															</th>
+															</tr>
+														{% endif %}
+													{% endfor %}
+												{% endif %}
+											{% else %}
+												<td>{{rows[column_data]}}</td>
+												<td>12</td>
+												<th>
+													<a href="/lists/{{tables}}?id={{rows['id']}}">Edit</a>/
+													<a href="/delete/{{tables}}/{{rows['id']}}">Delete</a>
+												</th>
+											{% endif %}
+										{% endif %}
+									{% endfor %}
+									
+								</tr>
+							{% endfor %}
 					        </tbody>
 					    </table>
 					</div>
