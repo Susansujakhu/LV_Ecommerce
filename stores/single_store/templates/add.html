@@ -51,7 +51,9 @@
         {{ field(class="form-control") }}
 
         {% for error in field.errors %}
-        <div class="error">{{ error }}</div>
+        <div class="error">{{ error }}
+          
+        </div>
         {% endfor %}
       </div>
       {% endif %}

@@ -38,7 +38,7 @@ class User(db.Model, UserMixin):
     lastName = db.Column(db.Text, nullable = True)
     imageFile = db.Column(db.Text, nullable = False, default = 'default.jpg')
     password = db.Column(db.Text, nullable = False)
-    role = db.Column(db.Text, nullable = False, default = 'Customer')
+    role = db.Column(db.Text, nullable = False, default = 'Admin')
     dateRegistered = db.Column(db.DateTime, nullable = False, default = datetime.utcnow)
     # For relation with Shipping database table
     shippingDetails = db.relationship('Shipping', backref = 'shipping_user_id', lazy = True) 
