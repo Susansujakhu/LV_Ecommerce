@@ -18,7 +18,7 @@ app.config.from_object("config.DevelopmentConfig")
 app.jinja_env.add_extension('jinja2.ext.do')
 app.jinja_env.add_extension('jinja2.ext.loopcontrols')
 app.jinja_env.cache = {}
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:sushansujakhu14@localhost/ecommerce'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://dlrlanipbonlce:9cb49a1064792c62b117eebcc4ef16c6e1023958ad3445a4974f76f552b0ce67@ec2-44-196-170-156.compute-1.amazonaws.com/dcog583f0vde5f'
 # app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 # # POSTGRES = {
 # #     'user': 'postgres',
